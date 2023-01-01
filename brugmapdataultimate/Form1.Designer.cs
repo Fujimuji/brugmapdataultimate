@@ -126,6 +126,7 @@
             this.aboutLbl.TabIndex = 43;
             this.aboutLbl.TabStop = true;
             this.aboutLbl.Text = "About";
+            this.aboutLbl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.aboutLbl_LinkClicked);
             // 
             // mapGroupBox
             // 
@@ -887,20 +888,20 @@
             this.treeMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deleteBtn});
             this.treeMenuStrip.Name = "treeMenuStrip";
-            this.treeMenuStrip.Size = new System.Drawing.Size(181, 48);
+            this.treeMenuStrip.Size = new System.Drawing.Size(108, 26);
             // 
             // deleteBtn
             // 
             this.deleteBtn.Image = ((System.Drawing.Image)(resources.GetObject("deleteBtn.Image")));
             this.deleteBtn.Name = "deleteBtn";
-            this.deleteBtn.Size = new System.Drawing.Size(180, 22);
+            this.deleteBtn.Size = new System.Drawing.Size(107, 22);
             this.deleteBtn.Text = "Delete";
             this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1204, 680);
             this.Controls.Add(this.clipboardLbl);
             this.Controls.Add(this.loadBtn);
@@ -913,9 +914,11 @@
             this.Controls.Add(this.mapGroupBox);
             this.Controls.Add(this.aboutLbl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Map Data Generator";
             this.mapGroupBox.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

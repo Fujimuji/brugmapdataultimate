@@ -1,10 +1,7 @@
 using Newtonsoft.Json;
-using System;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
-using System.Xml;
 using static brugmapdataultimate.Form1;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace brugmapdataultimate
 {
@@ -15,6 +12,7 @@ namespace brugmapdataultimate
             InitializeComponent();
             effTypeComboBox.SelectedIndex = 0;
             missTypeComboBox.SelectedIndex = 0;
+            mapTreeView.SelectedNode = mapTreeView.Nodes[0];
             missSettingsGroupBox.Location = new Point(368, 26);
             effSettingsGroupBox.Location = new Point(368, 26);
             cpSettingsGroupBox.Location = new Point(368, 26);
@@ -729,26 +727,6 @@ namespace brugmapdataultimate
                 9 => MissionType.DownwardsDiag,
                 10 => MissionType.PunchBounce
             };
-        }
-        
-        public void WriteMapData()
-        {
-            string genCPposition = "Global.CPposition = Array(";
-            string genPrime = "Global.Prime = Array(";
-            string genRadVAGobackCP = "Global.Radius_VA_GoBackCP = Array(";
-            string genConnections = "Global.Connections = Array(";
-            string genMission = "Global.Mission = Array(";
-            string genHiddenCPTpRadTT = "Global.HiddenCP_TpRad_TT = Array(";
-            string genTP = "Global.TP = Array(";
-            string genEffect = "Global.Effect = Array(";
-            string genAbilityCount = "Global.AbilityCount = Array(";
-
-            genCPposition += $"Vector({map.levelSelectorCP.Coordinate}));";
-            genPrime += $"{map.levelSelectorCP.Prime},);";
-            genRadVAGobackCP += $"Vector({map.levelSelectorCP.Radius}, 0, -1));";
-            genConnections += "0);";
-
-            //currentDataBox.Text = genCPposition + Environment.NewLine + genPrime + Environment.NewLine + genRadVAGobackCP + Environment.NewLine + genConnections;
         }
 
         private void isNoChange_CheckedChanged(object sender, EventArgs e)
@@ -2817,6 +2795,12 @@ namespace brugmapdataultimate
                     (mapcp ? map.levelSelectorCP.Missions : map.Levels.Find(x => x.Name == lvlname).Checkpoints[cpindex].Missions).RemoveAt(missionindex);
                 }
             }
+        }
+
+        private void aboutLbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            MessageBox.Show("Made for making map data generation easier in the absence of inspector. " +
+                "Big thanks to dreadowl, this would be IMPOSSIBLE without his help.- Dorian", "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 
