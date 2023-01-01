@@ -133,15 +133,16 @@
             // 
             // mapTreeView
             // 
+            this.mapTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mapTreeView.HideSelection = false;
-            this.mapTreeView.Location = new System.Drawing.Point(6, 17);
+            this.mapTreeView.Location = new System.Drawing.Point(3, 19);
             this.mapTreeView.Name = "mapTreeView";
             treeNode1.Checked = true;
             treeNode1.Name = "Node0";
             treeNode1.Text = "Map";
             this.mapTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode1});
-            this.mapTreeView.Size = new System.Drawing.Size(337, 611);
+            this.mapTreeView.Size = new System.Drawing.Size(344, 612);
             this.mapTreeView.TabIndex = 46;
             this.mapTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.mapTreeView_AfterSelect);
             // 
@@ -538,11 +539,12 @@
             // 
             // effSettingsGroupBox
             // 
+            this.effSettingsGroupBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.effSettingsGroupBox.Controls.Add(this.groupBox8);
             this.effSettingsGroupBox.Controls.Add(this.addEffBtn);
             this.effSettingsGroupBox.Controls.Add(this.groupBox4);
             this.effSettingsGroupBox.Controls.Add(this.effAbilGroupBox);
-            this.effSettingsGroupBox.Location = new System.Drawing.Point(368, 297);
+            this.effSettingsGroupBox.Location = new System.Drawing.Point(368, 308);
             this.effSettingsGroupBox.Name = "effSettingsGroupBox";
             this.effSettingsGroupBox.Size = new System.Drawing.Size(629, 216);
             this.effSettingsGroupBox.TabIndex = 59;
@@ -591,12 +593,13 @@
             // 
             // missSettingsGroupBox
             // 
+            this.missSettingsGroupBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.missSettingsGroupBox.Controls.Add(this.addMissBtn);
             this.missSettingsGroupBox.Controls.Add(this.missTimeUpDown);
             this.missSettingsGroupBox.Controls.Add(this.isMissLock);
             this.missSettingsGroupBox.Controls.Add(this.isMissTime);
             this.missSettingsGroupBox.Controls.Add(this.groupBox7);
-            this.missSettingsGroupBox.Location = new System.Drawing.Point(368, 513);
+            this.missSettingsGroupBox.Location = new System.Drawing.Point(368, 524);
             this.missSettingsGroupBox.Name = "missSettingsGroupBox";
             this.missSettingsGroupBox.Size = new System.Drawing.Size(435, 115);
             this.missSettingsGroupBox.TabIndex = 60;
@@ -691,14 +694,15 @@
             // 
             // cpSettingsGroupBox
             // 
+            this.cpSettingsGroupBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.cpSettingsGroupBox.Controls.Add(this.groupBox2);
             this.cpSettingsGroupBox.Controls.Add(this.abilCountGroupBox);
             this.cpSettingsGroupBox.Controls.Add(this.cpAbilGroupBox);
             this.cpSettingsGroupBox.Controls.Add(this.addCpBtn);
             this.cpSettingsGroupBox.Controls.Add(this.groupBox1);
-            this.cpSettingsGroupBox.Location = new System.Drawing.Point(368, 94);
+            this.cpSettingsGroupBox.Location = new System.Drawing.Point(368, 96);
             this.cpSettingsGroupBox.Name = "cpSettingsGroupBox";
-            this.cpSettingsGroupBox.Size = new System.Drawing.Size(829, 203);
+            this.cpSettingsGroupBox.Size = new System.Drawing.Size(827, 206);
             this.cpSettingsGroupBox.TabIndex = 61;
             this.cpSettingsGroupBox.TabStop = false;
             this.cpSettingsGroupBox.Text = "Checkpoint Settings";
@@ -803,6 +807,7 @@
             // 
             // lvlGroupBox
             // 
+            this.lvlGroupBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lvlGroupBox.Controls.Add(this.addLvlBtn);
             this.lvlGroupBox.Controls.Add(this.lvlNameTxt);
             this.lvlGroupBox.Location = new System.Drawing.Point(368, 26);
@@ -879,7 +884,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1204, 680);
+            this.ClientSize = new System.Drawing.Size(1275, 680);
             this.Controls.Add(this.clipboardLbl);
             this.Controls.Add(this.loadBtn);
             this.Controls.Add(this.saveBtn);
@@ -890,7 +895,6 @@
             this.Controls.Add(this.effSettingsGroupBox);
             this.Controls.Add(this.mapGroupBox);
             this.Controls.Add(this.aboutLbl);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form1";
             this.Text = "Form1";
             this.mapGroupBox.ResumeLayout(false);
