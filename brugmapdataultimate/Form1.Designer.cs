@@ -539,7 +539,6 @@
             // 
             // effSettingsGroupBox
             // 
-            this.effSettingsGroupBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.effSettingsGroupBox.Controls.Add(this.groupBox8);
             this.effSettingsGroupBox.Controls.Add(this.addEffBtn);
             this.effSettingsGroupBox.Controls.Add(this.groupBox4);
@@ -593,13 +592,12 @@
             // 
             // missSettingsGroupBox
             // 
-            this.missSettingsGroupBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.missSettingsGroupBox.Controls.Add(this.addMissBtn);
             this.missSettingsGroupBox.Controls.Add(this.missTimeUpDown);
             this.missSettingsGroupBox.Controls.Add(this.isMissLock);
             this.missSettingsGroupBox.Controls.Add(this.isMissTime);
             this.missSettingsGroupBox.Controls.Add(this.groupBox7);
-            this.missSettingsGroupBox.Location = new System.Drawing.Point(368, 524);
+            this.missSettingsGroupBox.Location = new System.Drawing.Point(368, 530);
             this.missSettingsGroupBox.Name = "missSettingsGroupBox";
             this.missSettingsGroupBox.Size = new System.Drawing.Size(435, 115);
             this.missSettingsGroupBox.TabIndex = 60;
@@ -694,7 +692,6 @@
             // 
             // cpSettingsGroupBox
             // 
-            this.cpSettingsGroupBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.cpSettingsGroupBox.Controls.Add(this.groupBox2);
             this.cpSettingsGroupBox.Controls.Add(this.abilCountGroupBox);
             this.cpSettingsGroupBox.Controls.Add(this.cpAbilGroupBox);
@@ -807,7 +804,6 @@
             // 
             // lvlGroupBox
             // 
-            this.lvlGroupBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lvlGroupBox.Controls.Add(this.addLvlBtn);
             this.lvlGroupBox.Controls.Add(this.lvlNameTxt);
             this.lvlGroupBox.Location = new System.Drawing.Point(368, 26);
@@ -884,7 +880,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1275, 680);
+            this.ClientSize = new System.Drawing.Size(1204, 680);
             this.Controls.Add(this.clipboardLbl);
             this.Controls.Add(this.loadBtn);
             this.Controls.Add(this.saveBtn);
@@ -895,6 +891,8 @@
             this.Controls.Add(this.effSettingsGroupBox);
             this.Controls.Add(this.mapGroupBox);
             this.Controls.Add(this.aboutLbl);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MinimizeBox = false;
             this.Name = "Form1";
             this.Text = "Form1";
             this.mapGroupBox.ResumeLayout(false);
