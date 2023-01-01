@@ -2676,7 +2676,7 @@ namespace brugmapdataultimate
                         mapTreeView.Nodes[0].Nodes.Add(lvlnode);
                         for (int j = 0; j < map.Levels[i].Checkpoints.Count; j++)
                         {
-                            mapTreeView.Nodes[0].Nodes[i + 1].Nodes.Add("Checkpoint " + j);
+                            mapTreeView.Nodes[0].Nodes[i + 1].Nodes.Add("Checkpoint " + (j + 1));
                             if (map.Levels[i].Checkpoints[j].Type != CheckpointType.LevelEnd)
                             {
                                 mapTreeView.Nodes[0].Nodes[i + 1].Nodes[j].Nodes.Add("Effects");
@@ -2711,6 +2711,112 @@ namespace brugmapdataultimate
         private void clipboardLbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Clipboard.SetText(map.GenerateMapData());
+        }
+
+        private void mapTreeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                if (e.Node.Text == "Map" || e.Node.Text == "Checkpoint 0" || e.Node.Text == "Effects" || e.Node.Text == "Missions")
+                {
+                    return;
+                }
+
+                if (e.Node.Text.Contains("Level - "))
+                {
+                    treeMenuStrip.Items[0].Text = "Delete Level";
+                }
+
+                if (e.Node.Text.Contains("Checkpoint"))
+                {
+                    treeMenuStrip.Items[0].Text = "Delete Checkpoint";
+                }
+
+                if (e.Node.Text.Contains("Effect:"))
+                {
+                    treeMenuStrip.Items[0].Text = "Delete Effect";
+                }
+
+                if (e.Node.Text.Contains("Mission:"))
+                {
+                    treeMenuStrip.Items[0].Text = "Delete Mission";
+                }
+
+                mapTreeView.SelectedNode = e.Node;
+                treeMenuStrip.Show(mapTreeView, e.Location);
+            }
+        }
+
+        private void deleteBtn_Click(object sender, EventArgs e)
+        {
+            if (deleteBtn.Text == "Delete Level")
+            {
+                if (mapTreeView.SelectedNode.Text.Contains("Level - "))
+                {
+                    string lvlname = mapTreeView.SelectedNode.Tag.ToString();
+                    mapTreeView.SelectedNode.Remove();
+                    map.Levels.RemoveAll(x => x.Name == lvlname);
+                }
+            }
+
+            if (deleteBtn.Text == "Delete Checkpoint")
+            {
+                if (mapTreeView.SelectedNode.Text.Contains("Checkpoint"))
+                {
+                    string lvlname = mapTreeView.SelectedNode.Parent.Tag.ToString();
+                    int cpindex = mapTreeView.SelectedNode.Index;
+                    mapTreeView.SelectedNode.Remove();
+                    map.Levels.Find(x => x.Name == lvlname).Checkpoints.RemoveAt(cpindex);
+                }
+            }
+
+            if (deleteBtn.Text == "Delete Effect")
+            {
+                if (mapTreeView.SelectedNode.Text.Contains("Effect:"))
+                {
+                    bool mapcp = mapTreeView.SelectedNode.Parent.Parent.Text == "Checkpoint 0";
+                    string lvlname = mapcp ? "" : mapTreeView.SelectedNode.Parent.Parent.Parent.Tag.ToString();
+                    int cpindex = mapTreeView.SelectedNode.Parent.Parent.Index;
+                    int effectindex = mapTreeView.SelectedNode.Index;
+                    Effect eff = (mapcp ? map.levelSelectorCP.Effects : map.Levels.Find(x => x.Name == lvlname).Checkpoints[cpindex].Effects)[effectindex];
+                    
+                    if (eff.Type == EffectType.EntryPortal)
+                    {
+                        (mapcp ? map.levelSelectorCP.Effects : map.Levels.Find(x => x.Name == lvlname).Checkpoints[cpindex].Effects).RemoveAt(effectindex);
+                        (mapcp ? map.levelSelectorCP.Effects : map.Levels.Find(x => x.Name == lvlname).Checkpoints[cpindex].Effects).RemoveAt(effectindex + 1);
+                        mapTreeView.SelectedNode.NextNode.Remove();
+                        mapTreeView.SelectedNode.Remove();
+                        return;
+                    }
+
+                    if (eff.Type == EffectType.ExitPortal)
+                    {
+                        (mapcp ? map.levelSelectorCP.Effects : map.Levels.Find(x => x.Name == lvlname).Checkpoints[cpindex].Effects).RemoveAt(effectindex);
+                        (mapcp ? map.levelSelectorCP.Effects : map.Levels.Find(x => x.Name == lvlname).Checkpoints[cpindex].Effects).RemoveAt(effectindex - 1);
+                        mapTreeView.SelectedNode.PrevNode.Remove();
+                        mapTreeView.SelectedNode.Remove();
+                        return;
+                    }
+                    
+                    mapTreeView.SelectedNode.Remove();
+                    (mapcp ? map.levelSelectorCP.Effects : map.Levels.Find(x => x.Name == lvlname).Checkpoints[cpindex].Effects).RemoveAt(effectindex);
+                    return;
+                }
+            }
+
+            if (deleteBtn.Text == "Delete Mission")
+            {
+                if (mapTreeView.SelectedNode.Text.Contains("Mission:"))
+                {
+                    bool mapcp = mapTreeView.SelectedNode.Parent.Parent.Text == "Checkpoint 0";
+                    string lvlname = mapcp ? "" : mapTreeView.SelectedNode.Parent.Parent.Parent.Tag.ToString();
+                    int cpindex = mapTreeView.SelectedNode.Parent.Parent.Index;
+                    int missionindex = mapTreeView.SelectedNode.Index;
+                    
+                    mapTreeView.SelectedNode.Remove();
+                    (mapcp ? map.levelSelectorCP.Missions : map.Levels.Find(x => x.Name == lvlname).Checkpoints[cpindex].Missions).RemoveAt(missionindex);
+                }
+            }
         }
     }
 

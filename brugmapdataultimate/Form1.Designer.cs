@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Map");
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.aboutLbl = new System.Windows.Forms.LinkLabel();
             this.mapGroupBox = new System.Windows.Forms.GroupBox();
             this.mapTreeView = new System.Windows.Forms.TreeView();
@@ -88,6 +90,8 @@
             this.saveBtn = new System.Windows.Forms.Button();
             this.loadBtn = new System.Windows.Forms.Button();
             this.clipboardLbl = new System.Windows.Forms.LinkLabel();
+            this.treeMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.deleteBtn = new System.Windows.Forms.ToolStripMenuItem();
             this.mapGroupBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -110,6 +114,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.powerBlockUpDown)).BeginInit();
             this.cpAbilGroupBox.SuspendLayout();
             this.lvlGroupBox.SuspendLayout();
+            this.treeMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // aboutLbl
@@ -145,6 +150,7 @@
             this.mapTreeView.Size = new System.Drawing.Size(344, 612);
             this.mapTreeView.TabIndex = 46;
             this.mapTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.mapTreeView_AfterSelect);
+            this.mapTreeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.mapTreeView_NodeMouseClick);
             // 
             // isLvlSelector
             // 
@@ -876,6 +882,21 @@
             this.clipboardLbl.Text = "Copy Map Data to Clipboard";
             this.clipboardLbl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.clipboardLbl_LinkClicked);
             // 
+            // treeMenuStrip
+            // 
+            this.treeMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.deleteBtn});
+            this.treeMenuStrip.Name = "treeMenuStrip";
+            this.treeMenuStrip.Size = new System.Drawing.Size(181, 48);
+            // 
+            // deleteBtn
+            // 
+            this.deleteBtn.Image = ((System.Drawing.Image)(resources.GetObject("deleteBtn.Image")));
+            this.deleteBtn.Name = "deleteBtn";
+            this.deleteBtn.Size = new System.Drawing.Size(180, 22);
+            this.deleteBtn.Text = "Delete";
+            this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -925,6 +946,7 @@
             this.cpAbilGroupBox.PerformLayout();
             this.lvlGroupBox.ResumeLayout(false);
             this.lvlGroupBox.PerformLayout();
+            this.treeMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -990,5 +1012,7 @@
         private Button saveBtn;
         private Button loadBtn;
         private LinkLabel clipboardLbl;
+        private ContextMenuStrip treeMenuStrip;
+        private ToolStripMenuItem deleteBtn;
     }
 }
