@@ -108,7 +108,7 @@ namespace brugmapdataultimate
                         genCPposition += "," + cp.CPPositionStringForCP();
                         genPrime += "," + cp.Prime;
                         genRadVAGobackCP += "," + $"Vector({cp.Radius},0," + (cp.Type == CheckpointType.LevelStart ? "0" : (cpcount - 1).ToString()) + ")";
-                        genConnections += "," + (cp.Type == CheckpointType.LevelEnd ? 0 : cpcount);
+                        genConnections += "," + (cp.Type == CheckpointType.LevelEnd ? 0 : cpcount + 1);
                         genMission += "," + cp.MissionStringForCP();
                         genHiddenCPTpRadTT += "," + cp.HiddenCPTPRadTTStringForCP();
                         genTP += "," + cp.TeleportStringForCP();
@@ -2793,6 +2793,7 @@ namespace brugmapdataultimate
                     
                     mapTreeView.SelectedNode.Remove();
                     (mapcp ? map.levelSelectorCP.Missions : map.Levels.Find(x => x.Name == lvlname).Checkpoints[cpindex].Missions).RemoveAt(missionindex);
+                    
                 }
             }
         }
