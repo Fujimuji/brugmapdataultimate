@@ -337,7 +337,6 @@
             this.cpCoordTxt.Location = new System.Drawing.Point(18, 47);
             this.cpCoordTxt.Name = "cpCoordTxt";
             this.cpCoordTxt.PlaceholderText = "Checkpoint coordinates";
-            this.cpCoordTxt.ShortcutsEnabled = false;
             this.cpCoordTxt.Size = new System.Drawing.Size(232, 27);
             this.cpCoordTxt.TabIndex = 52;
             this.cpCoordTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cpCoordTxt_KeyPress);
@@ -349,7 +348,6 @@
             this.tpCoordTxt.Location = new System.Drawing.Point(18, 80);
             this.tpCoordTxt.Name = "tpCoordTxt";
             this.tpCoordTxt.PlaceholderText = "Teleport coordinates";
-            this.tpCoordTxt.ShortcutsEnabled = false;
             this.tpCoordTxt.Size = new System.Drawing.Size(232, 27);
             this.tpCoordTxt.TabIndex = 53;
             this.tpCoordTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tpCoordTxt_KeyPress);
@@ -539,7 +537,6 @@
             this.effCoordTxt.Location = new System.Drawing.Point(147, 52);
             this.effCoordTxt.Name = "effCoordTxt";
             this.effCoordTxt.PlaceholderText = "Effect coordinates";
-            this.effCoordTxt.ShortcutsEnabled = false;
             this.effCoordTxt.Size = new System.Drawing.Size(232, 27);
             this.effCoordTxt.TabIndex = 57;
             this.effCoordTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.effCoordTxt_KeyPress);
