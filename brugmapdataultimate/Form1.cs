@@ -1351,6 +1351,21 @@ namespace brugmapdataultimate
                     TreeNode cpNode = new TreeNode($"Checkpoint 1");
                     cpNode.Nodes.Add("Effects");
                     cpNode.Nodes.Add("Missions");
+                    if (newThis.Effects.Any())
+                    {
+                        foreach (var effect in newThis.Effects)
+                        {
+                            cpNode.Nodes[0].Nodes.Add(effect.ToNodeString());
+                        }
+                    }
+                    
+                    if (newThis.Missions.Any())
+                    {
+                        foreach (var mission in newThis.Missions)
+                        {
+                            cpNode.Nodes[1].Nodes.Add(mission.ToNodeString());
+                        }
+                    }
                     mapTreeView.SelectedNode.Parent.Nodes.Insert(0, cpNode);
                     currentLvlName = map.Levels.First(x => x.Name == currentLvlName).Name;
                     mapTreeView.SelectedNode.Remove();
@@ -1391,6 +1406,8 @@ namespace brugmapdataultimate
                     }
                     map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].Type = CheckpointType.LevelEnd;
                     map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].EffectLock = isEffLocked.Checked;
+                    map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].Effects.Clear();
+                    map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].Missions.Clear();
                     Checkpoint newThis = map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex];
                     map.Levels.First(x => x.Name == currentLvlName).Checkpoints.RemoveAt(cpindex);
                     map.Levels.First(x => x.Name == currentLvlName).Checkpoints.Add(newThis);
@@ -1435,6 +1452,21 @@ namespace brugmapdataultimate
                     map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].Type = CheckpointType.Normal;
                     map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].EffectLock = isEffLocked.Checked;
                     mapTreeView.SelectedNode = mapTreeView.SelectedNode.Parent;
+                    if (map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].Effects.Any())
+                    {
+                        foreach (var effect in map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].Effects)
+                        {
+                            mapTreeView.SelectedNode.Nodes[0].Nodes.Add(effect.ToNodeString());
+                        }
+                    }
+
+                    if (map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].Missions.Any())
+                    {
+                        foreach (var mission in map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].Missions)
+                        {
+                            mapTreeView.SelectedNode.Nodes[1].Nodes.Add(mission.ToNodeString());
+                        }
+                    }
 
                     for (int i = 1; i < mapTreeView.SelectedNode.Nodes.Count; i++)
                     {
