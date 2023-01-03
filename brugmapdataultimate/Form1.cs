@@ -1445,10 +1445,10 @@ namespace brugmapdataultimate
                     map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].PowerblockEnabled = cpPowerBlockEnabled.Checked;
                     if (IsAbilCount())
                     {
-                        map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].isAbilCount = false;
-                        map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].PunchCount = "0";
-                        map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].SlamCount = "0";
-                        map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].PowerblockCount = "0";
+                        map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].isAbilCount = true;
+                        map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].PunchCount = punchUpDown.Value.ToString();
+                        map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].SlamCount = slamUpDown.Value.ToString();
+                        map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].PowerblockCount = powerBlockUpDown.Value.ToString();
                     }
                     map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].Type = CheckpointType.Normal;
                     map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].EffectLock = isEffLocked.Checked;
