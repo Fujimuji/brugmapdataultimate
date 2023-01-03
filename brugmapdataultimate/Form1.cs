@@ -1433,22 +1433,6 @@ namespace brugmapdataultimate
                         mapTreeView.SelectedNode.Nodes.Add("Effects");
                         mapTreeView.SelectedNode.Nodes.Add("Missions");
                     }
-
-                    if (map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].Effects.Any())
-                    {
-                        foreach (var effect in map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].Effects)
-                        {
-                            mapTreeView.SelectedNode.Nodes[0].Nodes.Add(effect.ToNodeString());
-                        }
-                    }
-
-                    if (map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].Missions.Any())
-                    {
-                        foreach (var mission in map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].Missions)
-                        {
-                            mapTreeView.SelectedNode.Nodes[1].Nodes.Add(mission.ToNodeString());
-                        }
-                    }
                     
                     bool doesLvlLastCpExist = map.Levels.First(x => x.Name == currentLvlName).Checkpoints.Any(x => x.Type == CheckpointType.LevelEnd);
                     map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].Coordinate = cpCoordTxt.Text;
