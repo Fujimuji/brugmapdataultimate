@@ -1397,13 +1397,10 @@ namespace brugmapdataultimate
                     map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].PunchEnabled = cpPunchEnabled.Checked;
                     map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].SlamEnabled = cpSlamEnabled.Checked;
                     map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].PowerblockEnabled = cpPowerBlockEnabled.Checked;
-                    if (IsAbilCount())
-                    {
-                        map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].isAbilCount = false;
-                        map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].PunchCount = "0";
-                        map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].SlamCount = "0";
-                        map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].PowerblockCount = "0";
-                    }
+                    map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].isAbilCount = false;
+                    map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].PunchCount = "0";
+                    map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].SlamCount = "0";
+                    map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].PowerblockCount = "0";
                     map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].Type = CheckpointType.LevelEnd;
                     map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].EffectLock = isEffLocked.Checked;
                     map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].Effects.Clear();
