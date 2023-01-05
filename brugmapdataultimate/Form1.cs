@@ -999,6 +999,7 @@ namespace brugmapdataultimate
                 if (currenteff.Type == EffectType.Time)
                 {
                     effTypeComboBox.SelectedIndex = 0;
+                    effTypeComboBox.Enabled = true;
                     effTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
                     effCoordTxt.Text = currenteff.Coordinate;
                     effRadTxt.Value = decimal.Parse(currenteff.Radius.Trim('-'));
@@ -2024,6 +2025,7 @@ namespace brugmapdataultimate
                     });
                     mapTreeView.SelectedNode.Nodes.Add("Effect: Entry Portal");
                     mapTreeView.SelectedNode = mapTreeView.SelectedNode.Parent;
+                    mapTreeView.SelectedNode = mapTreeView.SelectedNode.Nodes[0];
                     mapTreeView.Enabled = false;
                     effTypeComboBox.SelectedIndex = 6;
                     effTypeComboBox.Enabled = false;
@@ -2236,6 +2238,12 @@ namespace brugmapdataultimate
 
                 if (effTypeComboBox.SelectedItem.ToString() == "Entry Portal")
                 {
+                    if (currentEff.Type != EffectType.EntryPortal)
+                    {
+                        MessageBox.Show("You can't change other effects to an entry portal.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
                     (mapcp ? map.levelSelectorCP.Effects : map.Levels[lvlindex].Checkpoints[cpindex].Effects)[effindex] = new Effect
                     {
                         Type = EffectType.EntryPortal,
@@ -2251,12 +2259,18 @@ namespace brugmapdataultimate
 
                     mapTreeView.SelectedNode.Text = "Effect: Entry Portal";
                     mapTreeView.SelectedNode = mapTreeView.SelectedNode.Parent;
-                    mapTreeView.Enabled = false;
+                    effTypeComboBox.Enabled = true;
                     return;
                 }
 
                 if (effTypeComboBox.SelectedItem.ToString() == "Exit Portal")
                 {
+                    if (currentEff.Type != EffectType.ExitPortal)
+                    {
+                        MessageBox.Show("You can't change other effects to an exit portal.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
                     (mapcp ? map.levelSelectorCP.Effects : map.Levels[lvlindex].Checkpoints[cpindex].Effects)[effindex] = new Effect
                     {
                         Type = EffectType.ExitPortal,
