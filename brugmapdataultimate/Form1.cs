@@ -925,6 +925,7 @@ namespace brugmapdataultimate
             {
                 effSettingsGroupBox.Visible = true;
                 cpSettingsGroupBox.Visible = false;
+                effTypeComboBox.Enabled = true;
                 lvlGroupBox.Visible = false;
                 missSettingsGroupBox.Visible = false;
                 addEffBtn.Text = "Add Effect";
