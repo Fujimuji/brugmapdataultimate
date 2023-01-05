@@ -25,7 +25,7 @@ namespace brugmapdataultimate
             LevelEnd,
             Normal
         }
-        
+
         public enum EffectType
         {
             Time = 0,
@@ -50,8 +50,8 @@ namespace brugmapdataultimate
             UpwardsDiag = 29,
             DownwardsDiag = 31,
             PunchBounce = 37
-        }    
-        
+        }
+
         public enum AbilityPrimes
         {
             Punch = 2,
@@ -142,7 +142,7 @@ namespace brugmapdataultimate
                        genAbilityCount;
             }
         }
-        
+
         public class Level
         {
             public string Name { get; set; } = "";
@@ -216,7 +216,7 @@ namespace brugmapdataultimate
                 string genMission = "Array(";
                 int _prime = 1;
                 int deflock = 9930;
-                
+
                 for (int i = 0; i < Missions.Count; i++)
                 {
                     _prime *= (int)Missions[i].Type;
@@ -745,7 +745,7 @@ namespace brugmapdataultimate
             effSettingsGroupBox.Visible = false;
             missSettingsGroupBox.Visible = false;
         }
-        
+
         public void EnableCPControls()
         {
             cpSettingsGroupBox.Enabled = true;
@@ -782,7 +782,7 @@ namespace brugmapdataultimate
                 isNoChange.Checked = true;
             }
         }
-        
+
         public void SelectTheCPtype(CheckpointType type)
         {
             if (type == CheckpointType.LevelStart)
@@ -821,7 +821,7 @@ namespace brugmapdataultimate
                     isNormalCP.Enabled = false;
                     return;
                 }
-                
+
                 else //level selector cp exists and now can add a level
                 {
                     cpSettingsGroupBox.Visible = false;
@@ -834,7 +834,7 @@ namespace brugmapdataultimate
                     return;
                 }
             }
-            
+
             if (e.Node?.Text == "Checkpoint 0") //level selector cp selected
             {
                 HideEffectsMissions();
@@ -862,7 +862,7 @@ namespace brugmapdataultimate
                 isEffLocked.Enabled = true;
                 return;
             }
-            
+
             if (e.Node.Text.Contains("Level -")) //a level is selected
             {
                 ClearCPControls();
@@ -877,7 +877,7 @@ namespace brugmapdataultimate
                     isLvlStartCP.Checked = false;
                     isLvlStartCP.Enabled = false;
                 }
-                
+
                 if (!doesLvlFirstCpExist)
                 {
                     isLvlStartCP.Checked = true;
@@ -897,7 +897,7 @@ namespace brugmapdataultimate
                     lvlNameTxt.Text = e.Node.Tag.ToString();
                     return;
                 }
-                
+
                 if (doesLvlLastCpExist)
                 {
                     isLvlEndCP.Checked = false;
@@ -928,6 +928,8 @@ namespace brugmapdataultimate
                 lvlGroupBox.Visible = false;
                 missSettingsGroupBox.Visible = false;
                 addEffBtn.Text = "Add Effect";
+                effCoordTxt.Text = "";
+                effRadTxt.Value = decimal.Parse("1.1");
                 return;
             }
 
@@ -973,34 +975,225 @@ namespace brugmapdataultimate
                 Debug.WriteLine($"Level: {currentLvlName} | Checkpoint: {e.Node.Index}");
                 return;
             }
-            
+
             if (e.Node.Text.Contains("Effect:")) //effect of a checkpoint selected
             {
-                e.Node.Tag = e.Node.Index.ToString();
+                int effindex = e.Node.Index;
+                int cpindex = 1, lvlindex = 1;
+                bool mapcp = e.Node.Parent.Parent.Text == "Checkpoint 0";
+                mapTreeView.SelectedNode.Tag = e.Node.Index;
+
+
+                if (mapcp == false)
+                {
+                    cpindex = e.Node.Parent.Parent.Index;
+                    lvlindex = e.Node.Parent.Parent.Parent.Index - 1;
+                }
+                Effect currenteff = (mapcp ? map.levelSelectorCP.Effects : map.Levels[lvlindex].Checkpoints[cpindex].Effects)[effindex];
                 addEffBtn.Text = "Edit Effect";
                 cpSettingsGroupBox.Visible = false;
                 lvlGroupBox.Visible = false;
                 missSettingsGroupBox.Visible = false;
                 effSettingsGroupBox.Visible = true;
-                var lvlNode = e.Node.Parent.Parent.Parent;
-                var lvlName = lvlNode.Tag?.ToString();
-                var cpCount = e.Node.Parent.Parent.Index; //index of the checkpoint
-                Debug.WriteLine($"Level: {lvlName} | Checkpoint: {cpCount}");
+                if (currenteff.Type == EffectType.Time)
+                {
+                    effTypeComboBox.SelectedIndex = 0;
+                    effTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
+                    effCoordTxt.Text = currenteff.Coordinate;
+                    effRadTxt.Value = decimal.Parse(currenteff.Radius.Trim('-'));
+                    effTimeUpDown.Enabled = true;
+                    iseffLightShaft.Checked = currenteff.Lightshaft;
+                }
+
+                if (currenteff.Type == EffectType.Death)
+                {
+                    effTypeComboBox.SelectedIndex = 1;
+                    effTypeComboBox.Enabled = true;
+                    effCoordTxt.Text = currenteff.Coordinate;
+                    effRadTxt.Value = decimal.Parse(currenteff.Radius.Trim('-'));
+                    iseffLightShaft.Checked = currenteff.Lightshaft;
+                }
+
+                if (currenteff.Type == EffectType.Ability)
+                {
+                    effTypeComboBox.SelectedIndex = 2;
+                    effTypeComboBox.Enabled = true;
+                    effCoordTxt.Text = currenteff.Coordinate;
+                    effRadTxt.Value = decimal.Parse(currenteff.Radius.Trim('-'));
+                    iseffLightShaft.Checked = currenteff.Lightshaft;
+                    issEffCdReset.Checked = currenteff.CDReset;
+                    isNoChange.Checked = currenteff.NoChange;
+                    effSlamEnabled.Checked = currenteff.SlamEnabled;
+                    effPunchEnabled.Checked = currenteff.PunchEnabled;
+                    effPowerBlockEnabled.Checked = currenteff.PowerblockEnabled;
+                }
+
+                if (currenteff.Type == EffectType.Permeation)
+                {
+                    effTypeComboBox.SelectedIndex = 3;
+                    effTypeComboBox.Enabled = true;
+                    effCoordTxt.Text = currenteff.Coordinate;
+                    effRadTxt.Value = decimal.Parse(currenteff.Radius.Trim('-'));
+                    iseffLightShaft.Checked = currenteff.Lightshaft;
+                    issEffCdReset.Checked = currenteff.CDReset;
+                    isNoChange.Checked = currenteff.NoChange;
+                    effSlamEnabled.Checked = currenteff.SlamEnabled;
+                    effPunchEnabled.Checked = currenteff.PunchEnabled;
+                    effPowerBlockEnabled.Checked = currenteff.PowerblockEnabled;
+                }
+
+                if (currenteff.Type == EffectType.Safepoint)
+                {
+                    effTypeComboBox.SelectedIndex = 4;
+                    effTypeComboBox.Enabled = true;
+                    effCoordTxt.Text = currenteff.Coordinate;
+                    effRadTxt.Value = decimal.Parse(currenteff.Radius.Trim('-'));
+                    iseffLightShaft.Checked = currenteff.Lightshaft;
+                    issEffCdReset.Checked = false;
+                    isNoChange.Checked = false;
+                    effSlamEnabled.Checked = currenteff.SlamEnabled;
+                    effPunchEnabled.Checked = currenteff.PunchEnabled;
+                    effPowerBlockEnabled.Checked = currenteff.PowerblockEnabled;
+                }
+
+                if (currenteff.Type == EffectType.EntryPortal)
+                {
+                    effTypeComboBox.SelectedIndex = 5;
+                    effTypeComboBox.Enabled = false;
+                    effCoordTxt.Text = currenteff.Coordinate;
+                    effRadTxt.Value = decimal.Parse(currenteff.Radius);
+                    iseffLightShaft.Checked = false;
+                    issEffCdReset.Checked = currenteff.CDReset;
+                    isNoChange.Checked = currenteff.NoChange;
+                    effSlamEnabled.Checked = currenteff.SlamEnabled;
+                    effPunchEnabled.Checked = currenteff.PunchEnabled;
+                    effPowerBlockEnabled.Checked = currenteff.PowerblockEnabled;
+                }
+
+                if (currenteff.Type == EffectType.ExitPortal)
+                {
+                    effTypeComboBox.SelectedIndex = 6;
+                    effTypeComboBox.Enabled = false;
+                    effCoordTxt.Text = currenteff.Coordinate;
+                    effRadTxt.Value = decimal.Parse(currenteff.Radius);
+                    iseffLightShaft.Checked = false;
+                    issEffCdReset.Checked = currenteff.CDReset;
+                    isNoChange.Checked = currenteff.NoChange;
+                    effSlamEnabled.Checked = currenteff.SlamEnabled;
+                    effPunchEnabled.Checked = currenteff.PunchEnabled;
+                    effPowerBlockEnabled.Checked = currenteff.PowerblockEnabled;
+                }
                 return;
             }
 
             if (e.Node.Text.Contains("Mission:")) //mission of a checkpoint selected
             {
                 e.Node.Tag = e.Node.Index.ToString();
+                int missindex = e.Node.Index;
+                int cpindex = 1, lvlindex = 1;
+                bool mapcp = e.Node.Parent.Parent.Text == "Checkpoint 0";
+
+
+                if (mapcp == false)
+                {
+                    cpindex = e.Node.Parent.Parent.Index;
+                    lvlindex = e.Node.Parent.Parent.Parent.Index - 1;
+                }
+
+                Mission currenteff = (mapcp ? map.levelSelectorCP.Missions : map.Levels[lvlindex].Checkpoints[cpindex].Missions)[missindex];
+                if (currenteff.Type == MissionType.NoRocketPunch)
+                {
+                    missTypeComboBox.SelectedIndex = 0;
+                    isMissTime.Checked = currenteff.isTimeMission;
+                    isMissLock.Checked = currenteff.isLock;
+                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
+                }
+
+                if (currenteff.Type == MissionType.NoSlam)
+                {
+                    missTypeComboBox.SelectedIndex = 2;
+                    isMissTime.Checked = currenteff.isTimeMission;
+                    isMissLock.Checked = currenteff.isLock;
+                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
+                }
+
+                if (currenteff.Type == MissionType.NoPowerblock)
+                {
+                    missTypeComboBox.SelectedIndex = 1;
+                    isMissTime.Checked = currenteff.isTimeMission;
+                    isMissLock.Checked = currenteff.isLock;
+                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
+                }
+
+                if (currenteff.Type == MissionType.Stalless)
+                {
+                    missTypeComboBox.SelectedIndex = 3;
+                    isMissTime.Checked = currenteff.isTimeMission;
+                    isMissLock.Checked = currenteff.isLock;
+                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
+                }
+
+                if (currenteff.Type == MissionType.Spin)
+                {
+                    missTypeComboBox.SelectedIndex = 4;
+                    isMissTime.Checked = currenteff.isTimeMission;
+                    isMissLock.Checked = currenteff.isLock;
+                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
+                }
+
+                if (currenteff.Type == MissionType.RocketPunchFirst)
+                {
+                    missTypeComboBox.SelectedIndex = 5;
+                    isMissTime.Checked = currenteff.isTimeMission;
+                    isMissLock.Checked = currenteff.isLock;
+                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
+                }
+
+                if (currenteff.Type == MissionType.PowerblockFirst)
+                {
+                    missTypeComboBox.SelectedIndex = 6;
+                    isMissTime.Checked = currenteff.isTimeMission;
+                    isMissLock.Checked = currenteff.isLock;
+                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
+                }
+
+                if (currenteff.Type == MissionType.SlamFirst)
+                {
+                    missTypeComboBox.SelectedIndex = 7;
+                    isMissTime.Checked = currenteff.isTimeMission;
+                    isMissLock.Checked = currenteff.isLock;
+                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
+                }
+
+                if (currenteff.Type == MissionType.UpwardsDiag)
+                {
+                    missTypeComboBox.SelectedIndex = 8;
+                    isMissTime.Checked = currenteff.isTimeMission;
+                    isMissLock.Checked = currenteff.isLock;
+                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
+                }
+
+                if (currenteff.Type == MissionType.DownwardsDiag)
+                {
+                    missTypeComboBox.SelectedIndex = 9;
+                    isMissTime.Checked = currenteff.isTimeMission;
+                    isMissLock.Checked = currenteff.isLock;
+                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
+                }
+
+                if (currenteff.Type == MissionType.PunchBounce)
+                {
+                    missTypeComboBox.SelectedIndex = 10;
+                    isMissTime.Checked = currenteff.isTimeMission;
+                    isMissLock.Checked = currenteff.isLock;
+                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
+                }
+
                 addMissBtn.Text = "Edit Mission";
                 cpSettingsGroupBox.Visible = false;
                 lvlGroupBox.Visible = false;
                 missSettingsGroupBox.Visible = true;
                 effSettingsGroupBox.Visible = false;
-                var lvlNode = e.Node.Parent.Parent.Parent;
-                var lvlName = lvlNode.Tag?.ToString();
-                var cpCount = e.Node.Parent.Parent.Index; //index of the checkpoint
-                Debug.WriteLine($"Level: {lvlName} | Checkpoint: {cpCount}");
                 return;
             }
         }
@@ -1022,7 +1215,7 @@ namespace brugmapdataultimate
                 return mapTreeView.SelectedNode.Index;
             }
         }
-        
+
         public void ClearCPControls()
         {
             cpCoordTxt.Text = "";
@@ -1056,7 +1249,7 @@ namespace brugmapdataultimate
                 mapTreeView.SelectedNode = mapTreeView.Nodes[0].LastNode;
                 return;
             }
-            
+
             if (addLvlBtn.Text == "Change Level Name")
             {
                 if (string.IsNullOrWhiteSpace(lvlNameTxt.Text) || string.IsNullOrEmpty(lvlNameTxt.Text)) //lvlnameTxt was empty
@@ -1184,7 +1377,7 @@ namespace brugmapdataultimate
                     {
                         for (int i = 0; i < mapTreeView.SelectedNode.Nodes.Count; i++)
                         {
-                            mapTreeView.SelectedNode.Nodes[i].Text = "Checkpoint " + (i + 1).ToString(); 
+                            mapTreeView.SelectedNode.Nodes[i].Text = "Checkpoint " + (i + 1).ToString();
                         }
                         mapTreeView.SelectedNode = mapTreeView.SelectedNode.Nodes[0].Nodes[0];
                         return;
@@ -1196,7 +1389,7 @@ namespace brugmapdataultimate
                     clipboardLbl.Enabled = true;
                     return;
                 }
-                
+
                 if (isLvlEndCP.Checked)
                 {
                     string currentLvlName = mapTreeView.SelectedNode.Tag.ToString();
@@ -1220,7 +1413,7 @@ namespace brugmapdataultimate
                     clipboardLbl.Enabled = true;
                     return;
                 }
-                
+
                 if (isNormalCP.Checked)
                 {
                     string currentLvlName = mapTreeView.SelectedNode.Tag.ToString();
@@ -1245,7 +1438,7 @@ namespace brugmapdataultimate
                         newCP.SlamCount = slamUpDown.Value.ToString();
                         newCP.PowerblockCount = powerBlockUpDown.Value.ToString();
                     }
-                    
+
 
                     if (doesLvlLastCpExist)
                     {
@@ -1275,14 +1468,14 @@ namespace brugmapdataultimate
                     saveBtn.Enabled = true;
                     clipboardLbl.Enabled = true;
                     return;
-                }  
+                }
             }
-            
+
             if (addCpBtn.Text == "Edit Checkpoint")
             {
                 var result = Regex.Match(cpCoordTxt.Text, pattern);
                 var tpresult = Regex.Match(tpCoordTxt.Text, pattern);
-                
+
                 int cpindex = mapTreeView.SelectedNode.Index;
                 needed.Text = mapTreeView.SelectedNode.Parent.Index.ToString();
                 int killme = int.Parse(needed.Text);
@@ -1297,7 +1490,7 @@ namespace brugmapdataultimate
                     MessageBox.Show("There is something wrong with the teleport checkpoint coordinates.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                
+
                 if (isLvlSelector.Checked)
                 {
                     map.levelSelectorCP.Coordinate = cpCoordTxt.Text;
@@ -1317,7 +1510,7 @@ namespace brugmapdataultimate
                     mapTreeView.SelectedNode = mapTreeView.TopNode;
                     return;
                 }
-                
+
                 if (isLvlStartCP.Checked)
                 {
                     string currentLvlName = mapTreeView.SelectedNode.Parent.Tag.ToString();
@@ -1358,7 +1551,7 @@ namespace brugmapdataultimate
                             cpNode.Nodes[0].Nodes.Add(effect.ToNodeString());
                         }
                     }
-                    
+
                     if (newThis.Missions.Any())
                     {
                         foreach (var mission in newThis.Missions)
@@ -1379,7 +1572,7 @@ namespace brugmapdataultimate
                     clipboardLbl.Enabled = true;
                     return;
                 }
-                
+
                 if (isLvlEndCP.Checked)
                 {
                     string currentLvlName = mapTreeView.SelectedNode.Parent.Tag.ToString();
@@ -1430,7 +1623,7 @@ namespace brugmapdataultimate
                         mapTreeView.SelectedNode.Nodes.Add("Effects");
                         mapTreeView.SelectedNode.Nodes.Add("Missions");
                     }
-                    
+
                     bool doesLvlLastCpExist = map.Levels.First(x => x.Name == currentLvlName).Checkpoints.Any(x => x.Type == CheckpointType.LevelEnd);
                     map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].Coordinate = cpCoordTxt.Text;
                     map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].Radius = cpRadTxt.Value.ToString();
@@ -1450,15 +1643,13 @@ namespace brugmapdataultimate
                     map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].Type = CheckpointType.Normal;
                     map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].EffectLock = isEffLocked.Checked;
                     mapTreeView.SelectedNode = mapTreeView.SelectedNode.Parent;
-
-
                     for (int i = 1; i < mapTreeView.SelectedNode.Nodes.Count; i++)
                     {
                         mapTreeView.SelectedNode.Nodes[i].Text = $"Checkpoint {i + 1}";
                     }
                     saveBtn.Enabled = true;
                     clipboardLbl.Enabled = true;
-                }  
+                }
             }
         }
 
@@ -1719,12 +1910,16 @@ namespace brugmapdataultimate
                     mapTreeView.SelectedNode.Nodes.Add("Effect: Time " + (iseffLightShaft.Checked ? "Lightshaft - " : "Orb - ") + effTimeUpDown.Value.ToString());
                     //mapTreeView.SelectedNode = mapTreeView.SelectedNode.Nodes[0].FirstNode;
                     mapTreeView.SelectedNode = mapTreeView.SelectedNode.Parent;
+                    effCoordTxt.Text = "";
+                    effRadTxt.Value = decimal.Parse("1.1");
+                    effTimeUpDown.Value = 0;
+                    iseffLightShaft.Checked = false;
                     return;
                 }
 
                 if (effTypeComboBox.SelectedItem.ToString() == "Death")
                 {
-                    (mapcp ? map.levelSelectorCP.Effects : map.Levels[lvlindex].Checkpoints[cpindex].Effects).Add(new Effect 
+                    (mapcp ? map.levelSelectorCP.Effects : map.Levels[lvlindex].Checkpoints[cpindex].Effects).Add(new Effect
                     {
                         Type = EffectType.Death,
                         Coordinate = effCoordTxt.Text,
@@ -1734,6 +1929,9 @@ namespace brugmapdataultimate
 
                     mapTreeView.SelectedNode.Nodes.Add("Effect: Death " + (iseffLightShaft.Checked ? "Lightshaft" : "Orb"));
                     mapTreeView.SelectedNode = mapTreeView.SelectedNode.Parent;
+                    effCoordTxt.Text = "";
+                    effRadTxt.Value = decimal.Parse("1.1");
+                    iseffLightShaft.Checked = false;
                     return;
                 }
 
@@ -1754,6 +1952,11 @@ namespace brugmapdataultimate
                     });
                     mapTreeView.SelectedNode.Nodes.Add("Effect: Ability " + (iseffLightShaft.Checked ? "Lightshaft" : "Orb"));
                     mapTreeView.SelectedNode = mapTreeView.SelectedNode.Parent;
+                    effCoordTxt.Text = "";
+                    effRadTxt.Value = decimal.Parse("1.1");
+                    iseffLightShaft.Checked = false;
+                    issEffCdReset.Checked = false;
+                    isNoChange.Checked = true;
                     return;
                 }
 
@@ -1773,8 +1976,12 @@ namespace brugmapdataultimate
                         CDReset = issEffCdReset.Checked
                     });
                     mapTreeView.SelectedNode.Nodes.Add("Effect: Permeation " + (iseffLightShaft.Checked ? "Lightshaft" : "Orb"));
-                    mapTreeView.SelectedNode = mapTreeView.SelectedNode.Nodes[0].FirstNode;
                     mapTreeView.SelectedNode = mapTreeView.SelectedNode.Parent;
+                    effCoordTxt.Text = "";
+                    effRadTxt.Value = decimal.Parse("1.1");
+                    iseffLightShaft.Checked = false;
+                    issEffCdReset.Checked = false;
+                    isNoChange.Checked = true;
                     return;
                 }
 
@@ -1793,6 +2000,10 @@ namespace brugmapdataultimate
                     });
                     mapTreeView.SelectedNode.Nodes.Add("Effect: Safepoint");
                     mapTreeView.SelectedNode = mapTreeView.SelectedNode.Parent;
+                    effCoordTxt.Text = "";
+                    effRadTxt.Value = decimal.Parse("1.1");
+                    issEffCdReset.Checked = false;
+                    isNoChange.Checked = true;
                     return;
                 }
 
@@ -1815,6 +2026,10 @@ namespace brugmapdataultimate
                     mapTreeView.Enabled = false;
                     effTypeComboBox.SelectedIndex = 6;
                     effTypeComboBox.Enabled = false;
+                    effCoordTxt.Text = "";
+                    effRadTxt.Value = decimal.Parse("1.1");
+                    issEffCdReset.Checked = false;
+                    isNoChange.Checked = true;
                     return;
                 }
 
@@ -1835,8 +2050,13 @@ namespace brugmapdataultimate
                     mapTreeView.SelectedNode.Nodes.Add("Effect: Exit Portal");
                     mapTreeView.SelectedNode = mapTreeView.SelectedNode.Parent;
                     mapTreeView.Enabled = true;
-                    effTypeComboBox.SelectedIndex = 5;
+                    effTypeComboBox.SelectedIndex = 0;
                     effTypeComboBox.Enabled = true;
+                    effCoordTxt.Text = "";
+                    effRadTxt.Value = decimal.Parse("1.1");
+                    iseffLightShaft.Checked = false;
+                    issEffCdReset.Checked = false;
+                    isNoChange.Checked = true;
                     return;
                 }
             }
@@ -1853,7 +2073,7 @@ namespace brugmapdataultimate
 
                 if (mapTreeView.SelectedNode.Parent.Parent.Text != "Checkpoint 0")
                 {
-                    lvlindex = mapTreeView.SelectedNode.Parent.Parent.Parent.Index;
+                    lvlindex = mapTreeView.SelectedNode.Parent.Parent.Parent.Index - 1;
                     cpindex = mapTreeView.SelectedNode.Parent.Parent.Index;
                 }
 
@@ -2031,8 +2251,6 @@ namespace brugmapdataultimate
                     mapTreeView.SelectedNode.Text = "Effect: Entry Portal";
                     mapTreeView.SelectedNode = mapTreeView.SelectedNode.Parent;
                     mapTreeView.Enabled = false;
-                    effTypeComboBox.SelectedIndex = 6;
-                    effTypeComboBox.Enabled = false;
                     return;
                 }
 
@@ -2054,7 +2272,6 @@ namespace brugmapdataultimate
                     mapTreeView.SelectedNode.Text = "Effect: Exit Portal";
                     mapTreeView.SelectedNode = mapTreeView.SelectedNode.Parent;
                     mapTreeView.Enabled = true;
-                    effTypeComboBox.SelectedIndex = 5;
                     effTypeComboBox.Enabled = true;
                     return;
                 }
@@ -2125,7 +2342,7 @@ namespace brugmapdataultimate
         private void addMissBtn_Click(object sender, EventArgs e)
         {
             bool mapcp = false;
-            
+
             if (addMissBtn.Text == "Add Mission")
             {
                 int lvlindex = 1, cpindex = 1;
@@ -2133,7 +2350,7 @@ namespace brugmapdataultimate
                 {
                     mapcp = true;
                 }
-                
+
                 if (mapTreeView.SelectedNode.Parent.Text != "Checkpoint 0")
                 {
                     lvlindex = mapTreeView.SelectedNode.Parent.Parent.Index - 1;
@@ -2149,7 +2366,7 @@ namespace brugmapdataultimate
                     MessageBox.Show("You can only have one of 'X Ability First' missions per checkpoint!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                
+
                 if (missTypeComboBox.SelectedItem.ToString() == "No Rocket Punch")
                 {
                     bool exists = (mapcp ? map.levelSelectorCP.Missions : map.Levels[lvlindex].Checkpoints[cpindex].Missions).Any(x => x.Type == MissionType.NoRocketPunch);
@@ -2226,7 +2443,7 @@ namespace brugmapdataultimate
                     });
                     mapTreeView.SelectedNode.Nodes.Add("Mission: Stalless");
                 }
-                
+
                 if (missTypeComboBox.SelectedItem.ToString() == "360 Spin")
                 {
                     bool exists = (mapcp ? map.levelSelectorCP.Missions : map.Levels[lvlindex].Checkpoints[cpindex].Missions).Any(x => x.Type == MissionType.Spin);
@@ -2360,7 +2577,7 @@ namespace brugmapdataultimate
                     mapTreeView.SelectedNode.Nodes.Add("Mission: Rocket Punch Bounce");
                 }
             }
-            
+
             if (addMissBtn.Text == "Edit Mission")
             {
                 int lvlindex = 1, cpindex = 1;
@@ -2368,7 +2585,7 @@ namespace brugmapdataultimate
                 {
                     mapcp = true;
                 }
-                
+
                 if (mapTreeView.SelectedNode.Parent.Parent.Text != "Checkpoint 0")
                 {
                     lvlindex = mapTreeView.SelectedNode.Parent.Parent.Parent.Index - 1;
@@ -2650,7 +2867,7 @@ namespace brugmapdataultimate
                             mapTreeView.Nodes[0].Nodes[0].Nodes[0].Nodes.Add(map.levelSelectorCP.Effects[i].ToNodeString());
                         }
                     }
-                    
+
                     if (map.levelSelectorCP.Missions.Count > 0)
                     {
                         for (int i = 0; i < map.levelSelectorCP.Missions.Count; i++)
@@ -2659,7 +2876,7 @@ namespace brugmapdataultimate
                         }
                     }
                 }
-                
+
                 if (map.Levels.Any())
                 {
                     for (int i = 0; i < map.Levels.Count; i++)
@@ -2773,7 +2990,7 @@ namespace brugmapdataultimate
                     int cpindex = mapTreeView.SelectedNode.Parent.Parent.Index;
                     int effectindex = mapTreeView.SelectedNode.Index;
                     Effect eff = (mapcp ? map.levelSelectorCP.Effects : map.Levels.Find(x => x.Name == lvlname).Checkpoints[cpindex].Effects)[effectindex];
-                    
+
                     if (eff.Type == EffectType.EntryPortal)
                     {
                         (mapcp ? map.levelSelectorCP.Effects : map.Levels.Find(x => x.Name == lvlname).Checkpoints[cpindex].Effects).RemoveAt(effectindex);
@@ -2791,7 +3008,7 @@ namespace brugmapdataultimate
                         mapTreeView.SelectedNode.Remove();
                         return;
                     }
-                    
+
                     mapTreeView.SelectedNode.Remove();
                     (mapcp ? map.levelSelectorCP.Effects : map.Levels.Find(x => x.Name == lvlname).Checkpoints[cpindex].Effects).RemoveAt(effectindex);
                     return;
@@ -2806,10 +3023,10 @@ namespace brugmapdataultimate
                     string lvlname = mapcp ? "" : mapTreeView.SelectedNode.Parent.Parent.Parent.Tag.ToString();
                     int cpindex = mapTreeView.SelectedNode.Parent.Parent.Index;
                     int missionindex = mapTreeView.SelectedNode.Index;
-                    
+
                     mapTreeView.SelectedNode.Remove();
                     (mapcp ? map.levelSelectorCP.Missions : map.Levels.Find(x => x.Name == lvlname).Checkpoints[cpindex].Missions).RemoveAt(missionindex);
-                    
+
                 }
             }
         }
