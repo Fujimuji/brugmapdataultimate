@@ -5,7 +5,7 @@ Both of the versions have the same features like adding/editing/deleting cps, ef
 But the OCR version has an extra feature that can extract coordinates from a screenshot. That's why the file size is big for that one.  
 OCR version will only work for Windows 10.0.19041.0 and above. The default version should work for Windows 7 and above. (Both of the versions need .NET 6.0)  
 
-The link for KNEAT : https://pastebin.com/0D7ssz9J (thanks to yoshi, neb, dreadowl) 
+The link for KNEAT : https://pastebin.com/0D7ssz9J (thanks to yoshi, neb, dreadowl, also needless to say but hax himself :D) 
 
 If you think the executables are malicious, you can build it from the source code yourself :agreege:
 
