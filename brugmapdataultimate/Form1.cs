@@ -91,7 +91,7 @@ namespace brugmapdataultimate
 
                 genCPposition += $"Vector({levelSelectorCP.Coordinate})";
                 genPrime += $"{levelSelectorCP.Prime}";
-                genRadVAGobackCP += $"Vector({levelSelectorCP.Radius},0,-1)";
+                genRadVAGobackCP += $"Vector({levelSelectorCP.Radius.Replace(',', '.')},0,-1)";
                 genConnections += "0";
                 genMission += $"{levelSelectorCP.MissionStringForCP()}";
                 genHiddenCPTpRadTT += $"False";
@@ -107,7 +107,7 @@ namespace brugmapdataultimate
                         Checkpoint cp = Levels[i].Checkpoints[i1];
                         genCPposition += "," + cp.CPPositionStringForCP();
                         genPrime += "," + cp.Prime;
-                        genRadVAGobackCP += "," + $"Vector({cp.Radius},0," + (cp.Type == CheckpointType.LevelStart ? "0" : (cpcount - 1).ToString()) + ")";
+                        genRadVAGobackCP += "," + $"Vector({cp.Radius.Replace(',', '.')},0," + (cp.Type == CheckpointType.LevelStart ? "0" : (cpcount - 1).ToString()) + ")";
                         genConnections += "," + (cp.Type == CheckpointType.LevelEnd ? 0 : cpcount + 1);
                         genMission += "," + cp.MissionStringForCP();
                         genHiddenCPTpRadTT += "," + cp.HiddenCPTPRadTTStringForCP();
