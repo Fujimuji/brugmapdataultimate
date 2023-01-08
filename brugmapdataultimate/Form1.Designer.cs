@@ -139,7 +139,6 @@
             // 
             // mapTreeView
             // 
-            this.mapTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mapTreeView.HideSelection = false;
             this.mapTreeView.Location = new System.Drawing.Point(3, 19);
             this.mapTreeView.Name = "mapTreeView";
@@ -913,7 +912,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(1220, 719);
             this.Name = "Form1";
             this.Text = "Map Data Generator";
             this.mapGroupBox.ResumeLayout(false);
