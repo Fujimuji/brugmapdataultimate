@@ -8,3 +8,8 @@ OCR version will only work for Windows 10.0.19041.0 and above. The default versi
 The link for KNEAT : https://pastebin.com/0D7ssz9J  
 
 If you think the executables are malicious, you can build it from the source code yourself :agreege:
+
+# Tips for OCR
+For OCR to work you should only take a screenshot of the coordinates part and make sure that the screenshots are in .png format. (You can use something like ShareX)  
+OCR will work most of the time but it might not be able to extract the coordinates if the screenshot has a very busy background.  
+If you want to change the coordinates display color, find "rule ("display")" in the kneat file, and edit Color(Aqua) part to whatever you want it to be. (Aqua is the one that worked the best for me)
