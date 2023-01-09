@@ -1,4 +1,6 @@
 using Newtonsoft.Json;
+using Octokit;
+using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Text.RegularExpressions;
@@ -690,6 +692,7 @@ namespace brugmapdataultimate
 
         public Map map = new Map();
         string pattern = @"(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)";
+        const string version = "v1.0.1";
 
         public int GeneratePrimeForCP()
         {
@@ -3056,6 +3059,48 @@ namespace brugmapdataultimate
         {
             MessageBox.Show("Made for making map data generation easier in the absence of inspector. " +
                 "Big thanks to dreadowl, this would be IMPOSSIBLE without his help.- Dorian", "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            CheckForUpdates();
+        }
+
+        public async void CheckForUpdates()
+        {
+            var client = new GitHubClient(new ProductHeaderValue("brugmapdataultimate"));
+            var releases = await client.Repository.Release.GetAll("Fujimuji", "brugmapdataultimate");
+            if (releases[0].TagName != version)
+            {
+                DialogResult result = MessageBox.Show("There is a new version available. Would you like to download it?", "Update Available", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (result == DialogResult.Yes)
+                {
+                    using (var htclient = new HttpClient())
+                    {
+                        using (var s = htclient.GetStreamAsync(releases[0].Assets.FirstOrDefault(x => x.Name == "brugmapdataultimate.exe").BrowserDownloadUrl))
+                        {
+                            using (var fs = new FileStream($"brugmapdataultimate{releases[0].TagName}.exe", System.IO.FileMode.OpenOrCreate))
+                            {
+                                s.Result.CopyTo(fs);
+                            }
+                        }
+                    }
+                    MessageBox.Show($"Download complete. Please run the new version {releases[0].TagName}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (saveBtn.Enabled)
+            {
+                DialogResult result = MessageBox.Show("Would you like to save your changes?", "Save", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    saveBtn.PerformClick();
+                }
+            }
         }
     }
 

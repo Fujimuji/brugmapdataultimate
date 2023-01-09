@@ -915,6 +915,7 @@
             this.MinimumSize = new System.Drawing.Size(1220, 719);
             this.Name = "Form1";
             this.Text = "Map Data Generator";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.mapGroupBox.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
