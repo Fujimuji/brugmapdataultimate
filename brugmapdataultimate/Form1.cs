@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using System.Diagnostics;
+using System.Globalization;
 using System.Text.RegularExpressions;
 using static brugmapdataultimate.Form1;
 
@@ -10,6 +11,11 @@ namespace brugmapdataultimate
         public Form1()
         {
             InitializeComponent();
+            CultureInfo cultureInfo = CultureInfo.GetCultureInfo("en-US");
+            System.Globalization.CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            System.Globalization.CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+            Thread.CurrentThread.CurrentCulture = cultureInfo;
+            Thread.CurrentThread.CurrentUICulture = cultureInfo;
             effTypeComboBox.SelectedIndex = 0;
             missTypeComboBox.SelectedIndex = 0;
             mapTreeView.SelectedNode = mapTreeView.Nodes[0];
