@@ -128,6 +128,7 @@ namespace brugmapdataultimate
 
                 string filePath = @"playtemplate.txt";
 
+                File.WriteAllText(filePath, Properties.Resources.playtemplate);
                 string wholemapdata = File.ReadAllText(filePath);
 
                 if (File.Exists(filePath))
@@ -1314,6 +1315,7 @@ namespace brugmapdataultimate
             cpRadTxt.Value = 2;
             tpRadTxt.Value = 2;
         }
+        
         private void addLvlBtn_Click(object sender, EventArgs e)
         {
             if (addLvlBtn.Text == "Add Level")

@@ -960,6 +960,7 @@
             this.addLvlBtn.TabIndex = 1;
             this.addLvlBtn.Text = "Add Level";
             this.addLvlBtn.UseVisualStyleBackColor = true;
+            this.addLvlBtn.Click += new System.EventHandler(this.addLvlBtn_Click);
             // 
             // lvlNameTxt
             // 

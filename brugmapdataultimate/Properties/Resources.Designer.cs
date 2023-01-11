@@ -59,5 +59,18 @@ namespace brugmapdataultimate.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to settings
+        ///{
+        ///	main
+        ///	{
+        ///		Description: &quot;Doomfist Parkour by Hax                                                                               Play 				Template / Pioneer                                                                                 ver. 2.1.1a                                                                                                                                                                                                                             Join our Discord: discord.gg/d [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string playtemplate {
+            get {
+                return ResourceManager.GetString("playtemplate", resourceCulture);
+            }
+        }
     }
 }
