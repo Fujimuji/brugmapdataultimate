@@ -1,0 +1,4492 @@
+﻿settings
+{
+	main
+	{
+		Description: "Doomfist Parkour by Hax                                                                               Play 				Template / Pioneer                                                                                 ver. 2.1.1a                                                                                                                                                                                                                             Join our Discord: discord.gg/doomfistparkour"
+		Mode Name: "Doomfist Parkour"
+	}
+
+	lobby
+	{
+		Allow Players Who Are In Queue: Yes
+		Map Rotation: Paused
+		Match Voice Chat: Enabled
+		Max Spectators: 12
+		Max Team 1 Players: 11
+		Max Team 2 Players: 0
+		Return To Lobby: Never
+		Swap Teams After Match: No
+	}
+
+	modes
+	{
+		Assault
+		{
+			enabled maps
+			{
+			}
+		}
+
+		Control
+		{
+			enabled maps
+			{
+			}
+		}
+
+		Escort
+		{
+			enabled maps
+			{
+			}
+		}
+
+		Hybrid
+		{
+			enabled maps
+			{
+				Eichenwalde 0
+			}
+		}
+
+		Skirmish
+		{
+			enabled maps
+			{
+			}
+		}
+
+		Team Deathmatch
+		{
+			enabled maps
+			{
+			}
+		}
+
+		General
+		{
+			Allow Hero Switching: Off
+			Enemy Health Bars: Off
+			Game Mode Start: Immediately
+			Hero Limit: Off
+			Kill Cam: Off
+			Kill Feed: Off
+			Respawn As Random Hero: On
+			Respawn Time Scalar: 0%
+			Spawn Health Packs: Disabled
+		}
+	}
+
+	heroes
+	{
+		General
+		{
+			Ultimate Generation - Combat: 0%
+			Ultimate Generation - Passive: 0%
+
+			Doomfist
+			{
+				Power Block Cooldown Time: 91%
+				Seismic Slam Cooldown Time: 91%
+			}
+
+			enabled heroes
+			{
+				Doomfist
+			}
+		}
+	}
+
+	workshop
+	{
+		Full 12 player Leaderboard: On
+	}
+
+	extensions
+	{
+		Explosion Sounds
+		Play More Effects
+	}
+}
+
+variables
+{
+	global:
+		0: CPposition
+		1: Radius_VA_GoBackCP
+		2: Connections
+		3: Mission
+		4: Prime
+		5: AbilityCount
+		6: HiddenCP_TpRad_TT
+		7: TP
+		8: Effect
+		15: RefreshPioneer
+		16: Detector1
+		17: Detector2
+		18: Detector3
+		19: Detector4
+		20: QPos
+		21: QRad
+		22: QIndex
+		23: QCPdata
+		24: QCPdataRec
+		25: Multilevel
+		26: LevelCounter
+		27: LevelCPcounter
+		28: LvlName
+		29: LvlColors
+		30: LvlColors2
+		31: LBGen
+		32: Names
+		33: Times
+		34: LBNames
+		35: LBTimes
+		36: LB1st_to_4th
+		37: LB5th_to_8th
+		38: LB9th_to_12th
+		39: LBlevels
+		40: LBsort
+		41: LBleft
+		42: InfoText
+		50: QMission
+		51: QMissionTime
+		52: QMissionD
+		53: QMissionDisplay
+		54: MissionText
+		56: MissionCompletion
+		60: QEffState
+		61: QEffPos
+		62: QEffTim
+		63: QEffRad
+		64: QEffRadD
+		65: QEffType
+		66: QEffAbi
+		67: QLockE
+		68: QEffLockC
+		80: WSLBColor
+		81: WSLBMultiColor
+		82: WSAbilityEffectDisplay
+		83: WSFullLB
+		84: WSUpperCancelBulletPunch
+		85: WSSpectateCancel
+		86: WSClearSetFacing
+		87: WSReturnPrevent
+		88: WSCompletionist
+		89: Completionist
+		90: AblockLvl
+		91: AblockCP
+		92: Ablock_Slamlock
+		100: CharacterList
+		101: SpaceBois
+		102: DetectorLN
+		103: DetectorLNstrlngth
+		104: DetectorLNspacer
+		105: LBLvlName
+		110: MsDestructo
+		111: SwapAbils
+		124: CPmessages
+		125: HUDLvlName
+		126: PrimeNumbers
+		127: TimeRemaining
+
+	player:
+		1: CPData
+		2: Checkpoint
+		3: Level
+		4: RunTime
+		5: RunState
+		6: Shift
+		7: Roaming
+		8: Grace
+		9: AbilityDetect
+		10: PersonalBest
+		11: Local_Pos
+		12: Local_Rad
+		13: Local_Index
+		14: CPcount
+		15: Elements
+		16: DelGenElements
+		17: Text
+		18: Diverge
+		19: Diverge2
+		20: CPcounter
+		21: CPcounterHUD
+		22: CPtime
+		26: Zipline
+		30: Mission
+		31: MissionTime
+		32: MissionD
+		33: MissionC
+		34: LockM
+		35: HorizontalAngle
+		36: M360
+		37: DetectorBounce
+		38: MissionHUD
+		39: MissionTimeChange
+		40: MissionDisplay
+		41: MissionReset
+		42: MissionDetector
+		50: Effinitiate
+		53: Effpos
+		54: Effrad
+		55: Effstate
+		56: Efftim
+		57: Efftype
+		58: EffradD
+		59: Effabi
+		60: LockE
+		61: EfflockC
+		62: Effdetect
+		63: Effactual
+		64: Effvisible
+		65: EffectPreview
+		70: TTsetTime
+		71: TTStart
+		72: TTtimer
+		75: AbilityCount
+		76: AbilityText
+		77: Cheese
+		80: CPTimeToggle
+		81: PreviewCP
+		82: ProMode
+		83: PM_NoReset
+		84: PM_Centerless
+		85: Spectate
+		86: Spectate1stPersonView
+		87: TempVA
+		90: Completionist
+		91: Ablock
+		95: Pioneer
+		96: PioneerTime
+		97: PioneerGenerate
+		98: Save
+		100: PB_LBDisplay
+		101: PB_HUD
+		102: Invis
+		110: ArrayIterator
+		111: MapVectorArray
+		112: UpperLock
+		121: LocalC
+		127: ServerPerformance
+}
+
+subroutines
+{
+	1: CPfail
+	2: CPfailend
+	3: CPclear
+	4: CPclearend
+	5: CPchange
+	6: SetFacing
+	7: RPFix
+	8: AbilityEnableDisable
+	9: AbilityCDreset
+	10: RegularCPHUD
+	11: SetDiverge
+	12: DestroyElements
+	13: GenerateElements
+	14: RingGenerate
+	15: IconGenerate
+	16: AbilityCountText
+	17: RPMissions
+	18: RPDiag
+	19: MissionReset
+	20: MissionPlayerHUD
+	21: MissionTimeChange
+	22: Time_Ability_Effect
+	23: Permeation_Effect
+	24: CheckpointEffect
+	25: Portal_Effect
+	26: EffectAbilities
+	27: EffectLock
+	28: EffectInitiate
+	29: EffectGenerate
+	30: TimeTrial
+	31: TTclear
+	32: TTskipgoback
+	33: PioneerCPChange
+	34: PioneerHUD
+	35: PioneerGenerate
+	36: AbilityJumpCrouchEnable
+	37: AbilityJumpCrouchDisable
+	38: DisallowButtons
+	39: AllowButtons
+	40: WhileInteract1
+	41: WhileInteract2
+	42: Reset
+	43: SkipCP
+	44: PrevCP
+	45: SwitchDiverge
+	46: PreviewCP
+	47: PreviewEffect
+	48: ProMode
+	49: ZeroOutline
+	50: SetLevel
+	51: FinishedRun
+	52: Leaderboard
+	53: RegularHUD
+	54: MapData1
+	55: MapData2
+	56: MapData3
+	57: GenerateMap
+	58: MLVLicons
+	59: MLVLText
+	60: LBaligner
+	61: LeaderboardHUD
+	62: Instructions
+	63: Black_Hole_Effect
+	99: MissionCompeltionistDreset
+}
+
+rule("README.txt")
+{
+	event
+	{
+		Subroutine;
+		Instructions;
+	}
+
+	actions
+	{
+		"Step 0.5. Create your Map in my Map Editor, CODE: HAVVX . Make sure to read my Editors \"README.txt\" Rule.\nStep 1. Once you're back with your Maps Data, paste them in \"MAP DATA\" Rule. Make sure it's empty before you paste."
+		disabled Continue;
+		"Step 2. Save/Get share code to make sure you won't lose your Map.\nStep 3. Anything labeled with \"CUSTOMIZE\" is easy to tweak, go ham.\nStep 4. You're done! Save Preset, start the game, set game open to everyone and have fun! :D"
+		disabled Continue;
+		"Have an old map you've made and want to try in my Framework? I made a Converter for this purpose.\nCODE: 2R00R"
+		disabled End;
+	}
+}
+
+disabled rule("README FOR CODERS.txt")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		"Prime Number Switches explained:\n\n2: Rocket Punch Disabled\n3: Uppercut Disabled\n5: Seismic Slam Disabled\n\n7: Centerless CP upon completion\n\n11: Multilevel Level Select\n13: First CP of a Level in a Multilevel"
+		disabled Down == Up;
+		"17: Effect Lock Connection 1\n19: Effect Lock Connection 2\n23: Effect Lock Connection 3"
+		disabled Left == Right;
+	}
+
+	actions
+	{
+		"Mission Primes explained:\n\n2: No Rocket Punch\n3: No Uppercut\n5: No Seismic Slam\n\n7: Stallless\n11: Headbounce\n13: 360 spin"
+		disabled Continue;
+		"17: Use Rocket Punch First\n19: Use Uppercut First\n23: Use Seismic Slam First\n\n29: Diagonal Rocket Punch\n31: Down Diagonal Rocket Punch\n37: Rocket Punch Bounce"
+		disabled End;
+	}
+}
+
+rule("MAP DATA")
+{
+	event
+	{
+		Subroutine;
+		MapData1;
+	}
+
+  actions
+  {
+		"Map Data Goes Here"
+  }
+}
+
+disabled rule("MAP DATA SPLIT 1")
+{
+	event
+	{
+		Subroutine;
+		MapData2;
+	}
+}
+
+disabled rule("MAP DATA SPLIT 2")
+{
+	event
+	{
+		Subroutine;
+		MapData3;
+	}
+}
+
+rule("GLOBAL HUD - LEVEL NAMES & COLORS & INITIATE MAP   ----   CUSTOMIZE")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	actions
+	{
+		Disable Inspector Recording;
+		Disable Built-In Game Mode Announcer;
+		Disable Built-In Game Mode Completion;
+		Disable Built-In Game Mode Music;
+		Disable Built-In Game Mode Scoring;
+		Call Subroutine(MapData1);
+		Call Subroutine(MapData2);
+		Call Subroutine(MapData3);
+		If(Global.CPposition);
+			"Swap abilities so fake upper is old upper"
+			Global.SwapAbils = False;
+			"Customize Level Names"
+			"Customize Level Colors"
+			"Customize Leaderboard Multi Colors"
+			Global.LvlColors2 = Array(Color(White), Color(White), Color(White), Color(White), Color(White), Color(White));
+			"Customize Top Left Info"
+			Global.InfoText = Custom String("<CUSTOMIZE IN \"GLOBAL HUD\" RULE>");
+			Global.PrimeNumbers = Array(2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43);
+			Global.MissionCompletion = Array(Custom String("   "), Custom String("√ "), Custom String("X  "), Custom String("   "),
+				Custom String("X  "), Custom String("√ "), Custom String("LOCKED"), Custom String("PERFECT"), Custom String(
+				"LOCKED            X"), Custom String(""), Custom String("PERFECT"), Custom String("LOCKED            X"));
+			Global.MissionText = Array(Custom String("Omg I Suk!"), Custom String("No {0} ", Ability Icon String(Hero(Doomfist), Button(
+				Secondary Fire))), Custom String("No {0} ", Ability Icon String(Hero(Doomfist), Button(Ability 1))), Custom String("No {0} ",
+				Ability Icon String(Hero(Doomfist), Button(Ability 2))), Custom String("Stallless  "), Custom String(
+				"HB                                                 ", Icon String(Dizzy)), Custom String(
+				"360                                        ", Icon String(Halo)), Custom String("{0} 1st　 ", Ability Icon String(Hero(
+				Doomfist), Button(Secondary Fire))), Custom String("{0} 1st　 ", Ability Icon String(Hero(Doomfist), Button(Ability 1))),
+				Custom String("{0} 1st　 ", Ability Icon String(Hero(Doomfist), Button(Ability 2))), Custom String("UP {0}　   ",
+				Ability Icon String(Hero(Doomfist), Button(Secondary Fire))), Custom String("DWN {0}  ", Ability Icon String(Hero(Doomfist),
+				Button(Secondary Fire))), Custom String("BNC {0}  ", Ability Icon String(Hero(Doomfist), Button(Secondary Fire))));
+			Global.AblockLvl = Empty Array;
+			Global.AblockCP = Empty Array;
+			Call Subroutine(GenerateMap);
+			If(!Global.WSFullLB);
+				Create HUD Text(Local Player, Null, Local Player.PB_HUD, Null, Right, -200, Color(White), Color(White), Color(White),
+					Visible To and String, Default Visibility);
+			End;
+			If(Global.WSCompletionist);
+				Global.Completionist = Count Of(Global.LvlName);
+				Modify Global Variable(LvlName, Append To Array, Custom String("Completionist"));
+				Modify Global Variable(LvlColors, Append To Array, Custom Color(225, 180, 75, 255));
+			End;
+			Call Subroutine(LBaligner);
+			"Enable for debugging"
+			disabled Enable Inspector Recording;
+		End;
+		Create HUD Text(Local Player, Null, Evaluate Once(Global.InfoText ? Custom String(" \n\n\n\n{0}", Global.InfoText) : Custom String(
+			" \n\n\n\nPioneer Parkour\nCreate Custom Maps With My Editor CODE [ HAVVX ]\nExport Pioneered Map From The Inspector")),
+			Is Button Held(Local Player, Button(Interact)) ? Custom String("{0}\n   +  {1}  | Restart\n{2}", Input Binding String(Button(
+			Interact)), Input Binding String(Button(Ultimate)), Custom String("   +  {0}  | Skip CP\n   +  {1}  | Previous CP\n{2}",
+			Input Binding String(Button(Jump)), Input Binding String(Button(Crouch)), Custom String(
+			"   +  {0}  | Preview Next CP\n{1}\n{2} + Spray  | Invisibility\n", Input Binding String(Button(Primary Fire)), Custom String(
+			"   +  {0}  | Splits\n   +  {1}  | Pro-Mode\n\n{2}", Input Binding String(Button(Reload)), Input Binding String(Button(Melee)),
+			Custom String("{0} + {1} + {2}  | Free-Mode", Input Binding String(Button(Ultimate)), Input Binding String(Button(Jump)),
+			Input Binding String(Button(Crouch)))), Input Binding String(Button(Ultimate))))) : Custom String(
+			"{0}  | Show Commands\n{1}  | Quick Reset\n{2}", Input Binding String(Button(Interact)), Input Binding String(Button(Reload)),
+			Custom String("{0}{1}\n\n{2}", Custom String("{0}{1}{2}", Global.Detector1 ? Custom String("Hold  {0}  | {1}\n",
+			Input Binding String(Button(Reload)), Local Player.Pioneer ? Custom String("Exit Pioneer") : Custom String("Pioneer"))
+			: Custom String(""), Custom String("{0}  +  {1}  +  {2}  | Spectate & Pause Time\n", Input Binding String(Button(Ability 1)),
+			Input Binding String(Button(Ability 2)), Input Binding String(Button(Ultimate))), Custom String("{0} + {1}  | {2}",
+			Input Binding String(Button(Primary Fire)), Input Binding String(Button(Melee)), Local Player.TempVA ? Custom String(
+			"Remove VA") : Custom String("Set View Angle"))), Local Player.RunState > 2 && Local Player.Pioneer != 3 ? Custom String(
+			" \n{0} + {1}  | Set Spawnpoint", Input Binding String(Button(Primary Fire)), Input Binding String(Button(Ultimate)))
+			: Custom String(""), Local Player.ProMode ? Custom String("Pro-Mode\n{0}  | Restart on Fail\n{1}  | Centerless\n",
+			Input Binding String(Button(Ultimate)), Input Binding String(Button(Crouch))) : Custom String(""))), Left, -10, Color(White),
+			Color(Green), Color(White), Visible To and String, Visible Never);
+		Create HUD Text(Is Button Held(Local Player, Button(Interact)) ? Local Player : Null, Null, Null, Is Button Held(Local Player,
+			Button(Interact)) ? Custom String("{0}{1}\n{2}", Custom String(
+			" \n\n{0}\n\n           Press {1} To Preview Next CP           \n\n\n\n\n\n\n\n\n\n\n\n",
+			Local Player.CPData[8] ? Evaluate Once(Custom String("        {0} / {1} | View Effects", String("Forward"), String(
+			"Backward"))) : Custom String(""), Input Binding String(Button(Primary Fire))), Local Player.PreviewCP && Count Of(
+			Filtered Array(Array Slice(Local Player.Local_Pos, 0, 3), Current Array Element)) > 1 ? Evaluate Once(Custom String(
+			" {0}                              {1}{2}", Icon String(Arrow: Left), Icon String(Arrow: Right), Custom String(
+			" \n\n\n\n         Press {0} / {1} To Switch Target", String("Left"), String("Right")))) : Custom String(" \n\n\n\n"),
+			Evaluate Once(Custom String(
+			" \n\n\n   Join Doomfist Parkour Discord: discord.gg/doomfistparkour\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")))
+			: Null, Top, -46, Null, Null, Color(White), Visible To and String, Default Visibility);
+		If(Global.Detector1);
+			Create HUD Text(Filtered Array(All Players(All Teams), Count Of(Current Array Element.Local_Rad) < 4), Null, Null, Custom String(
+				"| Progress"), Left, -1, Null, Null, Color(Orange), Visible To, Default Visibility);
+		Else;
+			Create HUD Text(Filtered Array(All Players(All Teams), Count Of(Current Array Element.Local_Rad) < 4), Null, Null, Custom String(
+				" \n\n\nProgress |"), Right, -1, Null, Null, Color(Orange), Visible To, Default Visibility);
+	}
+}
+
+rule("GLOBAL LEVEL SELECT ICONS   -----------------------------------------   CUSTOMIZE")
+{
+	event
+	{
+		Subroutine;
+		MLVLicons;
+	}
+
+	actions
+	{
+		Skip(-2 + Global.LevelCounter * 2);
+	}
+}
+
+rule("GLOBAL LEVEL SELECT TEXT PLACEMENT   ------------------------   CUSTOMIZE")
+{
+	event
+	{
+		Subroutine;
+		MLVLText;
+	}
+
+	actions
+	{
+		"Level Name Placement   ---   CUSTOMIZE"
+		Create In-World Text(Filtered Array(All Players(All Teams), Current Array Element.CPData[13]), Custom String("{0}",
+			Global.LvlName[Global.LevelCounter]), Global.CPposition[Global.Detector1] + Up * 1.300, 1, Do Not Clip, Visible To,
+			Global.WSLBColor ? Global.LvlColors[Global.LevelCounter] : Color(White), Default Visibility);
+	}
+}
+
+rule("PLAYER ICONS   ----------------------------------------------------------------   CUSTOMIZE")
+{
+	event
+	{
+		Subroutine;
+		IconGenerate;
+	}
+
+	actions
+	{
+		Skip(Event Player.Level * 2);
+	}
+}
+
+rule("DIVERGE / LEVEL SELECT Player Outline")
+{
+	event
+	{
+		Subroutine;
+		ZeroOutline;
+	}
+
+	actions
+	{
+		If(Event Player.CPData[13]);
+			"Level Select"
+			Start Forcing Player Outlines(Event Player, All Players(All Teams), 0, Color(White), Default);
+		Else;
+			"Diverge / Single"
+			Start Forcing Player Outlines(Event Player, All Players(All Teams), 1, Global.LvlColors[0], Always);
+	}
+}
+
+disabled rule("Global")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+}
+
+rule("Match time")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	actions
+	{
+		Skip If(Current Game Mode == Game Mode(Skirmish), 5);
+		Wait(0.250, Ignore Condition);
+		Set Match Time(1);
+		Wait(1.100, Ignore Condition);
+		Set Match Time(1);
+		Wait(1.100, Ignore Condition);
+		While(True);
+			Set Match Time(3600);
+			Wait(2875, Ignore Condition);
+			Global.TimeRemaining += 1;
+			If(Global.TimeRemaining == 5);
+				Global.TimeRemaining = 1800;
+				Create HUD Text(All Players(All Teams), Custom String("  Server Restarts In {0} Min  ", Round To Integer(Global.TimeRemaining / 60,
+					Up)), Null, Null, Right, -200, Color(Red), Color(White), Color(White), Visible To and String, Visible Always);
+				Chase Global Variable At Rate(TimeRemaining, 0, 1, None);
+				Wait(1795, Ignore Condition);
+				Big Message(All Players(All Teams), Custom String("Restarting"));
+				Wait(5, Ignore Condition);
+				If(Current Game Mode == Game Mode(Deathmatch));
+					Declare Player Victory(First Of(First Of(Filtered Array(Global.LBNames, Current Array Element))));
+				Else;
+					Declare Team Victory(Team 1);
+				End;
+				Abort;
+			End;
+		End;
+	}
+}
+
+rule("Generate Regular Map Data sub")
+{
+	event
+	{
+		Subroutine;
+		GenerateMap;
+	}
+
+	actions
+	{
+		Global.LevelCounter = 1;
+		For Global Variable(Detector1, 0, Count Of(Global.CPposition), 1);
+			Global.QCPdata[Global.Detector1] = Empty Array;
+			Global.QCPdataRec = Empty Array;
+			"Preload CP Positions, Radii & Index"
+			If(Global.Connections[Global.Detector1] > 0);
+				Global.QPos[Global.Detector1] = Global.CPposition[Global.Connections[Global.Detector1]];
+				Global.QRad[Global.Detector1] = X Component Of(Global.Radius_VA_GoBackCP[Global.Connections[Global.Detector1]]);
+				Global.QIndex[Global.Detector1] = Global.Connections[Global.Detector1];
+			Else If(Global.Connections[Global.Detector1]);
+				Global.QPos[Global.Detector1] = Filtered Array(Array(X Component Of(Global.Connections[Global.Detector1])
+					? Global.CPposition[X Component Of(Global.Connections[Global.Detector1])] : 0, Y Component Of(
+					Global.Connections[Global.Detector1]) ? Global.CPposition[Y Component Of(Global.Connections[Global.Detector1])] : 0,
+					Z Component Of(Global.Connections[Global.Detector1]) ? Global.CPposition[Z Component Of(Global.Connections[Global.Detector1])
+					] : 0), Current Array Element);
+				Global.QRad[Global.Detector1] = Filtered Array(Array(First Of(Global.QPos[Global.Detector1]) ? X Component Of(
+					Global.Radius_VA_GoBackCP[X Component Of(Global.Connections[Global.Detector1])]) : 0,
+					Global.QPos[Global.Detector1][1] ? X Component Of(Global.Radius_VA_GoBackCP[Y Component Of(
+					Global.Connections[Global.Detector1])]) : 0, Global.QPos[Global.Detector1][2] ? X Component Of(
+					Global.Radius_VA_GoBackCP[Z Component Of(Global.Connections[Global.Detector1])]) : 0), Current Array Element);
+				Global.QIndex[Global.Detector1] = Filtered Array(Array(X Component Of(Global.Connections[Global.Detector1]), Y Component Of(
+					Global.Connections[Global.Detector1]), Z Component Of(Global.Connections[Global.Detector1])), Current Array Element);
+			End;
+			"Hidden CP?"
+			If(X Component Of(Global.HiddenCP_TpRad_TT[Global.Detector1]));
+				If(Global.Connections[Global.Detector1] > 0);
+					Global.QPos[Global.Detector1] = Array(Global.QPos[Global.Detector1], 0, 0, Global.CPposition[X Component Of(
+						Global.HiddenCP_TpRad_TT[Global.Detector1])]);
+					Global.QRad[Global.Detector1] = Array(Global.QRad[Global.Detector1], 0, 0, X Component Of(Global.Radius_VA_GoBackCP[X Component Of(
+						Global.HiddenCP_TpRad_TT[Global.Detector1])]));
+					Global.QIndex[Global.Detector1] = Array(Global.QIndex[Global.Detector1], 0, 0, X Component Of(
+						Global.HiddenCP_TpRad_TT[Global.Detector1]));
+				Else If(Global.Connections[Global.Detector1]);
+					Global.QPos[Global.Detector1] = Array(First Of(Global.QPos[Global.Detector1]), Global.QPos[Global.Detector1][1], Last Of(
+						Global.QPos[Global.Detector1]), Global.CPposition[X Component Of(Global.HiddenCP_TpRad_TT[Global.Detector1])]);
+					Global.QRad[Global.Detector1] = Array(First Of(Global.QRad[Global.Detector1]), Global.QRad[Global.Detector1][1], Last Of(
+						Global.QRad[Global.Detector1]), X Component Of(Global.Radius_VA_GoBackCP[X Component Of(
+						Global.HiddenCP_TpRad_TT[Global.Detector1])]));
+					Global.QIndex[Global.Detector1] = Array(First Of(Global.QIndex[Global.Detector1]), Global.QIndex[Global.Detector1][1], Last Of(
+						Global.QIndex[Global.Detector1]), X Component Of(Global.HiddenCP_TpRad_TT[Global.Detector1]));
+				Else;
+					Global.QPos[Global.Detector1] = Array(0, 0, 0, Global.CPposition[X Component Of(Global.HiddenCP_TpRad_TT[Global.Detector1])]);
+					Global.QRad[Global.Detector1] = Array(0, 0, 0, X Component Of(Global.Radius_VA_GoBackCP[X Component Of(
+						Global.HiddenCP_TpRad_TT[Global.Detector1])]));
+					Global.QIndex[Global.Detector1] = Array(0, 0, 0, X Component Of(Global.HiddenCP_TpRad_TT[Global.Detector1]));
+				End;
+			End;
+			"Arrange to arrays of 4 for Effect CPs to function properly"
+			Global.QPos[Global.Detector1] = Mapped Array(Array Slice(Global.PrimeNumbers, 0, 4),
+				Global.QPos[Global.Detector1][Current Array Index] ? Global.QPos[Global.Detector1][Current Array Index] : Left * Up);
+			Global.QRad[Global.Detector1] = Mapped Array(Array Slice(Global.PrimeNumbers, 0, 4),
+				Global.QRad[Global.Detector1][Current Array Index] ? Global.QRad[Global.Detector1][Current Array Index] : 0);
+			Global.QIndex[Global.Detector1] = Mapped Array(Array Slice(Global.PrimeNumbers, 0, 4),
+				Global.QIndex[Global.Detector1][Current Array Index] ? Global.QIndex[Global.Detector1][Current Array Index] : 0);
+			"Teleport? Position"
+			Global.QCPdataRec[1] = Global.TP[Global.Detector1] ? Global.TP[Global.Detector1] : Global.CPposition[Global.Detector1];
+			"Teleport? Radius"
+			Global.QCPdataRec[2] = Global.TP[Global.Detector1] ? Y Component Of(Global.HiddenCP_TpRad_TT[Global.Detector1]) : X Component Of(
+				Global.Radius_VA_GoBackCP[Global.Detector1]);
+			"Teleport?"
+			Global.QCPdataRec[5] = Global.TP[Global.Detector1] ? 1 : 0;
+			"Centerless?"
+			Global.QCPdataRec[6] = Global.Prime[Global.Detector1] % 7 ? 0 : 1;
+			"Temporary Pos & Rad"
+			Global.QCPdataRec[3] = Global.QCPdataRec[1];
+			Global.QCPdataRec[4] = Global.QCPdataRec[2];
+			"Time Trial?"
+			Global.QCPdataRec[10] = Z Component Of(Global.HiddenCP_TpRad_TT[Global.Detector1]);
+			"View Angle"
+			Global.QCPdataRec[11] = Y Component Of(Global.Radius_VA_GoBackCP[Global.Detector1]);
+			"Last CP?"
+			Global.QCPdataRec[12] = !(Global.Prime[Global.Detector1 + 1] % 13) ? 1 : 0;
+			"Multilevel CP?"
+			Global.QCPdataRec[13] = Global.CPposition[Global.Detector1 + 1] && !(Global.Prime[Global.Detector1] % 11) ? 1 : 0;
+			"Go Back CP"
+			Global.QCPdataRec[15] = Z Component Of(Global.Radius_VA_GoBackCP[Global.Detector1]);
+			"Ability Enable / Disable"
+			Global.QCPdataRec[16] = Global.Prime[Global.Detector1] % 2 ? 1 : 0;
+			Global.QCPdataRec[17] = Global.Prime[Global.Detector1] % (Global.SwapAbils ? 5 : 3) ? 1 : 0;
+			Global.QCPdataRec[18] = Global.Prime[Global.Detector1] % (Global.SwapAbils ? 3 : 5) ? 1 : 0;
+			"Ability Count?"
+			Global.QCPdataRec[21] = Global.AbilityCount[Global.Detector1];
+			"First CP of a Level?"
+			If(!(Global.Prime[Global.Detector1] % 13));
+				If(Global.LevelCounter == 1);
+					"Multilevel CP Index"
+					Global.LBGen = Global.Detector1 - 1;
+					Global.Multilevel = Global.LBGen;
+					Global.QPos[Global.LBGen] = Empty Array;
+					Global.QRad[Global.LBGen] = Empty Array;
+					Global.QIndex[Global.LBGen] = Empty Array;
+				End;
+				Create Effect(Filtered Array(All Players(All Teams), Current Array Element.CPData[13]), Ring,
+					Global.LvlColors[Global.LevelCounter], Global.CPposition[Global.Detector1], X Component Of(
+					Global.Radius_VA_GoBackCP[Global.Detector1]), Visible To);
+				Call Subroutine(MLVLicons);
+				Call Subroutine(MLVLText);
+				Wait(0.016, Ignore Condition);
+				Modify Global Variable At Index(QPos, Global.LBGen, Append To Array, Global.CPposition[Global.Detector1]);
+				Modify Global Variable At Index(QRad, Global.LBGen, Append To Array, X Component Of(Global.Radius_VA_GoBackCP[Global.Detector1]));
+				Modify Global Variable At Index(QIndex, Global.LBGen, Append To Array, Global.Detector1);
+				"First Cp Of A Level"
+				Global.QCPdataRec[14] = 1;
+				Global.LevelCPcounter[Global.LevelCounter] += 2;
+				Global.LevelCounter += 1;
+			End;
+			"How Many CPs in a Level?"
+			If(Global.LevelCounter > 1 && Global.Prime[Global.Detector1] % 13);
+				Global.LevelCPcounter[Global.LevelCounter - 1] += 1;
+			End;
+			"Check Missions"
+			If(Global.Mission[Global.Detector1][1]);
+				"Mission Check Toggle"
+				Global.QCPdataRec[7] = 1;
+				Global.QMissionTime[Global.Detector1] = Empty Array;
+				Global.QMissionDisplay[Global.Detector1] = Empty Array;
+				Global.Detector2 = Empty Array;
+				Global.Detector4 = Empty Array;
+				"Preload Mission Times"
+				Global.QMissionTime[Global.Detector1] = Array Slice(Global.Mission[Global.Detector1], 1, 4);
+				"Preload Mission HUD Elements"
+				For Global Variable(Detector3, 0, 4, 1);
+					Skip If(Global.QMissionTime[Global.Detector1][Global.Detector3], 1);
+					Break;
+					Global.Detector2[Global.Detector3] = Index Of Array Value(Global.PrimeNumbers, Sorted Array(Filtered Array(Global.PrimeNumbers, !(
+						First Of(Global.Mission[Global.Detector1]) % Current Array Element)), Current Array Element)[Global.Detector3]) + 1;
+					Modify Global Variable At Index(QMissionDisplay, Global.Detector1, Append To Array, Array(Custom String("    {0}» {1}",
+						Global.MissionText[Global.Detector2[Global.Detector3]],
+						Global.QMissionTime[Global.Detector1][Global.Detector3] < 9900 ? Custom String("{0}{1} s              ",
+						Global.QMissionTime[Global.Detector1][Global.Detector3] > 0 ? Custom String("+") : Custom String("   "),
+						Global.QMissionTime[Global.Detector1][Global.Detector3] + 0.001) : Custom String("")),
+						Global.QMissionTime[Global.Detector1][Global.Detector3] > 9900 ? (Global.Detector2[Global.Detector3] < 5 ? 9 : 6) : (
+						Global.QMissionTime[Global.Detector1][Global.Detector3] > 0 ? 3 : 0)));
+					Global.Detector4[Global.Detector2[Global.Detector3]] = Global.Detector2[Global.Detector3];
+				End;
+				Global.QMission[Global.Detector1] = Global.Detector2;
+				Global.QMissionD[Global.Detector1] = Global.Detector4;
+				"Check Mission Lock"
+				If(Is True For Any(Global.QMissionTime[Global.Detector1], Current Array Element > 9900));
+					Modify Global Variable At Index(QMissionTime, Global.Detector1, Append To Array, Array(Array(Last Of(Sorted Array(
+						Global.QMissionTime[Global.Detector1], Current Array Element)) % 2 ? 0 : 1, Last Of(Sorted Array(
+						Global.QMissionTime[Global.Detector1], Current Array Element)) % 3 ? 0 : 1, Last Of(Sorted Array(
+						Global.QMissionTime[Global.Detector1], Current Array Element)) % 5 ? 0 : 1)));
+					If(First Of(Last Of(Global.QMissionTime[Global.Detector1])) && !First Of(Global.SpaceBois));
+						Create In-World Text(First Of(Last Of(Local Player.MissionTime)) ? Local Player : Empty Array, Custom String("\r\n           ML"),
+							First Of(Local Player.Local_Pos), 1.300, Clip Against Surfaces, Visible To Position and Color, Custom Color(0, 0, 0,
+							Local Player.LockM == Empty Array ? 30 : 255), Default Visibility);
+						Global.SpaceBois[0] = 1;
+					End;
+					If(Last Of(Global.QMissionTime[Global.Detector1])[1] && !Global.SpaceBois[1]);
+						Create In-World Text(Last Of(Local Player.MissionTime)[1] ? Local Player : Empty Array, Custom String("\r\n           ML"),
+							Local Player.Local_Pos[1], 1.300, Clip Against Surfaces, Visible To Position and Color, Custom Color(0, 0, 0,
+							Local Player.LockM == Empty Array ? 30 : 255), Default Visibility);
+						Global.SpaceBois[1] = 1;
+					End;
+					If(Last Of(Global.QMissionTime[Global.Detector1])[2] && !Global.SpaceBois[2]);
+						Create In-World Text(Last Of(Local Player.MissionTime)[2] ? Local Player : Empty Array, Custom String("\r\n           ML"),
+							Local Player.Local_Pos[2], 1.300, Clip Against Surfaces, Visible To Position and Color, Custom Color(0, 0, 0,
+							Local Player.LockM == Empty Array ? 30 : 255), Default Visibility);
+						Global.SpaceBois[2] = 1;
+					End;
+				Else;
+					Modify Global Variable At Index(QMissionTime, Global.Detector1, Append To Array, 0);
+				End;
+				Wait(0.016, Ignore Condition);
+			End;
+			"Check Effects"
+			If(Global.Effect[Global.Detector1]);
+				"Effect Check Toggle"
+				Global.QCPdataRec[8] = 1;
+				"Effect Checkpoint Lock"
+				Global.QCPdataRec[19] = Global.Prime[Global.Detector1] % 29 ? 0 : 1;
+				Global.QLockE[Global.Detector1] = Empty Array;
+				Global.QEffLockC[Global.Detector1] = Empty Array;
+				"Check Effect Locks"
+				Modify Global Variable At Index(QLockE, Global.Detector1, Append To Array, Array(!(Global.Prime[Global.Detector1] % 17), !(
+					Global.Prime[Global.Detector1] % 19), !(Global.Prime[Global.Detector1] % 23)));
+				If(First Of(Global.QLockE[Global.Detector1]) && !Global.SpaceBois[3]);
+					Create In-World Text(First Of(Local Player.LockE) ? Local Player : Empty Array, Custom String("{0}{1}", Ability Icon String(Hero(
+						Winston), Button(Ability 2)), Local Player.CPData[19] ? Custom String("+") : Custom String("")), First Of(
+						Local Player.Local_Pos), 1, Clip Against Surfaces, Visible To Position and String, Color(White), Default Visibility);
+					Global.SpaceBois[3] = 1;
+				End;
+				If(Global.QLockE[Global.Detector1][1] && !Global.SpaceBois[4]);
+					Create In-World Text(Local Player.LockE[1] ? Local Player : Empty Array, Custom String("{0}{1}", Ability Icon String(Hero(Winston),
+						Button(Ability 2)), Local Player.CPData[19] ? Custom String("+") : Custom String("")), Local Player.Local_Pos[1], 1,
+						Clip Against Surfaces, Visible To Position and String, Color(White), Default Visibility);
+					Global.SpaceBois[4] = 1;
+				End;
+				If(Global.QLockE[Global.Detector1][2] && !Global.SpaceBois[5]);
+					Create In-World Text(Local Player.LockE[2] ? Local Player : Empty Array, Custom String("{0}{1}", Ability Icon String(Hero(Winston),
+						Button(Ability 2)), Local Player.CPData[19] ? Custom String("+") : Custom String("")), Local Player.Local_Pos[2], 1,
+						Clip Against Surfaces, Visible To Position and String, Color(White), Default Visibility);
+					Global.SpaceBois[5] = 1;
+				End;
+				Global.Detector2 = Global.Effect[Global.Detector1];
+				Global.QEffPos[Global.Detector1] = Mapped Array(Global.Detector2, First Of(Current Array Element));
+				Global.QEffRad[Global.Detector1] = Mapped Array(Global.Detector2, Current Array Element[1]);
+				Global.QEffState[Global.Detector1] = Mapped Array(Global.Detector2, Current Array Element[2]);
+				Global.QEffTim[Global.Detector1] = Mapped Array(Global.Detector2, Last Of(Current Array Element));
+				Global.QEffTim[Global.Detector1] = Mapped Array(Global.QEffTim[Global.Detector1],
+					Current Array Element == 1 ? 1 : Current Array Element);
+				Global.QEffType[Global.Detector1] = Mapped Array(Global.QEffRad[Global.Detector1], Current Array Element >= 0);
+				Global.QEffRad[Global.Detector1] = Mapped Array(Global.QEffRad[Global.Detector1], Absolute Value(Current Array Element));
+				Global.QEffRadD[Global.Detector1] = Mapped Array(Global.QEffRad[Global.Detector1], Current Array Element + 0.450);
+				Global.QEffAbi[Global.Detector1] = Mapped Array(Global.QEffTim[Global.Detector1], Array(Current Array Element % 2 ? True : False,
+					Current Array Element % 3 ? True : False, Current Array Element % 5 ? True : False));
+				Global.Detector3 = Empty Array;
+				For Global Variable(Detector2, 0, Count Of(Global.QEffType[Global.Detector1]), 1);
+					If(Global.QEffState[Global.Detector1][Global.Detector2] == 4);
+						Modify Global Variable At Index(QPos, Global.Detector1, Append To Array, Global.QEffPos[Global.Detector1][Global.Detector2]);
+						Modify Global Variable At Index(QRad, Global.Detector1, Append To Array, Global.QEffRad[Global.Detector1][Global.Detector2]);
+						Modify Global Variable At Index(QIndex, Global.Detector1, Append To Array, Global.Detector2);
+					End;
+					If(Is True For Any(Global.QLockE[Global.Detector1], Current Array Element) && Is True For Any(
+						Global.QEffState[Global.Detector1][Global.Detector2], !Current Array Element || Current Array Element == 2 || (
+						Global.QCPdataRec[19] ? Current Array Element == 4 : 0)));
+						Global.Detector3[Global.Detector2] = 1;
+					Else If(Array Contains(Global.QEffState[Global.Detector1], 0));
+						Global.Detector3[Global.Detector2] = 0;
+					End;
+				End;
+				Global.QEffLockC[Global.Detector1] = Global.Detector3;
+			End;
+			Modify Global Variable At Index(QCPdata, Global.Detector1, Append To Array, Global.QCPdataRec);
+			If(!(Global.Detector1 % 20));
+				Wait(0.048, Ignore Condition);
+			End;
+		End;
+		Global.CPmessages = Array(Custom String("Something feels off.."), Custom String("I can feel something.."), Custom String(
+			"This place is hiding something.."), Custom String("This feeling again.."), Custom String(
+			"There is more than meets the eye.."), Custom String("Hm..?"));
+		Global.CPposition = False;
+		Global.Radius_VA_GoBackCP = False;
+		Global.Connections = False;
+		Global.Mission = False;
+		Global.Prime = False;
+		Global.AbilityCount = False;
+		Global.HiddenCP_TpRad_TT = False;
+		Global.TP = False;
+		Global.Effect = False;
+		Global.QCPdataRec = False;
+		Global.LBGen = -1;
+		Global.Detector1 = -1;
+	}
+}
+
+disabled rule("Player")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+}
+
+rule("Player Joins, Current CP Color   ---------------------------------------------   CUSTOMIZE")
+{
+	event
+	{
+		Player Joined Match;
+		All;
+		All;
+	}
+
+	actions
+	{
+		Disable Messages(Event Player);
+		Event Player.Roaming = 1;
+		Event Player.RunState = 3;
+		Event Player.Checkpoint = -1;
+		"bot dont need more"
+		Abort If(Is Dummy Bot(Event Player));
+		Wait(1, Ignore Condition);
+		Wait Until(Has Spawned(Event Player), 99999);
+		Event Player.CPData[3] = Position Of(Event Player);
+		Event Player.CPData[4] = 99999;
+		Disable Built-In Game Mode Respawning(Event Player);
+		Disable Movement Collision With Players(Event Player);
+		Disable Game Mode HUD(Event Player);
+		Disable Game Mode In-World UI(Event Player);
+		"Current CP Color   ---   CUSTOMIZE"
+		Create Effect(Event Player, Ring, Color(White), Event Player.CPData[1], Event Player.CPData[2], Position and Radius);
+		Set Status(Event Player, Null, Invincible, 99999);
+		If(Global.QPos);
+			Wait Until(Count Of(Global.HUDLvlName) == Count Of(Global.LvlName), 99999);
+			Call Subroutine(RegularHUD);
+			Event Player.MissionReset[12] = Null;
+			Event Player.MissionC = Event Player.MissionReset;
+			Event Player.PB_HUD = Custom String(" ");
+			Call Subroutine(Reset);
+			If(Event Player.CPData[11]);
+				While(Horizontal Facing Angle Of(Event Player) / 100 != Event Player.CPData[11] / 100);
+					Set Facing(Event Player, Direction From Angles(Event Player.CPData[11], Vertical Facing Angle Of(Event Player) - 0.010), To World);
+					Wait(0.250, Ignore Condition);
+				End;
+			End;
+		Else;
+			Call Subroutine(PioneerHUD);
+			Chase Player Variable At Rate(Event Player, PioneerTime, 0, 1, None);
+			Event Player.Pioneer = 1;
+			Event Player.CPcounter = 1;
+			Event Player.CPcount = 1;
+			If(Global.CPposition);
+				Call Subroutine(Reset);
+			End;
+		End;
+		Wait(4, Ignore Condition);
+		Enable Messages(Event Player);
+	}
+}
+
+rule("Player HUD   -----------------------------------------------------------------------   CUSTOMIZE")
+{
+	event
+	{
+		Subroutine;
+		RegularHUD;
+	}
+
+	actions
+	{
+		Event Player.Text = Empty Array;
+		Create HUD Text(Event Player, Null, Event Player.CPData[13] ? Custom String(" ") : Evaluate Once(Global.HUDLvlName)
+			[Event Player.Level], Event Player.CPData[13] ? Custom String("Select Level") : (Event Player.CPData[12] ? Custom String(
+			"        Press {0} & {1} To Restart        ", Input Binding String(Button(Interact)), Input Binding String(Button(Ultimate)))
+			: Custom String("{0}{1}", Event Player.CPcounterHUD, Event Player.CPData[21] ? Custom String("\n      {0}",
+			Event Player.AbilityText) : Custom String(""))), Top, -50, Null, Global.LvlColors[Event Player.Level], Color(White),
+			String and Color, Default Visibility);
+		Modify Player Variable(Event Player, Text, Append To Array, Last Text ID);
+		Create HUD Text(Event Player, Null, Null, Custom String("{0}{1}{2}", Event Player.ProMode ? Custom String(" Pro") : Custom String(
+			""), Event Player.Ablock ? (Event Player.Ablock == 2 ? Custom String(" Slamlock") : Custom String(" Ablock")) : Custom String(
+			""), Event Player.RunState == 2 || Event Player.RunState == 3 ? Custom String(" ") : Custom String(" {0}{1} ",
+			Event Player.RunTime >= 0 ? Custom String("") : Custom String("-"), Custom String("{0}:{1}{2}", Custom String("{0}{1}",
+			Absolute Value(Event Player.RunTime) > 3600 ? Custom String("{0}:{1}", Round To Integer(Absolute Value(Event Player.RunTime)
+			/ 3600, Down), Absolute Value(Event Player.RunTime) % 3600 < 600 ? 0 : Custom String("")) : Custom String(""),
+			Round To Integer(Absolute Value(Event Player.RunTime) / 60, Down) % 60), Absolute Value(Event Player.RunTime)
+			% 60 < 10 ? 0 : Custom String(""), Absolute Value(Event Player.RunTime) % 60 + 0.001))), Top, -49, Null, Null, Color(White),
+			String, Default Visibility);
+		Modify Player Variable(Event Player, Text, Append To Array, Last Text ID);
+		Create HUD Text(Event Player, Null, Event Player.MissionTimeChange || Event Player.Effvisible[Count Of(Event Player.Efftype)
+			] ? Custom String(" {0}\n{1}", Event Player.MissionTimeChange ? Custom String("  Mission Time Change: {0}",
+			Event Player.MissionTimeChange + 0.001) : Custom String(""), Event Player.Effvisible[Count Of(Event Player.Efftype)
+			] ? Custom String("    Effect Time Change: {0}", Event Player.Effvisible[Count Of(Event Player.Efftype)] + 0.001)
+			: Custom String("")) : Custom String(""), Custom String("{0}{1}{2}", Custom String(" \n\n\n     {0}{1}     ",
+			Event Player.ProMode && !Event Player.PM_NoReset ? Ability Icon String(Hero(Baptiste), Button(Ability 2)) : Custom String(
+			"  "), Event Player.PM_Centerless ? Icon String(Halo) : Custom String("  ")), Event Player.CPData[10] ? Custom String(
+			" \n\n\n   Time Trial: {0}   ", Absolute Value(Event Player.TTtimer) + 0.001) : Custom String(" "), Custom String(
+			" \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")), Top, -45, Null, Color(White), Color(
+			Red), String, Default Visibility);
+		Modify Player Variable(Event Player, Text, Append To Array, Last Text ID);
+	}
+}
+
+rule("Update CP Counter sub")
+{
+	event
+	{
+		Subroutine;
+		RegularCPHUD;
+	}
+
+	actions
+	{
+		Event Player.CPcounterHUD = Event Player.Level ? Custom String("      {2} Checkpoint: {0} / {1} {2}      ", Event Player.CPcounter,
+			Global.LevelCPcounter[Event Player.Level], Custom String("{0}{1}", Event Player.CPcounter < 10 ? Custom String("     ")
+			: Custom String(""), Global.LevelCPcounter[Event Player.Level] < 10 ? Custom String("    ") : Custom String("")))
+			: Custom String("       {1} Checkpoint: {0} {1}       ", Event Player.RunState > 1 ? Custom String("N/A")
+			: Event Player.CPcounter, Event Player.CPcounter < 10 ? Custom String("    ") : Custom String(""));
+	}
+}
+
+rule("Player Leaves")
+{
+	event
+	{
+		Player Left Match;
+		All;
+		All;
+	}
+
+	actions
+	{
+		Event Player.PioneerTime = 0;
+		Wait Until(Global.LBGen == -1, 99999);
+		For Global Variable(LBleft, 0, Count Of(Global.LB1st_to_4th), 1);
+			Global.LBlevels = Global.LBleft;
+			If(Global.LBNames[Global.LBleft]);
+				Call Subroutine(Leaderboard);
+			End;
+		End;
+	}
+}
+
+disabled rule("Leaderboard")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+}
+
+rule("Player Finishes Run")
+{
+	event
+	{
+		Subroutine;
+		FinishedRun;
+	}
+
+	actions
+	{
+		Wait Until(Global.LBGen == -1, 99999);
+		Event Player.Shift = 1;
+		If(!Event Player.Level && Event Player.Completionist == 1);
+			Event Player.Level = Global.Completionist;
+		End;
+		Abort If(!Event Player.RunTime);
+		If(Event Player.RunTime < Event Player.PersonalBest[Event Player.Level] || !Event Player.PersonalBest[Event Player.Level]);
+			Event Player.PersonalBest[Event Player.Level] = Event Player.RunTime;
+			Event Player.PB_LBDisplay[Event Player.Level] = Custom String("{0}{1}", Custom String("{0}{1}{2}",
+				Event Player.RunTime >= 0 ? Custom String("") : Custom String("-"), Absolute Value(Event Player.RunTime)
+				>= 3600 ? Custom String("{0}:{1}", Round To Integer(Absolute Value(Event Player.RunTime) / 3600, Down), Absolute Value(
+				Event Player.RunTime) % 3600 < 600 ? 0 : Custom String("")) : Custom String(""), Absolute Value(Event Player.RunTime)
+				>= 60 ? Custom String("{0}:{1}", Round To Integer(Absolute Value(Event Player.RunTime) / 60, Down) % 60, Absolute Value(
+				Event Player.RunTime) % 60 < 10 ? 0 : Custom String("")) : Custom String("")), Absolute Value(Event Player.RunTime) % 60);
+			"To Fix Replay \"Entity\" Messages"
+			Event Player.ArrayIterator = Custom String("{0}", Event Player);
+			Big Message(All Players(All Teams), Custom String("{0} • {1} {2}", Global.LvlName[Event Player.Level], Event Player.ArrayIterator,
+				Event Player.PB_LBDisplay[Event Player.Level]));
+			If(Event Player.PersonalBest[Event Player.Level] < Global.Times[Event Player.Level] || !Global.Times[Event Player.Level]);
+				Skip If(Global.Times[Event Player.Level], 1);
+				Global.LBGen = Event Player.Level;
+				Global.Names[Event Player.Level] = Custom String("{0}", Event Player);
+				Global.Times[Event Player.Level] = Event Player.PersonalBest[Event Player.Level];
+				Global.LBTimes[Event Player.Level] = Custom String("{0}: {1}", Event Player, Event Player.PB_LBDisplay[Event Player.Level]);
+			End;
+			Global.LBlevels = Event Player.Level;
+			Call Subroutine(Leaderboard);
+			Event Player.RunTime -= 0.001;
+			Skip If(Global.WSFullLB, 7);
+			Event Player.PB_HUD = Custom String("Personal Best:        \n");
+			"Using Random Variables that dont see any use otherwise"
+			For Player Variable(Event Player, MapVectorArray, 0, Count Of(Event Player.PersonalBest), 1);
+				If(Event Player.PersonalBest[Event Player.MapVectorArray]);
+					Event Player.PB_HUD = Custom String("{0}{1}: {2}\n", Event Player.PB_HUD, Global.LvlName[Event Player.MapVectorArray],
+						Event Player.PB_LBDisplay[Event Player.MapVectorArray]);
+				End;
+			End;
+		End;
+		Wait(0.090, Ignore Condition);
+		Event Player.Shift = 0;
+	}
+}
+
+rule("Generate Leaderboard")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Global.Detector1 == -1;
+		Global.LBGen != -1;
+	}
+
+	actions
+	{
+		Call Subroutine(LeaderboardHUD);
+		Global.LBGen = -1;
+	}
+}
+
+rule("Gen Leaderboard sub")
+{
+	event
+	{
+		Subroutine;
+		LeaderboardHUD;
+	}
+
+	actions
+	{
+		If(Global.WSCompletionist && Global.LBGen == Global.Completionist);
+			"Completionist"
+			Create HUD Text(All Players(All Teams), Null, Evaluate Once(Custom String("{0}", Last Of(Global.LBLvlName))),
+				Global.LBTimes[Evaluate Once(Global.Completionist)], Right, -99, Null, Custom Color(245, 235, 220, 255), Custom Color(225, 180,
+				75, 255), Visible To and String, Default Visibility);
+			Create HUD Text(All Players(All Teams), Null, Global.LB1st_to_4th[Evaluate Once(Global.Completionist)] == Custom String("")
+				? Custom String(" ") : Custom String("{0}{1}{2}             ", Global.LB1st_to_4th[Evaluate Once(Global.Completionist)],
+				Global.LB5th_to_8th[Evaluate Once(Global.Completionist)], Global.LB9th_to_12th[Evaluate Once(Global.Completionist)]), Null,
+				Right, -98, Null, Custom Color(245, 235, 220, 255), Null, Visible To and String, Default Visibility);
+		Else;
+			Create HUD Text(All Players(All Teams), Null, Evaluate Once(Custom String("{0}", Global.LBLvlName[Global.LBGen])),
+				Global.LBTimes[Evaluate Once(Global.LBGen)], Right, !Global.LBGen ? -97 : Global.LBGen * -1, Color(White),
+				Global.LvlColors[Global.LBGen], Global.LvlColors[Global.LBGen], Visible To and String, Default Visibility);
+			Create HUD Text(All Players(All Teams), Null, Global.LB1st_to_4th[Evaluate Once(Global.LBGen)] == Custom String("")
+				? Custom String(" ") : Custom String("{0}{1}{2}             ", Global.LB1st_to_4th[Evaluate Once(Global.LBGen)],
+				Global.LB5th_to_8th[Evaluate Once(Global.LBGen)], Global.LB9th_to_12th[Evaluate Once(Global.LBGen)]), Null, Right,
+				!Global.LBGen ? -96 : Global.LBGen * -1 + 0.100, Color(White),
+				Global.WSLBMultiColor ? Global.LvlColors2[Global.LBGen] : Global.LvlColors[Global.LBGen], Color(White), Visible To and String,
+				Default Visibility);
+	}
+}
+
+rule("Refresh Leaderboard sub")
+{
+	event
+	{
+		Subroutine;
+		Leaderboard;
+	}
+
+	actions
+	{
+		Global.LBNames[Global.LBlevels] = Sorted Array(Filtered Array(All Players(All Teams),
+			Current Array Element.PersonalBest[Global.LBlevels]), Current Array Element.PersonalBest[Global.LBlevels]);
+		Global.LB1st_to_4th[Global.LBlevels] = Custom String("");
+		Global.LB5th_to_8th[Global.LBlevels] = Custom String("");
+		Global.LB9th_to_12th[Global.LBlevels] = Custom String("");
+		For Global Variable(LBsort, 0, Global.WSFullLB ? 12 : 4, 1);
+			Skip If(Global.LBNames[Global.LBlevels][Global.LBsort], 1);
+			Break;
+			If(Global.LBsort < 4);
+				Global.LB1st_to_4th[Global.LBlevels] = Global.LBsort ? Custom String("{0}{1}: {2}\n", Global.LB1st_to_4th[Global.LBlevels],
+					Filtered Array(All Players(All Teams), Current Array Element == Global.LBNames[Global.LBlevels][Global.LBsort]),
+					Filtered Array(All Players(All Teams), Current Array Element == Global.LBNames[Global.LBlevels][Global.LBsort])
+					.PB_LBDisplay[Global.LBlevels]) : (
+					Global.LBNames[Global.LBlevels][0].PersonalBest[Global.LBlevels] != Global.Times[Global.LBlevels] ? Custom String("{0}: {1}\n",
+					Filtered Array(All Players(All Teams), Current Array Element == First Of(Global.LBNames[Global.LBlevels])), Filtered Array(
+					All Players(All Teams), Current Array Element == First Of(Global.LBNames[Global.LBlevels])).PB_LBDisplay[Global.LBlevels])
+					: Custom String(""));
+			Else If(Global.LBsort < 8);
+				Global.LB5th_to_8th[Global.LBlevels] = Custom String("{0}{1}: {2}\n", Global.LBsort == 4 ? Custom String("")
+					: Global.LB5th_to_8th[Global.LBlevels], Filtered Array(All Players(All Teams),
+					Current Array Element == Global.LBNames[Global.LBlevels][Global.LBsort]), Filtered Array(All Players(All Teams),
+					Current Array Element == Global.LBNames[Global.LBlevels][Global.LBsort]).PB_LBDisplay[Global.LBlevels]);
+			Else;
+				Global.LB9th_to_12th[Global.LBlevels] = Custom String("{0}{1}: {2}\n", Global.LBsort == 8 ? Custom String("")
+					: Global.LB9th_to_12th[Global.LBlevels], Filtered Array(All Players(All Teams),
+					Current Array Element == Global.LBNames[Global.LBlevels][Global.LBsort]), Filtered Array(All Players(All Teams),
+					Current Array Element == Global.LBNames[Global.LBlevels][Global.LBsort]).PB_LBDisplay[Global.LBlevels]);
+			End;
+		End;
+		Global.LBlevels = -1;
+	}
+}
+
+rule("Leaderboard & HUD Text Aligner sub")
+{
+	event
+	{
+		Subroutine;
+		LBaligner;
+	}
+
+	actions
+	{
+		Global.CharacterList = Array(Array(Custom String("i"), Custom String("I"), Custom String(" "), Custom String("-"), Custom String(
+			","), Custom String("."), Custom String(";"), Custom String(":"), Custom String("'")), Array(Custom String("!")), Array(
+			Custom String("("), Custom String(")"), Custom String("["), Custom String("]"), Custom String("*")), Array(Custom String("e"),
+			Custom String("E"), Custom String("f"), Custom String("F"), Custom String("j"), Custom String("J"), Custom String("l"),
+			Custom String("L"), Custom String("s"), Custom String("S"), Custom String("t"), Custom String("T"), Custom String("/"),
+			Custom String("\\")), Array(Custom String("p"), Custom String("P"), Custom String("?"), Custom String("§")), Array(
+			Custom String("b"), Custom String("B"), Custom String("c"), Custom String("C"), Custom String("k"), Custom String("K"),
+			Custom String("r"), Custom String("R"), Custom String("y"), Custom String("Y"), Custom String("z"), Custom String("Z"),
+			Custom String("1"), Custom String("2"), Custom String("3"), Custom String("4"), Custom String("5"), Custom String("6"),
+			Custom String("7"), Custom String("8"), Custom String("9"), Custom String("0"), Custom String("#"), Custom String("="),
+			Custom String("+")), Array(Custom String("a"), Custom String("A"), Custom String("d"), Custom String("D"), Custom String("h"),
+			Custom String("H"), Custom String("u"), Custom String("U"), Custom String("v"), Custom String("V"), Custom String("x"),
+			Custom String("X"), Custom String("¤"), Custom String("&")), Array(Custom String("g"), Custom String("G"), Custom String("n"),
+			Custom String("N")), Array(Custom String("o"), Custom String("O"), Custom String("q"), Custom String("Q")), Array(
+			Custom String("m"), Custom String("M"), Custom String("%")), Array(Custom String("w"), Custom String("W"), Custom String("☆"),
+			Custom String("★")));
+		Global.SpaceBois = Array(Custom String("                                                       "), Custom String(
+			"                                                      "), Custom String(
+			"                                                     "), Custom String(
+			"                                                    "), Custom String("                                                   "),
+			Custom String("                                                  "), Custom String(
+			"                                                 "), Custom String("                                                "),
+			Custom String("                                               "), Custom String(
+			"                                              "), Custom String("                                             "),
+			Custom String("                                            "), Custom String("                                           "),
+			Custom String("                                          "), Custom String("                                         "),
+			Custom String("                                        "), Custom String("                                       "),
+			Custom String("                                      "), Custom String("                                     "), Custom String(
+			"                                    "), Custom String("                                   "), Custom String(
+			"                                  "), Custom String("                                 "), Custom String(
+			"                                "), Custom String("                               "), Custom String(
+			"                              "), Custom String("                             "), Custom String(
+			"                            "), Custom String("                           "), Custom String("                          "),
+			Custom String("                         "), Custom String("                        "), Custom String(
+			"                       "), Custom String("                      "), Custom String("                     "), Custom String(
+			"                    "), Custom String("                   "), Custom String("                  "), Custom String(
+			"                 "), Custom String("                "), Custom String("               "), Custom String("              "),
+			Custom String("             "), Custom String("            "), Custom String("           "), Custom String("          "),
+			Custom String("         "), Custom String("        "), Custom String("       "), Custom String("      "), Custom String(
+			"     "), Custom String("    "), Custom String("   "), Custom String("  "), Custom String(" "), Custom String(""));
+		For Global Variable(DetectorLN, 0, Count Of(Global.LvlName), 1);
+			For Global Variable(DetectorLNstrlngth, 0, String Length(Global.LvlName[Global.DetectorLN]), 1);
+				Global.DetectorLNspacer += Is True For Any(Global.CharacterList[0], Current Array Element == Char In String(
+					Global.LvlName[Global.DetectorLN], Global.DetectorLNstrlngth)) ? 4 : (Is True For Any(Global.CharacterList[1],
+					Current Array Element == Char In String(Global.LvlName[Global.DetectorLN], Global.DetectorLNstrlngth)) ? 5 : (Is True For Any(
+					Global.CharacterList[2], Current Array Element == Char In String(Global.LvlName[Global.DetectorLN], Global.DetectorLNstrlngth))
+					? 6 : (Is True For Any(Global.CharacterList[3], Current Array Element == Char In String(Global.LvlName[Global.DetectorLN],
+					Global.DetectorLNstrlngth)) ? 7 : (Is True For Any(Global.CharacterList[4], Current Array Element == Char In String(
+					Global.LvlName[Global.DetectorLN], Global.DetectorLNstrlngth)) ? 8 : (Is True For Any(Global.CharacterList[5],
+					Current Array Element == Char In String(Global.LvlName[Global.DetectorLN], Global.DetectorLNstrlngth)) ? 9 : (Is True For Any(
+					Global.CharacterList[6], Current Array Element == Char In String(Global.LvlName[Global.DetectorLN], Global.DetectorLNstrlngth))
+					? 10 : (Is True For Any(Global.CharacterList[7], Current Array Element == Char In String(Global.LvlName[Global.DetectorLN],
+					Global.DetectorLNstrlngth)) ? 11 : (Is True For Any(Global.CharacterList[8], Current Array Element == Char In String(
+					Global.LvlName[Global.DetectorLN], Global.DetectorLNstrlngth)) ? 12 : (Is True For Any(Global.CharacterList[9],
+					Current Array Element == Char In String(Global.LvlName[Global.DetectorLN], Global.DetectorLNstrlngth)) ? 13 : (Is True For Any(
+					Global.CharacterList[10], Current Array Element == Char In String(Global.LvlName[Global.DetectorLN],
+					Global.DetectorLNstrlngth)) ? 14 : 8))))))))));
+			End;
+			Wait(0.016, Ignore Condition);
+			Global.LBLvlName[Global.DetectorLN] = Custom String("{0}{1}", Global.LvlName[Global.DetectorLN], Global.SpaceBois[Min(
+				Round To Integer(Global.DetectorLNspacer / 4.010, Down), 53)]);
+			Wait(0.016, Ignore Condition);
+			Global.HUDLvlName[Global.DetectorLN] = Custom String("{0}{1}", Global.SpaceBois[Min(Round To Integer(
+				Global.DetectorLNspacer / 4.010, Down) / 2, 53)], Global.LvlName[Global.DetectorLN]);
+			Wait(0.016, Ignore Condition);
+			Global.DetectorLNspacer = 0;
+		End;
+		Global.CharacterList = 0;
+		Global.SpaceBois = 0;
+	}
+}
+
+disabled rule("Checkpoint Change Priority Rules")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+}
+
+rule("CP Change sub   ----------------------------------   ABLOCK CP")
+{
+	event
+	{
+		Subroutine;
+		CPchange;
+	}
+
+	actions
+	{
+		"Ablock - Checkpoint Based"
+		disabled Event Player.Ablock = Array Contains(Global.AblockCP, Event Player.Checkpoint) ? Global.Ablock_Slamlock : 0;
+		Event Player.CPData = Global.QCPdata[Event Player.Checkpoint];
+		"Reset Mission Lock"
+		Event Player.LockM = 0;
+		If(Event Player.Mission);
+			Destroy HUD Text(Event Player.Text[3]);
+			"Null Missions"
+			Event Player.Mission = Empty Array;
+			Event Player.MissionTime = Empty Array;
+			Event Player.MissionD = 0;
+			Call Subroutine(MissionReset);
+		End;
+		"Set Abilities ( order upper mission ? )"
+		Call Subroutine(AbilityEnableDisable);
+		"Check Missions"
+		If(Event Player.CPData[7]);
+			Create HUD Text(Event Player, Null, Custom String("Missions"), Event Player.MissionHUD, Left, -5, Color(White), Color(White),
+				Color(Orange), String, Default Visibility);
+			Event Player.Text[3] = Last Text ID;
+			Event Player.Mission = Global.QMission[Event Player.Checkpoint];
+			Event Player.MissionTime = Global.QMissionTime[Event Player.Checkpoint];
+			Event Player.MissionD = Global.QMissionD[Event Player.Checkpoint];
+			Event Player.LockM = Last Of(Event Player.MissionTime);
+			Call Subroutine(MissionPlayerHUD);
+		End;
+		"Reset Effects ( 3 actions )"
+		Event Player.LockE = 0;
+		Event Player.Effpos = Empty Array;
+		Event Player.Effvisible = Empty Array;
+		"Append CP Locations & Radii, Set CP Skip Arrow"
+		Call Subroutine(SetDiverge);
+		"Teleport / Recenter ?"
+		If(Event Player.CPData[5] || (!Event Player.PM_Centerless && !Event Player.CPData[6]) || Event Player.Shift == 1);
+			Teleport(Event Player, Event Player.CPData[1]);
+		End;
+		"Destroy & Generate Rings, Icons, Effects"
+		Start Rule(GenerateElements, Do Nothing);
+	}
+}
+
+rule("CP Clear / Fail")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Distance Between(Position Of(Event Player), Event Player.CPData[3]) > Event Player.CPData[4] + 0.100;
+		"Rocket Punch Grace   |   Disable to turn OFF"
+		(Is Firing Secondary(Event Player) || Event Player.Grace < 0.120) == True;
+		Event Player.Roaming == False;
+		Event Player.Shift == False;
+		Is On Ground(Event Player) == True;
+	}
+
+	actions
+	{
+		Skip If(Event Player.TTtimer, 1);
+		Disallow Button(Event Player, Button(Ability 2));
+		"Prepare Cancel Slam Animation"
+		If(Is Using Ability 2(Event Player) || (Event Player.Grace && !Is Button Held(Event Player, Button(Secondary Fire))));
+			Event Player.AbilityDetect = Event Player.Grace ? 2 : 1;
+		End;
+		If(Is True For Any(Event Player.Local_Rad, Current Array Element && Distance Between(Position Of(Event Player),
+			Event Player.Local_Pos[Current Array Index]) <= Current Array Element));
+			Call Subroutine(CPclear);
+		Else;
+			If(Event Player.Pioneer == 3);
+				Call Subroutine(PioneerGenerate);
+			Else;
+				Call Subroutine(CPfail);
+			End;
+		End;
+		Loop If Condition Is True;
+	}
+}
+
+rule("CP Clear sub")
+{
+	event
+	{
+		Subroutine;
+		CPclear;
+	}
+
+	actions
+	{
+		If(Event Player.Pioneer);
+			Event Player.Shift = 2;
+			Event Player.Checkpoint += 1;
+			Skip If(Event Player.CPcounter[Event Player.Checkpoint], 2);
+			Event Player.CPcounter[Event Player.Checkpoint] = 1;
+			Event Player.CPcounter[0] = Count Of(Filtered Array(Event Player.CPcounter, Current Array Element));
+			Play Effect(Event Player, Buff Explosion Sound, Color(Blue), Event Player, 69);
+			"Splits"
+			If(Event Player.CPTimeToggle);
+				Event Player.CPtime = Array(Event Player.RunTime - Last Of(Event Player.CPtime), Event Player.RunTime);
+				Small Message(Event Player, Custom String("{0}{1}", Event Player.RunState != 2 ? Custom String("{0}  |  ", Last Of(
+					Event Player.CPtime)) : Custom String(""), First Of(Event Player.CPtime)));
+			End;
+			Call Subroutine(PioneerCPChange);
+			Call Subroutine(CPclearend);
+		Else;
+			"Cancel Slam Animation (3 actions)"
+			If(Event Player.AbilityDetect == 1 && !Is Button Held(Event Player, Button(Ability 1)));
+				Cancel Primary Action(Event Player);
+			End;
+			Event Player.CPData[0] = Index Of Array Value(Event Player.Local_Pos, Filtered Array(Event Player.Local_Pos, Distance Between(
+				Position Of(Event Player), Current Array Element) <= Event Player.Local_Rad[Current Array Index]));
+			If(First Of(Event Player.CPData) >= Event Player.CPcount);
+				Call Subroutine(CheckpointEffect);
+			Else If(Event Player.LockE[First Of(Event Player.CPData)]);
+				Play Effect(Event Player, Debuff Impact Sound, Color(Purple), Event Player, 69);
+				Call Subroutine(CPfail);
+				Small Message(Event Player, Custom String("Effect Locked{0}", Event Player.CPData[19] ? Custom String(" Including Checkpoints")
+					: Custom String("")));
+			Else If(Event Player.LockM[First Of(Event Player.CPData)]);
+				Play Effect(Event Player, Debuff Impact Sound, Color(Purple), Event Player, 69);
+				Call Subroutine(CPfail);
+				Small Message(Event Player, Custom String("Mission Locked"));
+			Else;
+				Event Player.Shift = 2;
+				If(Event Player.CPData[10]);
+					Call Subroutine(TTclear);
+				End;
+				If(Event Player.Effvisible[Count Of(Event Player.Efftype)]);
+					Event Player.RunTime += Event Player.Effvisible[Count Of(Event Player.Efftype)];
+					Event Player.Effpos = 0;
+				End;
+				If(Event Player.Mission);
+					Call Subroutine(MissionTimeChange);
+				End;
+				Event Player.Checkpoint = Event Player.Local_Index[First Of(Event Player.CPData)];
+				"First CP of a Level?"
+				If(Global.QCPdata[Event Player.Checkpoint][14]);
+					Event Player.Level = First Of(Event Player.CPData) + 1;
+					Call Subroutine(SetLevel);
+				End;
+				"Finished Run, Skips for H:OMEGALUL:BRID"
+				If(Global.QCPdata[Event Player.Checkpoint][12]);
+					If(Event Player.RunState == 1);
+						Stop Chasing Player Variable(Event Player, RunTime);
+						Start Rule(FinishedRun, Do Nothing);
+					End;
+					Skip If(Global.QCPdata[Event Player.Checkpoint][13], 2);
+					Event Player.Roaming = 1;
+					Event Player.RunState = Event Player.RunState == 1 ? 4 : 3;
+				End;
+				Play Effect(Event Player, Buff Explosion Sound, Color(Purple), Event Player, 69);
+				"Splits"
+				If(Event Player.CPTimeToggle);
+					Event Player.CPtime = Array(Event Player.RunTime - Last Of(Event Player.CPtime), Event Player.RunTime);
+					Small Message(Event Player, Custom String("{0}{1}", Event Player.RunState != 2 ? Custom String("{0}  |  ", Last Of(
+						Event Player.CPtime)) : Custom String(""), First Of(Event Player.CPtime)));
+				End;
+				Call Subroutine(CPchange);
+				Skip If(Event Player.PM_NoReset, 1);
+				Event Player.TempVA = 0;
+				"Legacy Set VA"
+				If(Global.WSClearSetFacing);
+					Set Facing(Event Player, Direction From Angles(Event Player.CPData[11], Vertical Facing Angle Of(Event Player) - 0.010), To World);
+				End;
+				Call Subroutine(CPclearend);
+				Event Player.CPcounter += 1;
+				Call Subroutine(RegularCPHUD);
+				"Ominous CP..."
+				If(Event Player.Local_Rad[3] && Event Player.RunState == 1 && !Event Player.CPTimeToggle);
+					Small Message(Event Player, Random Value In Array(Global.CPmessages));
+				End;
+	}
+}
+
+rule("CP Clear Ending sub (optimizes Effect CP)")
+{
+	event
+	{
+		Subroutine;
+		CPclearend;
+	}
+
+	actions
+	{
+		Call Subroutine(AbilityCDreset);
+		"Bullet Punch / Uppercut Cancel (6 actions)"
+		If(!Global.WSUpperCancelBulletPunch && !Is Button Held(Event Player, Button(Secondary Fire)) && !Is Button Held(Event Player,
+			Button(Ability 1)) && !Is Button Held(Event Player, Button(Ability 2)));
+			Wait(0.032, Ignore Condition);
+			Cancel Primary Action(Event Player);
+			Wait(0.016, Ignore Condition);
+			Start Rule(RPFix, Restart Rule);
+		End;
+		Set Ability Cooldown(Event Player, Button(Secondary Fire), 0);
+		Wait(0.112, Ignore Condition);
+		Event Player.Shift = 0;
+		Event Player.AbilityDetect = 0;
+		Allow Button(Event Player, Button(Ability 2));
+	}
+}
+
+rule("CP Fail sub")
+{
+	event
+	{
+		Subroutine;
+		CPfail;
+	}
+
+	actions
+	{
+		If(Event Player.Grace);
+			Event Player.AbilityDetect = 2;
+			Event Player.Grace = 0;
+		End;
+		If(Event Player.CPData[21]);
+			Set Status(Event Player, Null, Rooted, 0.300);
+			Call Subroutine(AbilityCDreset);
+		End;
+		If(!Event Player.Checkpoint || Event Player.PM_NoReset);
+			Call Subroutine(Reset);
+		Else If(Event Player.TTtimer);
+			Abort If(!Event Player.TTStart);
+			Event Player.TTtimer = 0;
+			Event Player.Roaming = 1;
+		Else;
+			Event Player.Shift = 1;
+			Call Subroutine(CPfailend);
+	}
+}
+
+rule("CP Fail Ending sub (Optimizing Full Reset)")
+{
+	event
+	{
+		Subroutine;
+		CPfailend;
+	}
+
+	actions
+	{
+		Skip If(Event Player.RunState > 2, 2);
+		Event Player.CPData[3] = Event Player.CPData[1];
+		Event Player.CPData[4] = Event Player.CPData[2];
+		Teleport(Event Player, Event Player.CPData[3]);
+		Start Forcing Player Position(Event Player, Event Player.CPData[3], 0);
+		Cancel Primary Action(Event Player);
+		Event Player.LockE = Event Player.CPData[20];
+		Event Player.Effvisible = Empty Array;
+		If(Event Player.TempVA || Event Player.CPData[11]);
+			Start Rule(SetFacing, Restart Rule);
+		End;
+		Wait(0.080, Ignore Condition);
+		"Slam Leap Prevention System v.8055 ( 3 actions )"
+		If(Is Using Ability 2(Event Player));
+			Wait Until(!Is Using Ability 2(Event Player), 1);
+		End;
+		Stop Forcing Player Position(Event Player);
+		Call Subroutine(AbilityEnableDisable);
+		Call Subroutine(AbilityCDreset);
+		If(Event Player.Mission);
+			Start Rule(MissionReset, Restart Rule);
+		End;
+		Wait(Event Player.AbilityDetect == 2 ? 0.336 : (Event Player.CPData[21] ? 0.304 : 0.080), Ignore Condition);
+		Start Rule(RPFix, Restart Rule);
+		Event Player.AbilityDetect = 0;
+		Allow Button(Event Player, Button(Ability 2));
+		Stop Facing(Event Player);
+		If(Event Player.Pioneer == 3);
+			Destroy Effect(First Of(Event Player.Elements));
+			Event Player.Roaming = 0;
+			Event Player.PioneerGenerate = 0;
+		End;
+		Event Player.Shift = 0;
+	}
+}
+
+rule("Prevent CP Return")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Global.WSReturnPrevent == True;
+		Distance Between(Position Of(Event Player), Event Player.CPData[1]) <= Event Player.CPData[2] + 0.500;
+		Is True For Any(Event Player.Effvisible, Current Array Element) == True;
+		Is On Ground(Event Player) == True;
+	}
+
+	actions
+	{
+		Small Message(Event Player, Custom String("Returning Prevented"));
+		Call Subroutine(CPfail);
+	}
+}
+
+rule("Set Facing sub")
+{
+	event
+	{
+		Subroutine;
+		SetFacing;
+	}
+
+	actions
+	{
+		Start Facing(Event Player, Direction From Angles(Event Player.TempVA ? Event Player.TempVA : Event Player.CPData[11],
+			Vertical Facing Angle Of(Event Player)), 10000, To World, Direction and Turn Rate);
+		Wait Until(Horizontal Facing Angle Of(Event Player) / 100 == (Event Player.TempVA ? Event Player.TempVA : Event Player.CPData[11])
+			/ 100, 1);
+		Stop Facing(Event Player);
+	}
+}
+
+rule("Ability Enable/Disable sub")
+{
+	event
+	{
+		Subroutine;
+		AbilityEnableDisable;
+	}
+
+	actions
+	{
+		If(Event Player.CPData[21]);
+			Event Player.AbilityCount = Last Of(Event Player.CPData[21]);
+			Call Subroutine(AbilityCountText);
+			If(Event Player.RunState < 3);
+				Set Secondary Fire Enabled(Event Player, X Component Of(Event Player.AbilityCount) ? True : False);
+				Set Ability 1 Enabled(Event Player, Z Component Of(Event Player.AbilityCount) ? True : False);
+				Set Ability 2 Enabled(Event Player, Y Component Of(Event Player.AbilityCount) ? True : False);
+				Abort;
+			Else;
+				Set Secondary Fire Enabled(Event Player, True);
+				Set Ability 1 Enabled(Event Player, True);
+				Set Ability 2 Enabled(Event Player, True);
+				Abort;
+			End;
+		Else;
+			If(Event Player.RunState < 3);
+				Set Secondary Fire Enabled(Event Player, Event Player.CPData[16] ? True : False);
+				Set Ability 1 Enabled(Event Player, Event Player.CPData[17] ? True : False);
+				Set Ability 2 Enabled(Event Player, Event Player.CPData[18] ? True : False);
+				Abort;
+			Else;
+				Set Secondary Fire Enabled(Event Player, True);
+				Set Ability 1 Enabled(Event Player, True);
+				Set Ability 2 Enabled(Event Player, True);
+				Abort;
+			End;
+		End;
+	}
+}
+
+rule("Reset Ability CDs inside CP")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Distance Between(Position Of(Event Player), Event Player.CPData[3]) <= Event Player.CPData[4] + 0.500;
+		Event Player.Shift == False;
+		Event Player.UpperLock == False;
+		(Ability Cooldown(Event Player, Button(Secondary Fire)) || (Altitude Of(Event Player) < 1 && Ability Cooldown(Event Player, Button(
+			Ability 2))) || Ability Cooldown(Event Player, Button(Ability 1))) == True;
+	}
+
+	actions
+	{
+		Event Player.Shift = 1;
+		If(Event Player.CPData[21]);
+			Set Status(Event Player, Null, Rooted, 0.200);
+			Call Subroutine(AbilityEnableDisable);
+			Teleport(Event Player, Event Player.CPData[1]);
+			Start Forcing Player Position(Event Player, Event Player.CPData[1], 0);
+			Wait(0.016, Ignore Condition);
+			Stop Forcing Player Position(Event Player);
+		End;
+		Call Subroutine(AbilityCDreset);
+		Wait(0.080, Ignore Condition);
+		Event Player.Shift = 0;
+		Loop If Condition Is True;
+		If(Event Player.Mission && Event Player.CPData[3] == Event Player.CPData[1]);
+			If(Is True For Any(Event Player.MissionTime,
+				Current Array Element > 9900 && Event Player.MissionC[Event Player.Mission[Current Array Index]] == 1));
+				Event Player.MissionC = Mapped Array(Event Player.MissionC,
+					Current Array Element == 1 && Event Player.MissionTime[Index Of Array Value(Event Player.Mission, Current Array Index)
+					] > 9900 ? 1 : 0);
+			Else;
+				Event Player.MissionC = Event Player.MissionReset;
+			End;
+			Call Subroutine(MissionPlayerHUD);
+	}
+}
+
+rule("Reset Ability CDs sub")
+{
+	event
+	{
+		Subroutine;
+		AbilityCDreset;
+	}
+
+	actions
+	{
+		If(Event Player.UpperLock == False);
+			Set Ability Cooldown(Event Player, Button(Ability 2), 0);
+			Set Ability Cooldown(Event Player, Button(Ability 1), 0);
+			Set Ability Cooldown(Event Player, Button(Ability 2), 0);
+			Set Ability Cooldown(Event Player, Button(Secondary Fire), 0);
+	}
+}
+
+rule("Set Level sub")
+{
+	event
+	{
+		Subroutine;
+		SetLevel;
+	}
+
+	actions
+	{
+		Event Player.CPcounter = 1;
+		Start Forcing Player Outlines(Event Player, All Players(All Teams), 1, Global.LvlColors[Event Player.Level], Always);
+		Event Player.Completionist = 2;
+		"Ablock - Level Based"
+		Event Player.Ablock = Array Contains(Global.AblockLvl, Event Player.Level) ? Global.Ablock_Slamlock : 0;
+	}
+}
+
+rule("Append CP Positions, Radii, Indexes & Set Diverge Arrow sub")
+{
+	event
+	{
+		Subroutine;
+		SetDiverge;
+	}
+
+	actions
+	{
+		Event Player.Local_Pos = Global.QPos[Event Player.Checkpoint];
+		Event Player.Local_Rad = Global.QRad[Event Player.Checkpoint];
+		Event Player.Local_Index = Global.QIndex[Event Player.Checkpoint];
+		Event Player.Diverge2 = Index Of Array Value(Event Player.Local_Rad, First Of(Filtered Array(Event Player.Local_Rad,
+			Current Array Element)));
+		Event Player.Diverge = First Of(Filtered Array(Event Player.Local_Index, Current Array Element));
+		Event Player.CPcount = Count Of(Event Player.Local_Pos) - (Event Player.CPData[8] ? Count Of(Filtered Array(
+			Global.QEffState[Event Player.Checkpoint], Current Array Element == 4)) : 0);
+	}
+}
+
+rule("Rocket Punch Grace Period")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Is Firing Secondary(Event Player) == True;
+	}
+
+	actions
+	{
+		Event Player.Cheese = Is Button Held(Event Player, Button(Primary Fire));
+		Event Player.Grace = 0.119;
+		Chase Player Variable At Rate(Event Player, Grace, 0.500, 0.260, None);
+		Wait Until(!Is Firing Secondary(Event Player) || !Event Player.Grace, 99999);
+		If(Event Player.Grace > 0.016 && !(Is Button Held(Event Player, Button(Primary Fire)) && !Event Player.Cheese));
+			Chase Player Variable At Rate(Event Player, Grace, 0, 1, None);
+			"Ability Count"
+			If(Event Player.CPData[21]);
+				"Current Pioneer"
+				If(Event Player.Pioneer == 3);
+					Abort If(Event Player.PioneerGenerate);
+					Event Player.AbilityCount += Left;
+				Else If(Event Player.RunState < 3);
+					Skip If(X Component Of(Event Player.AbilityCount), 2);
+					Event Player.AbilityCount += Left;
+					Wait(0.016, Ignore Condition);
+					Event Player.AbilityCount += Right;
+				End;
+				Call Subroutine(AbilityCountText);
+			End;
+			If(Event Player.Mission);
+				Call Subroutine(RPMissions);
+			End;
+			Wait Until(!Event Player.Grace, 99999);
+		End;
+		Stop Chasing Player Variable(Event Player, Grace);
+		Event Player.Grace = 0;
+		Loop If Condition Is True;
+	}
+}
+
+rule("Rocket Punch BP / CD Fix sub")
+{
+	event
+	{
+		Subroutine;
+		RPFix;
+	}
+
+	actions
+	{
+		If(Is Button Held(Event Player, Button(Secondary Fire)));
+			Start Holding Button(Event Player, Button(Secondary Fire));
+			Wait Until(!Event Player.Shift && !Is Button Held(Event Player, Button(Secondary Fire)), 99999);
+			Stop Holding Button(Event Player, Button(Secondary Fire));
+	}
+}
+
+rule("Ability Count - Disable Rocket Punch")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Event Player.Roaming == False;
+		Event Player.CPData[21] == True;
+		X Component Of(Event Player.AbilityCount) == False;
+		Ability Cooldown(Event Player, Button(Secondary Fire)) == True;
+		Event Player.Pioneer != 3;
+	}
+
+	actions
+	{
+		Set Secondary Fire Enabled(Event Player, False);
+	}
+}
+
+rule("Ability Count - Disable Uppercut")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Event Player.Roaming == False;
+		Event Player.CPData[21] == True;
+		Z Component Of(Event Player.AbilityCount) == False;
+		Ability Cooldown(Event Player, Button(Ability 1)) == True;
+		Event Player.Pioneer != 3;
+	}
+
+	actions
+	{
+		Set Ability 1 Enabled(Event Player, False);
+	}
+}
+
+rule("Ability Count - Disable Seismic Slam")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Event Player.Roaming == False;
+		Event Player.CPData[21] == True;
+		Y Component Of(Event Player.AbilityCount) == False;
+		Ability Cooldown(Event Player, Button(Ability 2)) == True;
+		Event Player.Pioneer != 3;
+	}
+
+	actions
+	{
+		Set Ability 2 Enabled(Event Player, False);
+	}
+}
+
+rule("Ability Count Text sub")
+{
+	event
+	{
+		Subroutine;
+		AbilityCountText;
+	}
+
+	actions
+	{
+		Event Player.AbilityText = Custom String("{1}      {0}      {2}", Event Player.Pioneer ? Custom String("{0} {1}{2}",
+			Y Component Of(Event Player.AbilityCount), Ability Icon String(Hero Of(Event Player), Button(Ability 2)),
+			Event Player.Checkpoint > 8 && Count Of(Global.CPposition) > 9 ? Custom String("        ") : (
+			Event Player.Checkpoint > 8 || Count Of(Global.CPposition) > 9 ? Custom String("    ") : Custom String(""))) : Custom String(
+			"{0} {1}", Y Component Of(Event Player.AbilityCount), Ability Icon String(Hero Of(Event Player), Button(Ability 2))),
+			Event Player.Pioneer ? Custom String("{0} {1}{2}", Z Component Of(Event Player.AbilityCount), Ability Icon String(Hero Of(
+			Event Player), Button(Ability 1)), Event Player.Checkpoint > 8 && Count Of(Global.CPposition) > 9 ? Custom String("        ")
+			: (Event Player.Checkpoint > 8 || Count Of(Global.CPposition) > 9 ? Custom String("    ") : Custom String("")))
+			: Custom String("{0} {1}", Z Component Of(Event Player.AbilityCount), Ability Icon String(Hero Of(Event Player), Button(
+			Ability 1))), Custom String("{0} {1}", X Component Of(Event Player.AbilityCount), Ability Icon String(Hero Of(Event Player),
+			Button(Secondary Fire))));
+	}
+}
+
+disabled rule("Timer")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+}
+
+rule("Timer Start")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		(!Event Player.Checkpoint || Event Player.CPData[13]) == True;
+		Distance Between(Position Of(Event Player), Event Player.CPData[3]) > Event Player.CPData[4] + 0.100;
+		Event Player.Roaming == (Event Player.CPData[10] > 0);
+		Event Player.RunState < 2;
+		Event Player.Shift == False;
+	}
+
+	actions
+	{
+		Chase Player Variable At Rate(Event Player, RunTime, 100000, 1, None);
+		Abort If(Event Player.Pioneer);
+		Event Player.RunState = 1;
+		Event Player.CPcounter = 1;
+	}
+}
+
+disabled rule("Elements")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+}
+
+rule("Element Reset sub")
+{
+	event
+	{
+		Subroutine;
+		GenerateElements;
+	}
+
+	actions
+	{
+		Call Subroutine(DestroyElements);
+		Skip If(Event Player.CPData[12], 1);
+		Call Subroutine(RingGenerate);
+		If(Event Player.CPData[8]);
+			Start Rule(EffectInitiate, Restart Rule);
+	}
+}
+
+rule("Destroy Elements sub")
+{
+	event
+	{
+		Subroutine;
+		DestroyElements;
+	}
+
+	actions
+	{
+		Destroy Effect(First Of(Event Player.Elements));
+		For Player Variable(Event Player, DelGenElements, 0, Max(Count Of(Event Player.Elements[1]), Count Of(Event Player.Elements[2])),
+			1);
+			Destroy Icon(Event Player.Elements[1][Event Player.DelGenElements]);
+			Destroy In-World Text(Event Player.Elements[2][Event Player.DelGenElements]);
+		End;
+		Wait(0.016, Ignore Condition);
+		Event Player.Elements = Array(Array(), Array(), Array());
+	}
+}
+
+rule("Generate Rings sub")
+{
+	event
+	{
+		Subroutine;
+		RingGenerate;
+	}
+
+	actions
+	{
+		For Player Variable(Event Player, DelGenElements, 0, 3, 1);
+			If(Event Player.Local_Rad[Event Player.DelGenElements]);
+				Create Effect(Event Player, Ring, Event Player.Pioneer ? Color(Turquoise) : Global.LvlColors[Event Player.Level],
+					Event Player.Local_Pos[Event Player.DelGenElements], Event Player.Local_Rad[Event Player.DelGenElements], None);
+				Modify Player Variable At Index(Event Player, Elements, 0, Append To Array, Last Created Entity);
+				Call Subroutine(IconGenerate);
+				Modify Player Variable At Index(Event Player, Elements, 1, Append To Array, Last Created Entity);
+			End;
+		End;
+		If(Event Player.Local_Rad[3] && Event Player.RunState == 1);
+			Create Effect(Event Player, Ring, Color(White), Event Player.Local_Pos[3], Event Player.Local_Rad[3],
+				Visible To Position and Radius);
+			Modify Player Variable At Index(Event Player, Elements, 0, Append To Array, Last Created Entity);
+	}
+}
+
+disabled rule("Missions")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+}
+
+rule("Mission Rocket Punch & Diagonal Check")
+{
+	event
+	{
+		Subroutine;
+		RPMissions;
+	}
+
+	actions
+	{
+		"Ability First"
+		If(Is True For Any(Array Slice(Event Player.MissionD, 7, 3),
+			Current Array Element && !Event Player.MissionC[Current Array Element]));
+			Event Player.MissionC[7] = 1;
+			Event Player.MissionC[8] = 2;
+			Event Player.MissionC[9] = 2;
+			Call Subroutine(MissionPlayerHUD);
+		End;
+		"No Rocket Punch"
+		If(Event Player.MissionD[1] && !Event Player.MissionC[1]);
+			Event Player.MissionC[1] = Event Player.MissionTime[Index Of Array Value(Event Player.Mission, 1)
+				] > 0 && Event Player.MissionTime[Index Of Array Value(Event Player.Mission, 1)] < 9900 ? 1 : 2;
+			Call Subroutine(MissionPlayerHUD);
+		End;
+		"Diagonal check"
+		If(Is True For Any(Array Slice(Event Player.MissionD, 10, 2),
+			Current Array Element && !Event Player.MissionC[Current Array Element]));
+			While(Event Player.Grace);
+				Wait Until(!Event Player.Grace || Absolute Value(Vertical Speed Of(Event Player)) > 7, 99999);
+				Abort If(!Event Player.Grace);
+				Start Rule(RPDiag, Restart Rule);
+				Wait Until(!Event Player.Grace || Absolute Value(Vertical Speed Of(Event Player)) < 7, 99999);
+			End;
+	}
+}
+
+rule("Mission Diag / Down Diag sub")
+{
+	event
+	{
+		Subroutine;
+		RPDiag;
+	}
+
+	actions
+	{
+		Wait Until(Absolute Value(Vertical Speed Of(Event Player)) < 7 || !Event Player.Grace, 0.080);
+		Abort If(Absolute Value(Vertical Speed Of(Event Player)) < 7 || !Event Player.Grace);
+		Event Player.MissionC[Vertical Speed Of(Event Player) > 0 ? 10 : 11] = 1;
+		Call Subroutine(MissionPlayerHUD);
+		Event Player.Grace += Vertical Speed Of(Event Player) < 7 ? 0.080 : 0;
+	}
+}
+
+rule("Mission Seismic Slam")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Is Using Ability 1(Event Player) == True;
+	}
+
+	actions
+	{
+		"Ability First"
+		If(Is True For Any(Array Slice(Event Player.MissionD, 7, 3),
+			Current Array Element && !Event Player.MissionC[Current Array Element]));
+			Event Player.MissionC[7] = 2;
+			Event Player.MissionC[8] = 2;
+			Event Player.MissionC[9] = 1;
+			Call Subroutine(MissionPlayerHUD);
+		End;
+		"No Seismic Slam"
+		If(Event Player.MissionD[3] && !Event Player.MissionC[3]);
+			Event Player.MissionC[3] = Event Player.MissionTime[Index Of Array Value(Event Player.Mission, 3)
+				] > 0 && Event Player.MissionTime[Index Of Array Value(Event Player.Mission, 3)] < 9900 ? 1 : 2;
+			Call Subroutine(MissionPlayerHUD);
+		End;
+		"Ability Count"
+		If(Event Player.CPData[21]);
+			If(Event Player.Pioneer == 3);
+				Abort If(Event Player.PioneerGenerate);
+				Event Player.AbilityCount += Forward;
+			Else If(Event Player.RunState < 3);
+				Skip If(Z Component Of(Event Player.AbilityCount), 2);
+				Event Player.AbilityCount += Forward;
+				Wait(0.016, Ignore Condition);
+				Event Player.AbilityCount += Backward;
+			End;
+			Call Subroutine(AbilityCountText);
+	}
+}
+
+rule("Mission Powerblock")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		(Is Using Ability 2(Event Player) || Ability Cooldown(Event Player, Button(Ability 2))) >= 1;
+	}
+
+	actions
+	{
+		"Ability First"
+		If(Is True For Any(Array Slice(Event Player.MissionD, 7, 3),
+			Current Array Element && !Event Player.MissionC[Current Array Element]));
+			Event Player.MissionC[7] = 2;
+			Event Player.MissionC[8] = 1;
+			Event Player.MissionC[9] = 2;
+			Call Subroutine(MissionPlayerHUD);
+		End;
+		"No Uppercut"
+		If(Event Player.MissionD[2] && !Event Player.MissionC[2]);
+			Event Player.MissionC[2] = Event Player.MissionTime[Index Of Array Value(Event Player.Mission, 2)
+				] > 0 && Event Player.MissionTime[Index Of Array Value(Event Player.Mission, 2)] < 9900 ? 1 : 2;
+			Call Subroutine(MissionPlayerHUD);
+		End;
+		"Ability Count"
+		If(Event Player.CPData[21]);
+			If(Event Player.Pioneer == 3);
+				Abort If(Event Player.PioneerGenerate);
+				Event Player.AbilityCount += Up;
+			Else If(Event Player.RunState < 3);
+				Skip If(Y Component Of(Event Player.AbilityCount), 2);
+				Event Player.AbilityCount += Up;
+				Wait(0.016, Ignore Condition);
+				Event Player.AbilityCount += Down;
+			End;
+			Call Subroutine(AbilityCountText);
+		End;
+		"Headbounce"
+		If(Event Player.MissionD[5] && !Event Player.MissionC[5]);
+			Wait(0.350, Ignore Condition);
+			If(Horizontal Speed Of(Event Player) > 7);
+				Event Player.MissionC[5] = 1;
+				Call Subroutine(MissionPlayerHUD);
+			End;
+		End;
+		Wait Until(!Is Using Ability 2(Event Player), 99999);
+	}
+}
+
+rule("Mission Stallless")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Event Player.MissionD[4] == True;
+		Event Player.MissionC[4] == False;
+		Speed Of(Event Player) < 0.080;
+		Is In Air(Event Player) == True;
+		Is Using Ability 2(Event Player) == False;
+		Distance Between(Position Of(Event Player), Event Player.CPData[3]) > Event Player.CPData[4] + 0.100;
+	}
+
+	actions
+	{
+		Event Player.MissionC[4] = 2;
+		Call Subroutine(MissionPlayerHUD);
+	}
+}
+
+rule("Mission 360")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Event Player.MissionD[6] == True;
+		Event Player.MissionC[6] == False;
+		Distance Between(Position Of(Event Player), Event Player.CPData[3]) > Event Player.CPData[4] - 0.200;
+	}
+
+	actions
+	{
+		Event Player.HorizontalAngle = Horizontal Facing Angle Of(Event Player);
+		Event Player.M360 = 0;
+		While(Distance Between(Position Of(Event Player), Evaluate Once(Event Player.CPData[3])) > Evaluate Once(
+			Event Player.CPData[4] - 0.200));
+			Wait Until(Distance Between(Position Of(Event Player), Event Player.CPData[3])
+				< Event Player.CPData[4] - 0.200 || Update Every Frame(Absolute Value(Angle Difference(Horizontal Facing Angle Of(
+				Event Player), Event Player.HorizontalAngle)) > 90), 99999);
+			Abort If Condition Is False;
+			If(Horizontal Speed Of(Event Player) < 0.100);
+				Wait Until(Horizontal Speed Of(Event Player) > 0.100, 99999);
+				Loop;
+			End;
+			Event Player.M360 = Event Player.M360 ? (Event Player.M360 > 0 ? (Angle Difference(Horizontal Facing Angle Of(Event Player),
+				Event Player.HorizontalAngle) > 0 ? Event Player.M360 + 1 : -1) : (Angle Difference(Horizontal Facing Angle Of(Event Player),
+				Event Player.HorizontalAngle) > 0 ? 1 : Event Player.M360 - 1)) : (Angle Difference(Horizontal Facing Angle Of(Event Player),
+				Event Player.HorizontalAngle) > 0 ? 1 : -1);
+			If(Absolute Value(Event Player.M360) == 3);
+				Event Player.MissionC[6] = 1;
+				Call Subroutine(MissionPlayerHUD);
+				Small Message(Event Player, Custom String("360"));
+				Abort;
+			End;
+			Event Player.HorizontalAngle = Horizontal Angle From Direction(Direction From Angles(Event Player.HorizontalAngle + (
+				Event Player.M360 > 0 ? -90 : 90), 0));
+		End;
+	}
+}
+
+rule("Mission Bounce")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Event Player.Grace == True;
+		Is Button Held(Event Player, Button(Secondary Fire)) == False;
+		Is Button Held(Event Player, Button(Jump)) == True;
+	}
+
+	actions
+	{
+		Event Player.Grace = 0.032;
+		Abort If(!Event Player.MissionD[12] || Event Player.MissionC[12]);
+		Event Player.DetectorBounce = Y Component Of(Normalize(Velocity Of(Event Player)));
+		Wait(0.250, Ignore Condition);
+		If(!Is Using Ability 1(Event Player) && Vertical Speed Of(Event Player) > 5 && Y Component Of(Normalize(Velocity Of(Event Player)))
+			> Event Player.DetectorBounce);
+			Event Player.MissionC[12] = 1;
+			Call Subroutine(MissionPlayerHUD);
+		End;
+		Event Player.DetectorBounce = 0;
+	}
+}
+
+rule("Reset Missions sub")
+{
+	event
+	{
+		Subroutine;
+		MissionReset;
+	}
+
+	actions
+	{
+		Event Player.M360 = 0;
+		Wait Until(!Is Using Ability 2(Event Player), 99999);
+		Event Player.MissionC = Event Player.MissionReset;
+		Event Player.LockM = Last Of(Event Player.MissionTime);
+		Call Subroutine(MissionPlayerHUD);
+	}
+}
+
+rule("Refresh Mission HUD sub")
+{
+	event
+	{
+		Subroutine;
+		MissionPlayerHUD;
+	}
+
+	actions
+	{
+		If(Last Of(Event Player.MissionTime) != Empty Array);
+			If(Event Player.LockM == Empty Array ? Is True For Any(Event Player.Mission,
+				Event Player.MissionTime[Current Array Index] > 9900 && Event Player.MissionC[Current Array Element] == 2) : Is True For All(
+				Event Player.Mission, Event Player.MissionTime[Current Array Index] > 9900 ? Event Player.MissionC[Current Array Element] == (
+				Current Array Element < 5 ? 0 : 1) : 1));
+				Event Player.LockM = Event Player.LockM == Empty Array ? Last Of(Event Player.MissionTime) : 0;
+			End;
+		End;
+		For Player Variable(Event Player, MissionDetector, 0, Count Of(Event Player.Mission), 1);
+			Event Player.MissionHUD = Custom String("{0}{1}{2}\n", Event Player.MissionDetector ? Event Player.MissionHUD : Custom String(""),
+				Global.QMissionDisplay[Event Player.Checkpoint][Event Player.MissionDetector * 2],
+				Global.MissionCompletion[Global.QMissionDisplay[Event Player.Checkpoint][Event Player.MissionDetector * 2 + 1] + Event Player.MissionC[Event Player.Mission[Event Player.MissionDetector]]]);
+		End;
+	}
+}
+
+rule("Mission Time Change sub")
+{
+	event
+	{
+		Subroutine;
+		MissionTimeChange;
+	}
+
+	actions
+	{
+		Event Player.MissionTimeChange = 0;
+		"No ability use / Stallless completion"
+		If(Is True For Any(Array Slice(Event Player.MissionD, 1, 4), Current Array Element));
+			Event Player.MissionC = Mapped Array(Event Player.MissionC, Current Array Index >= 1 && Current Array Index <= 4 ? (
+				Event Player.MissionD[Current Array Index] ? !Current Array Element : Current Array Element) : Current Array Element);
+			Event Player.MissionC = Mapped Array(Event Player.MissionC, Current Array Element == 1 ? 1 : Current Array Element);
+		End;
+		"If completions"
+		If(Array Contains(Event Player.MissionC, 1));
+			"Change Run Time"
+			For Player Variable(Event Player, MissionDetector, 0, Count Of(Event Player.Mission), 1);
+				If(
+					Event Player.MissionC[Event Player.Mission[Event Player.MissionDetector]] == 1 && Event Player.MissionTime[Event Player.MissionDetector] < 9900);
+					Event Player.RunTime += Event Player.MissionTime[Event Player.MissionDetector];
+					Event Player.MissionTimeChange += Event Player.MissionTime[Event Player.MissionDetector];
+				End;
+			End;
+		End;
+		Event Player.MissionDisplay = 2.500;
+		Chase Player Variable At Rate(Event Player, MissionDisplay, 0, 1, None);
+		"No ability use / Stallless Completionist Fix"
+		If(Is True For Any(Event Player.MissionTime, Current Array Element < 9900 && Current Array Element > 0));
+			Event Player.MissionC = Mapped Array(Event Player.MissionC, Array Contains(Event Player.Mission, Current Array Index)
+				&& Current Array Element && Event Player.MissionTime[Index Of Array Value(Event Player.Mission, Current Array Index)
+				] < 9900 && Event Player.MissionTime[Index Of Array Value(Event Player.Mission, Current Array Index)] > 0 ? (
+				Current Array Element == 1 ? 0 : 1) : Current Array Element);
+		End;
+		If(Event Player.Completionist < 2);
+			Event Player.Completionist = Is True For Any(Filtered Array(Event Player.MissionC, Array Contains(Event Player.Mission,
+				Current Array Index)), Current Array Element == 2 || !Current Array Element) ? 2 : 1;
+		End;
+		Start Rule(MissionCompeltionistDreset, Restart Rule);
+	}
+}
+
+rule("Mission Time change Reset")
+{
+	event
+	{
+		Subroutine;
+		MissionCompeltionistDreset;
+	}
+
+	actions
+	{
+		Skip If(Event Player.Completionist != 1, 2);
+		Wait(0.500, Ignore Condition);
+		Play Effect(Event Player, Buff Impact Sound, Color(Purple), Event Player, 69);
+		Wait Until(!Event Player.MissionDisplay, 3);
+		Stop Chasing Player Variable(Event Player, MissionDisplay);
+		Event Player.MissionTimeChange = 0;
+	}
+}
+
+disabled rule("Effects")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+}
+
+rule("Effect Initiate sub")
+{
+	event
+	{
+		Subroutine;
+		EffectInitiate;
+	}
+
+	actions
+	{
+		Event Player.Effpos = Global.QEffPos[Event Player.Checkpoint];
+		"Effect Checkpoints get removed so you need a separate array"
+		Event Player.EffectPreview = Event Player.Effpos;
+		Event Player.Effrad = Global.QEffRad[Event Player.Checkpoint];
+		Event Player.Effstate = Global.QEffState[Event Player.Checkpoint];
+		Event Player.Efftim = Global.QEffTim[Event Player.Checkpoint];
+		Event Player.Efftype = Global.QEffType[Event Player.Checkpoint];
+		Event Player.EffradD = Global.QEffRadD[Event Player.Checkpoint];
+		Event Player.Effabi = Global.QEffAbi[Event Player.Checkpoint];
+		Event Player.LockE = Global.QLockE[Event Player.Checkpoint];
+		Event Player.EfflockC = Global.QEffLockC[Event Player.Checkpoint];
+		Event Player.CPData[20] = Event Player.LockE;
+		For Player Variable(Event Player, Effinitiate, 0, Count Of(Global.QEffPos[Event Player.Checkpoint]), 1);
+			Call Subroutine(EffectGenerate);
+			If(Is True For Any(Event Player.Effstate[Event Player.Effinitiate],
+				Current Array Element == 4 || Current Array Element == 8 || Current Array Element == 9));
+				If(Event Player.Effstate[Event Player.Effinitiate] == 8);
+					Event Player.Effrad[Event Player.Effinitiate] = Event Player.Effpos[Event Player.Effinitiate];
+				Else If(Event Player.Effstate[Event Player.Effinitiate] == 9);
+					Event Player.Efftype[Event Player.Effinitiate - 1] = Event Player.Effpos[Event Player.Effinitiate];
+				End;
+				Event Player.Effpos[Event Player.Effinitiate] = 0;
+			End;
+		End;
+	}
+}
+
+rule("Effect Create sub    -------------------------------   CUSTOMIZE")
+{
+	event
+	{
+		Subroutine;
+		EffectGenerate;
+	}
+
+	actions
+	{
+		If(Event Player.Efftype[Event Player.Effinitiate]);
+			If(Event Player.Effstate[Event Player.Effinitiate] < 4);
+				If(Is True For Any(Event Player.Effstate[Event Player.Effinitiate], Current Array Element == 1 || Current Array Element == 3));
+					Create Effect(Event Player, Sphere, Event Player.Effstate[Event Player.Effinitiate] == 1 ? Color(Red) : Color(Lime Green),
+						Event Player.Effpos[Event Player.Effinitiate], Event Player.Effrad[Event Player.Effinitiate], None);
+				Else;
+					Create Effect(Event Player.Effvisible[Evaluate Once(Event Player.Effinitiate)] ? Empty Array : Event Player, Sphere,
+						Event Player.Effstate[Event Player.Effinitiate] ? Color(White) : (Event Player.Efftim[Event Player.Effinitiate] > 0 ? Color(
+						Purple) : Color(Sky Blue)), Event Player.Effpos[Event Player.Effinitiate], Event Player.Effrad[Event Player.Effinitiate],
+						Visible To);
+				End;
+			Else If(Event Player.Effstate[Event Player.Effinitiate] == 4);
+				Create Effect(Event Player, Ring, Event Player.Effvisible[Evaluate Once(Event Player.Effinitiate)] ? Color(Red) : Color(Orange),
+					Event Player.Effpos[Event Player.Effinitiate], Event Player.Effrad[Event Player.Effinitiate], Color);
+			Else If(Is True For Any(Event Player.Effstate[Event Player.Effinitiate],
+					Current Array Element == 5 || Current Array Element == 6));
+				Create Effect(Event Player, Good Aura, Event Player.Effstate[Event Player.Effinitiate] == 5 ? Color(Orange) : Color(Sky Blue),
+					Event Player.Effpos[Event Player.Effinitiate], 1.600, None);
+			Else If(Event Player.Effstate[Event Player.Effinitiate] == 7);
+				Create Effect(Event Player, Orb, Color(Black), Event Player.Effpos[Event Player.Effinitiate],
+					Event Player.Effrad[Event Player.Effinitiate], None);
+			Else;
+				Abort If(Event Player.Effstate[Event Player.Effinitiate + 1] != 9);
+				Create Beam Effect(Event Player, Bad Beam, Event Player.Effpos[Event Player.Effinitiate],
+					Event Player.Effpos[Event Player.Effinitiate + 1], Color(Blue), None);
+			End;
+		Else;
+			If(Is True For Any(Event Player.Effstate[Event Player.Effinitiate], Current Array Element == 1 || Current Array Element == 3));
+				Create Effect(Event Player, Light Shaft, Event Player.Effstate[Event Player.Effinitiate] == 1 ? Color(Red) : Color(Lime Green),
+					Event Player.Effpos[Event Player.Effinitiate], Event Player.Effrad[Event Player.Effinitiate], None);
+			Else;
+				Create Effect(Event Player.Effvisible[Evaluate Once(Event Player.Effinitiate)] ? Empty Array : Event Player, Light Shaft,
+					Event Player.Effstate[Event Player.Effinitiate] ? Color(White) : (Event Player.Efftim[Event Player.Effinitiate] > 0 ? Color(
+					Purple) : Color(Sky Blue)), Event Player.Effpos[Event Player.Effinitiate], Event Player.Effrad[Event Player.Effinitiate],
+					Visible To);
+			End;
+		End;
+		Modify Player Variable At Index(Event Player, Elements, 0, Append To Array, Last Created Entity);
+		Abort If(Is True For Any(Event Player.Effstate[Event Player.Effinitiate],
+			Current Array Element == 1 || Current Array Element > 6));
+		If(Event Player.Effstate[Event Player.Effinitiate] > 1 && Event Player.Effstate[Event Player.Effinitiate] != 4);
+			Abort If(Event Player.Efftim[Event Player.Effinitiate] == 11 && Event Player.Effstate[Event Player.Effinitiate] > 2);
+			Create In-World Text(Event Player.Effvisible[Evaluate Once(Event Player.Effinitiate)] ? Empty Array : Event Player, Custom String(
+				"{0}{1}{0}", Event Player.Efftim[Event Player.Effinitiate] < 0 ? Custom String("*") : Custom String(""), Absolute Value(
+				Event Player.Efftim[Event Player.Effinitiate]) == 11 ? Custom String("\r\n NC\r\n") : Custom String(" {0}{1}{2} ", First Of(
+				Event Player.Effabi[Event Player.Effinitiate]) ? Ability Icon String(Hero Of(Event Player), Button(Secondary Fire))
+				: Custom String(""), Event Player.Effabi[Event Player.Effinitiate][1] ? Ability Icon String(Hero Of(Event Player), Button(
+				Ability 1)) : Custom String(""), Last Of(Event Player.Effabi[Event Player.Effinitiate]) ? Ability Icon String(Hero Of(
+				Event Player), Button(Ability 2)) : Custom String(""))), Evaluate Once(Event Player.Efftype[Event Player.Effinitiate])
+				? Evaluate Once(Event Player.Effpos[Event Player.Effinitiate]) + Direction Towards(Evaluate Once(
+				Event Player.Effpos[Event Player.Effinitiate]), Eye Position(Event Player)) * Evaluate Once(
+				Event Player.Effrad[Event Player.Effinitiate]) : Evaluate Once(Event Player.Effpos[Event Player.Effinitiate] * (
+				Left + Forward)) + Update Every Frame(Vector(0, Max(Y Component Of(Eye Position(Event Player)), Evaluate Once(Y Component Of(
+				Event Player.Effpos[Event Player.Effinitiate]))), 0)), Absolute Value(Event Player.Efftim[Event Player.Effinitiate])
+				== 11 ? 0.900 : 1.500, Clip Against Surfaces, Visible To and Position, Color(White), Default Visibility);
+		Else If(Event Player.Effstate[Event Player.Effinitiate] == 4);
+			Create In-World Text(Event Player.Effvisible[Evaluate Once(Event Player.Effinitiate)] ? Empty Array : Event Player, Custom String(
+				"{0} {1} {0}", Event Player.Efftim[Event Player.Effinitiate] < 0 ? Custom String("*") : Custom String(""), Icon String(Flag)),
+				Event Player.Effpos[Event Player.Effinitiate] + Up * 1.750, 1.300, Do Not Clip, Visible To, Color(White), Default Visibility);
+		Else;
+			Abort If(!Event Player.Efftim[Event Player.Effinitiate]);
+			Create In-World Text(Event Player.Effvisible[Evaluate Once(Event Player.Effinitiate)] ? Empty Array : Event Player, Custom String(
+				" {0}{1} s", Event Player.Efftim[Event Player.Effinitiate] > 0 ? Custom String("+") : Custom String(""),
+				Event Player.Efftim[Event Player.Effinitiate] + 0.001), Evaluate Once(Event Player.Efftype[Event Player.Effinitiate])
+				? Evaluate Once(Event Player.Effpos[Event Player.Effinitiate]) : Evaluate Once(
+				Event Player.Effpos[Event Player.Effinitiate] * (Left + Forward)) + Update Every Frame(Vector(0, Max(Y Component Of(
+				Eye Position(Event Player)), Evaluate Once(Y Component Of(Event Player.Effpos[Event Player.Effinitiate]))), 0)), 2,
+				Do Not Clip, Visible To and Position, Event Player.Efftim[Event Player.Effinitiate] > 0 ? Color(Red) : Color(Aqua),
+				Default Visibility);
+		End;
+		Modify Player Variable At Index(Event Player, Elements, 2, Append To Array, Last Text ID);
+	}
+}
+
+rule("Effect Detect")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Event Player.CPData[8] == True;
+		Is True For Any(Event Player.Effpos, Current Array Element && !Event Player.Effvisible[Current Array Index] && (Distance Between(
+			Position Of(Event Player) + Vector(0, 0.450, 0),
+			Event Player.Efftype[Current Array Index] ? Current Array Element : Current Array Element * Vector(1, 0, 1) + Vector(0, Max(
+			Y Component Of(Position Of(Event Player)) + 0.450, Y Component Of(Current Array Element)), 0))
+			< Event Player.EffradD[Current Array Index] || Distance Between(Position Of(Event Player) + Vector(0, 1.250, 0),
+			Current Array Element) < Event Player.EffradD[Current Array Index])) == True;
+		Event Player.Effdetect == False;
+		Event Player.Shift == False;
+	}
+
+	actions
+	{
+		Event Player.Effdetect = Index Of Array Value(Event Player.Effpos, First Of(Sorted Array(Filtered Array(Event Player.Effpos,
+			Current Array Element && !Event Player.Effvisible[Index Of Array Value(Event Player.Effpos, Current Array Element)]),
+			Distance Between(Evaluate Once(Position Of(Event Player) + Vector(0, 0.850, 0)), Current Array Element * Vector(1, 0, 1)
+			+ Vector(0, Max(Event Player.Efftype[Index Of Array Value(Event Player.Effpos, Current Array Element)
+			] ? -10000 : Evaluate Once(Y Component Of(Position Of(Event Player)) + 0.850), Y Component Of(Current Array Element)), 0))
+			/ Event Player.EffradD[Index Of Array Value(Event Player.Effpos, Current Array Element)]))) + 1;
+		Event Player.Effactual = Event Player.Effdetect - 1;
+		Skip(Event Player.Effstate[Event Player.Effactual] * 2 + 1);
+		While(0);
+			Call Subroutine(Time_Ability_Effect);
+			Break;
+			Call Subroutine(CPfail);
+			Break;
+			Call Subroutine(Time_Ability_Effect);
+			Break;
+			Call Subroutine(Permeation_Effect);
+			Break;
+			"Checkpoint"
+			disabled End;
+			disabled End;
+			"Portal 1 - no need for duplicates"
+			disabled End;
+			disabled End;
+			Call Subroutine(Portal_Effect);
+			Break;
+			Call Subroutine(Black_Hole_Effect);
+			Break;
+		End;
+		Event Player.Effdetect = 0;
+		Wait(0.016, Ignore Condition);
+		Loop If Condition Is True;
+	}
+}
+
+rule("Time / Ability Effect sub")
+{
+	event
+	{
+		Subroutine;
+		Time_Ability_Effect;
+	}
+
+	actions
+	{
+		Play Effect(Event Player, Ring Explosion Sound, Color(White), Event Player, 69);
+		Event Player.Effvisible[Event Player.Effactual] = 1;
+		If(Event Player.Effstate[Event Player.Effactual]);
+			Skip If(Event Player.Efftim[Event Player.Effactual] == 11, 1);
+			Start Rule(EffectAbilities, Restart Rule);
+		Else;
+			Event Player.Effvisible[Count Of(Event Player.Efftype)] += Event Player.Efftim[Event Player.Effactual];
+		End;
+		Call Subroutine(EffectLock);
+	}
+}
+
+rule("Permeation Effect sub")
+{
+	event
+	{
+		Subroutine;
+		Permeation_Effect;
+	}
+
+	actions
+	{
+		Skip If(Event Player.Efftim[Event Player.Effactual] == 11, 1);
+		Start Rule(EffectAbilities, Restart Rule);
+		Play Effect(Event Player, Moira Fade Disappear Sound, Null, Event Player, 80);
+		Disable Movement Collision With Environment(Event Player, 1);
+		Event Player.Effdetect = Array(Event Player.Effpos[Event Player.Effactual] * Vector(1, 0, 1), Y Component Of(
+			Event Player.Effpos[Event Player.Effactual]), Event Player.Efftype[Event Player.Effactual],
+			Event Player.EffradD[Event Player.Effactual] + 0.500);
+		Wait Until(Distance Between(Position Of(Event Player) + Vector(0, 0.850, 0), First Of(Event Player.Effdetect) + Vector(0, Max(
+			Event Player.Effdetect[2] ? -10000 : Y Component Of(Position Of(Event Player)) + 0.850, Event Player.Effdetect[1]), 0))
+			> Last Of(Event Player.Effdetect), 9999);
+		Enable Movement Collision With Environment(Event Player);
+		Play Effect(Event Player, Moira Fade Reappear Sound, Null, Event Player, 80);
+	}
+}
+
+rule("Portal Effect sub")
+{
+	event
+	{
+		Subroutine;
+		Portal_Effect;
+	}
+
+	actions
+	{
+		Event Player.Effinitiate = Event Player.Effactual + (Event Player.Effstate[Event Player.Effactual] == 5 ? 1 : -1);
+		Play Effect(Event Player, Tracer Recall Disappear Sound, Color(Orange), Event Player, 100);
+		Teleport(Event Player, Event Player.Effpos[Event Player.Effinitiate]);
+		If(Is Using Ability 2(Event Player));
+			"Disable to eliminate Slam Bounce"
+			Set Move Speed(Event Player, 0);
+			Cancel Primary Action(Event Player);
+			Set Move Speed(Event Player, 100);
+		End;
+		Skip If(Event Player.Efftim[Event Player.Effactual] == 11, 1);
+		Start Rule(EffectAbilities, Restart Rule);
+		Event Player.Effdetect = Array(Event Player.Effpos[Event Player.Effinitiate],
+			Event Player.EffradD[Event Player.Effinitiate] + 0.700);
+		Wait(0.250, Ignore Condition);
+		Wait Until(Distance Between(Position Of(Event Player) + Vector(0, 0.850, 0), First Of(Event Player.Effdetect)) > Last Of(
+			Event Player.Effdetect), 9999);
+	}
+}
+
+rule("Effect Checkpoint sub")
+{
+	event
+	{
+		Subroutine;
+		CheckpointEffect;
+	}
+
+	actions
+	{
+		Event Player.Effdetect = 1;
+		Event Player.Effactual = Event Player.Local_Index[First Of(Event Player.CPData)];
+		Event Player.Shift = 1;
+		Disallow Button(Event Player, Button(Ability 2));
+		If(Is Using Ability 2(Event Player) && !Is Button Held(Event Player, Button(Ability 1)));
+			Cancel Primary Action(Event Player);
+		End;
+		Play Effect(Event Player, Buff Explosion Sound, Color(White), Event Player, 69);
+		Event Player.Effvisible[Event Player.Effactual] = 1;
+		Event Player.CPData[3] = Event Player.Local_Pos[First Of(Event Player.CPData)];
+		Event Player.CPData[4] = Event Player.Local_Rad[First Of(Event Player.CPData)];
+		Skip If(Event Player.PM_Centerless || Event Player.Efftim[Event Player.Effactual] < 0, 1);
+		Teleport(Event Player, Event Player.CPData[3]);
+		If(Absolute Value(Event Player.Efftim[Event Player.Effactual]) != 11);
+			Set Secondary Fire Enabled(Event Player, First Of(Event Player.Effabi[Event Player.Effactual]));
+			Set Ability 1 Enabled(Event Player, Event Player.Effabi[Event Player.Effactual][1]);
+			Set Ability 2 Enabled(Event Player, Last Of(Event Player.Effabi[Event Player.Effactual]));
+		End;
+		Call Subroutine(CPclearend);
+		Call Subroutine(EffectLock);
+		Wait Until(Distance Between(Position Of(Event Player), Event Player.CPData[3]) > Event Player.CPData[4], 9999);
+		Skip If(Event Player.CPData[19], 1);
+		Event Player.Effvisible[Event Player.Effactual] = 0;
+		Event Player.CPData[3] = Event Player.CPData[1];
+		Event Player.CPData[4] = Event Player.CPData[2];
+		Event Player.Effdetect = 0;
+	}
+}
+
+rule("Black Hole Effect sub")
+{
+	event
+	{
+		Subroutine;
+		Black_Hole_Effect;
+	}
+
+	actions
+	{
+		Set Move Speed(Event Player, 0);
+		Set Gravity(Event Player, 0);
+		Skip If(!Is Using Ability 2(Event Player), 1);
+		Cancel Primary Action(Event Player);
+		Event Player.Effdetect = Array(Event Player.Effpos[Event Player.Effactual], Event Player.EffradD[Event Player.Effactual] + 0.500);
+		Set Move Speed(Event Player, 100);
+		While(Distance Between(Position Of(Event Player) + Vector(0, 0.850, 0), First Of(Event Player.Effdetect)) < Last Of(
+			Event Player.Effdetect));
+			Apply Impulse(Event Player, Direction Towards(Position Of(Event Player) + Vector(0, 0.850, 0), First Of(Event Player.Effdetect)),
+				0.500 + 5 * (1 - Distance Between(Normalize(Velocity Of(Event Player)), Direction Towards(Position Of(Event Player) + Vector(0,
+				0.850, 0), First Of(Event Player.Effdetect))) / 2) * Max(0.400, 1 - Distance Between(Position Of(Event Player) + Vector(0,
+				0.850, 0), First Of(Event Player.Effdetect)) / Last Of(Event Player.Effdetect)), To World, Incorporate Contrary Motion);
+			Play Effect(Event Player, Zarya Particle Cannon Explosion Sound, Color(White), First Of(Event Player.Effdetect), 10);
+			Wait(0.048, Ignore Condition);
+		End;
+		Set Gravity(Event Player, 100);
+	}
+}
+
+rule("Zipline Effect")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Event Player.CPData[8] == True;
+		Is Button Held(Event Player, Button(Jump)) == True;
+		Event Player.Effdetect == False;
+		Is True For Any(Event Player.Effrad, X Component Of(Current Array Element)) == True;
+		Is True For Any(Filtered Array(Event Player.Effrad, X Component Of(Current Array Element)), Distance Between(Eye Position(
+			Event Player), Current Array Element + Direction Towards(Current Array Element, Event Player.Efftype[Index Of Array Value(
+			Event Player.Effrad, Current Array Element)]) * Max(0, Min(Dot Product(Direction Towards(Current Array Element,
+			Event Player.Efftype[Index Of Array Value(Event Player.Effrad, Current Array Element)]), Vector Towards(Current Array Element,
+			Eye Position(Event Player))), Distance Between(Current Array Element, Event Player.Efftype[Index Of Array Value(
+			Event Player.Effrad, Current Array Element)])))) < 1.100) == True;
+	}
+
+	actions
+	{
+		Cancel Primary Action(Event Player);
+		Event Player.Effactual = Index Of Array Value(Event Player.Effrad, First Of(Sorted Array(Filtered Array(Event Player.Effrad,
+			X Component Of(Current Array Element)), Distance Between(Eye Position(Event Player), Current Array Element + Direction Towards(
+			Current Array Element, Event Player.Efftype[Index Of Array Value(Event Player.Effrad, Current Array Element)]) * Max(0, Min(
+			Dot Product(Direction Towards(Current Array Element, Event Player.Efftype[Index Of Array Value(Event Player.Effrad,
+			Current Array Element)]), Vector Towards(Current Array Element, Eye Position(Event Player))), Distance Between(
+			Current Array Element, Event Player.Efftype[Index Of Array Value(Event Player.Effrad, Current Array Element)])))))));
+		Event Player.Effdetect = Array(Event Player.Effrad[Event Player.Effactual], Event Player.Efftype[Event Player.Effactual]);
+		Event Player.Effactual = First Of(Event Player.Effdetect) + Direction Towards(First Of(Event Player.Effdetect), Last Of(
+			Event Player.Effdetect) + Down + Down) * Max(0, Min(Dot Product(Direction Towards(First Of(Event Player.Effdetect), Last Of(
+			Event Player.Effdetect)), Vector Towards(First Of(Event Player.Effdetect), Eye Position(Event Player))), Distance Between(
+			First Of(Event Player.Effdetect), Last Of(Event Player.Effdetect)))) + Down + Down;
+		Event Player.Effdetect = Last Of(Event Player.Effdetect) + Direction Towards(First Of(Event Player.Effdetect), Last Of(
+			Event Player.Effdetect)) + Down + Down;
+		Chase Player Variable At Rate(Event Player, Effactual, Evaluate Once(Event Player.Effdetect), 5 + Event Player.Zipline,
+			Destination and Rate);
+		Event Player.Zipline = 4;
+		Chase Player Variable At Rate(Event Player, Zipline, 15, 7, None);
+		Disable Movement Collision With Environment(Event Player, 1);
+		Start Forcing Player Position(Event Player, Event Player.Effactual, 1);
+		Wait Until(Event Player.Shift || Distance Between(Event Player.Effactual, Evaluate Once(Event Player.Effdetect)) < 1 || (
+			Event Player.Grace && !Is Firing Secondary(Event Player)) || !Is Button Held(Event Player, Button(Jump)) || Is Using Ability 1(
+			Event Player) || Is Using Ability 2(Event Player) || Is Button Held(Event Player, Button(Crouch)), 99999);
+		Wait Until(Event Player.Shift || Distance Between(Event Player.Effactual, Evaluate Once(Event Player.Effdetect)) < 1 || (
+			Event Player.Grace && !Is Firing Secondary(Event Player)) || Is Button Held(Event Player, Button(Jump)) || Is Using Ability 1(
+			Event Player) || Is Using Ability 2(Event Player) || Is Button Held(Event Player, Button(Crouch)), 99999);
+		Enable Movement Collision With Environment(Event Player);
+		Stop Forcing Player Position(Event Player);
+		Stop Chasing Player Variable(Event Player, Effactual);
+		Stop Chasing Player Variable(Event Player, Zipline);
+		Event Player.Effdetect = 0;
+		Abort If(Event Player.Shift);
+		If(!Is Using Ability 1(Event Player) && !Is Using Ability 2(Event Player) && (Is Button Held(Event Player, Button(Jump))
+			|| Is Button Held(Event Player, Button(Crouch))));
+			If((Is Button Held(Event Player, Button(Jump)) && Y Component Of(Velocity Of(Event Player)) > 0) || (Is Button Held(Event Player,
+				Button(Crouch)) && Y Component Of(Velocity Of(Event Player)) < 0));
+				Apply Impulse(Event Player, Is Button Held(Event Player, Button(Jump)) ? Up : Down, Is Button Held(Event Player, Button(Jump))
+					? 8 : 2, To World, Incorporate Contrary Motion);
+			Else;
+				Apply Impulse(Event Player, Is Button Held(Event Player, Button(Jump)) ? Up : Down, Is Button Held(Event Player, Button(Jump))
+					? 8 : 2, To World, Cancel Contrary Motion XYZ);
+			End;
+		End;
+		Wait(0.700, Ignore Condition);
+	}
+}
+
+rule("Effect Lock Check sub")
+{
+	event
+	{
+		Subroutine;
+		EffectLock;
+	}
+
+	actions
+	{
+		If(Array Contains(Event Player.LockE, 1));
+			If(Array Slice(Event Player.Effvisible, 0, Count Of(Event Player.Efftype)) == Event Player.EfflockC);
+				Event Player.LockE = 0;
+			End;
+		End;
+	}
+}
+
+rule("Effect Ability Enable / Disable sub")
+{
+	event
+	{
+		Subroutine;
+		EffectAbilities;
+	}
+
+	actions
+	{
+		Event Player.Shift = True;
+		If(Event Player.Efftim[Event Player.Effactual] != -11);
+			If(Is Using Ability 1(Event Player));
+				"Disable to eliminate Slam Bounce"
+				Set Move Speed(Event Player, False);
+				"Ablock Slam Cancel"
+				If(Event Player.Ablock == True && Last Of(Event Player.Effabi[Event Player.Effactual]));
+					Cancel Primary Action(Event Player);
+				End;
+			End;
+			Set Secondary Fire Enabled(Event Player, First Of(Event Player.Effabi[Event Player.Effactual]));
+			Set Ability 1 Enabled(Event Player, Event Player.Effabi[Event Player.Effactual][1]);
+			Set Ability 2 Enabled(Event Player, Last Of(Event Player.Effabi[Event Player.Effactual]));
+			Set Move Speed(Event Player, 100);
+		End;
+		"CD reset"
+		If(Event Player.Efftim[Event Player.Effactual] < 0);
+			If(Is Using Ability 2(Event Player));
+				Wait Until(Ability Cooldown(Event Player, Button(Ability 2)) != False, True);
+			Else If(Event Player.Grace);
+				Wait Until(Ability Cooldown(Event Player, Button(Secondary Fire)) != False, 2);
+			Else;
+				Cancel Primary Action(Event Player);
+			End;
+			Call Subroutine(AbilityCDreset);
+		End;
+		"Ablock Slam CD Reset"
+		If(Event Player.Ablock == 1 && Ability Cooldown(Event Player, Button(Ability 1)));
+			Set Ability Cooldown(Event Player, Button(Ability 1), 0.600);
+		End;
+		"Needed for Ablock to function perfectly"
+		Wait(0.016, Ignore Condition);
+		Event Player.Shift = False;
+	}
+}
+
+disabled rule("Time Trial")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+}
+
+rule("Time Trial Setup")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Event Player.CPData[10] == True;
+		Event Player.TTtimer == False;
+		Event Player.RunState < 3;
+		Event Player.Shift == False;
+	}
+
+	actions
+	{
+		Skip If(Event Player.Checkpoint || !Event Player.RunState, 1);
+		Call Subroutine(Reset);
+		Call Subroutine(TimeTrial);
+	}
+}
+
+rule("Time Trial sub")
+{
+	event
+	{
+		Subroutine;
+		TimeTrial;
+	}
+
+	actions
+	{
+		Wait Until(!Event Player.Shift, 99999);
+		Event Player.Shift = 3;
+		Cancel Primary Action(Event Player);
+		Call Subroutine(DisallowButtons);
+		Event Player.CPData[3] = Event Player.CPData[1];
+		Event Player.CPData[4] = Event Player.CPData[2];
+		Teleport(Event Player, Event Player.CPData[3]);
+		Start Forcing Player Position(Event Player, Event Player.CPData[3], 0);
+		Event Player.LockE = Event Player.CPData[20];
+		Event Player.Effvisible = Empty Array;
+		Event Player.TTtimer = Event Player.CPData[10];
+		Event Player.TTStart = 0;
+		If(Event Player.CPData[11]);
+			Start Rule(SetFacing, Restart Rule);
+		End;
+		Call Subroutine(AbilityCDreset);
+		Wait(Event Player.AbilityDetect == 2 ? 0.336 : 0.160, Ignore Condition);
+		Stop Forcing Player Position(Event Player);
+		Stop Facing(Event Player);
+		Call Subroutine(AllowButtons);
+		Skip If(!Event Player.Mission, 1);
+		Call Subroutine(MissionReset);
+		Event Player.AbilityDetect = 0;
+		Event Player.Shift = 0;
+		Abort If(!Event Player.CPData[10]);
+		Start Rule(RPFix, Restart Rule);
+		Wait Until(Horizontal Speed Of(Event Player) > 0.050 || Is Firing Secondary(Event Player) || Event Player.Shift, 99999);
+		Chase Player Variable At Rate(Event Player, TTtimer, 0, Event Player.TTStart ? 1 : 0, Destination and Rate);
+		Event Player.TTStart = 1;
+		Event Player.Roaming = Event Player.CPData[10] > 0;
+	}
+}
+
+rule("Time Trial Detect Completion")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Event Player.TTStart == True;
+		Event Player.Roaming == True;
+		Is True For Any(Event Player.Local_Rad, Current Array Element && Distance Between(Position Of(Event Player),
+			Event Player.Local_Pos[Current Array Index]) <= Current Array Element) == True;
+		Is On Ground(Event Player) == True;
+	}
+
+	actions
+	{
+		Call Subroutine(CPclear);
+	}
+}
+
+rule("Time Trial Completed sub")
+{
+	event
+	{
+		Subroutine;
+		TTclear;
+	}
+
+	actions
+	{
+		Stop Chasing Player Variable(Event Player, TTtimer);
+		Event Player.Roaming = 0;
+		Event Player.TTStart = 0;
+		Event Player.TTtimer = 0;
+	}
+}
+
+rule("Skip, Go back on Time Trial")
+{
+	event
+	{
+		Subroutine;
+		TTskipgoback;
+	}
+
+	actions
+	{
+		Wait(0.500, Ignore Condition);
+		Call Subroutine(TTclear);
+	}
+}
+
+disabled rule("Pioneer")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+}
+
+rule("To Pioneer")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Global.Detector1 == True;
+		Is Button Held(Event Player, Button(Reload)) == True;
+	}
+
+	actions
+	{
+		Wait(1.500, Abort When False);
+		Small Message(Event Player, Event Player.Pioneer ? Custom String("\r\nExiting Pioneer in\r\n") : Custom String(
+			"\r\nEntering Pioneer in\r\n"));
+		Wait(1, Abort When False);
+		Play Effect(Event Player, Buff Impact Sound, Null, Event Player, 30);
+		Small Message(Event Player, Custom String("\r\n3\r\n"));
+		Wait(0.500, Abort When False);
+		Play Effect(Event Player, Buff Impact Sound, Null, Event Player, 30);
+		Small Message(Event Player, Custom String("\r\n2\r\n"));
+		Wait(0.500, Abort When False);
+		Play Effect(Event Player, Buff Impact Sound, Null, Event Player, 30);
+		Small Message(Event Player, Custom String("\r\n1\r\n"));
+		Wait(0.500, Abort When False);
+		Play Effect(Event Player, Sombra Translocator Reappear Sound, Null, Event Player, 60);
+		Event Player.Shift = 1;
+		Stop Chasing Player Variable(Event Player, RunTime);
+		For Player Variable(Event Player, DelGenElements, 0, Count Of(Event Player.Text), 1);
+			Destroy HUD Text(Event Player.Text[Event Player.DelGenElements]);
+		End;
+		If(Event Player.Pioneer);
+			Event Player.Save[1] = Array(Event Player.Checkpoint, Event Player.RunTime, Event Player.RunState, Event Player.CPcounter,
+				Event Player.Pioneer);
+			Event Player.Pioneer = 0;
+			Event Player.Checkpoint = First Of(First Of(Event Player.Save));
+			Event Player.RunTime = First Of(Event Player.Save)[1];
+			Event Player.RunState = First Of(Event Player.Save)[2];
+			Event Player.Roaming = First Of(Event Player.Save)[3];
+			Event Player.CPcounter = First Of(Event Player.Save)[4];
+			Event Player.Level = Last Of(First Of(Event Player.Save));
+			Call Subroutine(RegularHUD);
+			Call Subroutine(CPchange);
+			Start Forcing Player Outlines(Event Player, All Players(All Teams), 1, Global.LvlColors[Event Player.Level], Always);
+			Event Player.Shift = 0;
+			Abort If(Event Player.CPData[13] || Event Player.CPData[12]);
+			Chase Player Variable At Rate(Event Player, RunTime, 100000, 1, None);
+		Else;
+			Event Player.Save[0] = Array(Event Player.Checkpoint, Event Player.RunTime, Event Player.RunState, Event Player.Roaming,
+				Event Player.CPcounter, Event Player.Level);
+			Event Player.Pioneer = Last Of(Event Player.Save[1]) == 4 && Is True For All(All Players(All Teams), Current Array Element != 3)
+				? 4 : 1;
+			"Reset Mission Lock"
+			Event Player.LockM = 0;
+			"Null Missions"
+			Event Player.Mission = Empty Array;
+			Event Player.MissionTime = Empty Array;
+			Event Player.MissionD = 0;
+			Call Subroutine(MissionReset);
+			Event Player.Effpos = Empty Array;
+			Event Player.Level = 0;
+			If(Event Player.Save[1][3]);
+				Event Player.Checkpoint = First Of(Last Of(Event Player.Save));
+				Event Player.RunTime = Last Of(Event Player.Save)[1];
+				Event Player.RunState = Last Of(Event Player.Save)[2];
+				Event Player.CPcounter = Last Of(Event Player.Save)[3];
+				Event Player.Roaming = Event Player.Checkpoint == Count Of(Global.CPposition) - 1;
+			Else;
+				Chase Player Variable At Rate(Event Player, PioneerTime, 0, 1, None);
+				Event Player.Checkpoint = Global.CPposition ? 0 : -1;
+				Event Player.RunTime = 0;
+				Event Player.RunState = Global.CPposition ? 0 : 3;
+				Event Player.CPcounter = 1;
+			End;
+			Call Subroutine(PioneerHUD);
+			If(Global.CPposition);
+				Call Subroutine(PioneerCPChange);
+			Else;
+				Event Player.TempVA = 0;
+				Event Player.Local_Index = 0;
+				Event Player.Local_Pos = 0;
+				Event Player.Local_Rad = 0;
+				Event Player.Diverge2 = 1;
+				Event Player.Diverge = 0;
+				Event Player.Checkpoint = -1;
+				Event Player.CPData = Array(0, Position Of(Event Player), 10000, Position Of(Event Player), 10000);
+				Call Subroutine(GenerateElements);
+				Call Subroutine(AbilityEnableDisable);
+			End;
+			Start Forcing Player Outlines(Event Player, All Players(All Teams), 1, Color(Turquoise), Always);
+			Wait(0.100, Ignore Condition);
+			Event Player.Shift = 0;
+			Abort If(Event Player.Checkpoint <= 0 || Event Player.Pioneer > 1);
+			Chase Player Variable At Rate(Event Player, RunTime, 100000, 1, None);
+	}
+}
+
+rule("Pioneer HUD sub")
+{
+	event
+	{
+		Subroutine;
+		PioneerHUD;
+	}
+
+	actions
+	{
+		Event Player.Text = Empty Array;
+		Create HUD Text(Event Player, Null, Custom String("{0}{1} ", Is True For Any(All Players(All Teams),
+			Current Array Element.Pioneer == 3) ? Custom String("        {0} is the Pioneer {1}", Filtered Array(All Players(All Teams),
+			Current Array Element.Pioneer == 3), Custom String("{0}:{1}{2}", Round To Integer(Filtered Array(All Players(All Teams),
+			Current Array Element.Pioneer == 3).PioneerTime / 60, Down), Filtered Array(All Players(All Teams),
+			Current Array Element.Pioneer == 3).PioneerTime % 60 < 10 ? 0 : Custom String(""), Round To Integer(Filtered Array(All Players(
+			All Teams), Current Array Element.Pioneer == 3).PioneerTime, Down) % 60)) : (Is True For Any(All Players(All Teams),
+			Current Array Element.PioneerTime) ? Custom String("     Repeat Pioneer Timeout {0}:{1}{2}", Round To Integer(Filtered Array(
+			All Players(All Teams), Current Array Element.PioneerTime).PioneerTime / -60, Down), Filtered Array(All Players(All Teams),
+			Current Array Element.PioneerTime).PioneerTime % 60 > -10 ? 0 : Custom String(""), Round To Integer(Absolute Value(
+			Filtered Array(All Players(All Teams), Current Array Element.PioneerTime).PioneerTime) % 60, Down)) : Custom String("")),
+			Global.CPposition[Event Player.Checkpoint + 1] ? Custom String(" \n        CP Made by {0}", First Of(
+			Global.AbilityCount[Event Player.Checkpoint])) : Custom String("")), Global.CPposition ? Custom String(
+			"     Checkpoint: {0} / {1}     \n    {2}", Event Player.Checkpoint + 1, Count Of(Global.CPposition), Event Player.AbilityText)
+			: Custom String(" \n\n\n\n\n\n\n\n\n\n{0}  | Create Starting Checkpoint", Input Binding String(Button(Melee))), Top, -50, Null,
+			Color(Orange), Color(White), String, Default Visibility);
+		Modify Player Variable(Event Player, Text, Append To Array, Last Text ID);
+		Create HUD Text(Event Player, Null, Null, Custom String("{0}{1}", Event Player.ProMode ? Custom String(" Pro") : Custom String(""),
+			Event Player.RunState > 2 ? Custom String(" ") : Custom String(" {0}:{1}{2} ", Custom String("{0}{1}", Absolute Value(
+			Event Player.RunTime) > 3600 ? Custom String("{0}:{1}", Round To Integer(Event Player.RunTime / 3600, Down),
+			Event Player.RunTime % 3600 < 600 ? 0 : Custom String("")) : Custom String(""), Round To Integer(Event Player.RunTime / 60,
+			Down) % 60), Event Player.RunTime % 60 < 10 ? 0 : Custom String(""), Event Player.RunTime % 60 + 0.001)), Top, -48, Color(
+			White), Color(White), Color(White), String, Default Visibility);
+		Modify Player Variable(Event Player, Text, Append To Array, Last Text ID);
+		Create HUD Text(Event Player, Null, Null, Custom String(" \n\n\n{0}\n\n \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+			Event Player.PioneerGenerate ? Custom String("Confirm |  {0}              {1}  | Reset ", Input Binding String(Button(Melee)),
+			Input Binding String(Button(Reload))) : Custom String("{0}{1}",
+			Event Player.ProMode && !Event Player.PM_NoReset ? Ability Icon String(Hero(Baptiste), Button(Ability 2)) : Custom String(""),
+			Event Player.PM_Centerless ? Icon String(Halo) : Custom String(""))), Top, -45, Null, Null, Color(Orange), String,
+			Default Visibility);
+		Modify Player Variable(Event Player, Text, Append To Array, Last Text ID);
+		If(Global.Detector1);
+			Create HUD Text(Filtered Array(All Players(All Teams), Current Array Element.Pioneer), Null, Custom String("{0}  |  {1}", First Of(
+				Event Player.CPcounter), Evaluate Once(Event Player)), Null, Left, Index Of Array Value(Sorted Array(Filtered Array(
+				All Players(All Teams), Current Array Element.Pioneer), First Of(Current Array Element.CPcounter) * -1), Event Player), Null,
+				Color(Turquoise), Null, Visible To Sort Order and String, Default Visibility);
+		Else;
+			Create HUD Text(Filtered Array(All Players(All Teams), Current Array Element.Pioneer), Null, Null, Custom String("{1}  |  {0}",
+				First Of(Event Player.CPcounter), Evaluate Once(Event Player)), Right, Index Of Array Value(Sorted Array(Filtered Array(
+				All Players(All Teams), Current Array Element.Pioneer), First Of(Current Array Element.CPcounter) * -1), Event Player), Null,
+				Null, Color(Turquoise), Visible To Sort Order and String, Default Visibility);
+		End;
+		Modify Player Variable(Event Player, Text, Append To Array, Last Text ID);
+	}
+}
+
+rule("Pioneer First CP")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Global.CPposition == False;
+		Event Player.Checkpoint == -1;
+		Is Button Held(Event Player, Button(Melee)) == True;
+		Is On Ground(Event Player) == True;
+	}
+
+	actions
+	{
+		Filtered Array(All Players(All Teams), Current Array Element.Pioneer).Checkpoint = 0;
+		Global.CPposition[0] = Position Of(Event Player);
+		Play Effect(Filtered Array(All Players(All Teams), Current Array Element.Pioneer), Buff Explosion Sound, Color(Purple),
+			Global.CPposition, 69);
+		Global.Radius_VA_GoBackCP = Vector(2, 0, -1);
+		Global.Prime = 1;
+		Global.AbilityCount = Array(Array(1, Left * Up));
+		Filtered Array(All Players(All Teams), Current Array Element.Pioneer).Roaming = 0;
+		"Set minus to Force CP Change subroutine"
+		Filtered Array(All Players(All Teams), Current Array Element.Pioneer).Pioneer = -2;
+		"Current Pioneer"
+		Event Player.Pioneer = -3;
+		Event Player.RunState = 3;
+	}
+}
+
+rule("Pioneer CP Change sub")
+{
+	event
+	{
+		Subroutine;
+		PioneerCPChange;
+	}
+
+	actions
+	{
+		Event Player.PioneerGenerate = 0;
+		"Wait For Pioneer / Prep for new Pioneer"
+		If(Event Player.Checkpoint == Count Of(Global.CPposition) - 1 && Event Player.Pioneer > 0);
+			If(Event Player.Pioneer == 1);
+				Event Player.Pioneer = 2;
+				Event Player.Roaming = 1;
+				Event Player.RunState = 3;
+			Else If(Event Player.Pioneer == 3);
+				Event Player.Roaming = 0;
+				Event Player.RunState = 3;
+			Else;
+				Event Player.Roaming = 1;
+				Event Player.RunState = 3;
+			End;
+		Else If(Event Player.Pioneer == 3 && Event Player.Checkpoint != Count Of(Global.CPposition) - 1);
+			If(Number Of Players(All Teams) > 1);
+				Event Player.PioneerTime = -210;
+				Wait(0.048, Ignore Condition);
+				Event Player.Pioneer = 4;
+			Else;
+				Event Player.PioneerTime = 0;
+				Wait(0.048, Ignore Condition);
+				Event Player.Pioneer = 2;
+			End;
+			Event Player.Roaming = 0;
+			Event Player.RunState = Event Player.Checkpoint ? 2 : 0;
+		End;
+		Event Player.CPData = Array(0, Global.CPposition[Event Player.Checkpoint], X Component Of(
+			Global.Radius_VA_GoBackCP[Event Player.Checkpoint]), Global.CPposition[Event Player.Checkpoint], X Component Of(
+			Global.Radius_VA_GoBackCP[Event Player.Checkpoint]), 0, 0, Global.Mission[Event Player.Checkpoint], 0, 0, 0, Y Component Of(
+			Global.Radius_VA_GoBackCP[Event Player.Checkpoint]), Global.CPposition[Event Player.Checkpoint + 1] ? 0 : 1, 0, 0,
+			Event Player.Checkpoint - 1, 0, 0, 0, 0, 0, Global.AbilityCount[Event Player.Checkpoint]);
+		"Set Abilities"
+		Call Subroutine(AbilityEnableDisable);
+		"Reset Temporary View Angle"
+		Event Player.TempVA = 0;
+		Event Player.Local_Index = Global.Connections[Event Player.Checkpoint];
+		If(Event Player.Local_Index);
+			Event Player.Local_Pos = Global.CPposition[Event Player.Local_Index];
+			Event Player.Local_Rad = X Component Of(Global.Radius_VA_GoBackCP[Event Player.Local_Index]);
+		Else;
+			Event Player.Local_Pos = Left * Up;
+			Event Player.Local_Rad = 0;
+		End;
+		Event Player.Diverge2 = 1;
+		Event Player.Diverge = Event Player.Local_Index;
+		"Centerless?"
+		Skip If(Event Player.Shift == 2 && Event Player.PM_Centerless && Event Player.Pioneer != 3, 1);
+		Teleport(Event Player, Event Player.CPData[1]);
+		"Destroy & Generate Rings, Icons, Effects"
+		Start Rule(GenerateElements, Do Nothing);
+	}
+}
+
+rule("Pioneer Generate new CP sub")
+{
+	event
+	{
+		Subroutine;
+		PioneerGenerate;
+	}
+
+	actions
+	{
+		If(Distance Between(Position Of(Event Player), Event Player.CPData[1]) < 4);
+			Small Message(Event Player, Custom String("Too Near"));
+			Call Subroutine(CPfail);
+		Else;
+			Event Player.Shift = 1;
+			Event Player.PioneerGenerate = Position Of(Event Player);
+			Play Effect(Event Player, Baptiste Biotic Launcher Explosion Sound, Color(White), Event Player, 60);
+			Event Player.Roaming = 1;
+			Call Subroutine(DisallowButtons);
+			Cancel Primary Action(Event Player);
+			Teleport(Event Player, Event Player.PioneerGenerate);
+			Start Forcing Player Position(Event Player, Event Player.PioneerGenerate, 0);
+			Wait(0.032, Ignore Condition);
+			Stop Forcing Player Position(Event Player);
+			Wait Until(Speed Of(Event Player) == False, 0.400);
+			If(Speed Of(Event Player) == False);
+				Event Player.PioneerGenerate = Position Of(Event Player);
+			End;
+			Create Effect(Event Player, Ring, Color(Purple), Event Player.PioneerGenerate, 2, None);
+			Modify Player Variable At Index(Event Player, Elements, 0, Append To Array, Last Created Entity);
+			Call Subroutine(AbilityJumpCrouchEnable);
+			Set Move Speed(Event Player, 100);
+			Allow Button(Event Player, Button(Ability 2));
+			Wait Until(!Is Alive(Event Player) || Is Button Held(Event Player, Button(Reload)) || Is Button Held(Event Player, Button(Melee)),
+				99999);
+			Event Player.PioneerGenerate = Is Alive(Event Player) ? Event Player.PioneerGenerate : 0;
+			Event Player.Shift = 0;
+		End;
+	}
+}
+
+rule("Pioneer Confirm")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Event Player.Pioneer == 3;
+		Event Player.PioneerGenerate == True;
+		Is Button Held(Event Player, Button(Melee)) == True;
+		Event Player.Shift == False;
+	}
+
+	actions
+	{
+		Global.Radius_VA_GoBackCP[Event Player.Checkpoint] += Up * Event Player.TempVA;
+		Global.AbilityCount[Event Player.Checkpoint] = Array(Custom String("{0}", Event Player), Event Player.AbilityCount);
+		Global.Connections[Event Player.Checkpoint] = Event Player.Checkpoint + 1;
+		Modify Global Variable(CPposition, Append To Array, Event Player.PioneerGenerate);
+		Modify Global Variable(Radius_VA_GoBackCP, Append To Array, Vector(2, 0, Event Player.Checkpoint));
+		Modify Global Variable(Connections, Append To Array, 0);
+		disabled Modify Global Variable(Mission, Append To Array, 0);
+		Modify Global Variable(Prime, Append To Array, 1);
+		Modify Global Variable(AbilityCount, Append To Array, Array(Array(1, Left * Up)));
+		disabled Modify Global Variable(HiddenCP_TpRad_TT, Append To Array, 0);
+		disabled Modify Global Variable(TP, Append To Array, 0);
+		disabled Modify Global Variable(Effect, Append To Array, 0);
+		Global.RefreshPioneer = 1;
+		If(Number Of Players(All Teams) == 1);
+			Play Effect(Event Player, Doomfist Meteor Strike Impact Sound, Color(White), Event Player, 100);
+			Call Subroutine(CPclear);
+			Event Player.Pioneer = 3;
+			Event Player.RunState = 3;
+			Event Player.Roaming = 0;
+		Else;
+			Play Effect(Filtered Array(All Players(All Teams), Current Array Element.Pioneer), Doomfist Meteor Strike Impact Sound, Color(
+				White), Event Player.PioneerGenerate, 100);
+			Chase Player Variable At Rate(Filtered Array(All Players(All Teams), Event Player.Pioneer > 1), RunTime, 100000, 1, None);
+			Filtered Array(All Players(All Teams), Current Array Element.Pioneer > 1).Pioneer = -1;
+			Event Player.PioneerTime = 0;
+	}
+}
+
+rule("Refresh Inspector For Pioneer Map Data")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Global.RefreshPioneer == True;
+	}
+
+	actions
+	{
+		Global.RefreshPioneer = 0;
+		Enable Inspector Recording;
+		Disable Inspector Recording;
+	}
+}
+
+rule("Pioneer Force")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Event Player.Pioneer < 0;
+	}
+
+	actions
+	{
+		"This Value used for Repeat Pioneer & Pioneering -Timeout"
+		Event Player.PioneerTime = Event Player.Pioneer > -3 ? 0 : (Event Player.Pioneer == -3 ? 150 : -210);
+		If(Event Player.Pioneer == -3);
+			Event Player.Checkpoint = Count Of(Global.CPposition) - 1;
+			Cancel Primary Action(Event Player);
+		End;
+		Event Player.RunState = First Of(Event Player.CPcounter) == Count Of(Global.CPposition) ? 3 : 1;
+		Call Subroutine(PioneerCPChange);
+		If(Event Player.Pioneer == -3);
+			Teleport(Event Player, Event Player.CPData[3]);
+			Start Forcing Player Position(Event Player, Event Player.CPData[3], 0);
+			Cancel Primary Action(Event Player);
+			Wait(0.080, Ignore Condition);
+			Stop Forcing Player Position(Event Player);
+		End;
+		Event Player.Pioneer *= -1;
+		Event Player.Roaming = Event Player.Checkpoint == Count Of(Global.CPposition) - 1 && Is True For Any(Event Player.Pioneer,
+			Current Array Element == 2 || Current Array Element == 4);
+		Wait(0.048, Ignore Condition);
+		Loop If Condition Is True;
+	}
+}
+
+rule("New Pioneer")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Event Player.Pioneer == 2;
+		Global.Connections[Event Player.Checkpoint] == False;
+		First Of(Event Player.CPcounter) == Count Of(Global.CPposition);
+	}
+
+	actions
+	{
+		Stop Chasing Player Variable(Event Player, RunTime);
+		If(Number Of Players(All Teams) > 1);
+			Wait(0.250, Ignore Condition);
+			Abort If(Is True For Any(All Players(All Teams), Current Array Element.PioneerTime > 0));
+			If(First Of(Global.AbilityCount[Event Player.Checkpoint - 1]) == Custom String("{0}", Event Player)
+				&& Event Player.CPcounter[Event Player.Checkpoint] != 2);
+				Skip If(Is True For Any(All Players(All Teams), Current Array Element.Pioneer == 3), 3);
+				"Pioneer Jail"
+				Event Player.Pioneer = -4;
+				Event Player.CPcounter[Event Player.Checkpoint] = 2;
+			Else;
+				Event Player.Pioneer = -3;
+				Wait(0.048, Ignore Condition);
+				Filtered Array(All Players(All Teams), Current Array Element != Event Player && Current Array Element.PioneerTime && (
+					Current Array Element.Pioneer > 2 || Last Of(Current Array Element.Save[1]) == 4)).PioneerTime = 0;
+				Filtered Array(All Players(All Teams), !Current Array Element.PioneerTime && Current Array Element.Pioneer == 3).Pioneer = -2;
+			End;
+		Else;
+			Event Player.Pioneer = -3;
+	}
+}
+
+rule("Pioneer Timeout")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Is True For All(All Players(All Teams), Current Array Element.PioneerTime <= 0) == True;
+	}
+
+	actions
+	{
+		If(Is True For Any(All Players(All Teams), Current Array Element.Pioneer == 2 && First Of(Current Array Element.CPcounter)
+			== Count Of(Global.CPposition)));
+			Random Value In Array(Filtered Array(All Players(All Teams), Current Array Element.Pioneer == 2 && First Of(
+				Current Array Element.CPcounter) == Count Of(Global.CPposition))).Pioneer = -3;
+			Filtered Array(All Players(All Teams), Current Array Element.Pioneer == 3).Pioneer = -2;
+	}
+}
+
+rule("Out Of Jail")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Event Player.Pioneer == 4;
+		Event Player.PioneerTime == False;
+	}
+
+	actions
+	{
+		Wait(0.048, Ignore Condition);
+		Event Player.Pioneer = Is True For Any(All Players(All Teams), Current Array Element.PioneerTime) ? 2 : -3;
+	}
+}
+
+disabled rule("Movement Restrictions")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+}
+
+rule("Ability Jump Crouch Disable sub")
+{
+	event
+	{
+		Subroutine;
+		AbilityJumpCrouchDisable;
+	}
+
+	actions
+	{
+		Set Jump Enabled(Event Player, False);
+		Set Crouch Enabled(Event Player, False);
+		Set Secondary Fire Enabled(Event Player, False);
+		Set Ability 1 Enabled(Event Player, False);
+		Set Ability 2 Enabled(Event Player, False);
+	}
+}
+
+rule("Ability Jump Crouch Enable sub")
+{
+	event
+	{
+		Subroutine;
+		AbilityJumpCrouchEnable;
+	}
+
+	actions
+	{
+		Set Jump Enabled(Event Player, True);
+		Set Crouch Enabled(Event Player, True);
+		Set Secondary Fire Enabled(Event Player, True);
+		Set Ability 1 Enabled(Event Player, True);
+		Set Ability 2 Enabled(Event Player, True);
+	}
+}
+
+rule("Disallow Buttons")
+{
+	event
+	{
+		Subroutine;
+		DisallowButtons;
+	}
+
+	actions
+	{
+		Set Move Speed(Event Player, 0);
+		Call Subroutine(AbilityJumpCrouchDisable);
+	}
+}
+
+rule("Allow Buttons")
+{
+	event
+	{
+		Subroutine;
+		AllowButtons;
+	}
+
+	actions
+	{
+		Call Subroutine(AbilityEnableDisable);
+		Set Move Speed(Event Player, 100);
+		Set Jump Enabled(Event Player, True);
+		Set Crouch Enabled(Event Player, True);
+	}
+}
+
+disabled rule("Commands")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+}
+
+rule("Quick Reset   |   Reload")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Is Button Held(Event Player, Button(Reload)) == True;
+		Event Player.Shift == False;
+		Is Button Held(Event Player, Button(Interact)) == False;
+		"Slam Leap Prevention System v.8055"
+		(Is Using Ability 2(Event Player) && !Horizontal Speed Of(Event Player)) == False;
+	}
+
+	actions
+	{
+		Call Subroutine(CPfail);
+		Wait(0.400, Ignore Condition);
+		Wait Until(!Is Button Held(Event Player, Button(Reload)), 99999);
+	}
+}
+
+rule("Interact")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Event Player.Shift == False;
+		Is Button Held(Event Player, Button(Interact)) == True;
+	}
+
+	actions
+	{
+		Skip If(Event Player.LocalC[1], 3);
+		"Skip / Preview Arrow   ---   CUSTOMIZE"
+		Create Icon(Filtered Array(Event Player, Event Player.Diverge), Event Player.Local_Pos[Event Player.Diverge2] + Up * (2.400 + (
+			Event Player.PreviewCP ? 0 : Distance Between(Position Of(Event Player), Event Player.Local_Pos[Event Player.Diverge2]) / 25)),
+			Arrow: Down, Visible To and Position, Color(Red), 1);
+		Event Player.LocalC[1] = Last Created Entity;
+		Set Move Speed(Event Player, Event Player.Pioneer ? 100 : 0);
+		Call Subroutine(WhileInteract1);
+		Skip If(!Is Button Held(Event Player, Button(Interact)), 24);
+		If(Is Button Held(Event Player, Button(Ultimate)));
+			Call Subroutine(Reset);
+			Call Subroutine(WhileInteract2);
+		Else If(Is Button Held(Event Player, Button(Jump)));
+			Call Subroutine(SkipCP);
+		Else If(Event Player.Checkpoint && Is Button Held(Event Player, Button(Crouch)));
+			Call Subroutine(PrevCP);
+		Else If(Is Button Held(Event Player, Button(Melee)));
+			Call Subroutine(ProMode);
+			Call Subroutine(WhileInteract2);
+		Else If(Is Button Held(Event Player, Button(Reload)));
+			"Splits"
+			Event Player.CPTimeToggle = !Event Player.CPTimeToggle;
+			Call Subroutine(WhileInteract2);
+		Else If(Is Button Held(Event Player, Button(Primary Fire)));
+			Skip If(Event Player.CPData[12] && !Event Player.CPData[13], 1);
+			Call Subroutine(PreviewCP);
+			Call Subroutine(WhileInteract2);
+		Else If(X Component Of(Throttle Of(Event Player)));
+			Skip If(Event Player.CPData[12] && !Event Player.CPData[13], 1);
+			Call Subroutine(SwitchDiverge);
+			Call Subroutine(WhileInteract2);
+		Else If(Event Player.CPData[8] && Z Component Of(Throttle Of(Event Player)));
+			Call Subroutine(PreviewEffect);
+			Call Subroutine(WhileInteract2);
+		End;
+		Wait(0.016, Ignore Condition);
+		Loop If Condition Is True;
+		Destroy Icon(Event Player.LocalC[1]);
+		Destroy HUD Text(Event Player.LocalC[4]);
+		Destroy Effect(Event Player.LocalC[5]);
+		Event Player.PreviewCP = 0;
+		Stop Camera(Event Player);
+		Event Player.LocalC = 0;
+		"Slam Leap Prevention System v.8055"
+		Wait Until(!Is Using Ability 2(Event Player), 1);
+		Set Move Speed(Event Player, 100);
+	}
+}
+
+rule("While Interact 1 sub")
+{
+	event
+	{
+		Subroutine;
+		WhileInteract1;
+	}
+
+	actions
+	{
+		Skip If(!Event Player.Local_Pos || Event Player.PreviewCP, 2);
+		Event Player.Diverge2 = Index Of Array Value(Event Player.Local_Pos, First Of(Sorted Array(Filtered Array(Array Slice(
+			Event Player.Local_Pos, 0, Event Player.CPcount), Current Array Element), Distance Between(Facing Direction Of(Event Player),
+			Direction Towards(Eye Position(Event Player), Current Array Element + Up)))));
+		Event Player.Diverge = Event Player.Local_Index[Event Player.Diverge2];
+		Wait(0.048, Ignore Condition);
+		Loop If(Is Button Held(Event Player, Button(Interact)) && !Is Button Held(Event Player, Button(Primary Fire)) && !Is Button Held(
+			Event Player, Button(Ultimate)) && !Is Button Held(Event Player, Button(Jump)) && !Is Button Held(Event Player, Button(Crouch))
+			&& !Is Button Held(Event Player, Button(Melee)) && !Is Button Held(Event Player, Button(Reload)) && !X Component Of(
+			Throttle Of(Event Player)) && !Z Component Of(Throttle Of(Event Player)));
+	}
+}
+
+rule("While Interact 2 sub")
+{
+	event
+	{
+		Subroutine;
+		WhileInteract2;
+	}
+
+	actions
+	{
+		Wait(0.048, Ignore Condition);
+		Loop If(Is Button Held(Event Player, Button(Primary Fire)) || Is Button Held(Event Player, Button(Ultimate)) || Is Button Held(
+			Event Player, Button(Jump)) || Is Button Held(Event Player, Button(Crouch)) || Is Button Held(Event Player, Button(Melee))
+			|| Is Button Held(Event Player, Button(Reload)) || X Component Of(Throttle Of(Event Player)) || Z Component Of(Throttle Of(
+			Event Player)));
+	}
+}
+
+rule("Full Reset sub   |   Interact + Ultimate")
+{
+	event
+	{
+		Subroutine;
+		Reset;
+	}
+
+	actions
+	{
+		Abort If(Event Player.Pioneer && !Global.CPposition);
+		Event Player.Shift = 1;
+		If(Event Player.CPData[21]);
+			Set Status(Event Player, Null, Rooted, 0.300);
+			Call Subroutine(AbilityCDreset);
+		End;
+		Stop Chasing Player Variable(Event Player, RunTime);
+		Event Player.RunTime = 0;
+		Event Player.CPtime = 0;
+		Skip If(Event Player.Pioneer && !Global.CPposition[1], 1);
+		Event Player.RunState = 0;
+		Stop Chasing Player Variable(Event Player, TTtimer);
+		Event Player.TTsetTime = 0;
+		Event Player.TTtimer = 0;
+		Event Player.TTStart = 0;
+		If(Event Player.Checkpoint);
+			Event Player.Roaming = 1;
+			Skip If(Event Player.PM_NoReset, 1);
+			Event Player.TempVA = 0;
+			Event Player.Checkpoint = 0;
+			If(Event Player.Pioneer);
+				Skip If(Event Player.Pioneer > 1, 1);
+				Event Player.Pioneer = 1;
+				Call Subroutine(PioneerCPChange);
+			Else;
+				Event Player.Level = 0;
+				Event Player.CPcounter = 1;
+				Call Subroutine(RegularCPHUD);
+				Event Player.Completionist = 0;
+				Call Subroutine(CPchange);
+				Call Subroutine(ZeroOutline);
+				Event Player.Ablock = Array Contains(Global.AblockLvl, 0) ? Global.Ablock_Slamlock : (Array Contains(Global.AblockCP, 0)
+					? Global.Ablock_Slamlock : 0);
+			End;
+			Event Player.Roaming = Event Player.CPData[10] > 0;
+		End;
+		Call Subroutine(CPfailend);
+	}
+}
+
+rule("Skip CP sub   |   Interact + Jump")
+{
+	event
+	{
+		Subroutine;
+		SkipCP;
+	}
+
+	actions
+	{
+		If(Event Player.Diverge);
+			Event Player.Shift = 1;
+			Event Player.RunState = 2;
+			If(Event Player.CPData[10]);
+				Call Subroutine(TTskipgoback);
+			End;
+			"Next"
+			Event Player.Checkpoint = Event Player.Diverge;
+			Event Player.TempVA = 0;
+			If(Event Player.Pioneer);
+				Call Subroutine(PioneerCPChange);
+			Else;
+				"First CP of a Level"
+				If(Global.QCPdata[Event Player.Checkpoint][14]);
+					Event Player.Level = Event Player.Diverge2 + 1;
+					Call Subroutine(SetLevel);
+				Else If(Global.QCPdata[Event Player.Checkpoint][13]);
+					Event Player.CPcounter = 0;
+				End;
+				Event Player.CPcounter += 1;
+				Call Subroutine(RegularCPHUD);
+				Call Subroutine(CPchange);
+			End;
+			Skip If(Event Player.Pioneer > 1, 1);
+			Chase Player Variable At Rate(Event Player, RunTime, 100000, 1, None);
+			Wait(0.250, Ignore Condition);
+			Skip If(Event Player.Pioneer, 1);
+			Event Player.Roaming = (Event Player.CPData[12] && !Event Player.CPData[13]) == True;
+			Event Player.Shift = 0;
+			Loop If(Is Button Held(Event Player, Button(Jump)));
+		Else;
+			Call Subroutine(Reset);
+	}
+}
+
+rule("Prev CP sub   |   Interact + Crouch")
+{
+	event
+	{
+		Subroutine;
+		PrevCP;
+	}
+
+	actions
+	{
+		If(Event Player.CPData[15]);
+			Event Player.Shift = 1;
+			Event Player.RunState = 2;
+			If(Event Player.CPData[10]);
+				Call Subroutine(TTskipgoback);
+			End;
+			"Previous"
+			Event Player.Checkpoint = Event Player.CPData[15];
+			Event Player.TempVA = 0;
+			If(Event Player.CPData[13]);
+				Event Player.Level = 0;
+				Call Subroutine(ZeroOutline);
+				"Ablock - Level Based"
+				Event Player.Ablock = Array Contains(Global.AblockLvl, Event Player.Level) ? Global.Ablock_Slamlock : 0;
+			End;
+			If(Event Player.Pioneer);
+				Call Subroutine(PioneerCPChange);
+			Else;
+				Event Player.CPcounter -= 1;
+				Call Subroutine(RegularCPHUD);
+				Call Subroutine(CPchange);
+			End;
+			Skip If(Event Player.Pioneer > 1, 1);
+			Chase Player Variable At Rate(Event Player, RunTime, 100000, 1, None);
+			Wait(0.250, Ignore Condition);
+			Event Player.Roaming = 0;
+			Event Player.Shift = 0;
+			Loop If(Event Player.Checkpoint && Is Button Held(Event Player, Button(Crouch)));
+		Else;
+			Call Subroutine(Reset);
+	}
+}
+
+rule("Switch Diverge Arrow sub   |   Interact + Left / Right")
+{
+	event
+	{
+		Subroutine;
+		SwitchDiverge;
+	}
+
+	actions
+	{
+		If(Event Player.CPData[13]);
+			Event Player.Diverge2 += X Component Of(Normalize(Throttle Of(Event Player))) > 0 ? (
+				Event Player.Diverge2 > 0 ? -1 : Event Player.CPcount - 1) : (
+				Event Player.Diverge2 < Event Player.CPcount - 1 ? 1 : Event Player.Diverge2 * -1);
+		Else;
+			Event Player.Diverge2 += X Component Of(Normalize(Throttle Of(Event Player))) > 0 ? (Event Player.Diverge2 > 0 ? -1 : Count Of(
+				Filtered Array(Array Slice(Event Player.Local_Rad, 0, 3), Current Array Element)) - 1) : (Event Player.Diverge2 < Count Of(
+				Filtered Array(Array Slice(Event Player.Local_Rad, 0, 3), Current Array Element)) - 1 ? 1 : Event Player.Diverge2 * -1);
+		End;
+		Event Player.Diverge = Event Player.Local_Index[Event Player.Diverge2];
+		Wait(0.016, Ignore Condition);
+	}
+}
+
+rule("Preview Next CP sub   |   Interact + Primary Fire")
+{
+	event
+	{
+		Subroutine;
+		PreviewCP;
+	}
+
+	actions
+	{
+		Event Player.PreviewCP = !Event Player.PreviewCP;
+		If(Event Player.PreviewCP);
+			Event Player.LocalC[3] = 0;
+			Destroy HUD Text(Event Player.LocalC[4]);
+			Start Camera(Event Player, Event Player.Local_Pos[Event Player.Diverge2] + Direction From Angles(Horizontal Facing Angle Of(
+				Event Player), Vertical Facing Angle Of(Event Player)) * -1 * 6, Event Player.Local_Pos[Event Player.Diverge2], 10);
+		Else;
+			Stop Camera(Event Player);
+	}
+}
+
+rule("Effect Preview sub   |   Interact + Forwards / Backwards")
+{
+	event
+	{
+		Subroutine;
+		PreviewEffect;
+	}
+
+	actions
+	{
+		Skip If(Event Player.LocalC[3], 6);
+		Event Player.PreviewCP = 0;
+		Start Camera(Event Player, (Event Player.LocalC[3] ? (
+			Event Player.Efftype[Event Player.LocalC[3] - 1] ? Event Player.EffectPreview[Event Player.LocalC[3] - 1] : Event Player.EffectPreview[Event Player.LocalC[3] - 1] * Vector(
+			1, 0, 1) + Vector(0, Max(Y Component Of(Eye Position(Event Player)), Y Component Of(
+			Event Player.EffectPreview[Event Player.LocalC[3] - 1])), 0)) : Event Player.EffectPreview) + Facing Direction Of(Event Player)
+			* -1 * (Max(4, Event Player.Effrad[Event Player.LocalC[3] - 1]) + 2), Event Player.LocalC[3] ? (
+			Event Player.Efftype[Event Player.LocalC[3] - 1] ? Event Player.EffectPreview[Event Player.LocalC[3] - 1] : Event Player.EffectPreview[Event Player.LocalC[3] - 1] * Vector(
+			1, 0, 1) + Vector(0, Max(Y Component Of(Eye Position(Event Player)), Y Component Of(
+			Event Player.EffectPreview[Event Player.LocalC[3] - 1])), 0)) : Event Player.EffectPreview, 10);
+		Create HUD Text(Event Player, Custom String(" \n Effect Details:\n {0}\n                \r\n",
+			Event Player.Effstate[Event Player.LocalC[3] - 1] ? (Event Player.Effstate[Event Player.LocalC[3] - 1] == 1 ? Custom String(
+			"Death\n Kills you") : (Event Player.Effstate[Event Player.LocalC[3] - 1] == 2 ? Custom String(
+			"Abilities: {0}{1}\n Changes current\n abilities", Absolute Value(Event Player.Efftim[Event Player.LocalC[3] - 1])
+			== 11 ? Custom String("No change") : Custom String("{0}{1}{2}", First Of(Event Player.Effabi[Event Player.LocalC[3] - 1])
+			? Ability Icon String(Hero Of(Event Player), Button(Secondary Fire)) : Custom String(""),
+			Event Player.Effabi[Event Player.LocalC[3] - 1][1] ? Ability Icon String(Hero Of(Event Player), Button(Ability 1))
+			: Custom String(""), Last Of(Event Player.Effabi[Event Player.LocalC[3] - 1]) ? Ability Icon String(Hero Of(Event Player),
+			Button(Ability 2)) : Custom String("")), Event Player.Efftim[Event Player.LocalC[3] - 1] < 0 ? Custom String(
+			" \n Resets Cooldowns") : Custom String("")) : (Event Player.Effstate[Event Player.LocalC[3] - 1] == 3 ? Custom String(
+			"Abilities: {0}{1}\n Lets you pass\n through environment", Absolute Value(Event Player.Efftim[Event Player.LocalC[3] - 1])
+			== 11 ? Custom String("No change") : Custom String("{0}{1}{2}", First Of(Event Player.Effabi[Event Player.LocalC[3] - 1])
+			? Ability Icon String(Hero Of(Event Player), Button(Secondary Fire)) : Custom String(""),
+			Event Player.Effabi[Event Player.LocalC[3] - 1][1] ? Ability Icon String(Hero Of(Event Player), Button(Ability 1))
+			: Custom String(""), Last Of(Event Player.Effabi[Event Player.LocalC[3] - 1]) ? Ability Icon String(Hero Of(Event Player),
+			Button(Ability 2)) : Custom String("")), Event Player.Efftim[Event Player.LocalC[3] - 1] < 0 ? Custom String(
+			" \n Resets Cooldowns") : Custom String("")) : (Event Player.Effstate[Event Player.LocalC[3] - 1] == 4 ? Custom String(
+			"Abilities: {0}{1}\n Safe zone", Absolute Value(Event Player.Efftim[Event Player.LocalC[3] - 1]) == 11 ? Custom String(
+			"No change") : Custom String("{0}{1}{2}", First Of(Event Player.Effabi[Event Player.LocalC[3] - 1]) ? Ability Icon String(
+			Hero Of(Event Player), Button(Secondary Fire)) : Custom String(""),
+			Event Player.Effabi[Event Player.LocalC[3] - 1][1] ? Ability Icon String(Hero Of(Event Player), Button(Ability 1))
+			: Custom String(""), Last Of(Event Player.Effabi[Event Player.LocalC[3] - 1]) ? Ability Icon String(Hero Of(Event Player),
+			Button(Ability 2)) : Custom String("")), Event Player.Efftim[Event Player.LocalC[3] - 1] < 0 ? Custom String(" \n Centerless")
+			: Custom String("")) : (Event Player.Effstate[Event Player.LocalC[3] - 1] < 7 ? Custom String("Abilities: {0}{1}\n Portal",
+			Absolute Value(Event Player.Efftim[Event Player.LocalC[3] - 1]) == 11 ? Custom String("No change") : Custom String("{0}{1}{2}",
+			First Of(Event Player.Effabi[Event Player.LocalC[3] - 1]) ? Ability Icon String(Hero Of(Event Player), Button(Secondary Fire))
+			: Custom String(""), Event Player.Effabi[Event Player.LocalC[3] - 1][1] ? Ability Icon String(Hero Of(Event Player), Button(
+			Ability 1)) : Custom String(""), Last Of(Event Player.Effabi[Event Player.LocalC[3] - 1]) ? Ability Icon String(Hero Of(
+			Event Player), Button(Ability 2)) : Custom String("")), Event Player.Efftim[Event Player.LocalC[3] - 1] < 0 ? Custom String(
+			" \n Resets Cooldowns") : Custom String("")) : (Event Player.Effstate[Event Player.LocalC[3] - 1] == 7 ? Custom String(
+			"Black Hole\n You fall towards it\n when close") : Custom String(
+			"Zipline\n Press/Hold Jump\n to attach\n Jump/Crouch to detach"))))))) : Custom String(
+			"Time Change: {0}\n Changes Time upon\n Completion", Event Player.Efftim[Event Player.LocalC[3] - 1] + 0.001)), Null, Null,
+			Left, -7, Array(Color(Sky Blue), Color(Red), Color(White), Color(Lime Green), Color(Orange), Color(Orange), Color(Sky Blue),
+			Color(Gray), Color(Blue), Color(Blue))[Event Player.Effstate[Event Player.LocalC[3] - 1]], Null, Null, String and Color,
+			Default Visibility);
+		Event Player.LocalC[4] = Last Text ID;
+		Create Effect(Event Player.Effstate[Event Player.LocalC[3] - 1] == 7 ? Event Player : Null, Sphere, Color(Black),
+			Event Player.EffectPreview[Event Player.LocalC[3] - 1], Event Player.Effrad[Event Player.LocalC[3] - 1],
+			Visible To Position and Radius);
+		Event Player.LocalC[5] = Last Created Entity;
+		Event Player.LocalC[3] += Event Player.LocalC[3] < Count Of(Event Player.EffectPreview) ? 1 : (Count Of(Event Player.EffectPreview)
+			- 1) * -1;
+	}
+}
+
+rule("Set View Angle   |   Primary Fire + Melee")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Is Button Held(Event Player, Button(Primary Fire)) == True;
+		Is Button Held(Event Player, Button(Melee)) == True;
+	}
+
+	actions
+	{
+		Event Player.TempVA = Event Player.TempVA ? 0 : Horizontal Facing Angle Of(Event Player);
+	}
+}
+
+rule("Pro-Mode sub   |   Interact + Melee")
+{
+	event
+	{
+		Subroutine;
+		ProMode;
+	}
+
+	actions
+	{
+		Event Player.ProMode = !Event Player.ProMode;
+		Event Player.PM_NoReset = Event Player.ProMode;
+		Event Player.PM_Centerless = 0;
+	}
+}
+
+rule("Pro-Mode Toggles   |   Reset On Fail   |   Ultimate     /     Centerless   |   Crouch")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Event Player.ProMode == True;
+		Is Button Held(Event Player, Button(Interact)) == False;
+		(Is Button Held(Event Player, Button(Ultimate)) || Is Button Held(Event Player, Button(Crouch))) == True;
+	}
+
+	actions
+	{
+		If(Is Button Held(Event Player, Button(Ultimate)));
+			Event Player.PM_NoReset = !Event Player.PM_NoReset;
+		Else;
+			Event Player.PM_Centerless = !Event Player.PM_Centerless;
+	}
+}
+
+rule("Spectate   |   Uppercut + Slam + Ultimate")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Is Button Held(Event Player, Button(Ultimate)) == True;
+		Is Button Held(Event Player, Button(Ability 1)) == True;
+		Is Button Held(Event Player, Button(Ability 2)) == True;
+	}
+
+	actions
+	{
+		Event Player.Spectate = 1;
+		Stop Chasing Player Variable(Event Player, RunTime);
+		Enable Death Spectate All Players(Event Player);
+		Enable Death Spectate Target HUD(Event Player);
+		Disable Built-In Game Mode Respawning(Event Player);
+		Kill(Event Player, Null);
+		Skip If(Global.WSSpectateCancel, 1);
+		Start Rule(CPfail, Do Nothing);
+		Wait(0.300, Ignore Condition);
+		If(!Event Player.Spectate1stPersonView);
+			Event Player.Spectate1stPersonView = 1;
+			Press Button(Event Player, Button(Jump));
+		End;
+		Wait Until(!Is Button Held(Event Player, Button(Ultimate)) && !Is Button Held(Event Player, Button(Ability 1)) && !Is Button Held(
+			Event Player, Button(Ability 2)), 99999);
+		Wait Until(Is Button Held(Event Player, Button(Ultimate)), 99999);
+		Enable Built-In Game Mode Respawning(Event Player);
+		Resurrect(Event Player);
+		Skip If(Event Player.CPData[12] && !Event Player.CPData[13], 1);
+		Chase Player Variable At Rate(Event Player, RunTime, 100000, 1, None);
+		Call Subroutine(GenerateElements);
+		Event Player.Spectate = 0;
+		Wait Until(!Is Button Held(Event Player, Button(Ultimate)) && !Is Button Held(Event Player, Button(Ability 1)) && !Is Button Held(
+			Event Player, Button(Ability 2)), 99999);
+	}
+}
+
+rule("Free-Mode   |   Ultimate + Jump + Crouch")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Is Button Held(Event Player, Button(Ultimate)) == True;
+		Is Button Held(Event Player, Button(Jump)) == True;
+		Is Button Held(Event Player, Button(Crouch)) == True;
+		Event Player.Pioneer != 3;
+	}
+
+	actions
+	{
+		Call Subroutine(WhileInteract2);
+		Call Subroutine(CPfail);
+		Event Player.Roaming = !Event Player.Roaming;
+		If(Event Player.Roaming);
+			Call Subroutine(AbilityJumpCrouchEnable);
+			Event Player.RunState = 3;
+		Else;
+			Call Subroutine(AbilityEnableDisable);
+			Event Player.RunState = Event Player.Checkpoint ? 2 : 0;
+			Call Subroutine(CPfail);
+		End;
+		Call Subroutine(RegularCPHUD);
+	}
+}
+
+rule("Invisibility   |   Ultimate + Spray")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Is Communicating Any Spray(Event Player) == True;
+		Is Button Held(Event Player, Button(Ultimate)) == True;
+	}
+
+	actions
+	{
+		Event Player.Invis = Event Player.Invis ? 0 : 2;
+		If(Event Player.Invis);
+			Set Invisible(Event Player, All);
+		Else;
+			Set Invisible(Event Player, None);
+	}
+}
+
+rule("Set Temporary Spawn In Free-Mode   |   Primary Fire + Ultimate")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Is Button Held(Event Player, Button(Primary Fire)) == True;
+		Is Button Held(Event Player, Button(Ultimate)) == True;
+		Event Player.RunState > 2;
+		Event Player.Pioneer != 3;
+	}
+
+	actions
+	{
+		Event Player.CPData[3] = Position Of(Event Player);
+	}
+}
+
+disabled rule("Misc")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+}
+
+rule("Death Reset")
+{
+	event
+	{
+		Player Died;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Event Player.Spectate == False;
+	}
+
+	actions
+	{
+		Call Subroutine(CPfail);
+		Resurrect(Event Player);
+	}
+}
+
+disabled rule("Proximity Invisibility")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		(Event Player.Invis ? Distance Between(Event Player, Closest Player To(Event Player, All Teams)) > 2 : Distance Between(
+			Event Player, Closest Player To(Event Player, All Teams)) < 1.500) == True;
+		Number Of Players(All Teams) > 1;
+		Event Player.Invis != 2;
+	}
+
+	actions
+	{
+		Event Player.Invis = Event Player.Invis ? 0 : 1;
+		If(Event Player.Invis);
+			Set Invisible(Event Player, All);
+		Else;
+			Set Invisible(Event Player, None);
+		End;
+		Loop If Condition Is True;
+	}
+}
+
+disabled rule("Ability Lock Enabled & Instructions")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Global.Detector1 == -1;
+	}
+
+	actions
+	{
+		"Instructions:\n   Add Levels Ablock is Enabled on (Level 0 = Level Select / Diverge / Single)\n   Leave Disabled if using Checkpoint Ablock\n   Will not work with Checkpoint Ablock, has to be one or the other"
+		disabled Global.AblockLvl = Array(0);
+		"Instructions:\n   Add Checkpoints Ablock is Enabled on\n   Leave Disabled if using Level Ablock\n   Will not work with Level Ablock, has to be one or the other\nIf Enabled:\n   Enable Ablock Action in \"CP Change sub\" Rule"
+		disabled Global.AblockCP = Array(0);
+		"Slamlock? Change to 2"
+		Global.Ablock_Slamlock = 1;
+	}
+}
+
+disabled rule("Ability Lock - Rocket Punch Disabler")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Event Player.Ablock == True;
+		Event Player.Grace == True;
+		Is Firing Secondary(Event Player) == False;
+		Event Player.Roaming == False;
+	}
+
+	actions
+	{
+		Wait Until(!Event Player.Grace, 99999);
+		Wait Until(Event Player.Shift || Distance Between(Position Of(Event Player), Event Player.CPData[3])
+			> Event Player.CPData[4] + 0.500, 99999);
+		Abort If(Event Player.Shift);
+		Wait Until(Event Player.Shift, 0.450);
+		Abort If(Event Player.Shift);
+		Set Secondary Fire Enabled(Event Player, Event Player.Effdetect ? First Of(Event Player.Effabi[Event Player.Effactual]) : False);
+	}
+}
+
+disabled rule("Ability Lock - Uppercut Disabler")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Event Player.Ablock == True;
+		Is Using Ability 1(Event Player) == True;
+		Event Player.Roaming == False;
+	}
+
+	actions
+	{
+		Wait Until(Event Player.Shift || Ability Cooldown(Event Player, Button(Ability 1)) == True, 99999);
+		Abort If(Event Player.Shift);
+		Set Ability 1 Enabled(Event Player, Event Player.Effdetect ? Event Player.Effabi[Event Player.Effactual][1] : False);
+	}
+}
+
+rule("Server Performance")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Event Player == Host Player;
+		Is Button Held(Event Player, Button(Ultimate)) == True;
+	}
+
+	actions
+	{
+		Wait(3, Abort When False);
+		If(Event Player.ServerPerformance);
+			Destroy HUD Text(Event Player.ServerPerformance);
+			Event Player.ServerPerformance = 0;
+		Else;
+			Create HUD Text(Event Player, Null, Custom String("Server Load   Cu {0}  |  Avg {1}  |  Peak {2}", Server Load,
+				Server Load Average, Custom String("{0}\nEntity Count {1}   |   {2}", Server Load Peak, Entity Count, Custom String(
+				"Text Count {0}\n                                                                                  ", Text Count))), Null,
+				Right, -500, Color(White), Color(White), Color(White), String, Visible Never);
+			Event Player.ServerPerformance = Last Text ID;
+	}
+}
+
+rule("Fake Uppercut")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Is Using Ability 2(Event Player) == True;
+		Is Button Held(Event Player, Button(Ability 2)) == True;
+		Ability Cooldown(Event Player, Button(Ability 2)) == False;
+		Event Player.UpperLock == False;
+	}
+
+	actions
+	{
+		Cancel Primary Action(Event Player);
+		Event Player.UpperLock = True;
+		Apply Impulse(Event Player, Vector(0, 1, 0), 13.750, To Player, Cancel Contrary Motion XYZ);
+		Apply Impulse(Event Player, Vector(0, 0, 1), 2, To Player, Cancel Contrary Motion XYZ);
+		Wait(1, Ignore Condition);
+		Event Player.UpperLock = False;
+	}
+}
+
+rule("Ms. Destructo | Destroys Breakable Objects On All Maps")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		"Credit: nebula#11571"
+		Is Game In Progress == True;
+	}
+
+	actions
+	{
+		Wait Until(Is True For Any(All Players(All Teams), Has Spawned(Current Array Element)), 99999);
+		"Init dummy at arbitrary location\r\n previously -1 slot, now extra dummy enabled to spawn outside of player slot to prevent overwrite of slot"
+		Create Dummy Bot(Hero(D.Va), Team Of(First Of(Filtered Array(All Players(All Teams), Has Spawned(Current Array Element)
+			&& !Is Dummy Bot(Current Array Element)))), 20, Vector(0, 200, 0), Vector(0, 0, 0));
+		Global.MsDestructo = Last Created Entity;
+		"MsDestructo.startForcingName(\"Ms. Destructo\") #disabled because translated this line gives errors"
+		Wait(1, Ignore Condition);
+		"MsDestructo.setInvisibility(Invis.ALL)"
+		Global.MsDestructo.MapVectorArray = Array(Array(0, Map(Hanamura), Map(Horizon Lunar Colony), Map(Paris), Map(Temple of Anubis),
+			Map(Dorado), Map(Havana), Map(Junkertown), Map(Rialto), Map(Route 66), Map(Watchpoint: Gibraltar), Map(Blizzard World), Map(
+			Eichenwalde), Map(Hollywood), Map(King's Row), Map(Numbani), Map(Ayutthaya), Map(Black Forest), Map(Castillo), Map(
+			Ecopoint: Antarctica), Map(Château Guillard), Map(Kanezaka), Map(Necropolis), Map(Petra), Map(Volskaya Industries), Map(
+			Practice Range), Map(Ilios), Map(Busan), Map(Lijiang Tower), Map(Nepal), Map(Oasis), Map(Malevento), Map(Circuit royal), Map(
+			Esperança), Map(New Queen Street), Map(Paraíso), Map(Colosseo), Map(Midtown), Map(Shambali Monastery)), Array(Vector(15.759,
+			30.576, -27.201)), Array(Vector(31.759, 40.003, -59.476)), Array(Vector(-54.508, 40.179, -10.866)), Array(Vector(-26.780,
+			23.366, 40.284)), Array(Vector(69.418, 42.103, -17.712)), Array(Vector(9.382, 38.635, -81.276)), Array(Vector(9.382, 38.635,
+			-81.276)), Array(Vector(9.756, 30.753, -41.395)), Array(Vector(30.313, 28.237, -16.925)), Array(Vector(73.985, 26.198,
+			-109.338)), Array(Vector(-21.030, 35.127, 88.381)), Array(Vector(54.798, 40.964, -82.780)), Array(Vector(-0.355, 28.167,
+			-22.396)), Array(Vector(-56.869, 24.061, -32.132)), Array(Vector(105.299, 22.764, 14.890)), Array(Vector(16.965, 26.541,
+			-7.130)), Array(Vector(-9.622, 44.751, 5.635)), Array(Vector(-100.828, 76.566, 60.021)), Array(Vector(-6.186, 35.564, 1.378)),
+			Array(Vector(200.414, 82.412, 78.813)), Array(Vector(-36.319, 32.305, 0.472)), Array(Vector(-1.144, 47.168, -2.946)), Array(
+			Vector(9.678, 28.313, 13.400)), Array(Vector(-49.147, 22.344, 76.844)), Array(Vector(54.948, 50.769, 3.930)), Array(Vector(
+			322.988, 40, -37.732), Vector(27.711, 100, -161.298), Vector(-223.895, 50, 0.890)), Array(Vector(51.885, 37.172, -113.654),
+			Vector(-329.934, 56.136, 149.839), Vector(227.210, 43.353, 252.640)), Array(Vector(-5.808, 324.398, 282.523), Vector(-0.414,
+			156.197, 148.681), Vector(-0.381, 53.736, -33.335)), Array(Vector(83.100, 178.926, 0.593), Vector(-49.803, 63.290, -0.413),
+			Vector(-184.659, -38.730, -0.783)), Array(Vector(150.125, 30.619, 251.966), Vector(134.888, 36.760, -240.736), Vector(-195.549,
+			60.350, -0.098)), Array(Vector(17.808, 35.955, 17.505)), Array(Vector(13, 61, -37)), Array(Vector(0, 50, 0)), Array(Vector(0,
+			35, 25), Vector(0, 8, 23.770)), Array(Vector(-29, 40, -36.900)), Array(Vector(0, 40, 0)), Array(Vector(49.300, 45, -2.830)),
+			Array(Vector(-50, 81, 130)));
+		For Player Variable(Global.MsDestructo, ArrayIterator, 0, Count Of(Global.MsDestructo.MapVectorArray[Index Of Array Value(First Of(
+			Global.MsDestructo.MapVectorArray), Current Map)]), 1);
+			Start Forcing Player Position(Global.MsDestructo, Global.MsDestructo.MapVectorArray[Index Of Array Value(
+				Global.MsDestructo.MapVectorArray, Current Map)][Global.MsDestructo.ArrayIterator], True);
+			Start Scaling Player(Global.MsDestructo, 20, True);
+			Disable Movement Collision With Environment(Global.MsDestructo, True);
+			Set Ultimate Ability Enabled(Global.MsDestructo, True);
+			Set Ultimate Charge(Global.MsDestructo, 100);
+			Wait(3, Ignore Condition);
+			Start Holding Button(Global.MsDestructo, Button(Ultimate));
+			Wait(5, Ignore Condition);
+			Respawn(Global.MsDestructo);
+			Wait(3, Ignore Condition);
+		End;
+		Destroy Dummy Bot(Team Of(Global.MsDestructo), Slot Of(Global.MsDestructo));
+		"Remove MsDestructo data when done"
+		Global.MsDestructo.MapVectorArray = 0;
+		Global.MsDestructo.ArrayIterator = 0;
+		Global.MsDestructo = 0;
+	}
+}
+
+rule("Workshop Settings")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	actions
+	{
+		If(Global.CPposition);
+			"General"
+			Global.WSLBColor = Workshop Setting Toggle(Custom String("1. General"), Custom String("Multilevel Colored texts"), True, 0);
+			Global.WSLBMultiColor = Workshop Setting Toggle(Custom String("1. General"), Custom String("Leaderboard Multi Color"), False, 1);
+			Global.WSAbilityEffectDisplay = Workshop Setting Toggle(Custom String("1. General"), Custom String("Display Effect Abilities"),
+				True, 2);
+			Global.WSFullLB = Workshop Setting Toggle(Custom String("1. General"), Custom String("Full 12 player Leaderboard"), False, 3);
+			Global.WSUpperCancelBulletPunch = Workshop Setting Toggle(Custom String("1. General"), Custom String(
+				"Upper Cancel / Bullet Punch"), True, 4);
+			Global.WSSpectateCancel = Workshop Setting Toggle(Custom String("1. General"), Custom String("Spectate Slam Cancel"), False, 5);
+			Global.WSClearSetFacing = Workshop Setting Toggle(Custom String("1. General"), Custom String(
+				"Set View Angle on CP clear (legacy way)"), False, 6);
+			Global.WSReturnPrevent = Workshop Setting Toggle(Custom String("1. General"), Custom String(
+				"Prevent Returning to CP on Effect Lock"), False, 7);
+			"Enable Completionist"
+			Global.WSCompletionist = Workshop Setting Toggle(Custom String("2. Completionist"), Custom String(
+				" Completionist Mode - Complete every Mission in a path of Diverge"), True, 0);
+			Global.WSUpperCancelBulletPunch = !Global.WSUpperCancelBulletPunch;
+	}
+}
+
+rule("Force Doom for Skirmish(Push Maps)")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		(Current Map == Map(Esperança) || Current Map == Map(Colosseo) || Current Map == Map(New Queen Street)) == True;
+	}
+
+	actions
+	{
+		Start Forcing Player To Be Hero(Event Player, Hero(Doomfist));
+	}
+}
+
+rule("display")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	actions
+	{
+		Create HUD Text(Event Player, Custom String("\r\n{0} , {1} , {2}\r\n", X Component Of(Position Of(Event Player)), Y Component Of(
+			Position Of(Event Player)), Z Component Of(Position Of(Event Player))), Null, Null, Left, 30, Color(Aqua), Color(Black), Color(
+			Black), Visible To and String, Default Visibility);
+	}
+}
+
+disabled rule("Stall counter")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Is On Ground(Event Player) == False;
+		Horizontal Speed Of(Event Player) == False;
+		Vertical Speed Of(Event Player) == False;
+		Is Button Held(Event Player, Button(Ultimate)) == True;
+	}
+
+	actions
+	{
+		Small Message(Event Player, Custom String("\r\n3\r\n"));
+		Wait(1, Abort When False);
+		Play Effect(Event Player, Buff Impact Sound, Null, Event Player, 30);
+		Small Message(Event Player, Custom String("\r\n2\r\n"));
+		Wait(1, Ignore Condition);
+		Play Effect(Event Player, Buff Impact Sound, Null, Event Player, 30);
+		Small Message(Event Player, Custom String("\r\n1\r\n"));
+		Wait(1, Ignore Condition);
+		Play Effect(Event Player, Buff Impact Sound, Null, Event Player, 30);
+		Small Message(Event Player, Custom String("\r\nboing\r\n"));
+	}
+}

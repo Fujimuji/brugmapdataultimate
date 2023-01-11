@@ -83,15 +83,17 @@
             this.cpPowerBlockEnabled = new System.Windows.Forms.CheckBox();
             this.cpSlamEnabled = new System.Windows.Forms.CheckBox();
             this.addCpBtn = new System.Windows.Forms.Button();
-            this.lvlGroupBox = new System.Windows.Forms.GroupBox();
-            this.addLvlBtn = new System.Windows.Forms.Button();
-            this.lvlNameTxt = new System.Windows.Forms.TextBox();
             this.needed = new System.Windows.Forms.Label();
             this.saveBtn = new System.Windows.Forms.Button();
             this.loadBtn = new System.Windows.Forms.Button();
             this.clipboardLbl = new System.Windows.Forms.LinkLabel();
             this.treeMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.deleteBtn = new System.Windows.Forms.ToolStripMenuItem();
+            this.lvlGroupBox = new System.Windows.Forms.GroupBox();
+            this.lvlColorComboBox = new System.Windows.Forms.ComboBox();
+            this.lvlIconComboBox = new System.Windows.Forms.ComboBox();
+            this.addLvlBtn = new System.Windows.Forms.Button();
+            this.lvlNameTxt = new System.Windows.Forms.TextBox();
             this.mapGroupBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -113,8 +115,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.slamUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.powerBlockUpDown)).BeginInit();
             this.cpAbilGroupBox.SuspendLayout();
-            this.lvlGroupBox.SuspendLayout();
             this.treeMenuStrip.SuspendLayout();
+            this.lvlGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // aboutLbl
@@ -805,37 +807,6 @@
             this.addCpBtn.UseVisualStyleBackColor = true;
             this.addCpBtn.Click += new System.EventHandler(this.addCpBtn_Click);
             // 
-            // lvlGroupBox
-            // 
-            this.lvlGroupBox.Controls.Add(this.addLvlBtn);
-            this.lvlGroupBox.Controls.Add(this.lvlNameTxt);
-            this.lvlGroupBox.Location = new System.Drawing.Point(368, 26);
-            this.lvlGroupBox.Name = "lvlGroupBox";
-            this.lvlGroupBox.Size = new System.Drawing.Size(368, 64);
-            this.lvlGroupBox.TabIndex = 62;
-            this.lvlGroupBox.TabStop = false;
-            this.lvlGroupBox.Text = "Level Name";
-            this.lvlGroupBox.Visible = false;
-            // 
-            // addLvlBtn
-            // 
-            this.addLvlBtn.Location = new System.Drawing.Point(225, 22);
-            this.addLvlBtn.Name = "addLvlBtn";
-            this.addLvlBtn.Size = new System.Drawing.Size(137, 28);
-            this.addLvlBtn.TabIndex = 1;
-            this.addLvlBtn.Text = "Add Level";
-            this.addLvlBtn.UseVisualStyleBackColor = true;
-            this.addLvlBtn.Click += new System.EventHandler(this.addLvlBtn_Click);
-            // 
-            // lvlNameTxt
-            // 
-            this.lvlNameTxt.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lvlNameTxt.Location = new System.Drawing.Point(13, 23);
-            this.lvlNameTxt.Name = "lvlNameTxt";
-            this.lvlNameTxt.PlaceholderText = "Level name";
-            this.lvlNameTxt.Size = new System.Drawing.Size(206, 27);
-            this.lvlNameTxt.TabIndex = 0;
-            // 
             // needed
             // 
             this.needed.AutoSize = true;
@@ -894,17 +865,122 @@
             this.deleteBtn.Text = "Delete";
             this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
             // 
+            // lvlGroupBox
+            // 
+            this.lvlGroupBox.Controls.Add(this.lvlColorComboBox);
+            this.lvlGroupBox.Controls.Add(this.lvlIconComboBox);
+            this.lvlGroupBox.Controls.Add(this.addLvlBtn);
+            this.lvlGroupBox.Controls.Add(this.lvlNameTxt);
+            this.lvlGroupBox.Location = new System.Drawing.Point(368, 26);
+            this.lvlGroupBox.Name = "lvlGroupBox";
+            this.lvlGroupBox.Size = new System.Drawing.Size(827, 64);
+            this.lvlGroupBox.TabIndex = 67;
+            this.lvlGroupBox.TabStop = false;
+            this.lvlGroupBox.Text = "Level Settings";
+            this.lvlGroupBox.Visible = false;
+            // 
+            // lvlColorComboBox
+            // 
+            this.lvlColorComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.lvlColorComboBox.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lvlColorComboBox.FormattingEnabled = true;
+            this.lvlColorComboBox.Items.AddRange(new object[] {
+            "White",
+            "Yellow",
+            "Green",
+            "Purple",
+            "Red",
+            "Blue",
+            "Aqua",
+            "Orange",
+            "SkyBlue",
+            "Turqoise",
+            "LimeGreen",
+            "Gray",
+            "Violet",
+            "Rose",
+            "Black"});
+            this.lvlColorComboBox.Location = new System.Drawing.Point(416, 23);
+            this.lvlColorComboBox.Name = "lvlColorComboBox";
+            this.lvlColorComboBox.Size = new System.Drawing.Size(183, 28);
+            this.lvlColorComboBox.TabIndex = 3;
+            // 
+            // lvlIconComboBox
+            // 
+            this.lvlIconComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.lvlIconComboBox.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lvlIconComboBox.FormattingEnabled = true;
+            this.lvlIconComboBox.Items.AddRange(new object[] {
+            "Arrow: Down",
+            "Arrow: Up",
+            "Arrow: Left",
+            "Arrow: Right",
+            "Asterisk",
+            "Bolt",
+            "Checkmark",
+            "Circle",
+            "Club",
+            "Diamond",
+            "Dizzy",
+            "Exclamation Mark",
+            "Eye",
+            "Fire",
+            "Flag",
+            "Halo",
+            "Happy",
+            "Heart",
+            "Moon",
+            "No",
+            "Plus",
+            "Poison",
+            "Poison2",
+            "Question Mark",
+            "Radioactive",
+            "Recycle",
+            "Ring Thick",
+            "Ring Thin",
+            "Sad",
+            "Skull",
+            "Spade",
+            "Spiral",
+            "Stop",
+            "Trashcan",
+            "Warning",
+            "X"});
+            this.lvlIconComboBox.Location = new System.Drawing.Point(227, 23);
+            this.lvlIconComboBox.Name = "lvlIconComboBox";
+            this.lvlIconComboBox.Size = new System.Drawing.Size(183, 28);
+            this.lvlIconComboBox.TabIndex = 2;
+            // 
+            // addLvlBtn
+            // 
+            this.addLvlBtn.Location = new System.Drawing.Point(605, 23);
+            this.addLvlBtn.Name = "addLvlBtn";
+            this.addLvlBtn.Size = new System.Drawing.Size(216, 28);
+            this.addLvlBtn.TabIndex = 1;
+            this.addLvlBtn.Text = "Add Level";
+            this.addLvlBtn.UseVisualStyleBackColor = true;
+            // 
+            // lvlNameTxt
+            // 
+            this.lvlNameTxt.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lvlNameTxt.Location = new System.Drawing.Point(13, 23);
+            this.lvlNameTxt.Name = "lvlNameTxt";
+            this.lvlNameTxt.PlaceholderText = "Level name";
+            this.lvlNameTxt.Size = new System.Drawing.Size(206, 27);
+            this.lvlNameTxt.TabIndex = 0;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1204, 680);
+            this.Controls.Add(this.lvlGroupBox);
             this.Controls.Add(this.clipboardLbl);
             this.Controls.Add(this.loadBtn);
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.needed);
             this.Controls.Add(this.cpSettingsGroupBox);
-            this.Controls.Add(this.lvlGroupBox);
             this.Controls.Add(this.missSettingsGroupBox);
             this.Controls.Add(this.effSettingsGroupBox);
             this.Controls.Add(this.mapGroupBox);
@@ -944,9 +1020,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.powerBlockUpDown)).EndInit();
             this.cpAbilGroupBox.ResumeLayout(false);
             this.cpAbilGroupBox.PerformLayout();
+            this.treeMenuStrip.ResumeLayout(false);
             this.lvlGroupBox.ResumeLayout(false);
             this.lvlGroupBox.PerformLayout();
-            this.treeMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -995,10 +1071,7 @@
         private ComboBox effTypeComboBox;
         private GroupBox groupBox8;
         private GroupBox cpSettingsGroupBox;
-        private GroupBox lvlGroupBox;
-        private TextBox lvlNameTxt;
         private Button addCpBtn;
-        private Button addLvlBtn;
         private GroupBox cpAbilGroupBox;
         private CheckBox cpPunchEnabled;
         private CheckBox cpPowerBlockEnabled;
@@ -1014,5 +1087,10 @@
         private LinkLabel clipboardLbl;
         private ContextMenuStrip treeMenuStrip;
         private ToolStripMenuItem deleteBtn;
+        private GroupBox lvlGroupBox;
+        private ComboBox lvlColorComboBox;
+        private ComboBox lvlIconComboBox;
+        private Button addLvlBtn;
+        private TextBox lvlNameTxt;
     }
 }

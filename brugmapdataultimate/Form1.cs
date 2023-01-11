@@ -20,6 +20,8 @@ namespace brugmapdataultimate
             Thread.CurrentThread.CurrentUICulture = cultureInfo;
             effTypeComboBox.SelectedIndex = 0;
             missTypeComboBox.SelectedIndex = 0;
+            lvlIconComboBox.SelectedIndex = 0;
+            lvlColorComboBox.SelectedIndex = 0;
             mapTreeView.SelectedNode = mapTreeView.Nodes[0];
             missSettingsGroupBox.Location = new Point(368, 26);
             effSettingsGroupBox.Location = new Point(368, 26);
@@ -58,21 +60,6 @@ namespace brugmapdataultimate
             UpwardsDiag = 29,
             DownwardsDiag = 31,
             PunchBounce = 37
-        }
-
-        public enum AbilityPrimes
-        {
-            Punch = 2,
-            Slam = 3,
-            Powerblock = 5
-        }
-
-        public enum EffectPrimes
-        {
-            Punch = 2,
-            Slam = 3,
-            Powerblock = 5,
-            NoChange = 11
         }
 
         public class Map
@@ -139,21 +126,111 @@ namespace brugmapdataultimate
                     }
                 }
 
-                return genCPposition + Environment.NewLine +
-                       genPrime + Environment.NewLine +
-                       genRadVAGobackCP + Environment.NewLine +
-                       genConnections + Environment.NewLine +
-                       genMission + Environment.NewLine +
-                       genHiddenCPTpRadTT + Environment.NewLine +
-                       genTP + Environment.NewLine +
-                       genEffect + Environment.NewLine +
-                       genAbilityCount;
+                string filePath = @"playtemplate.txt";
+
+                string wholemapdata = File.ReadAllText(filePath);
+
+                if (File.Exists(filePath))
+                {
+                    int mapdataindex = wholemapdata.IndexOf("\"Map Data Goes Here\"");
+                    if (mapdataindex != -1)
+                    {
+                        wholemapdata = wholemapdata.Insert(mapdataindex + "\"Map Data Goes Here\"".Length, $"\r\n\t\t{genCPposition}\r\n\t\t{genPrime}\r\n\t\t{genRadVAGobackCP}\r\n\t\t{genConnections}\r\n\t\t{genMission}\r\n\t\t{genHiddenCPTpRadTT}\r\n\t\t{genTP}\r\n\t\t{genEffect}\r\n\t\t{genAbilityCount}");
+                    }
+
+                    int lvlnameindex = wholemapdata.IndexOf("\"Customize Level Names\"");
+                    if (lvlnameindex != -1)
+                    {
+                        string lvlnamestring = $"\r\n\t\t\tGlobal.LvlName = Array(Custom String(\"Diverge / Single\"),";
+                        for (int i = 0; i < Levels.Count; i++)
+                        {
+                            Level lvl = Levels[i];
+                            if (i == Levels.Count - 1)
+                            {
+                                lvlnamestring += $" Custom String(\"{lvl.Name}\"));";
+                            }
+
+                            else
+                            {
+                                lvlnamestring += $" Custom String(\"{lvl.Name}\"),";
+                            }
+                        }
+                        wholemapdata = wholemapdata.Insert(lvlnameindex + "\"Customize Level Names\"".Length, lvlnamestring);
+                    }
+
+                    int lvlcolorindex = wholemapdata.IndexOf("\"Customize Level Colors\"");
+                    if (lvlcolorindex != -1)
+                    {
+                        string lvlcolorstring = $"\r\n\t\t\tGlobal.LvlColors = Array(Color(Red),";
+                        for (int i = 0; i < Levels.Count; i++)
+                        {
+                            Level lvl = Levels[i];
+                            if (i == Levels.Count - 1)
+                            {
+                                lvlcolorstring += $" Color({lvl.Color}));";
+                            }
+
+                            else
+                            {
+                                lvlcolorstring += $" Color({lvl.Color}),";
+                            }
+                        }
+                        wholemapdata = wholemapdata.Insert(lvlcolorindex + "\"Customize Level Colors\"".Length, lvlcolorstring);
+                    }
+
+                    int lvliconindex = wholemapdata.IndexOf("Skip(-2 + Global.LevelCounter * 2);");
+                    if (lvliconindex != -1)
+                    {
+                        string lvliconstring = "";
+                        for (int i = 0; i < Levels.Count; i++)
+                        {
+                            Level lvl = Levels[i];
+                            if (i == Levels.Count - 1)
+                            {
+                                lvliconstring += $"\r\n\t\t\"{lvl.Name}\"\r\n\t\tCreate Icon(Filtered Array(All Players(All Teams), Current Array Element.CPData[13]),\r\n\t\t\tGlobal.CPposition[Global.Detector1] + Up * 1.750, {lvl.Icon}, Visible To, Global.LvlColors[Global.LevelCounter], True);";
+                            }
+
+                            else
+                            {
+                                lvliconstring += $"\r\n\t\t\"{lvl.Name}\"\r\n\t\tCreate Icon(Filtered Array(All Players(All Teams), Current Array Element.CPData[13]),\r\n\t\t\tGlobal.CPposition[Global.Detector1] + Up * 1.750, {lvl.Icon}, Visible To, Global.LvlColors[Global.LevelCounter], True);" + Environment.NewLine + "\t\tAbort;";
+                            }
+                        }
+                        wholemapdata = wholemapdata.Insert(lvliconindex + "Skip(-2 + Global.LevelCounter * 2);".Length, lvliconstring);
+
+                    }
+
+                    int playericonindex = wholemapdata.IndexOf("Skip(Event Player.Level * 2);");
+                    if (playericonindex != -1)
+                    {
+                        string lvlplayericonstring = "";
+                        lvlplayericonstring += $"\r\n\t\t\"Diverge / Single / Pioneer\"\r\n\t\tCreate Icon(Event Player, Event Player.Local_Pos[Event Player.DelGenElements] + Up * 1.750, Flag, None,\r\n\t\t\tEvent Player.Pioneer ? Color(Orange) : Global.LvlColors[Event Player.Level], True);" + Environment.NewLine + "\t\tAbort;"; ;
+                        for (int i = 0; i < Levels.Count; i++)
+                        {
+                            Level lvl = Levels[i];
+                            if (i == Levels.Count - 1)
+                            {
+                                lvlplayericonstring += $"\r\n\t\t\"{lvl.Name}\"\r\n\t\tCreate Icon(Event Player, Event Player.Local_Pos[Event Player.DelGenElements] + Up * 1.750, {lvl.Icon}, None,\r\n\t\t\tGlobal.LvlColors[Event Player.Level], True);";
+                            }
+
+                            else
+                            {
+                                lvlplayericonstring += $"\r\n\t\t\"{lvl.Name}\"\r\n\t\tCreate Icon(Event Player, Event Player.Local_Pos[Event Player.DelGenElements] + Up * 1.750, {lvl.Icon}, None,\r\n\t\t\tGlobal.LvlColors[Event Player.Level], True);" + Environment.NewLine + "\t\tAbort;";
+                            }
+                        }
+
+                        wholemapdata = wholemapdata.Insert(playericonindex + "Skip(Event Player.Level * 2);".Length, lvlplayericonstring);
+                    }
+                }
+
+                return wholemapdata;
             }
         }
 
         public class Level
         {
             public string Name { get; set; } = "";
+            public string Icon { get; set; } = "Flag";
+            public string Color { get; set; } = "Green";
             public List<Checkpoint> Checkpoints { get; set; } = new List<Checkpoint>();
         }
 
@@ -692,7 +769,7 @@ namespace brugmapdataultimate
 
         public Map map = new Map();
         string pattern = @"(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)";
-        const string version = "v1.0.1";
+        const string version = "v1.0.2";
 
         public int GeneratePrimeForCP()
         {
@@ -879,6 +956,9 @@ namespace brugmapdataultimate
                 isLvlSelector.Enabled = false;
                 isNormalCP.Checked = true;
                 string currentLvlName = mapTreeView.SelectedNode.Tag.ToString();
+                var currentlv = map.Levels.First(x => x.Name == currentLvlName);
+                lvlIconComboBox.SelectedItem = currentlv.Icon;
+                lvlColorComboBox.SelectedItem = currentlv.Color;
                 bool doesLvlFirstCpExist = map.Levels.First(x => x.Name == currentLvlName).Checkpoints.Any(x => x.Type == CheckpointType.LevelStart);
                 bool doesLvlLastCpExist = map.Levels.First(x => x.Name == currentLvlName).Checkpoints.Any(x => x.Type == CheckpointType.LevelEnd);
                 if (doesLvlFirstCpExist)
@@ -899,7 +979,7 @@ namespace brugmapdataultimate
                     cpSettingsGroupBox.Location = new Point(368, 94);
                     cpSettingsGroupBox.Visible = true;
                     HideEffectsMissions();
-                    addLvlBtn.Text = "Change Level Name";
+                    addLvlBtn.Text = "Edit Level";
                     addLvlBtn.Enabled = true;
                     addCpBtn.Text = "Add Checkpoint";
                     addCpBtn.Enabled = true;
@@ -921,7 +1001,7 @@ namespace brugmapdataultimate
                 cpSettingsGroupBox.Location = new Point(368, 94);
                 cpSettingsGroupBox.Visible = true;
                 HideEffectsMissions();
-                addLvlBtn.Text = "Change Level Name";
+                addLvlBtn.Text = "Edit Level";
                 addLvlBtn.Enabled = true;
                 addCpBtn.Text = "Add Checkpoint";
                 addCpBtn.Enabled = true;
@@ -1253,6 +1333,8 @@ namespace brugmapdataultimate
 
                 Level newLvl = new Level();
                 newLvl.Name = lvlNameTxt.Text;
+                newLvl.Icon = lvlIconComboBox.Items[lvlIconComboBox.SelectedIndex].ToString();
+                newLvl.Color = lvlColorComboBox.Items[lvlColorComboBox.SelectedIndex].ToString();
                 map.Levels.Add(newLvl);
                 TreeNode lvlNode = new TreeNode("Level - " + lvlNameTxt.Text);
                 lvlNode.Tag = lvlNameTxt.Text;
@@ -1261,7 +1343,7 @@ namespace brugmapdataultimate
                 return;
             }
 
-            if (addLvlBtn.Text == "Change Level Name")
+            if (addLvlBtn.Text == "Edit Level")
             {
                 if (string.IsNullOrWhiteSpace(lvlNameTxt.Text) || string.IsNullOrEmpty(lvlNameTxt.Text)) //lvlnameTxt was empty
                 {
@@ -1269,9 +1351,14 @@ namespace brugmapdataultimate
                     return;
                 }
 
-                if (mapTreeView.SelectedNode.Text == lvlNameTxt.Text) //user put the same level name 
+                if (mapTreeView.SelectedNode.Tag.ToString() == lvlNameTxt.Text || !map.Levels.Any(x => x.Name == lvlNameTxt.Text)) //incredible stuff
                 {
-                    MessageBox.Show("Please enter a different level name.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    map.Levels.First(x => x.Name == mapTreeView.SelectedNode.Tag.ToString()).Name = lvlNameTxt.Text;
+                    map.Levels.First(x => x.Name == mapTreeView.SelectedNode.Tag.ToString()).Icon = lvlIconComboBox.Items[lvlIconComboBox.SelectedIndex].ToString();
+                    map.Levels.First(x => x.Name == mapTreeView.SelectedNode.Tag.ToString()).Color = lvlColorComboBox.Items[lvlColorComboBox.SelectedIndex].ToString();
+                    mapTreeView.SelectedNode.Tag = lvlNameTxt.Text;
+                    mapTreeView.SelectedNode.Text = "Level - " + lvlNameTxt.Text;
+                    mapTreeView.SelectedNode = mapTreeView.Nodes[0];
                     return;
                 }
 
@@ -1280,13 +1367,6 @@ namespace brugmapdataultimate
                     MessageBox.Show("A level with this name already exists.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                //map.Levels[mapTreeView.SelectedNode.Index].Name = lvlNameTxt.Text;
-                Debug.WriteLine(GetLevelIndexFromSelectedLevelNode());
-                map.Levels.First(x => x.Name == mapTreeView.SelectedNode.Tag.ToString()).Name = lvlNameTxt.Text;
-                mapTreeView.SelectedNode.Tag = lvlNameTxt.Text;
-                mapTreeView.SelectedNode.Text = "Level - " + lvlNameTxt.Text;
-                lvlNameTxt.Text = "";
-                return;
             }
         }
 
