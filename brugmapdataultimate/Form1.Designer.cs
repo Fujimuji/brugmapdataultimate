@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Map");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Map");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.aboutLbl = new System.Windows.Forms.LinkLabel();
             this.mapGroupBox = new System.Windows.Forms.GroupBox();
@@ -88,14 +88,14 @@
             this.loadBtn = new System.Windows.Forms.Button();
             this.clipboardLbl = new System.Windows.Forms.LinkLabel();
             this.treeMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.moveUpBtn = new System.Windows.Forms.ToolStripMenuItem();
+            this.moveDownBtn = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteBtn = new System.Windows.Forms.ToolStripMenuItem();
             this.lvlGroupBox = new System.Windows.Forms.GroupBox();
             this.lvlColorComboBox = new System.Windows.Forms.ComboBox();
             this.lvlIconComboBox = new System.Windows.Forms.ComboBox();
             this.addLvlBtn = new System.Windows.Forms.Button();
             this.lvlNameTxt = new System.Windows.Forms.TextBox();
-            this.moveUpBtn = new System.Windows.Forms.ToolStripMenuItem();
-            this.moveDownBtn = new System.Windows.Forms.ToolStripMenuItem();
             this.mapGroupBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -146,11 +146,11 @@
             this.mapTreeView.HideSelection = false;
             this.mapTreeView.Location = new System.Drawing.Point(3, 19);
             this.mapTreeView.Name = "mapTreeView";
-            treeNode2.Checked = true;
-            treeNode2.Name = "Node0";
-            treeNode2.Text = "Map";
+            treeNode1.Checked = true;
+            treeNode1.Name = "Node0";
+            treeNode1.Text = "Map";
             this.mapTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2});
+            treeNode1});
             this.mapTreeView.Size = new System.Drawing.Size(344, 612);
             this.mapTreeView.TabIndex = 46;
             this.mapTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.mapTreeView_AfterSelect);
@@ -859,13 +859,29 @@
             this.moveDownBtn,
             this.deleteBtn});
             this.treeMenuStrip.Name = "treeMenuStrip";
-            this.treeMenuStrip.Size = new System.Drawing.Size(181, 92);
+            this.treeMenuStrip.Size = new System.Drawing.Size(139, 70);
+            // 
+            // moveUpBtn
+            // 
+            this.moveUpBtn.Image = ((System.Drawing.Image)(resources.GetObject("moveUpBtn.Image")));
+            this.moveUpBtn.Name = "moveUpBtn";
+            this.moveUpBtn.Size = new System.Drawing.Size(138, 22);
+            this.moveUpBtn.Text = "Move Up";
+            this.moveUpBtn.Click += new System.EventHandler(this.moveUpBtn_Click);
+            // 
+            // moveDownBtn
+            // 
+            this.moveDownBtn.Image = ((System.Drawing.Image)(resources.GetObject("moveDownBtn.Image")));
+            this.moveDownBtn.Name = "moveDownBtn";
+            this.moveDownBtn.Size = new System.Drawing.Size(138, 22);
+            this.moveDownBtn.Text = "Move Down";
+            this.moveDownBtn.Click += new System.EventHandler(this.moveDownBtn_Click);
             // 
             // deleteBtn
             // 
             this.deleteBtn.Image = ((System.Drawing.Image)(resources.GetObject("deleteBtn.Image")));
             this.deleteBtn.Name = "deleteBtn";
-            this.deleteBtn.Size = new System.Drawing.Size(180, 22);
+            this.deleteBtn.Size = new System.Drawing.Size(138, 22);
             this.deleteBtn.Text = "Delete";
             this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
             // 
@@ -898,7 +914,7 @@
             "Aqua",
             "Orange",
             "SkyBlue",
-            "Turqoise",
+            "Turquoise",
             "LimeGreen",
             "Gray",
             "Violet",
@@ -974,22 +990,6 @@
             this.lvlNameTxt.PlaceholderText = "Level name";
             this.lvlNameTxt.Size = new System.Drawing.Size(206, 27);
             this.lvlNameTxt.TabIndex = 0;
-            // 
-            // moveUpBtn
-            // 
-            this.moveUpBtn.Image = ((System.Drawing.Image)(resources.GetObject("moveUpBtn.Image")));
-            this.moveUpBtn.Name = "moveUpBtn";
-            this.moveUpBtn.Size = new System.Drawing.Size(180, 22);
-            this.moveUpBtn.Text = "Move Up";
-            this.moveUpBtn.Click += new System.EventHandler(this.moveUpBtn_Click);
-            // 
-            // moveDownBtn
-            // 
-            this.moveDownBtn.Image = ((System.Drawing.Image)(resources.GetObject("moveDownBtn.Image")));
-            this.moveDownBtn.Name = "moveDownBtn";
-            this.moveDownBtn.Size = new System.Drawing.Size(180, 22);
-            this.moveDownBtn.Text = "Move Down";
-            this.moveDownBtn.Click += new System.EventHandler(this.moveDownBtn_Click);
             // 
             // Form1
             // 
