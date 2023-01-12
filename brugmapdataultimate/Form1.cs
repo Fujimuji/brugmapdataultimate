@@ -770,7 +770,7 @@ namespace brugmapdataultimate
 
         public Map map = new Map();
         string pattern = @"(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)";
-        const string version = "v1.0.2";
+        const string version = "v1.0.3";
 
         public int GeneratePrimeForCP()
         {
@@ -1036,6 +1036,7 @@ namespace brugmapdataultimate
 
             if (e.Node.Text.Contains("Checkpoint")) //a checkpoint under a level selected
             {
+                isNormalCP.Enabled = true;
                 string currentLvlName = mapTreeView.SelectedNode.Parent.Tag.ToString();
                 bool doesLvlFirstCpExist = map.Levels.First(x => x.Name == currentLvlName).Checkpoints.Any(x => x.Type == CheckpointType.LevelStart);
                 bool doesLvlLastCpExist = map.Levels.First(x => x.Name == currentLvlName).Checkpoints.Any(x => x.Type == CheckpointType.LevelEnd);
@@ -1058,7 +1059,10 @@ namespace brugmapdataultimate
                 slamUpDown.Value = decimal.Parse(map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].SlamCount);
                 powerBlockUpDown.Value = decimal.Parse(map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].PowerblockCount);
                 isEffLocked.Enabled = true;
-                isNormalCP.Enabled = true;
+                if (map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].Type == CheckpointType.LevelStart || map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].Type == CheckpointType.LevelEnd)
+                {
+                    isNormalCP.Enabled = false;
+                }
                 isTeleport.Enabled = true;
                 isTeleport.Checked = map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].TeleportCoordinate == "" ? false : true;
                 tpCoordTxt.Text = map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].TeleportCoordinate;
@@ -1315,7 +1319,6 @@ namespace brugmapdataultimate
             cpRadTxt.Value = 2;
             tpRadTxt.Value = 2;
         }
-        
         private void addLvlBtn_Click(object sender, EventArgs e)
         {
             if (addLvlBtn.Text == "Add Level")
@@ -1654,10 +1657,11 @@ namespace brugmapdataultimate
                     }
                     mapTreeView.SelectedNode.Parent.Nodes.Insert(0, cpNode);
                     currentLvlName = map.Levels.First(x => x.Name == currentLvlName).Name;
+                    var lvnode = mapTreeView.SelectedNode.Parent;
                     mapTreeView.SelectedNode.Remove();
-                    mapTreeView.SelectedNode = mapTreeView.TopNode.Nodes[int.Parse(needed.Text)];
+                    mapTreeView.SelectedNode = lvnode;
                     //change the name of the other checkpoints accordingly
-                    for (int i = 1; i < mapTreeView.SelectedNode.Nodes.Count; i++)
+                    for (int i = 0; i < mapTreeView.SelectedNode.Nodes.Count; i++)
                     {
                         mapTreeView.SelectedNode.Nodes[i].Text = $"Checkpoint {i + 1}";
                     }
@@ -1697,9 +1701,10 @@ namespace brugmapdataultimate
                     TreeNode cpNode = new TreeNode($"Checkpoint {map.Levels.First(x => x.Name == currentLvlName).Checkpoints.Count}");
                     mapTreeView.SelectedNode.Parent.Nodes.Add(cpNode);
                     currentLvlName = map.Levels.First(x => x.Name == currentLvlName).Name;
+                    var lvnode = mapTreeView.SelectedNode.Parent;
                     mapTreeView.SelectedNode.Remove();
-                    mapTreeView.SelectedNode = mapTreeView.SelectedNode.Parent;
-                    for (int i = 1; i < mapTreeView.SelectedNode.Nodes.Count; i++)
+                    mapTreeView.SelectedNode = lvnode;
+                    for (int i = 0; i < mapTreeView.SelectedNode.Nodes.Count; i++)
                     {
                         mapTreeView.SelectedNode.Nodes[i].Text = $"Checkpoint {i + 1}";
                     }
@@ -1736,7 +1741,7 @@ namespace brugmapdataultimate
                     map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].Type = CheckpointType.Normal;
                     map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].EffectLock = isEffLocked.Checked;
                     mapTreeView.SelectedNode = mapTreeView.SelectedNode.Parent;
-                    for (int i = 1; i < mapTreeView.SelectedNode.Nodes.Count; i++)
+                    for (int i = 0; i < mapTreeView.SelectedNode.Nodes.Count; i++)
                     {
                         mapTreeView.SelectedNode.Nodes[i].Text = $"Checkpoint {i + 1}";
                     }
@@ -3041,22 +3046,111 @@ namespace brugmapdataultimate
 
                 if (e.Node.Text.Contains("Level - "))
                 {
-                    treeMenuStrip.Items[0].Text = "Delete Level";
+                    int lvlindex = map.Levels.FindIndex(x => x.Name == e.Node.Tag.ToString());
+                    moveUpBtn.Visible = true;
+                    moveDownBtn.Visible = true;
+                    treeMenuStrip.Items[2].Text = "Delete Level";
+                    if (map.Levels.Count == 1)
+                    {
+                        moveUpBtn.Visible = false;
+                        moveDownBtn.Visible = false;
+
+                        mapTreeView.SelectedNode = e.Node;
+                        treeMenuStrip.Show(mapTreeView, e.Location);
+                        return;
+                    }
+
+                    if (lvlindex == 0)
+                    {
+                        moveUpBtn.Visible = false;
+                    }
+
+                    else if (lvlindex == map.Levels.Count - 1)
+                    {
+                        moveDownBtn.Visible = false;
+                    }
+
+                    mapTreeView.SelectedNode = e.Node;
+                    treeMenuStrip.Show(mapTreeView, e.Location);
+
                 }
 
                 if (e.Node.Text.Contains("Checkpoint"))
                 {
-                    treeMenuStrip.Items[0].Text = "Delete Checkpoint";
+                    moveUpBtn.Visible = true;
+                    moveDownBtn.Visible = true;
+                    treeMenuStrip.Items[2].Text = "Delete Checkpoint";
+                    int lvlindex = e.Node.Parent.Index - 1;
+                    int cpindex = e.Node.Index;
+                    CheckpointType checkpointType = map.Levels[lvlindex].Checkpoints[cpindex].Type;
+
+                    if (checkpointType == CheckpointType.LevelStart)
+                    {
+                        return;
+
+                    }
+
+                    if (checkpointType == CheckpointType.LevelEnd)
+                    {
+                        return;
+                    }
+
+                    if (e.Node.Parent.Nodes.Count == 1)
+                    {
+                        moveUpBtn.Visible = false;
+                        moveDownBtn.Visible = false;
+
+                        mapTreeView.SelectedNode = e.Node;
+                        treeMenuStrip.Show(mapTreeView, e.Location);
+                        return;
+                    }
+
+                    if (checkpointType == CheckpointType.Normal)
+                    {
+                        if (!map.Levels[lvlindex].Checkpoints.Any(x => x.Type == CheckpointType.LevelStart) && !map.Levels[lvlindex].Checkpoints.Any(x => x.Type == CheckpointType.LevelEnd))
+                        {
+                            if (cpindex == 0)
+                            {
+                                moveUpBtn.Visible = false;
+                            }
+
+                            if (cpindex == e.Node.Parent.Nodes.Count - 1)
+                            {
+                                moveDownBtn.Visible = false;
+                            }
+                        }
+
+                        if (map.Levels[lvlindex].Checkpoints.Any(x => x.Type == CheckpointType.LevelStart) && map.Levels[lvlindex].Checkpoints[cpindex - 1].Type == CheckpointType.LevelStart)
+                        {
+                            moveUpBtn.Visible = false;
+                            if (cpindex == e.Node.Parent.Nodes.Count - 1)
+                            {
+                                moveDownBtn.Visible = false;
+                            }
+                        }
+
+                        if (map.Levels[lvlindex].Checkpoints.Any(x => x.Type == CheckpointType.LevelEnd) && map.Levels[lvlindex].Checkpoints[cpindex + 1].Type == CheckpointType.LevelEnd)
+                        {
+                            moveDownBtn.Visible = false;
+                            mapTreeView.SelectedNode = e.Node;
+                            treeMenuStrip.Show(mapTreeView, e.Location);
+                            return;
+                        }
+                    }
                 }
 
                 if (e.Node.Text.Contains("Effect:"))
                 {
-                    treeMenuStrip.Items[0].Text = "Delete Effect";
+                    moveUpBtn.Visible = false;
+                    moveDownBtn.Visible = false;
+                    treeMenuStrip.Items[2].Text = "Delete Effect";
                 }
 
                 if (e.Node.Text.Contains("Mission:"))
                 {
-                    treeMenuStrip.Items[0].Text = "Delete Mission";
+                    moveUpBtn.Visible = false;
+                    moveDownBtn.Visible = false;
+                    treeMenuStrip.Items[2].Text = "Delete Mission";
                 }
 
                 mapTreeView.SelectedNode = e.Node;
@@ -3082,8 +3176,14 @@ namespace brugmapdataultimate
                 {
                     string lvlname = mapTreeView.SelectedNode.Parent.Tag.ToString();
                     int cpindex = mapTreeView.SelectedNode.Index;
+                    var lvl = mapTreeView.SelectedNode.Parent;
                     mapTreeView.SelectedNode.Remove();
+                    mapTreeView.SelectedNode = lvl;
                     map.Levels.Find(x => x.Name == lvlname).Checkpoints.RemoveAt(cpindex);
+                    for (int i = 0; i < mapTreeView.SelectedNode.Nodes.Count; i++)
+                    {
+                        mapTreeView.SelectedNode.Nodes[i].Text = "Checkpoint " + (i + 1).ToString();
+                    }
                 }
             }
 
@@ -3149,9 +3249,10 @@ namespace brugmapdataultimate
             CheckForUpdates();
         }
 
+
         public async void CheckForUpdates()
         {
-            var client = new GitHubClient(new ProductHeaderValue("brugmapdataultimate"));
+            var client = new GitHubClient(new ProductHeaderValue("brugmapdataultimateOCR"));
             var releases = await client.Repository.Release.GetAll("Fujimuji", "brugmapdataultimate");
             if (releases[0].TagName != version)
             {
@@ -3160,9 +3261,9 @@ namespace brugmapdataultimate
                 {
                     using (var htclient = new HttpClient())
                     {
-                        using (var s = htclient.GetStreamAsync(releases[0].Assets.FirstOrDefault(x => x.Name == "brugmapdataultimate.exe").BrowserDownloadUrl))
+                        using (var s = htclient.GetStreamAsync(releases[0].Assets.FirstOrDefault(x => x.Name == "brugmapdataultimateOCR.exe").BrowserDownloadUrl))
                         {
-                            using (var fs = new FileStream($"brugmapdataultimate{releases[0].TagName}.exe", System.IO.FileMode.OpenOrCreate))
+                            using (var fs = new FileStream($"brugmapdataultimateOCR{releases[0].TagName}.exe", System.IO.FileMode.OpenOrCreate))
                             {
                                 s.Result.CopyTo(fs);
                             }
@@ -3182,6 +3283,62 @@ namespace brugmapdataultimate
                 {
                     saveBtn.PerformClick();
                 }
+            }
+        }
+
+        private void moveUpBtn_Click(object sender, EventArgs e)
+        {
+            if (mapTreeView.SelectedNode.Text.Contains("Level -"))
+            {
+                int lvlindex = map.Levels.FindIndex(x => x.Name == mapTreeView.SelectedNode.Tag.ToString());
+                Level currentlvl = map.Levels[lvlindex];
+                map.Levels.RemoveAt(lvlindex);
+                map.Levels.Insert(lvlindex - 1, currentlvl);
+                var currentlvlnode = mapTreeView.SelectedNode;
+                int currentlvlnodeindex = mapTreeView.SelectedNode.Index;
+                var prevlvlnode = mapTreeView.SelectedNode.PrevNode;
+                mapTreeView.SelectedNode.Remove();
+                mapTreeView.Nodes[0].Nodes.Insert(currentlvlnodeindex - 1, currentlvlnode);
+                mapTreeView.SelectedNode = currentlvlnode;
+            }
+
+            if (mapTreeView.SelectedNode.Text.Contains("Checkpoint"))
+            {
+                int cpindex = mapTreeView.SelectedNode.Index;
+                Checkpoint currentcp = map.Levels.Find(x => x.Name == mapTreeView.SelectedNode.Parent.Tag.ToString()).Checkpoints[cpindex];
+
+                map.Levels.Find(x => x.Name == mapTreeView.SelectedNode.Parent.Tag.ToString()).Checkpoints.RemoveAt(cpindex);
+                map.Levels.Find(x => x.Name == mapTreeView.SelectedNode.Parent.Tag.ToString()).Checkpoints.Insert(cpindex - 1, currentcp);
+                mapTreeView.SelectedNode = mapTreeView.SelectedNode.Parent;
+                mapTreeView.SelectedNode = mapTreeView.SelectedNode.Nodes[cpindex - 1];
+            }
+        }
+
+        private void moveDownBtn_Click(object sender, EventArgs e)
+        {
+            if (mapTreeView.SelectedNode.Text.Contains("Level -"))
+            {
+                int lvlindex = map.Levels.FindIndex(x => x.Name == mapTreeView.SelectedNode.Tag.ToString());
+                Level currentlvl = map.Levels[lvlindex];
+                map.Levels.RemoveAt(lvlindex);
+                map.Levels.Insert(lvlindex + 1, currentlvl);
+                var currentlvlnode = mapTreeView.SelectedNode;
+                int currentlvlnodeindex = mapTreeView.SelectedNode.Index;
+                var prevlvlnode = mapTreeView.SelectedNode.PrevNode;
+                mapTreeView.SelectedNode.Remove();
+                mapTreeView.Nodes[0].Nodes.Insert(currentlvlnodeindex + 1, currentlvlnode);
+                mapTreeView.SelectedNode = currentlvlnode;
+            }
+
+            if (mapTreeView.SelectedNode.Text.Contains("Checkpoint"))
+            {
+                int cpindex = mapTreeView.SelectedNode.Index;
+                Checkpoint currentcp = map.Levels.Find(x => x.Name == mapTreeView.SelectedNode.Parent.Tag.ToString()).Checkpoints[cpindex];
+
+                map.Levels.Find(x => x.Name == mapTreeView.SelectedNode.Parent.Tag.ToString()).Checkpoints.RemoveAt(cpindex);
+                map.Levels.Find(x => x.Name == mapTreeView.SelectedNode.Parent.Tag.ToString()).Checkpoints.Insert(cpindex + 1, currentcp);
+                mapTreeView.SelectedNode = mapTreeView.SelectedNode.Parent;
+                mapTreeView.SelectedNode = mapTreeView.SelectedNode.Nodes[cpindex + 1];
             }
         }
     }
