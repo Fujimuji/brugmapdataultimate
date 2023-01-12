@@ -1358,9 +1358,10 @@ namespace brugmapdataultimate
 
                 if (mapTreeView.SelectedNode.Tag.ToString() == lvlNameTxt.Text || !map.Levels.Any(x => x.Name == lvlNameTxt.Text)) //incredible stuff
                 {
-                    map.Levels.First(x => x.Name == mapTreeView.SelectedNode.Tag.ToString()).Name = lvlNameTxt.Text;
+                    string oldname = mapTreeView.SelectedNode.Tag.ToString();
                     map.Levels.First(x => x.Name == mapTreeView.SelectedNode.Tag.ToString()).Icon = lvlIconComboBox.Items[lvlIconComboBox.SelectedIndex].ToString();
                     map.Levels.First(x => x.Name == mapTreeView.SelectedNode.Tag.ToString()).Color = lvlColorComboBox.Items[lvlColorComboBox.SelectedIndex].ToString();
+                    map.Levels.First(x => x.Name == mapTreeView.SelectedNode.Tag.ToString()).Name = lvlNameTxt.Text;
                     mapTreeView.SelectedNode.Tag = lvlNameTxt.Text;
                     mapTreeView.SelectedNode.Text = "Level - " + lvlNameTxt.Text;
                     mapTreeView.SelectedNode = mapTreeView.Nodes[0];
