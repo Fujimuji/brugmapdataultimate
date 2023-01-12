@@ -770,7 +770,7 @@ namespace brugmapdataultimate
 
         public Map map = new Map();
         string pattern = @"(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)";
-        const string version = "v1.0.3";
+        const string version = "v1.0.4";
 
         public int GeneratePrimeForCP()
         {
