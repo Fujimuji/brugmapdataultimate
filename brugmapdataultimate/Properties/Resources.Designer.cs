@@ -61,6 +61,38 @@ namespace brugmapdataultimate.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hanamura,Assault
+        ///Hanamura Winter,Assault
+        ///Horizon Lunar Colony,Assault
+        ///Paris,Assault
+        ///Temple of Anubis,Assault
+        ///Volskaya Industries,Assault
+        ///Busan,Control
+        ///Ilios,Control
+        ///Lijiang Tower,Control
+        ///Lijiang Tower Lunar New Year,Control
+        ///Nepal,Control
+        ///Oasis,Control
+        ///Circuit Royal,Escort
+        ///Dorado,Escort
+        ///Havana,Escort
+        ///Junkertown,Escort
+        ///Rialto,Escort
+        ///Route 66,Escort
+        ///Shambali Monastery,Escort
+        ///Watchpoint: Gibraltar,Escort
+        ///Blizzard World,Hybrid
+        ///Blizzard World Winter,Hybrid
+        ///Eichenwalde,Hybrid
+        ///Eichenwalde Hal [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string maps {
+            get {
+                return ResourceManager.GetString("maps", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to settings
         ///{
         ///	main

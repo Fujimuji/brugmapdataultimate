@@ -96,6 +96,10 @@
             this.lvlIconComboBox = new System.Windows.Forms.ComboBox();
             this.addLvlBtn = new System.Windows.Forms.Button();
             this.lvlNameTxt = new System.Windows.Forms.TextBox();
+            this.generalGroupBox = new System.Windows.Forms.GroupBox();
+            this.mapComboBox = new System.Windows.Forms.ComboBox();
+            this.editMapSettingsBtn = new System.Windows.Forms.Button();
+            this.topleftTxt = new System.Windows.Forms.TextBox();
             this.mapGroupBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -119,6 +123,7 @@
             this.cpAbilGroupBox.SuspendLayout();
             this.treeMenuStrip.SuspendLayout();
             this.lvlGroupBox.SuspendLayout();
+            this.generalGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // aboutLbl
@@ -624,6 +629,7 @@
             // 
             // missTimeUpDown
             // 
+            this.missTimeUpDown.Enabled = false;
             this.missTimeUpDown.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.missTimeUpDown.Location = new System.Drawing.Point(376, 20);
             this.missTimeUpDown.Maximum = new decimal(new int[] {
@@ -891,7 +897,7 @@
             this.lvlGroupBox.Controls.Add(this.lvlIconComboBox);
             this.lvlGroupBox.Controls.Add(this.addLvlBtn);
             this.lvlGroupBox.Controls.Add(this.lvlNameTxt);
-            this.lvlGroupBox.Location = new System.Drawing.Point(368, 26);
+            this.lvlGroupBox.Location = new System.Drawing.Point(368, 97);
             this.lvlGroupBox.Name = "lvlGroupBox";
             this.lvlGroupBox.Size = new System.Drawing.Size(827, 64);
             this.lvlGroupBox.TabIndex = 67;
@@ -991,11 +997,53 @@
             this.lvlNameTxt.Size = new System.Drawing.Size(206, 27);
             this.lvlNameTxt.TabIndex = 0;
             // 
+            // generalGroupBox
+            // 
+            this.generalGroupBox.Controls.Add(this.mapComboBox);
+            this.generalGroupBox.Controls.Add(this.editMapSettingsBtn);
+            this.generalGroupBox.Controls.Add(this.topleftTxt);
+            this.generalGroupBox.Location = new System.Drawing.Point(368, 26);
+            this.generalGroupBox.Name = "generalGroupBox";
+            this.generalGroupBox.Size = new System.Drawing.Size(827, 64);
+            this.generalGroupBox.TabIndex = 69;
+            this.generalGroupBox.TabStop = false;
+            this.generalGroupBox.Text = "General Settings";
+            // 
+            // mapComboBox
+            // 
+            this.mapComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mapComboBox.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.mapComboBox.FormattingEnabled = true;
+            this.mapComboBox.Location = new System.Drawing.Point(395, 23);
+            this.mapComboBox.Name = "mapComboBox";
+            this.mapComboBox.Size = new System.Drawing.Size(183, 28);
+            this.mapComboBox.TabIndex = 2;
+            // 
+            // editMapSettingsBtn
+            // 
+            this.editMapSettingsBtn.Location = new System.Drawing.Point(605, 23);
+            this.editMapSettingsBtn.Name = "editMapSettingsBtn";
+            this.editMapSettingsBtn.Size = new System.Drawing.Size(216, 28);
+            this.editMapSettingsBtn.TabIndex = 1;
+            this.editMapSettingsBtn.Text = "Edit Settings";
+            this.editMapSettingsBtn.UseVisualStyleBackColor = true;
+            this.editMapSettingsBtn.Click += new System.EventHandler(this.editMapSettingsBtn_Click);
+            // 
+            // topleftTxt
+            // 
+            this.topleftTxt.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.topleftTxt.Location = new System.Drawing.Point(13, 23);
+            this.topleftTxt.Name = "topleftTxt";
+            this.topleftTxt.PlaceholderText = "Top Left Info";
+            this.topleftTxt.Size = new System.Drawing.Size(355, 27);
+            this.topleftTxt.TabIndex = 0;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1204, 680);
+            this.Controls.Add(this.generalGroupBox);
             this.Controls.Add(this.lvlGroupBox);
             this.Controls.Add(this.clipboardLbl);
             this.Controls.Add(this.loadBtn);
@@ -1044,6 +1092,8 @@
             this.treeMenuStrip.ResumeLayout(false);
             this.lvlGroupBox.ResumeLayout(false);
             this.lvlGroupBox.PerformLayout();
+            this.generalGroupBox.ResumeLayout(false);
+            this.generalGroupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1115,5 +1165,9 @@
         private TextBox lvlNameTxt;
         private ToolStripMenuItem moveUpBtn;
         private ToolStripMenuItem moveDownBtn;
+        private GroupBox generalGroupBox;
+        private ComboBox mapComboBox;
+        private Button editMapSettingsBtn;
+        private TextBox topleftTxt;
     }
 }

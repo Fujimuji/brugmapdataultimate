@@ -24,6 +24,7 @@
 		{
 			enabled maps
 			{
+				"Assault"
 			}
 		}
 
@@ -31,6 +32,7 @@
 		{
 			enabled maps
 			{
+				"Control"
 			}
 		}
 
@@ -38,6 +40,7 @@
 		{
 			enabled maps
 			{
+				"Escort"
 			}
 		}
 
@@ -45,7 +48,7 @@
 		{
 			enabled maps
 			{
-				Eichenwalde 0
+				"Hybrid"
 			}
 		}
 
@@ -53,6 +56,7 @@
 		{
 			enabled maps
 			{
+				"Skirmish"
 			}
 		}
 
@@ -60,6 +64,7 @@
 		{
 			enabled maps
 			{
+				"Team Deathmatch"
 			}
 		}
 
@@ -439,7 +444,7 @@ rule("GLOBAL HUD - LEVEL NAMES & COLORS & INITIATE MAP   ----   CUSTOMIZE")
 			"Customize Leaderboard Multi Colors"
 			Global.LvlColors2 = Array(Color(White), Color(White), Color(White), Color(White), Color(White), Color(White));
 			"Customize Top Left Info"
-			Global.InfoText = Custom String("<CUSTOMIZE IN \"GLOBAL HUD\" RULE>");
+			Global.InfoText = Custom String("<CUSTOMIZE IN GLOBAL HUD RULE>");
 			Global.PrimeNumbers = Array(2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43);
 			Global.MissionCompletion = Array(Custom String("   "), Custom String("√ "), Custom String("X  "), Custom String("   "),
 				Custom String("X  "), Custom String("√ "), Custom String("LOCKED"), Custom String("PERFECT"), Custom String(
@@ -4414,7 +4419,7 @@ rule("Workshop Settings")
 			Global.WSClearSetFacing = Workshop Setting Toggle(Custom String("1. General"), Custom String(
 				"Set View Angle on CP clear (legacy way)"), False, 6);
 			Global.WSReturnPrevent = Workshop Setting Toggle(Custom String("1. General"), Custom String(
-				"Prevent Returning to CP on Effect Lock"), False, 7);
+				"Prevent Returning to CP on Effect Lock"), True, 7);
 			"Enable Completionist"
 			Global.WSCompletionist = Workshop Setting Toggle(Custom String("2. Completionist"), Custom String(
 				" Completionist Mode - Complete every Mission in a path of Diverge"), True, 0);
