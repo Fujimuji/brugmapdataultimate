@@ -775,7 +775,7 @@ namespace brugmapdataultimate
 
         public Map map = new Map();
         string pattern = @"(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)";
-        const string version = "v1.0.4";
+        const string version = "v1.0.5";
 
         public int GeneratePrimeForCP()
         {
@@ -3271,6 +3271,7 @@ namespace brugmapdataultimate
 
         public void FillMapComboBox()
         {
+            mapComboBox.Items.Clear();
             string[] maplist = Properties.Resources.maps.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
             foreach (string m in maplist)
             {
