@@ -2842,7 +2842,7 @@ namespace brugmapdataultimate
 
         private void clipboardLbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Clipboard.SetText(map.GenerateMapData());
+            Clipboard.SetText(map.GenerateMapData(coordCbox.Checked));
         }
 
         private void mapTreeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
