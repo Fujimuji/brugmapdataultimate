@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Map");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Map");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.aboutLbl = new System.Windows.Forms.LinkLabel();
             this.mapGroupBox = new System.Windows.Forms.GroupBox();
@@ -100,6 +100,8 @@
             this.mapComboBox = new System.Windows.Forms.ComboBox();
             this.editMapSettingsBtn = new System.Windows.Forms.Button();
             this.topleftTxt = new System.Windows.Forms.TextBox();
+            this.loadKneatBtn = new System.Windows.Forms.Button();
+            this.coordCbox = new System.Windows.Forms.CheckBox();
             this.mapGroupBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -151,11 +153,11 @@
             this.mapTreeView.HideSelection = false;
             this.mapTreeView.Location = new System.Drawing.Point(3, 19);
             this.mapTreeView.Name = "mapTreeView";
-            treeNode1.Checked = true;
-            treeNode1.Name = "Node0";
-            treeNode1.Text = "Map";
+            treeNode2.Checked = true;
+            treeNode2.Name = "Node0";
+            treeNode2.Text = "Map";
             this.mapTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1});
+            treeNode2});
             this.mapTreeView.Size = new System.Drawing.Size(344, 612);
             this.mapTreeView.TabIndex = 46;
             this.mapTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.mapTreeView_AfterSelect);
@@ -1038,11 +1040,35 @@
             this.topleftTxt.Size = new System.Drawing.Size(355, 27);
             this.topleftTxt.TabIndex = 0;
             // 
+            // loadKneatBtn
+            // 
+            this.loadKneatBtn.Location = new System.Drawing.Point(976, 6);
+            this.loadKneatBtn.Name = "loadKneatBtn";
+            this.loadKneatBtn.Size = new System.Drawing.Size(219, 23);
+            this.loadKneatBtn.TabIndex = 70;
+            this.loadKneatBtn.Text = "Load KNEAT Data from Clipboard";
+            this.loadKneatBtn.UseVisualStyleBackColor = true;
+            this.loadKneatBtn.Click += new System.EventHandler(this.loadKneatBtn_Click);
+            // 
+            // coordCbox
+            // 
+            this.coordCbox.AutoSize = true;
+            this.coordCbox.Checked = true;
+            this.coordCbox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.coordCbox.Location = new System.Drawing.Point(222, 660);
+            this.coordCbox.Name = "coordCbox";
+            this.coordCbox.Size = new System.Drawing.Size(203, 19);
+            this.coordCbox.TabIndex = 71;
+            this.coordCbox.Text = "Enable/Disable Coordinates Panel";
+            this.coordCbox.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(1204, 680);
+            this.Controls.Add(this.coordCbox);
+            this.Controls.Add(this.loadKneatBtn);
             this.Controls.Add(this.generalGroupBox);
             this.Controls.Add(this.lvlGroupBox);
             this.Controls.Add(this.clipboardLbl);
@@ -1169,5 +1195,7 @@
         private ComboBox mapComboBox;
         private Button editMapSettingsBtn;
         private TextBox topleftTxt;
+        private Button loadKneatBtn;
+        private CheckBox coordCbox;
     }
 }

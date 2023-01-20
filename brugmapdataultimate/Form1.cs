@@ -73,11 +73,11 @@ namespace brugmapdataultimate
 
             public string SelectedMap { get; set; } = "Eichenwalde";
             public string Type { get; set; } = "Hybrid";
-            public string TopLeftInfo { get; set; } = "<CUSTOMIZE IN \"GLOBAL HUD\" RULE>";
+            public string TopLeftInfo { get; set; } = "<CUSTOMIZE IN GLOBAL HUD RULE>";
             public Checkpoint levelSelectorCP { get; set; }
             public List<Level> Levels { get; set; }
 
-            public string GenerateMapData()
+            public string GenerateMapData(bool isPanelActivated = false)
             {
                 string genCPposition = "Global.CPposition = Array(";
                 string genPrime = "Global.Prime = Array(";
@@ -132,10 +132,22 @@ namespace brugmapdataultimate
                 }
 
                 string wholemapdata = Properties.Resources.playtemplate;
-                int mapdataindex = wholemapdata.IndexOf("\"Map Data Goes Here\"");
-                if (mapdataindex != -1)
+                int firstdataindex = wholemapdata.IndexOf("\"First Data Goes Here\"");
+                if (firstdataindex != -1)
                 {
-                    wholemapdata = wholemapdata.Insert(mapdataindex + "\"Map Data Goes Here\"".Length, $"\r\n\t\t{genCPposition}\r\n\t\t{genPrime}\r\n\t\t{genRadVAGobackCP}\r\n\t\t{genConnections}\r\n\t\t{genMission}\r\n\t\t{genHiddenCPTpRadTT}\r\n\t\t{genTP}\r\n\t\t{genEffect}\r\n\t\t{genAbilityCount}");
+                    wholemapdata = wholemapdata.Insert(firstdataindex + "\"First Data Goes Here\"".Length, $"\r\n\t\t{genCPposition}\r\n\t\t{genPrime}\r\n\t\t{genRadVAGobackCP}");
+                }
+
+                int seconddataindex = wholemapdata.IndexOf("\"Second Data Goes Here\"");
+                if (seconddataindex != -1)
+                {
+                    wholemapdata = wholemapdata.Insert(seconddataindex + "\"Second Data Goes Here\"".Length, $"\r\n\t\t{genConnections}\r\n\t\t{genMission}\r\n\t\t{genHiddenCPTpRadTT}");
+                }
+
+                int thirddataindex = wholemapdata.IndexOf("\"Third Data Goes Here\"");
+                if (thirddataindex != -1)
+                {
+                    wholemapdata = wholemapdata.Insert(thirddataindex + "\"Third Data Goes Here\"".Length, $"\r\n\t\t{genTP}\r\n\t\t{genEffect}\r\n\t\t{genAbilityCount}");
                 }
 
                 int lvlnameindex = wholemapdata.IndexOf("\"Customize Level Names\"");
@@ -224,9 +236,11 @@ namespace brugmapdataultimate
                 wholemapdata = wholemapdata.Replace("<CUSTOMIZE IN GLOBAL HUD RULE>", TopLeftInfo);
                 wholemapdata = wholemapdata.Replace($"\"{Type}\"", SelectedMap + " 0");
                 string[] maptypes = new string[] { "Assault", "Control", "Escort", "Hybrid", "Skirmish", "Team Deathmatch" };
-                for (int i = 0; i < maptypes.Length; i++)
+                wholemapdata = maptypes.Aggregate(wholemapdata, (current, t) => current.Replace($"\"{t}\"", string.Empty));
+
+                if (isPanelActivated == false)
                 {
-                    wholemapdata = wholemapdata.Replace($"\"{maptypes[i]}\"", string.Empty);
+                    wholemapdata = wholemapdata.Replace("rule(\"display)\"", "disabled rule(\"display)\"");
                 }
                 return wholemapdata;
             }
@@ -239,7 +253,6 @@ namespace brugmapdataultimate
             public string Color { get; set; } = "Green";
             public List<Checkpoint> Checkpoints { get; set; } = new List<Checkpoint>();
         }
-
 
         public class Checkpoint
         {
@@ -316,6 +329,7 @@ namespace brugmapdataultimate
                 int currentcount = 1;
                 int listcount = Missions.Count;
                 genMission += _prime.ToString() + ",";
+
                 if (Missions.Any(x => (int)x.Type == 2))
                 {
                     Mission m = Missions.FirstOrDefault(x => (int)x.Type == 2);
@@ -348,34 +362,19 @@ namespace brugmapdataultimate
                         deflock++;
                     }
                 }
+
                 if (Missions.Any(x => (int)x.Type == 3))
                 {
                     Mission m = Missions.FirstOrDefault(x => (int)x.Type == 3);
                     if (m.isTimeMission)
                     {
-                        if (currentcount == listcount)
-                        {
-                            genMission += m.TimeValue + ")";
-                        }
-
-                        else
-                        {
-                            genMission += m.TimeValue + ",";
-                        }
+                        genMission += currentcount == listcount ? m.TimeValue + ")" : m.TimeValue + ",";
                         currentcount++;
                     }
 
                     if (m.isLock)
                     {
-                        if (currentcount == listcount)
-                        {
-                            genMission += deflock.ToString() + ")";
-                        }
-
-                        else
-                        {
-                            genMission += deflock.ToString() + ",";
-                        }
+                        genMission += currentcount == listcount ? deflock.ToString() + ")" : deflock.ToString() + ",";
                         currentcount++;
                         deflock++;
                     }
@@ -385,29 +384,13 @@ namespace brugmapdataultimate
                     Mission m = Missions.FirstOrDefault(x => (int)x.Type == 5);
                     if (m.isTimeMission)
                     {
-                        if (currentcount == listcount)
-                        {
-                            genMission += m.TimeValue + ")";
-                        }
-
-                        else
-                        {
-                            genMission += m.TimeValue + ",";
-                        }
+                        genMission += currentcount == listcount ? m.TimeValue + ")" : m.TimeValue + ",";
                         currentcount++;
                     }
 
                     if (m.isLock)
                     {
-                        if (currentcount == listcount)
-                        {
-                            genMission += deflock.ToString() + ")";
-                        }
-
-                        else
-                        {
-                            genMission += deflock.ToString() + ",";
-                        }
+                        genMission += currentcount == listcount ? deflock.ToString() + ")" : deflock.ToString() + ",";
                         currentcount++;
                         deflock++;
                     }
@@ -417,29 +400,13 @@ namespace brugmapdataultimate
                     Mission m = Missions.FirstOrDefault(x => (int)x.Type == 7);
                     if (m.isTimeMission)
                     {
-                        if (currentcount == listcount)
-                        {
-                            genMission += m.TimeValue + ")";
-                        }
-
-                        else
-                        {
-                            genMission += m.TimeValue + ",";
-                        }
+                        genMission += currentcount == listcount ? m.TimeValue + ")" : m.TimeValue + ",";
                         currentcount++;
                     }
 
                     if (m.isLock)
                     {
-                        if (currentcount == listcount)
-                        {
-                            genMission += deflock.ToString() + ")";
-                        }
-
-                        else
-                        {
-                            genMission += deflock.ToString() + ",";
-                        }
+                        genMission += currentcount == listcount ? deflock.ToString() + ")" : deflock.ToString() + ",";
                         currentcount++;
                         deflock++;
                     }
@@ -449,29 +416,13 @@ namespace brugmapdataultimate
                     Mission m = Missions.FirstOrDefault(x => (int)x.Type == 13);
                     if (m.isTimeMission)
                     {
-                        if (currentcount == listcount)
-                        {
-                            genMission += m.TimeValue + ")";
-                        }
-
-                        else
-                        {
-                            genMission += m.TimeValue + ",";
-                        }
+                        genMission += currentcount == listcount ? m.TimeValue + ")" : m.TimeValue + ",";
                         currentcount++;
                     }
 
                     if (m.isLock)
                     {
-                        if (currentcount == listcount)
-                        {
-                            genMission += deflock.ToString() + ")";
-                        }
-
-                        else
-                        {
-                            genMission += deflock.ToString() + ",";
-                        }
+                        genMission += currentcount == listcount ? deflock.ToString() + ")" : deflock.ToString() + ",";
                         currentcount++;
                         deflock++;
                     }
@@ -481,29 +432,13 @@ namespace brugmapdataultimate
                     Mission m = Missions.FirstOrDefault(x => (int)x.Type == 17);
                     if (m.isTimeMission)
                     {
-                        if (currentcount == listcount)
-                        {
-                            genMission += m.TimeValue + ")";
-                        }
-
-                        else
-                        {
-                            genMission += m.TimeValue + ",";
-                        }
+                        genMission += currentcount == listcount ? m.TimeValue + ")" : m.TimeValue + ",";
                         currentcount++;
                     }
 
                     if (m.isLock)
                     {
-                        if (currentcount == listcount)
-                        {
-                            genMission += deflock.ToString() + ")";
-                        }
-
-                        else
-                        {
-                            genMission += deflock.ToString() + ",";
-                        }
+                        genMission += currentcount == listcount ? deflock.ToString() + ")" : deflock.ToString() + ",";
                         currentcount++;
                         deflock++;
                     }
@@ -513,29 +448,13 @@ namespace brugmapdataultimate
                     Mission m = Missions.FirstOrDefault(x => (int)x.Type == 19);
                     if (m.isTimeMission)
                     {
-                        if (currentcount == listcount)
-                        {
-                            genMission += m.TimeValue + ")";
-                        }
-
-                        else
-                        {
-                            genMission += m.TimeValue + ",";
-                        }
+                        genMission += currentcount == listcount ? m.TimeValue + ")" : m.TimeValue + ",";
                         currentcount++;
                     }
 
                     if (m.isLock)
                     {
-                        if (currentcount == listcount)
-                        {
-                            genMission += deflock.ToString() + ")";
-                        }
-
-                        else
-                        {
-                            genMission += deflock.ToString() + ",";
-                        }
+                        genMission += currentcount == listcount ? deflock.ToString() + ")" : deflock.ToString() + ",";
                         currentcount++;
                         deflock++;
                     }
@@ -545,29 +464,13 @@ namespace brugmapdataultimate
                     Mission m = Missions.FirstOrDefault(x => (int)x.Type == 23);
                     if (m.isTimeMission)
                     {
-                        if (currentcount == listcount)
-                        {
-                            genMission += m.TimeValue + ")";
-                        }
-
-                        else
-                        {
-                            genMission += m.TimeValue + ",";
-                        }
+                        genMission += currentcount == listcount ? m.TimeValue + ")" : m.TimeValue + ",";
                         currentcount++;
                     }
 
                     if (m.isLock)
                     {
-                        if (currentcount == listcount)
-                        {
-                            genMission += deflock.ToString() + ")";
-                        }
-
-                        else
-                        {
-                            genMission += deflock.ToString() + ",";
-                        }
+                        genMission += currentcount == listcount ? deflock.ToString() + ")" : deflock.ToString() + ",";
                         currentcount++;
                         deflock++;
                     }
@@ -577,29 +480,13 @@ namespace brugmapdataultimate
                     Mission m = Missions.FirstOrDefault(x => (int)x.Type == 29);
                     if (m.isTimeMission)
                     {
-                        if (currentcount == listcount)
-                        {
-                            genMission += m.TimeValue + ")";
-                        }
-
-                        else
-                        {
-                            genMission += m.TimeValue + ",";
-                        }
+                        genMission += currentcount == listcount ? m.TimeValue + ")" : m.TimeValue + ",";
                         currentcount++;
                     }
 
                     if (m.isLock)
                     {
-                        if (currentcount == listcount)
-                        {
-                            genMission += deflock.ToString() + ")";
-                        }
-
-                        else
-                        {
-                            genMission += deflock.ToString() + ",";
-                        }
+                        genMission += currentcount == listcount ? deflock.ToString() + ")" : deflock.ToString() + ",";
                         currentcount++;
                         deflock++;
                     }
@@ -609,29 +496,13 @@ namespace brugmapdataultimate
                     Mission m = Missions.FirstOrDefault(x => (int)x.Type == 31);
                     if (m.isTimeMission)
                     {
-                        if (currentcount == listcount)
-                        {
-                            genMission += m.TimeValue + ")";
-                        }
-
-                        else
-                        {
-                            genMission += m.TimeValue + ",";
-                        }
+                        genMission += currentcount == listcount ? m.TimeValue + ")" : m.TimeValue + ",";
                         currentcount++;
                     }
 
                     if (m.isLock)
                     {
-                        if (currentcount == listcount)
-                        {
-                            genMission += deflock.ToString() + ")";
-                        }
-
-                        else
-                        {
-                            genMission += deflock.ToString() + ",";
-                        }
+                        genMission += currentcount == listcount ? deflock.ToString() + ")" : deflock.ToString() + ",";
                         currentcount++;
                         deflock++;
                     }
@@ -641,29 +512,13 @@ namespace brugmapdataultimate
                     Mission m = Missions.FirstOrDefault(x => (int)x.Type == 37);
                     if (m.isTimeMission)
                     {
-                        if (currentcount == listcount)
-                        {
-                            genMission += m.TimeValue + ")";
-                        }
-
-                        else
-                        {
-                            genMission += m.TimeValue + ",";
-                        }
+                        genMission += currentcount == listcount ? m.TimeValue + ")" : m.TimeValue + ",";
                         currentcount++;
                     }
 
                     if (m.isLock)
                     {
-                        if (currentcount == listcount)
-                        {
-                            genMission += deflock.ToString() + ")";
-                        }
-
-                        else
-                        {
-                            genMission += deflock.ToString() + ",";
-                        }
+                        genMission += currentcount == listcount ? deflock.ToString() + ")" : deflock.ToString() + ",";
                         currentcount++;
                         deflock++;
                     }
@@ -680,29 +535,15 @@ namespace brugmapdataultimate
                 string genEffect = "Array(";
                 for (int i = 0; i < Effects.Count; i++)
                 {
-                    if (i == Effects.Count - 1)
-                    {
-                        genEffect += Effects[i].EffectString() + ")";
-                    }
-
-                    else
-                    {
-                        genEffect += Effects[i].EffectString() + ",";
-                    }
+                    genEffect += i == Effects.Count - 1
+                        ? Effects[i].EffectString() + ")"
+                        : Effects[i].EffectString() + ",";
                 }
                 return genEffect;
             }
             public string AbilityCountStringForCP()
             {
-                if (isAbilCount == false)
-                {
-                    return "False";
-                }
-
-                else
-                {
-                    return $"Vector({PunchCount},{PowerblockCount},{SlamCount})";
-                }
+                return isAbilCount == false ? "False" : $"Vector({PunchCount},{PowerblockCount},{SlamCount})";
             }
         }
 
@@ -723,45 +564,16 @@ namespace brugmapdataultimate
 
             public string EffectString()
             {
-                if (Type == EffectType.Time)
+                return Type switch
                 {
-                    return $"Array(Vector({Coordinate}), {Radius}, 0, {TimeValue})";
-                }
-
-                if (Type == EffectType.Death)
-                {
-                    return $"Array(Vector({Coordinate}), {Radius}, 1, 1)";
-                }
-
-                if (Type == EffectType.Ability)
-                {
-                    return $"Array(Vector({Coordinate}), {Radius}, 2, {Prime})";
-                }
-
-                if (Type == EffectType.Permeation)
-                {
-                    return $"Array(Vector({Coordinate}), {Radius}, 3, {Prime})";
-                }
-
-                if (Type == EffectType.Safepoint)
-                {
-                    return $"Array(Vector({Coordinate}), {Radius}, 4, {Prime})";
-                }
-
-                if (Type == EffectType.EntryPortal)
-                {
-                    return $"Array(Vector({Coordinate}), {Radius}, 5, {Prime})";
-                }
-
-                if (Type == EffectType.ExitPortal)
-                {
-                    return $"Array(Vector({Coordinate}), {Radius}, 6, {Prime})";
-                }
-
-                else
-                {
-                    return "";
-                }
+                    EffectType.Time => $"Array(Vector({Coordinate}), {Radius}, 0, {TimeValue})",
+                    EffectType.Death => $"Array(Vector({Coordinate}), {Radius}, 1, 1)",
+                    EffectType.Ability => $"Array(Vector({Coordinate}), {Radius}, 2, {Prime})",
+                    EffectType.Permeation => $"Array(Vector({Coordinate}), {Radius}, 3, {Prime})",
+                    EffectType.Safepoint => $"Array(Vector({Coordinate}), {Radius}, 4, {Prime})",
+                    EffectType.EntryPortal => $"Array(Vector({Coordinate}), {Radius}, 5, {Prime})",
+                    EffectType.ExitPortal => $"Array(Vector({Coordinate}), {Radius}, 6, {Prime})"
+                };
             }
         }
 
@@ -775,50 +587,16 @@ namespace brugmapdataultimate
 
         public Map map = new Map();
         string pattern = @"(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)";
-        const string version = "v1.0.5";
+        const string version = "v1.0.6";
 
         public int GeneratePrimeForCP()
         {
-            int prime = 1;
-            foreach (CheckBox c in cpAbilGroupBox.Controls.OfType<CheckBox>())
-            {
-                if (!c.Checked)
-                {
-                    prime *= int.Parse(c.Tag.ToString());
-                }
-            }
-            return prime;
+            return cpAbilGroupBox.Controls.OfType<CheckBox>().Where(c => !c.Checked).Aggregate(1, (current, c) => current * int.Parse(c.Tag.ToString()));
         }
 
         public int GeneratePrimeForEffect()
         {
-            int prime = 1;
-            foreach (CheckBox c in effAbilGroupBox.Controls.OfType<CheckBox>())
-            {
-                if (!c.Checked)
-                {
-                    prime *= int.Parse(c.Tag.ToString());
-                }
-            }
-            return prime;
-        }
-
-        public MissionType GetSelectedMissionType()
-        {
-            return missTypeComboBox.SelectedIndex switch
-            {
-                0 => MissionType.NoRocketPunch,
-                1 => MissionType.NoPowerblock,
-                2 => MissionType.NoSlam,
-                3 => MissionType.Stalless,
-                4 => MissionType.Spin,
-                5 => MissionType.RocketPunchFirst,
-                6 => MissionType.PowerblockFirst,
-                7 => MissionType.SlamFirst,
-                8 => MissionType.UpwardsDiag,
-                9 => MissionType.DownwardsDiag,
-                10 => MissionType.PunchBounce
-            };
+            return effAbilGroupBox.Controls.OfType<CheckBox>().Where(c => !c.Checked).Aggregate(1, (current, c) => current * int.Parse(c.Tag.ToString()));
         }
 
         private void isNoChange_CheckedChanged(object sender, EventArgs e)
@@ -861,14 +639,7 @@ namespace brugmapdataultimate
                 }
             }
 
-            int checkcount = 0;
-            foreach (CheckBox z in effAbilGroupBox.Controls.OfType<CheckBox>())
-            {
-                if (z.Checked)
-                {
-                    checkcount++;
-                }
-            }
+            int checkcount = effAbilGroupBox.Controls.OfType<CheckBox>().Count(z => z.Checked);
             if (checkcount == 0)
             {
                 isNoChange.Checked = true;
@@ -877,17 +648,17 @@ namespace brugmapdataultimate
 
         public void SelectTheCPtype(CheckpointType type)
         {
-            if (type == CheckpointType.LevelStart)
+            switch (type)
             {
-                isLvlStartCP.Checked = true;
-            }
-            if (type == CheckpointType.LevelEnd)
-            {
-                isLvlEndCP.Checked = true;
-            }
-            if (type == CheckpointType.Normal)
-            {
-                isNormalCP.Checked = true;
+                case CheckpointType.LevelStart:
+                    isLvlStartCP.Checked = true;
+                    break;
+                case CheckpointType.LevelEnd:
+                    isLvlEndCP.Checked = true;
+                    break;
+                case CheckpointType.Normal:
+                    isNormalCP.Checked = true;
+                    break;
             }
         }
 
@@ -895,7 +666,7 @@ namespace brugmapdataultimate
         {
             if (e.Node?.Text == "Map")
             {
-                topleftTxt.Text = map.TopLeftInfo == "<CUSTOMIZE IN \"GLOBAL HUD\" RULE>" ? "" : map.TopLeftInfo;
+                topleftTxt.Text = map.TopLeftInfo == "<CUSTOMIZE IN GLOBAL HUD RULE>" ? "" : map.TopLeftInfo;
                 mapComboBox.SelectedItem = map.SelectedMap;
                 if (e.Node.FirstNode?.Text != "Checkpoint 0") //level selector cp hasn't been added
                 {
@@ -957,7 +728,7 @@ namespace brugmapdataultimate
                 cpSlamEnabled.Enabled = true;
                 cpPowerBlockEnabled.Enabled = true;
                 isEffLocked.Checked = map.levelSelectorCP.EffectLock;
-                isEffLocked.Enabled = true;
+                isEffLocked.Enabled = map.levelSelectorCP.Effects.Any(x => x.Type == EffectType.Ability || x.Type == EffectType.Time);
                 return;
             }
 
@@ -1055,8 +826,8 @@ namespace brugmapdataultimate
                 string currentLvlName = mapTreeView.SelectedNode.Parent.Tag.ToString();
                 bool doesLvlFirstCpExist = map.Levels.First(x => x.Name == currentLvlName).Checkpoints.Any(x => x.Type == CheckpointType.LevelStart);
                 bool doesLvlLastCpExist = map.Levels.First(x => x.Name == currentLvlName).Checkpoints.Any(x => x.Type == CheckpointType.LevelEnd);
-                isLvlEndCP.Enabled = doesLvlLastCpExist ? false : true;
-                isLvlStartCP.Enabled = doesLvlFirstCpExist ? false : true;
+                isLvlEndCP.Enabled = !doesLvlLastCpExist;
+                isLvlStartCP.Enabled = !doesLvlFirstCpExist;
                 isLvlSelector.Enabled = false;
                 HideEffectsMissions();
                 SelectTheCPtype(map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].Type);
@@ -1073,13 +844,13 @@ namespace brugmapdataultimate
                 punchUpDown.Value = decimal.Parse(map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].PunchCount);
                 slamUpDown.Value = decimal.Parse(map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].SlamCount);
                 powerBlockUpDown.Value = decimal.Parse(map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].PowerblockCount);
-                isEffLocked.Enabled = true;
+                isEffLocked.Enabled = map.levelSelectorCP.Effects.Any(x => x.Type == EffectType.Ability || x.Type == EffectType.Time);
                 if (map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].Type == CheckpointType.LevelStart || map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].Type == CheckpointType.LevelEnd)
                 {
                     isNormalCP.Enabled = false;
                 }
                 isTeleport.Enabled = true;
-                isTeleport.Checked = map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].TeleportCoordinate == "" ? false : true;
+                isTeleport.Checked = map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].TeleportCoordinate != "";
                 tpCoordTxt.Text = map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].TeleportCoordinate;
                 tpRadTxt.Value = decimal.Parse(map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].TeleportRadius);
                 Debug.WriteLine($"Level: {currentLvlName} | Checkpoint: {e.Node.Index}");
@@ -1214,92 +985,74 @@ namespace brugmapdataultimate
                 }
 
                 Mission currenteff = (mapcp ? map.levelSelectorCP.Missions : map.Levels[lvlindex].Checkpoints[cpindex].Missions)[missindex];
-                if (currenteff.Type == MissionType.NoRocketPunch)
+                switch (currenteff.Type)
                 {
-                    missTypeComboBox.SelectedIndex = 0;
-                    isMissTime.Checked = currenteff.isTimeMission;
-                    isMissLock.Checked = currenteff.isLock;
-                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
-                }
-
-                if (currenteff.Type == MissionType.NoSlam)
-                {
-                    missTypeComboBox.SelectedIndex = 2;
-                    isMissTime.Checked = currenteff.isTimeMission;
-                    isMissLock.Checked = currenteff.isLock;
-                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
-                }
-
-                if (currenteff.Type == MissionType.NoPowerblock)
-                {
-                    missTypeComboBox.SelectedIndex = 1;
-                    isMissTime.Checked = currenteff.isTimeMission;
-                    isMissLock.Checked = currenteff.isLock;
-                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
-                }
-
-                if (currenteff.Type == MissionType.Stalless)
-                {
-                    missTypeComboBox.SelectedIndex = 3;
-                    isMissTime.Checked = currenteff.isTimeMission;
-                    isMissLock.Checked = currenteff.isLock;
-                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
-                }
-
-                if (currenteff.Type == MissionType.Spin)
-                {
-                    missTypeComboBox.SelectedIndex = 4;
-                    isMissTime.Checked = currenteff.isTimeMission;
-                    isMissLock.Checked = currenteff.isLock;
-                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
-                }
-
-                if (currenteff.Type == MissionType.RocketPunchFirst)
-                {
-                    missTypeComboBox.SelectedIndex = 5;
-                    isMissTime.Checked = currenteff.isTimeMission;
-                    isMissLock.Checked = currenteff.isLock;
-                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
-                }
-
-                if (currenteff.Type == MissionType.PowerblockFirst)
-                {
-                    missTypeComboBox.SelectedIndex = 6;
-                    isMissTime.Checked = currenteff.isTimeMission;
-                    isMissLock.Checked = currenteff.isLock;
-                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
-                }
-
-                if (currenteff.Type == MissionType.SlamFirst)
-                {
-                    missTypeComboBox.SelectedIndex = 7;
-                    isMissTime.Checked = currenteff.isTimeMission;
-                    isMissLock.Checked = currenteff.isLock;
-                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
-                }
-
-                if (currenteff.Type == MissionType.UpwardsDiag)
-                {
-                    missTypeComboBox.SelectedIndex = 8;
-                    isMissTime.Checked = currenteff.isTimeMission;
-                    isMissLock.Checked = currenteff.isLock;
-                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
-                }
-
-                if (currenteff.Type == MissionType.DownwardsDiag)
-                {
-                    missTypeComboBox.SelectedIndex = 9;
-                    isMissTime.Checked = currenteff.isTimeMission;
-                    isMissLock.Checked = currenteff.isLock;
-                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
-                }
-
-                if (currenteff.Type == MissionType.PunchBounce)
-                {
-                    missTypeComboBox.SelectedIndex = 10;
-                    isMissTime.Checked = currenteff.isTimeMission;
-                    isMissLock.Checked = currenteff.isLock;
-                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
+                    case MissionType.NoRocketPunch:
+                        missTypeComboBox.SelectedIndex = 0;
+                        isMissTime.Checked = currenteff.isTimeMission;
+                        isMissLock.Checked = currenteff.isLock;
+                        missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
+                        break;
+                    case MissionType.NoSlam:
+                        missTypeComboBox.SelectedIndex = 2;
+                        isMissTime.Checked = currenteff.isTimeMission;
+                        isMissLock.Checked = currenteff.isLock;
+                        missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
+                        break;
+                    case MissionType.NoPowerblock:
+                        missTypeComboBox.SelectedIndex = 1;
+                        isMissTime.Checked = currenteff.isTimeMission;
+                        isMissLock.Checked = currenteff.isLock;
+                        missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
+                        break;
+                    case MissionType.Stalless:
+                        missTypeComboBox.SelectedIndex = 3;
+                        isMissTime.Checked = currenteff.isTimeMission;
+                        isMissLock.Checked = currenteff.isLock;
+                        missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
+                        break;
+                    case MissionType.Spin:
+                        missTypeComboBox.SelectedIndex = 4;
+                        isMissTime.Checked = currenteff.isTimeMission;
+                        isMissLock.Checked = currenteff.isLock;
+                        missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
+                        break;
+                    case MissionType.RocketPunchFirst:
+                        missTypeComboBox.SelectedIndex = 5;
+                        isMissTime.Checked = currenteff.isTimeMission;
+                        isMissLock.Checked = currenteff.isLock;
+                        missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
+                        break;
+                    case MissionType.PowerblockFirst:
+                        missTypeComboBox.SelectedIndex = 6;
+                        isMissTime.Checked = currenteff.isTimeMission;
+                        isMissLock.Checked = currenteff.isLock;
+                        missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
+                        break;
+                    case MissionType.SlamFirst:
+                        missTypeComboBox.SelectedIndex = 7;
+                        isMissTime.Checked = currenteff.isTimeMission;
+                        isMissLock.Checked = currenteff.isLock;
+                        missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
+                        break;
+                    case MissionType.UpwardsDiag:
+                        missTypeComboBox.SelectedIndex = 8;
+                        isMissTime.Checked = currenteff.isTimeMission;
+                        isMissLock.Checked = currenteff.isLock;
+                        missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
+                        break;
+                    case MissionType.DownwardsDiag:
+                        missTypeComboBox.SelectedIndex = 9;
+                        isMissTime.Checked = currenteff.isTimeMission;
+                        isMissLock.Checked = currenteff.isLock;
+                        missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
+                        break;
+                    case MissionType.PunchBounce:
+                        missTypeComboBox.SelectedIndex = 10;
+                        isMissTime.Checked = currenteff.isTimeMission;
+                        isMissLock.Checked = currenteff.isLock;
+                        missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
+                        break;
                 }
 
                 addMissBtn.Text = "Edit Mission";
@@ -1307,25 +1060,6 @@ namespace brugmapdataultimate
                 lvlGroupBox.Visible = false;
                 missSettingsGroupBox.Visible = true;
                 effSettingsGroupBox.Visible = false;
-                return;
-            }
-        }
-
-        private void isTeleport_CheckedChanged(object sender, EventArgs e)
-        {
-            tpCoordTxt.Enabled = isTeleport.Checked;
-            tpRadTxt.Enabled = isTeleport.Checked;
-        }
-
-        public int GetLevelIndexFromSelectedLevelNode()
-        {
-            if (mapTreeView.Nodes[0].FirstNode.Text == "Checkpoint 0")
-            {
-                return mapTreeView.SelectedNode.Index - 1;
-            }
-            else
-            {
-                return mapTreeView.SelectedNode.Index;
             }
         }
 
@@ -1336,6 +1070,7 @@ namespace brugmapdataultimate
             cpRadTxt.Value = 2;
             tpRadTxt.Value = 2;
         }
+
         private void addLvlBtn_Click(object sender, EventArgs e)
         {
             if (addLvlBtn.Text == "Add Level")
@@ -2077,7 +1812,7 @@ namespace brugmapdataultimate
                     return;
                 }
 
-                if (effTypeComboBox.SelectedItem.ToString() == "Permation")
+                if (effTypeComboBox.SelectedItem.ToString() == "Permeation")
                 {
                     (mapcp ? map.levelSelectorCP.Effects : map.Levels[lvlindex].Checkpoints[cpindex].Effects).Add(new Effect
                     {
@@ -2289,7 +2024,7 @@ namespace brugmapdataultimate
                     return;
                 }
 
-                if (effTypeComboBox.SelectedItem.ToString() == "Permation")
+                if (effTypeComboBox.SelectedItem.ToString() == "Permeation")
                 {
                     if (currentEff.Type == EffectType.EntryPortal)
                     {
@@ -2410,62 +2145,50 @@ namespace brugmapdataultimate
 
         private void effTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (effTypeComboBox.SelectedItem.ToString() == "Time")
+            switch (effTypeComboBox.SelectedItem.ToString())
             {
-                timePanel.Visible = true;
-                effAbilGroupBox.Enabled = false;
-                issEffCdReset.Enabled = false;
-                iseffLightShaft.Enabled = true;
-                return;
-            }
-
-            if (effTypeComboBox.SelectedItem.ToString() == "Death")
-            {
-                timePanel.Visible = false;
-                effAbilGroupBox.Enabled = false;
-                issEffCdReset.Enabled = false;
-                iseffLightShaft.Enabled = true;
-                return;
-            }
-
-            if (effTypeComboBox.SelectedItem.ToString() == "Ability")
-            {
-                timePanel.Visible = false;
-                effAbilGroupBox.Enabled = true;
-                issEffCdReset.Enabled = true;
-                iseffLightShaft.Enabled = true;
-            }
-
-            if (effTypeComboBox.SelectedItem.ToString() == "Permeation")
-            {
-                timePanel.Visible = false;
-                effAbilGroupBox.Enabled = true;
-                issEffCdReset.Enabled = true;
-                iseffLightShaft.Enabled = true;
-            }
-
-            if (effTypeComboBox.SelectedItem.ToString() == "Safepoint")
-            {
-                timePanel.Visible = false;
-                effAbilGroupBox.Enabled = true;
-                issEffCdReset.Enabled = false;
-                iseffLightShaft.Enabled = false;
-            }
-
-            if (effTypeComboBox.SelectedItem.ToString() == "Entry Portal")
-            {
-                timePanel.Visible = false;
-                effAbilGroupBox.Enabled = true;
-                issEffCdReset.Enabled = true;
-                iseffLightShaft.Enabled = false;
-            }
-
-            if (effTypeComboBox.SelectedItem.ToString() == "Exit Portal")
-            {
-                timePanel.Visible = false;
-                effAbilGroupBox.Enabled = true;
-                issEffCdReset.Enabled = true;
-                iseffLightShaft.Enabled = false;
+                case "Time":
+                    timePanel.Visible = true;
+                    effAbilGroupBox.Enabled = false;
+                    issEffCdReset.Enabled = false;
+                    iseffLightShaft.Enabled = true;
+                    return;
+                case "Death":
+                    timePanel.Visible = false;
+                    effAbilGroupBox.Enabled = false;
+                    issEffCdReset.Enabled = false;
+                    iseffLightShaft.Enabled = true;
+                    return;
+                case "Ability":
+                    timePanel.Visible = false;
+                    effAbilGroupBox.Enabled = true;
+                    issEffCdReset.Enabled = true;
+                    iseffLightShaft.Enabled = true;
+                    break;
+                case "Permeation":
+                    timePanel.Visible = false;
+                    effAbilGroupBox.Enabled = true;
+                    issEffCdReset.Enabled = true;
+                    iseffLightShaft.Enabled = true;
+                    break;
+                case "Safepoint":
+                    timePanel.Visible = false;
+                    effAbilGroupBox.Enabled = true;
+                    issEffCdReset.Enabled = false;
+                    iseffLightShaft.Enabled = false;
+                    break;
+                case "Entry Portal":
+                    timePanel.Visible = false;
+                    effAbilGroupBox.Enabled = true;
+                    issEffCdReset.Enabled = true;
+                    iseffLightShaft.Enabled = false;
+                    break;
+                case "Exit Portal":
+                    timePanel.Visible = false;
+                    effAbilGroupBox.Enabled = true;
+                    issEffCdReset.Enabled = true;
+                    iseffLightShaft.Enabled = false;
+                    break;
             }
         }
 
@@ -2952,6 +2675,7 @@ namespace brugmapdataultimate
                 missTimeUpDown.Value = 0;
                 missTimeUpDown.Enabled = false;
             }
+
             else
             {
                 missTimeUpDown.Value = 0;
@@ -3047,6 +2771,73 @@ namespace brugmapdataultimate
 
                 MessageBox.Show("Map Data Loaded!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        public void LoadMap()
+        {
+            if (!string.IsNullOrWhiteSpace(map.levelSelectorCP.Coordinate) || !string.IsNullOrEmpty(map.levelSelectorCP.Coordinate))
+            {
+                mapTreeView.Nodes.Clear();
+                mapTreeView.Nodes.Add("Map");
+                mapTreeView.Nodes[0].Nodes.Add("Checkpoint 0");
+                mapTreeView.Nodes[0].Nodes[0].Nodes.Add("Effects");
+                mapTreeView.Nodes[0].Nodes[0].Nodes.Add("Missions");
+                if (map.levelSelectorCP.Effects.Count > 0)
+                {
+                    for (int i = 0; i < map.levelSelectorCP.Effects.Count; i++)
+                    {
+                        mapTreeView.Nodes[0].Nodes[0].Nodes[0].Nodes.Add(map.levelSelectorCP.Effects[i].ToNodeString());
+                    }
+                }
+
+                if (map.levelSelectorCP.Missions.Count > 0)
+                {
+                    for (int i = 0; i < map.levelSelectorCP.Missions.Count; i++)
+                    {
+                        mapTreeView.Nodes[0].Nodes[0].Nodes[1].Nodes.Add(map.levelSelectorCP.Missions[i].ToNodeString());
+                    }
+                }
+            }
+
+            if (map.Levels.Any())
+            {
+                for (int i = 0; i < map.Levels.Count; i++)
+                {
+                    TreeNode lvlnode = new TreeNode();
+                    lvlnode.Text = "Level - " + map.Levels[i].Name;
+                    lvlnode.Tag = map.Levels[i].Name;
+                    mapTreeView.Nodes[0].Nodes.Add(lvlnode);
+                    for (int j = 0; j < map.Levels[i].Checkpoints.Count; j++)
+                    {
+                        mapTreeView.Nodes[0].Nodes[i + 1].Nodes.Add("Checkpoint " + (j + 1));
+                        if (map.Levels[i].Checkpoints[j].Type != CheckpointType.LevelEnd)
+                        {
+                            mapTreeView.Nodes[0].Nodes[i + 1].Nodes[j].Nodes.Add("Effects");
+                            mapTreeView.Nodes[0].Nodes[i + 1].Nodes[j].Nodes.Add("Missions");
+                        }
+
+                        if (map.Levels[i].Checkpoints[j].Effects.Count > 0)
+                        {
+                            for (int k = 0; k < map.Levels[i].Checkpoints[j].Effects.Count; k++)
+                            {
+                                mapTreeView.Nodes[0].Nodes[i + 1].Nodes[j].Nodes[0].Nodes.Add(map.Levels[i].Checkpoints[j].Effects[k].ToNodeString());
+                            }
+                        }
+
+                        if (map.Levels[i].Checkpoints[j].Missions.Count > 0)
+                        {
+                            for (int k = 0; k < map.Levels[i].Checkpoints[j].Missions.Count; k++)
+                            {
+                                mapTreeView.Nodes[0].Nodes[i + 1].Nodes[j].Nodes[1].Nodes.Add(map.Levels[i].Checkpoints[j].Missions[k].ToNodeString());
+                            }
+                        }
+                    }
+                }
+                saveBtn.Enabled = true;
+                clipboardLbl.Enabled = true;
+            }
+
+            MessageBox.Show("Map Data Loaded!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void clipboardLbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -3256,6 +3047,550 @@ namespace brugmapdataultimate
             }
         }
 
+        private void loadKneatBtn_Click(object sender, EventArgs e)
+        {
+            string kneatdata = Clipboard.GetText();
+            string cpPosition = "Global.CPposition =";
+            Map newMap = new Map();
+            int cpPositionIndex = kneatdata.IndexOf(cpPosition);
+            if (cpPositionIndex >= 0)
+            {
+                int startIndex = cpPositionIndex;
+                int endIndex = kneatdata.IndexOf(";", startIndex);
+                string cpPositionLine = kneatdata.Substring(startIndex, endIndex - startIndex + 1);
+                string patternz = @"Vector\(([\d\.\-, ]+)\)";
+                MatchCollection checkpoints = Regex.Matches(Regex.Replace(cpPositionLine, @"\s+", string.Empty), patternz);
+                mapTreeView.Nodes.Clear();
+                mapTreeView.Nodes.Add("Map");
+                newMap.TopLeftInfo = GetInfoText();
+                var mapsettings = GetMapSettings();
+                newMap.SelectedMap = mapsettings[1];
+                newMap.Type = mapsettings[0];
+                Level newLvl = new Level();
+                int lvlindex = -1;
+                int cpindex = 1;
+                bool islevelstart = true;
+                for (int i = 0; i < checkpoints.Count; i++)
+                {
+                    Match match = checkpoints[i];
+                    if (i == 0)
+                    {
+                        newMap.levelSelectorCP.Coordinate = checkpoints[i].Groups[1].Value;
+                        newMap.levelSelectorCP.Prime = GetPrime(i);
+                        var primefactors = int.Parse(newMap.levelSelectorCP.Prime).PrimeFactorization();
+                        newMap.levelSelectorCP.PunchEnabled = primefactors.Any(x => x == 2);
+                        newMap.levelSelectorCP.PowerblockEnabled = primefactors.Any(x => x == 5);
+                        newMap.levelSelectorCP.SlamEnabled = primefactors.Any(x => x == 3);
+                        newMap.levelSelectorCP.EffectLock = primefactors.Any(x => x == 17);
+                        newMap.levelSelectorCP.Radius = GetRadius(i);
+                        var abilitycount = GetAbilityCount(i);
+                        newMap.levelSelectorCP.isAbilCount = abilitycount[0] == "False" ? false : true;
+                        newMap.levelSelectorCP.Type = CheckpointType.LevelSelector;
+                        if (newMap.levelSelectorCP.isAbilCount)
+                        {
+                            newMap.levelSelectorCP.PunchCount = abilitycount[0];
+                            newMap.levelSelectorCP.PowerblockCount = abilitycount[1];
+                            newMap.levelSelectorCP.SlamCount = abilitycount[2];
+                        }
+                        var efflist = GetEffects(i);
+                        if (efflist.Any())
+                        {
+                            for (int i1 = 0; i1 < efflist.Count; i1++)
+                            {
+                                newMap.levelSelectorCP.Effects.Add(efflist[i1]);
+                            }
+                        }
+                        var misslist = GetMissions(i);
+                        if (misslist.Any())
+                        {
+                            for (int i1 = 0; i1 < misslist.Count; i1++)
+                            {
+                                newMap.levelSelectorCP.Missions.Add(misslist[i1]);
+                            }
+                        }
+                    }
+
+                    else
+                    {
+                        bool islvlEnd = GetConnection(i) == 0 ? true : false;
+                        if (islvlEnd == false)
+                        {
+                            var primefactors = int.Parse(GetPrime(i)).PrimeFactorization();
+                            if (islevelstart == true)
+                            {
+                                lvlindex++;
+                                cpindex = 1;
+                                newLvl = new Level();
+                                newLvl.Name = GetLevelName(lvlindex);
+                                newLvl.Icon = GetLevelIcon(lvlindex);
+                                newLvl.Color = GetLevelColor(lvlindex);
+                                islevelstart = false;
+                            }
+
+                            Checkpoint newcp = new Checkpoint()
+                            {
+                                Coordinate = checkpoints[i].Groups[1].Value,
+                                Prime = GetPrime(i),
+                                Radius = GetRadius(i),
+                                TeleportCoordinate = GetTP(i) == "False" ? "" : GetTP(i),
+                                TeleportRadius = GetTP(i) == "False" ? "2" : GetTPRadius(i),
+                                EffectLock = primefactors.Any(x => x == 17),
+                                PunchEnabled = primefactors.Any(x => x == 2),
+                                PowerblockEnabled = primefactors.Any(x => x == 5),
+                                SlamEnabled = primefactors.Any(x => x == 3),
+                                Type = primefactors.Any(x => x == 13) ? CheckpointType.LevelStart : CheckpointType.Normal
+                            };
+
+                            var abilitycount = GetAbilityCount(i);
+                            newcp.isAbilCount = abilitycount[0] == "False" ? false : true;
+
+                            if (newcp.isAbilCount)
+                            {
+                                newcp.PunchCount = abilitycount[0];
+                                newcp.PowerblockCount = abilitycount[1];
+                                newcp.SlamCount = abilitycount[2];
+                            }
+
+                            var efflist = GetEffects(i);
+                            if (efflist.Any())
+                            {
+                                efflist.ForEach(x => newcp.Effects.Add(x));
+                            }
+
+                            var misslist = GetMissions(i);
+                            if (efflist.Any())
+                            {
+                                misslist.ForEach(x => newcp.Missions.Add(x));
+                            }
+                            newLvl.Checkpoints.Add(newcp);
+                        }
+
+                        if (islvlEnd == true)
+                        {
+                            Checkpoint newcp = new Checkpoint()
+                            {
+                                Coordinate = checkpoints[i].Groups[1].Value,
+                                Prime = "True",
+                                Radius = GetRadius(i),
+                                Type = CheckpointType.LevelEnd
+                            };
+                            newLvl.Checkpoints.Add(newcp);
+                            newMap.Levels.Add(newLvl);
+                            islevelstart = true;
+                        }
+                    }
+                }
+                map = newMap;
+                LoadMap();
+            }
+        }
+
+        public string GetInfoText()
+        {
+            string fileContent = Clipboard.GetText();
+            string target = "Global.InfoText = Custom String(\"";
+            int targetIndex = fileContent.IndexOf(target) + target.Length;
+            if (targetIndex >= 0)
+            {
+                int startIndex = targetIndex;
+                int endIndex = fileContent.IndexOf("\");", startIndex);
+                string targetLine = fileContent.Substring(startIndex, endIndex - startIndex);
+                return targetLine;
+            }
+            return null;
+        }
+
+        public string[] GetMapSettings()
+        {
+            string input = Clipboard.GetText();
+            string pattern = @"(\w+)\s*\{\s*enabled maps\s*\{\s*(.*?)\s*\}\s*\}";
+            MatchCollection matches = Regex.Matches(input, pattern);
+
+            foreach (Match match in matches)
+            {
+                if (match.Groups[2].Value.Trim() != "")
+                {
+                    return new string[] { match.Groups[1].Value, match.Groups[2].Value.Replace("0", string.Empty).Trim() }; //0 = map type, 1 = selected map
+                }
+            }
+            return null;
+        }
+
+        public string GetLevelName(int index)
+        {
+            string fileContent = Clipboard.GetText();
+            string target = "Global.LvlName = Array(";
+            int targetIndex = fileContent.IndexOf(target) + target.Length;
+            if (targetIndex >= 0)
+            {
+                int startIndex = targetIndex;
+                int endIndex = fileContent.IndexOf(");", startIndex);
+                string targetLine = fileContent.Substring(startIndex, endIndex - startIndex).Replace("\t", string.Empty);
+                targetLine = Regex.Replace(targetLine, @"\r\n?|\n", string.Empty);
+                string patternz = @"Custom\s+String\s*\(""(.*?)""\s*\)";
+                MatchCollection matches = Regex.Matches(targetLine, patternz);
+                return matches[index + 1].Groups[1].Value;
+            }
+            return null;
+        }
+
+        public string GetLevelColor(int index)
+        {
+            string fileContent = Clipboard.GetText();
+            string target = "Global.LvlColors = Array(";
+            int targetIndex = fileContent.IndexOf(target) + target.Length;
+            if (targetIndex >= 0)
+            {
+                int startIndex = targetIndex;
+                int endIndex = fileContent.IndexOf(");", startIndex);
+                string targetLine = fileContent.Substring(startIndex, endIndex - startIndex).Replace("\t", string.Empty);
+                targetLine = Regex.Replace(targetLine, @"\r\n?|\n", string.Empty);
+                string patternz = @"(?:Custom\s)?Color\(([\w, ]+)\)";
+                MatchCollection matches = Regex.Matches(targetLine, patternz);
+                string colorValue = matches[index + 1].Groups[1].Value;
+                if (matches[index + 1].Groups[1].Value == "Custom" || colorValue.Split(',').Length >= 2)
+                {
+                    return "White";
+                }
+                return colorValue;
+            }
+            return null;
+        }
+
+        public string GetLevelIcon(int index)
+        {
+            string fileContent = Clipboard.GetText();
+            string target = "Skip(-2 + Global.LevelCounter * 2);";
+            int targetIndex = fileContent.IndexOf(target) + target.Length;
+            if (targetIndex >= 0)
+            {
+                int startIndex = targetIndex;
+                int endIndex = fileContent.IndexOf("}", startIndex);
+                string targetLine = fileContent.Substring(startIndex, endIndex - startIndex).Replace("\t", string.Empty).Replace("\r\n", "");
+                string patternz = @"Up \* [0-9]+\.[0-9]+,[ ]*(.*?), Visible To( and Color)?,";
+                MatchCollection matches = Regex.Matches(targetLine, patternz);
+                MessageBox.Show(matches[index].Groups[1].Value);
+                return matches[index].Groups[1].Value;
+            }
+            return null;
+        }
+
+        public string GetPrime(int index)
+        {
+            string fileContent = Clipboard.GetText();
+            string target = "Global.Prime =";
+            int targetIndex = fileContent.IndexOf(target) + target.Length;
+            if (targetIndex >= 0)
+            {
+                int startIndex = targetIndex;
+                int endIndex = fileContent.IndexOf(";", startIndex);
+                string targetLine = fileContent.Substring(startIndex, endIndex - startIndex + 1)
+                    .Replace("Array(", string.Empty)
+                    .Replace(");", string.Empty)
+                    .Replace("True", "1");
+                targetLine = Regex.Replace(targetLine, @"\s+", string.Empty);
+                return targetLine.Split(',')[index];
+            }
+            return null;
+        }
+
+        public string GetRadius(int index)
+        {
+            string fileContent = Clipboard.GetText();
+            string target = "Global.Radius_VA_GoBackCP =";
+            int targetIndex = fileContent.IndexOf(target);
+            if (targetIndex >= 0)
+            {
+                int startIndex = targetIndex;
+                int endIndex = fileContent.IndexOf(";", startIndex);
+                string targetLine = fileContent.Substring(startIndex, endIndex - startIndex + 1);
+                string patternz = @"Vector\(([\d\.\-, ]+)\)";
+                MatchCollection matches = Regex.Matches(Regex.Replace(targetLine, @"\s+", string.Empty), patternz);
+                return matches[index].Groups[1].Value.Split(',')[0];
+            }
+            return "2";
+        }
+
+        public string GetTPRadius(int index)
+        {
+            string fileContent = Clipboard.GetText();
+            string target = "Global.HiddenCP_TpRad_TT =";
+            int targetIndex = fileContent.IndexOf(target) + target.Length;
+            if (targetIndex >= 0)
+            {
+                int startIndex = targetIndex;
+                int endIndex = fileContent.IndexOf(";", startIndex);
+                string targetLine = fileContent.Substring(startIndex, endIndex - startIndex + 1)
+                    .Replace("Array(", string.Empty)
+                    .Replace(");", string.Empty);
+                string patternz = @"False|Vector\(([\d\.\-, ]+)\)";
+                MatchCollection matches = Regex.Matches(Regex.Replace(targetLine, @"\s+", string.Empty), patternz);
+                if (matches[index].Value == "False")
+                {
+                    return "False";
+                }
+                return matches[index].Groups[1].Value.Split(',')[1];
+            }
+            return "";
+        }
+
+        public string[] GetAbilityCount(int index)
+        {
+            string fileContent = Clipboard.GetText();
+            string target = "Global.AbilityCount =";
+            int targetIndex = fileContent.IndexOf(target) + target.Length;
+            if (targetIndex >= 0)
+            {
+                int startIndex = targetIndex;
+                int endIndex = fileContent.IndexOf(";", startIndex);
+                string targetLine = fileContent.Substring(startIndex, endIndex - startIndex + 1)
+                    .Replace("Array(", string.Empty)
+                    .Replace(");", string.Empty);
+                string patternz = @"0|False|Vector\(([\d\.\-, ]+)\)";
+                MatchCollection matches = Regex.Matches(Regex.Replace(targetLine, @"\s+", string.Empty), patternz);
+                if (matches[index].Value == "False" || matches[index].Value == "0")
+                {
+                    return new string[] { "False" };
+                }
+
+                else
+                {
+                    var abilities = matches[index].Groups[1].Value.Split(',');
+                    return new string[] { abilities[0], abilities[1], abilities[2] };
+                }
+            }
+            return null;
+        }
+
+        public string GetTP(int index)
+        {
+            string fileContent = Clipboard.GetText();
+            string target = "Global.TP =";
+            int targetIndex = fileContent.IndexOf(target) + target.Length;
+            if (targetIndex >= 0)
+            {
+                int startIndex = targetIndex;
+                int endIndex = fileContent.IndexOf(";", startIndex);
+                string targetLine = fileContent.Substring(startIndex, endIndex - startIndex + 1)
+                    .Replace("Array(", string.Empty)
+                    .Replace(");", string.Empty);
+                string patternz = @"0|False|Vector\(([\d\.\-, ]+)\)";
+                MatchCollection matches = Regex.Matches(Regex.Replace(targetLine, @"\s+", string.Empty), patternz);
+                if (matches[index].Value == "False" || matches[index].Value == "0")
+                {
+                    return "False";
+                }
+
+                else
+                {
+                    return matches[index].Groups[1].Value;
+                }
+            }
+            return "hmm"; //XD
+        }
+
+        public int GetConnection(int index)
+        {
+            string fileContent = Clipboard.GetText();
+            string target = "Global.Connections =";
+            int targetIndex = fileContent.IndexOf(target) + target.Length;
+            if (targetIndex >= 0)
+            {
+                int startIndex = targetIndex;
+                int endIndex = fileContent.IndexOf(";", startIndex);
+                string targetLine = fileContent.Substring(startIndex, endIndex - startIndex + 1)
+                    .Replace("Array(", string.Empty)
+                    .Replace(");", string.Empty)
+                    .Replace("False", "0");
+                targetLine = Regex.Replace(targetLine, @"\s+", string.Empty);
+                int bracketCount = 0;
+                List<string> values = new List<string>();
+                string currentString = "";
+                foreach (char c in targetLine)
+                {
+                    if (c == ',' && bracketCount == 0)
+                    {
+                        values.Add(currentString);
+                        currentString = "";
+                    }
+                    else
+                    {
+                        if (c == '(') bracketCount++;
+                        else if (c == ')') bracketCount--;
+                        currentString += c;
+                    }
+                }
+                values.Add(currentString);
+                if (values[index] == "0")
+                {
+                    return 0;
+                }
+
+                else
+                {
+                    return int.Parse(values[index].Replace("Vector(", string.Empty).Replace(")", string.Empty).Split(',').First(x => x != "0"));
+                }
+            }
+            return -1;
+        }
+
+        public List<Effect> GetEffects(int index)
+        {
+            string fileContent = Clipboard.GetText();
+            string target = "Global.Effect = Array(";
+            int targetIndex = fileContent.IndexOf(target) + target.Length;
+            if (targetIndex >= 0)
+            {
+                int startIndex = targetIndex;
+                int endIndex = fileContent.IndexOf(";", startIndex);
+                string targetLine = fileContent.Substring(startIndex, endIndex - startIndex + 1);
+                targetLine = Regex.Replace(targetLine, @"\s+", string.Empty);
+                string edited = targetLine.Replace("(", "[").Replace(")", "]").Replace("];", string.Empty).Replace("False", "0");
+                List<string> values = new List<string>();
+                string currentString = "";
+                int openBracketCount = 0;
+                foreach (char c in edited)
+                {
+                    if (c == ',' && openBracketCount == 0)
+                    {
+                        values.Add(currentString);
+                        currentString = "";
+                    }
+                    else
+                    {
+                        if (c == '[') openBracketCount++;
+                        else if (c == ']') openBracketCount--;
+                        currentString += c;
+                    }
+                }
+                values.Add(currentString);
+                List<Effect> effects = new List<Effect>();
+                if (values[index] == "0")
+                {
+                    return effects;
+                }
+
+                else
+                {
+                    MatchCollection mc = Regex.Matches(values[index], @"[Vector[[0-9.,-]+],-?\d+(.\d+)?,\d+,-?\d+]");
+                    if (mc.Count > 0)
+                    {
+                        foreach (Match match in mc)
+                        {
+                            string matchString = match.Value;
+                            string[] parts = matchString.Split(new char[] { '[', ']', ',' }, StringSplitOptions.RemoveEmptyEntries);
+                            if (int.Parse(parts[5]) < 7)
+                            {
+                                Effect newEffect = new Effect
+                                {
+                                    Coordinate = $"{parts[1]},{parts[2]},{parts[3]}",
+                                    Radius = parts[4],
+                                    Lightshaft = parts[4].Contains('-'),
+                                    Type = (EffectType)int.Parse(parts[5])
+                                };
+                                newEffect.Prime = (newEffect.Type == EffectType.Time || newEffect.Type == EffectType.Death) ? "1" : parts[6];
+                                if (newEffect.Type == EffectType.Time)
+                                {
+                                    newEffect.TimeValue = parts[6];
+                                    effects.Add(newEffect);
+                                }
+
+                                if (newEffect.Type == EffectType.Death)
+                                {
+                                    effects.Add(newEffect);
+                                }
+
+                                if (newEffect.Type != EffectType.Time && newEffect.Type != EffectType.Death)
+                                {
+                                    var primeFactors = Math.Abs(int.Parse(parts[6])).PrimeFactorization().Distinct();
+                                    newEffect.CDReset = parts[6].Contains('-');
+                                    newEffect.NoChange = primeFactors.Any(x => x == 11);
+                                    newEffect.PunchEnabled = primeFactors.Any(x => x == 2);
+                                    newEffect.SlamEnabled = primeFactors.Any(x => x == 3);
+                                    newEffect.PowerblockEnabled = primeFactors.Any(x => x == 5);
+                                    effects.Add(newEffect);
+                                }
+                            }
+                        }
+                    }
+                    return effects;
+                }
+            }
+            return null;
+        }
+
+        public List<Mission> GetMissions(int index)
+        {
+            string fileContent = Clipboard.GetText();
+            string target = "Global.Mission = Array(";
+            int targetIndex = fileContent.IndexOf(target) + target.Length;
+            if (targetIndex >= 0)
+            {
+                int startIndex = targetIndex;
+                int endIndex = fileContent.IndexOf(";", startIndex);
+                string targetLine = fileContent.Substring(startIndex, endIndex - startIndex + 1);
+                targetLine = Regex.Replace(targetLine, @"\s+", string.Empty);
+                string edited = targetLine.Replace("(", "[").Replace(")", "]").Replace("];", string.Empty).Replace("Array", string.Empty);
+                List<string> values = new List<string>();
+                string currentString = "";
+                int openBracketCount = 0;
+                foreach (char c in edited)
+                {
+                    if (c == ',' && openBracketCount == 0)
+                    {
+                        values.Add(currentString);
+                        currentString = "";
+                    }
+                    else
+                    {
+                        if (c == '[') openBracketCount++;
+                        else if (c == ']') openBracketCount--;
+                        currentString += c;
+                    }
+                }
+                values.Add(currentString);
+                //values.ForEach(x => richTextBox1.Text += x + Environment.NewLine);
+                List<Mission> missions = new List<Mission>();
+                if (values[index] == "True")
+                {
+                    return missions;
+                }
+
+                else
+                {
+                    string[] missionValues = values[index].Split(new char[] { '[', ']', ',' }, StringSplitOptions.RemoveEmptyEntries);
+                    int prime = int.Parse(missionValues[0]);
+                    var primeFactors = prime.PrimeFactorization().Distinct();
+
+                    int i = 1;
+                    foreach (var primeFactor in primeFactors)
+                    {
+                        if (primeFactor != 11)
+                        {
+                            Mission newMission = new Mission();
+                            newMission.Type = (MissionType)primeFactor;
+                            double missionEffect = double.Parse(missionValues[i]);
+                            if (missionEffect >= 9930)
+                            {
+                                newMission.isLock = true;
+                                missions.Add(newMission);
+                            }
+
+                            else
+                            {
+                                newMission.isTimeMission = true;
+                                newMission.TimeValue = missionEffect.ToString();
+                                missions.Add(newMission);
+                            }
+                        }
+                        i++;
+                    }
+                    return missions;
+                }
+            }
+            return null;
+        }
+
         private void aboutLbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             MessageBox.Show("Made for making map data generation easier in the absence of inspector. " +
@@ -3383,6 +3718,27 @@ namespace brugmapdataultimate
                 mapTreeView.SelectedNode = mapTreeView.SelectedNode.Parent;
                 mapTreeView.SelectedNode = mapTreeView.SelectedNode.Nodes[cpindex + 1];
             }
+        }
+    }
+
+    public static class PrimeExtension
+    {
+        public static List<int> PrimeFactorization(this int n)
+        {
+            List<int> factors = new List<int>();
+            for (int i = 2; i <= n / i; i++)
+            {
+                while (n % i == 0)
+                {
+                    factors.Add(i);
+                    n /= i;
+                }
+            }
+            if (n > 1)
+            {
+                factors.Add(n);
+            }
+            return factors;
         }
     }
 
