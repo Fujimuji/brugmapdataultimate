@@ -395,27 +395,37 @@ rule("MAP DATA")
 		MapData1;
 	}
 
-  actions
-  {
-		"Map Data Goes Here"
-  }
+	actions
+	{
+		"First Data Goes Here"
+	}
 }
 
-disabled rule("MAP DATA SPLIT 1")
+rule("MAP DATA SPLIT 1")
 {
 	event
 	{
 		Subroutine;
 		MapData2;
 	}
+	
+	actions
+	{
+		"Second Data Goes Here"
+	}
 }
 
-disabled rule("MAP DATA SPLIT 2")
+rule("MAP DATA SPLIT 2")
 {
 	event
 	{
 		Subroutine;
 		MapData3;
+	}
+	
+	actions
+	{
+		"Third Data Goes Here"
 	}
 }
 
