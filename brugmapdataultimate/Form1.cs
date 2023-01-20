@@ -3269,7 +3269,6 @@ namespace brugmapdataultimate
                 string targetLine = fileContent.Substring(startIndex, endIndex - startIndex).Replace("\t", string.Empty).Replace("\r\n", "");
                 string patternz = @"Up \* [0-9]+\.[0-9]+,[ ]*(.*?), Visible To( and Color)?,";
                 MatchCollection matches = Regex.Matches(targetLine, patternz);
-                MessageBox.Show(matches[index].Groups[1].Value);
                 return matches[index].Groups[1].Value;
             }
             return null;

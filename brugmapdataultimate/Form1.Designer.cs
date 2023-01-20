@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Map");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Map");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.aboutLbl = new System.Windows.Forms.LinkLabel();
             this.mapGroupBox = new System.Windows.Forms.GroupBox();
@@ -153,11 +153,11 @@
             this.mapTreeView.HideSelection = false;
             this.mapTreeView.Location = new System.Drawing.Point(3, 19);
             this.mapTreeView.Name = "mapTreeView";
-            treeNode2.Checked = true;
-            treeNode2.Name = "Node0";
-            treeNode2.Text = "Map";
+            treeNode1.Checked = true;
+            treeNode1.Name = "Node0";
+            treeNode1.Text = "Map";
             this.mapTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2});
+            treeNode1});
             this.mapTreeView.Size = new System.Drawing.Size(344, 612);
             this.mapTreeView.TabIndex = 46;
             this.mapTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.mapTreeView_AfterSelect);
@@ -255,6 +255,7 @@
             // isEffLocked
             // 
             this.isEffLocked.AutoSize = true;
+            this.isEffLocked.Enabled = false;
             this.isEffLocked.Location = new System.Drawing.Point(255, 22);
             this.isEffLocked.Name = "isEffLocked";
             this.isEffLocked.Size = new System.Drawing.Size(97, 19);
