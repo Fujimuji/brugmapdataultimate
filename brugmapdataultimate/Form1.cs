@@ -844,7 +844,7 @@ namespace brugmapdataultimate
                 punchUpDown.Value = decimal.Parse(map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].PunchCount);
                 slamUpDown.Value = decimal.Parse(map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].SlamCount);
                 powerBlockUpDown.Value = decimal.Parse(map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].PowerblockCount);
-                isEffLocked.Enabled = map.levelSelectorCP.Effects.Any(x => x.Type == EffectType.Ability || x.Type == EffectType.Time);
+                isEffLocked.Enabled = map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].Effects.Any(x => x.Type == EffectType.Ability || x.Type == EffectType.Time);
                 if (map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].Type == CheckpointType.LevelStart || map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].Type == CheckpointType.LevelEnd)
                 {
                     isNormalCP.Enabled = false;
