@@ -937,12 +937,7 @@ public partial class Form1 : Form
     public bool IsAbilCount()
     {
         //if any of the NumericUpDown in the abilbox has Value > 0
-        if (abilCountGroupBox.Controls.OfType<NumericUpDown>().Any(n => n.Value > 0))
-        {
-            return true;
-        }
-
-        return false;
+        return abilCountGroupBox.Controls.OfType<NumericUpDown>().Any(n => n.Value > 0);
     }
 
     private void addCpBtn_Click(object sender, EventArgs e)
