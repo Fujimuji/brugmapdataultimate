@@ -551,7 +551,7 @@ public partial class Form1 : Form
             string currentLvlName = mapTreeView.SelectedNode.Tag.ToString();
             var currentlv = map.Levels.First(x => x.Name == currentLvlName);
             lvlIconComboBox.SelectedItem = currentlv.Icon;
-            lvlColorComboBox.SelectedItem = currentlv.Color;
+            lvlColorComboBox.SelectedItem = currentlv.Color.Split('(', ')')[1];
             bool doesLvlFirstCpExist = map.Levels.First(x => x.Name == currentLvlName).Checkpoints.Any(x => x.Type == CheckpointType.LevelStart);
             bool doesLvlLastCpExist = map.Levels.First(x => x.Name == currentLvlName).Checkpoints.Any(x => x.Type == CheckpointType.LevelEnd);
             if (doesLvlFirstCpExist)
@@ -671,18 +671,19 @@ public partial class Form1 : Form
             bool mapcp = e.Node.Parent.Parent.Text == "Checkpoint 0";
             mapTreeView.SelectedNode.Tag = e.Node.Index;
 
-
             if (mapcp == false)
             {
                 cpindex = e.Node.Parent.Parent.Index;
                 lvlindex = e.Node.Parent.Parent.Parent.Index - 1;
             }
+
             Effect currenteff = (mapcp ? map.levelSelectorCP.Effects : map.Levels[lvlindex].Checkpoints[cpindex].Effects)[effindex];
             addEffBtn.Text = "Edit Effect";
             cpSettingsGroupBox.Visible = false;
             lvlGroupBox.Visible = false;
             missSettingsGroupBox.Visible = false;
             effSettingsGroupBox.Visible = true;
+
             if (currenteff.Type == EffectType.Time)
             {
                 effTypeComboBox.SelectedIndex = 0;
@@ -908,7 +909,6 @@ public partial class Form1 : Form
 
         if (addLvlBtn.Text == "Edit Level")
         {
-            MessageBox.Show(mapTreeView.SelectedNode.Tag.ToString());
             if (string.IsNullOrWhiteSpace(lvlNameTxt.Text) || string.IsNullOrEmpty(lvlNameTxt.Text)) //lvlnameTxt was empty
             {
                 MessageBox.Show("Please enter a level name.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -923,7 +923,9 @@ public partial class Form1 : Form
                 map.Levels.First(x => x.Name == oldname).Name = lvlNameTxt.Text;
                 mapTreeView.SelectedNode.Tag = lvlNameTxt.Text;
                 mapTreeView.SelectedNode.Text = "Level - " + lvlNameTxt.Text;
+                int index = mapTreeView.SelectedNode.Index;
                 mapTreeView.SelectedNode = mapTreeView.Nodes[0];
+                mapTreeView.SelectedNode = mapTreeView.Nodes[0].Nodes[index];
                 return;
             }
 
@@ -937,7 +939,12 @@ public partial class Form1 : Form
     public bool IsAbilCount()
     {
         //if any of the NumericUpDown in the abilbox has Value > 0
-        return abilCountGroupBox.Controls.OfType<NumericUpDown>().Any(n => n.Value > 0);
+        if (abilCountGroupBox.Controls.OfType<NumericUpDown>().Any(n => n.Value > 0))
+        {
+            return true;
+        }
+
+        return false;
     }
 
     private void addCpBtn_Click(object sender, EventArgs e)
@@ -2895,8 +2902,8 @@ public partial class Form1 : Form
 
                 else
                 {
-                    bool islvlEnd = GetConnection(i) == 0;
-                    islevelstart = GetConnection(i - 1) == 0;
+                    bool islvlEnd = GetPrime(i + 1) == null || int.Parse(GetPrime(i + 1)).PrimeFactorization().Any(x => x == 13);
+                    islevelstart = int.Parse(GetPrime(i)).PrimeFactorization().Any(x => x == 13);
                     if (islevelstart)
                     {
                         lvlindex++;
@@ -2959,6 +2966,7 @@ public partial class Form1 : Form
             }
             map = newMap;
             LoadMap();
+            mapTreeView.Nodes[0].Expand();
         }
     }
 
@@ -3065,7 +3073,7 @@ public partial class Form1 : Form
                 .Replace(");", string.Empty)
                 .Replace("True", "1");
             targetLine = Regex.Replace(targetLine, @"\s+", string.Empty);
-            return targetLine.Split(',')[index];
+            return targetLine.Split(',').Length <= index ? null : targetLine.Split(',')[index];
         }
         return null;
     }
