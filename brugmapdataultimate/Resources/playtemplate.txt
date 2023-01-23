@@ -4112,7 +4112,7 @@ rule("Invisibility   |   Ultimate + Spray")
 
 	conditions
 	{
-		Is Communicating Any Spray(Event Player) == True;
+		Is Communicating Any Spray(Event Player) == False;
 		Is Button Held(Event Player, Button(Ultimate)) == True;
 	}
 

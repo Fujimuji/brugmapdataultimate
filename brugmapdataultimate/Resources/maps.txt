@@ -32,9 +32,9 @@ Paraíso,Hybrid
 Colosseo,Skirmish
 Esperança,Skirmish
 New Queen Street,Skirmish
-Black Forest,Team Deatmatch
+Black Forest,Team Deathmatch
 Black Forest Winter,Team Deathmatch
-Castillo,Team Deatmatch
+Castillo,Team Deathmatch
 Château Guillard,Team Deathmatch
 Château Guillard Halloween,Team Deathmatch
 Ecopoint: Antarctica,Team Deathmatch
