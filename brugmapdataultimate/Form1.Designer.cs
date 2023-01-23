@@ -285,7 +285,7 @@
             // 
             // tpRadTxt
             // 
-            this.tpRadTxt.DecimalPlaces = 1;
+            this.tpRadTxt.DecimalPlaces = 3;
             this.tpRadTxt.Enabled = false;
             this.tpRadTxt.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.tpRadTxt.Increment = new decimal(new int[] {
@@ -293,7 +293,7 @@
             0,
             0,
             65536});
-            this.tpRadTxt.Location = new System.Drawing.Point(383, 81);
+            this.tpRadTxt.Location = new System.Drawing.Point(376, 81);
             this.tpRadTxt.Maximum = new decimal(new int[] {
             999,
             0,
@@ -303,9 +303,9 @@
             1,
             0,
             0,
-            65536});
+            196608});
             this.tpRadTxt.Name = "tpRadTxt";
-            this.tpRadTxt.Size = new System.Drawing.Size(49, 27);
+            this.tpRadTxt.Size = new System.Drawing.Size(64, 27);
             this.tpRadTxt.TabIndex = 57;
             this.tpRadTxt.Value = new decimal(new int[] {
             2,
@@ -315,14 +315,14 @@
             // 
             // cpRadTxt
             // 
-            this.cpRadTxt.DecimalPlaces = 1;
+            this.cpRadTxt.DecimalPlaces = 3;
             this.cpRadTxt.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.cpRadTxt.Increment = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-            this.cpRadTxt.Location = new System.Drawing.Point(383, 48);
+            this.cpRadTxt.Location = new System.Drawing.Point(377, 48);
             this.cpRadTxt.Maximum = new decimal(new int[] {
             999,
             0,
@@ -332,9 +332,9 @@
             1,
             0,
             0,
-            65536});
+            196608});
             this.cpRadTxt.Name = "cpRadTxt";
-            this.cpRadTxt.Size = new System.Drawing.Size(49, 27);
+            this.cpRadTxt.Size = new System.Drawing.Size(64, 27);
             this.cpRadTxt.TabIndex = 56;
             this.cpRadTxt.Value = new decimal(new int[] {
             2,
@@ -465,6 +465,7 @@
             // 
             // effTimeUpDown
             // 
+            this.effTimeUpDown.DecimalPlaces = 2;
             this.effTimeUpDown.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.effTimeUpDown.Location = new System.Drawing.Point(98, 7);
             this.effTimeUpDown.Maximum = new decimal(new int[] {
@@ -478,7 +479,7 @@
             0,
             -2147483648});
             this.effTimeUpDown.Name = "effTimeUpDown";
-            this.effTimeUpDown.Size = new System.Drawing.Size(48, 27);
+            this.effTimeUpDown.Size = new System.Drawing.Size(52, 27);
             this.effTimeUpDown.TabIndex = 59;
             // 
             // iseffLightShaft
@@ -515,7 +516,7 @@
             // 
             // effRadTxt
             // 
-            this.effRadTxt.DecimalPlaces = 1;
+            this.effRadTxt.DecimalPlaces = 3;
             this.effRadTxt.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.effRadTxt.Increment = new decimal(new int[] {
             1,
@@ -532,9 +533,9 @@
             1,
             0,
             0,
-            65536});
+            196608});
             this.effRadTxt.Name = "effRadTxt";
-            this.effRadTxt.Size = new System.Drawing.Size(48, 27);
+            this.effRadTxt.Size = new System.Drawing.Size(63, 27);
             this.effRadTxt.TabIndex = 58;
             this.effRadTxt.Value = new decimal(new int[] {
             11,
@@ -632,6 +633,7 @@
             // 
             // missTimeUpDown
             // 
+            this.missTimeUpDown.DecimalPlaces = 2;
             this.missTimeUpDown.Enabled = false;
             this.missTimeUpDown.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.missTimeUpDown.Location = new System.Drawing.Point(376, 20);
@@ -646,7 +648,7 @@
             0,
             -2147483648});
             this.missTimeUpDown.Name = "missTimeUpDown";
-            this.missTimeUpDown.Size = new System.Drawing.Size(48, 27);
+            this.missTimeUpDown.Size = new System.Drawing.Size(53, 27);
             this.missTimeUpDown.TabIndex = 60;
             // 
             // isMissLock
