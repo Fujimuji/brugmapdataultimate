@@ -32,7 +32,6 @@
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Map");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.aboutLbl = new System.Windows.Forms.LinkLabel();
-            this.mapGroupBox = new System.Windows.Forms.GroupBox();
             this.mapTreeView = new System.Windows.Forms.TreeView();
             this.isLvlSelector = new System.Windows.Forms.RadioButton();
             this.isLvlStartCP = new System.Windows.Forms.RadioButton();
@@ -92,7 +91,7 @@
             this.moveDownBtn = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteBtn = new System.Windows.Forms.ToolStripMenuItem();
             this.lvlGroupBox = new System.Windows.Forms.GroupBox();
-            this.lvlColorComboBox = new System.Windows.Forms.ComboBox();
+            this.colorSelectPanel = new System.Windows.Forms.Panel();
             this.lvlIconComboBox = new System.Windows.Forms.ComboBox();
             this.addLvlBtn = new System.Windows.Forms.Button();
             this.lvlNameTxt = new System.Windows.Forms.TextBox();
@@ -102,7 +101,6 @@
             this.topleftTxt = new System.Windows.Forms.TextBox();
             this.loadKneatBtn = new System.Windows.Forms.Button();
             this.coordCbox = new System.Windows.Forms.CheckBox();
-            this.mapGroupBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tpRadTxt)).BeginInit();
@@ -131,7 +129,7 @@
             // aboutLbl
             // 
             this.aboutLbl.AutoSize = true;
-            this.aboutLbl.Location = new System.Drawing.Point(12, 661);
+            this.aboutLbl.Location = new System.Drawing.Point(12, 674);
             this.aboutLbl.Name = "aboutLbl";
             this.aboutLbl.Size = new System.Drawing.Size(40, 15);
             this.aboutLbl.TabIndex = 43;
@@ -139,26 +137,17 @@
             this.aboutLbl.Text = "About";
             this.aboutLbl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.aboutLbl_LinkClicked);
             // 
-            // mapGroupBox
-            // 
-            this.mapGroupBox.Controls.Add(this.mapTreeView);
-            this.mapGroupBox.Location = new System.Drawing.Point(12, 26);
-            this.mapGroupBox.Name = "mapGroupBox";
-            this.mapGroupBox.Size = new System.Drawing.Size(350, 634);
-            this.mapGroupBox.TabIndex = 45;
-            this.mapGroupBox.TabStop = false;
-            // 
             // mapTreeView
             // 
             this.mapTreeView.HideSelection = false;
-            this.mapTreeView.Location = new System.Drawing.Point(3, 19);
+            this.mapTreeView.Location = new System.Drawing.Point(12, 56);
             this.mapTreeView.Name = "mapTreeView";
             treeNode1.Checked = true;
             treeNode1.Name = "Node0";
             treeNode1.Text = "Map";
             this.mapTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode1});
-            this.mapTreeView.Size = new System.Drawing.Size(344, 612);
+            this.mapTreeView.Size = new System.Drawing.Size(350, 612);
             this.mapTreeView.TabIndex = 46;
             this.mapTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.mapTreeView_AfterSelect);
             this.mapTreeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.mapTreeView_NodeMouseClick);
@@ -855,7 +844,7 @@
             // 
             this.clipboardLbl.AutoSize = true;
             this.clipboardLbl.Enabled = false;
-            this.clipboardLbl.Location = new System.Drawing.Point(58, 661);
+            this.clipboardLbl.Location = new System.Drawing.Point(58, 674);
             this.clipboardLbl.Name = "clipboardLbl";
             this.clipboardLbl.Size = new System.Drawing.Size(158, 15);
             this.clipboardLbl.TabIndex = 66;
@@ -898,43 +887,28 @@
             // 
             // lvlGroupBox
             // 
-            this.lvlGroupBox.Controls.Add(this.lvlColorComboBox);
+            this.lvlGroupBox.Controls.Add(this.colorSelectPanel);
             this.lvlGroupBox.Controls.Add(this.lvlIconComboBox);
             this.lvlGroupBox.Controls.Add(this.addLvlBtn);
             this.lvlGroupBox.Controls.Add(this.lvlNameTxt);
             this.lvlGroupBox.Location = new System.Drawing.Point(368, 97);
             this.lvlGroupBox.Name = "lvlGroupBox";
-            this.lvlGroupBox.Size = new System.Drawing.Size(827, 64);
+            this.lvlGroupBox.Size = new System.Drawing.Size(700, 64);
             this.lvlGroupBox.TabIndex = 67;
             this.lvlGroupBox.TabStop = false;
             this.lvlGroupBox.Text = "Level Settings";
             this.lvlGroupBox.Visible = false;
             // 
-            // lvlColorComboBox
+            // colorSelectPanel
             // 
-            this.lvlColorComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.lvlColorComboBox.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lvlColorComboBox.FormattingEnabled = true;
-            this.lvlColorComboBox.Items.AddRange(new object[] {
-            "White",
-            "Yellow",
-            "Green",
-            "Purple",
-            "Red",
-            "Blue",
-            "Aqua",
-            "Orange",
-            "Sky Blue",
-            "Turquoise",
-            "Lime Green",
-            "Gray",
-            "Violet",
-            "Rose",
-            "Black"});
-            this.lvlColorComboBox.Location = new System.Drawing.Point(416, 23);
-            this.lvlColorComboBox.Name = "lvlColorComboBox";
-            this.lvlColorComboBox.Size = new System.Drawing.Size(183, 28);
-            this.lvlColorComboBox.TabIndex = 3;
+            this.colorSelectPanel.BackColor = System.Drawing.Color.Lime;
+            this.colorSelectPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.colorSelectPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.colorSelectPanel.Location = new System.Drawing.Point(427, 23);
+            this.colorSelectPanel.Name = "colorSelectPanel";
+            this.colorSelectPanel.Size = new System.Drawing.Size(27, 28);
+            this.colorSelectPanel.TabIndex = 72;
+            this.colorSelectPanel.Click += new System.EventHandler(this.colorSelectPanel_Click);
             // 
             // lvlIconComboBox
             // 
@@ -985,7 +959,7 @@
             // 
             // addLvlBtn
             // 
-            this.addLvlBtn.Location = new System.Drawing.Point(605, 23);
+            this.addLvlBtn.Location = new System.Drawing.Point(473, 22);
             this.addLvlBtn.Name = "addLvlBtn";
             this.addLvlBtn.Size = new System.Drawing.Size(216, 28);
             this.addLvlBtn.TabIndex = 1;
@@ -1017,11 +991,11 @@
             // mapComboBox
             // 
             this.mapComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.mapComboBox.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.mapComboBox.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.mapComboBox.FormattingEnabled = true;
-            this.mapComboBox.Location = new System.Drawing.Point(395, 23);
+            this.mapComboBox.Location = new System.Drawing.Point(380, 25);
             this.mapComboBox.Name = "mapComboBox";
-            this.mapComboBox.Size = new System.Drawing.Size(183, 28);
+            this.mapComboBox.Size = new System.Drawing.Size(214, 25);
             this.mapComboBox.TabIndex = 2;
             // 
             // editMapSettingsBtn
@@ -1045,9 +1019,9 @@
             // 
             // loadKneatBtn
             // 
-            this.loadKneatBtn.Location = new System.Drawing.Point(976, 6);
+            this.loadKneatBtn.Location = new System.Drawing.Point(12, 30);
             this.loadKneatBtn.Name = "loadKneatBtn";
-            this.loadKneatBtn.Size = new System.Drawing.Size(219, 23);
+            this.loadKneatBtn.Size = new System.Drawing.Size(350, 23);
             this.loadKneatBtn.TabIndex = 70;
             this.loadKneatBtn.Text = "Load KNEAT Data from Clipboard";
             this.loadKneatBtn.UseVisualStyleBackColor = true;
@@ -1058,7 +1032,7 @@
             this.coordCbox.AutoSize = true;
             this.coordCbox.Checked = true;
             this.coordCbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.coordCbox.Location = new System.Drawing.Point(222, 660);
+            this.coordCbox.Location = new System.Drawing.Point(222, 673);
             this.coordCbox.Name = "coordCbox";
             this.coordCbox.Size = new System.Drawing.Size(203, 19);
             this.coordCbox.TabIndex = 71;
@@ -1069,7 +1043,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(1204, 680);
+            this.ClientSize = new System.Drawing.Size(1204, 699);
+            this.Controls.Add(this.mapTreeView);
             this.Controls.Add(this.coordCbox);
             this.Controls.Add(this.loadKneatBtn);
             this.Controls.Add(this.generalGroupBox);
@@ -1077,12 +1052,11 @@
             this.Controls.Add(this.clipboardLbl);
             this.Controls.Add(this.loadBtn);
             this.Controls.Add(this.saveBtn);
-            this.Controls.Add(this.needed);
             this.Controls.Add(this.cpSettingsGroupBox);
             this.Controls.Add(this.missSettingsGroupBox);
             this.Controls.Add(this.effSettingsGroupBox);
-            this.Controls.Add(this.mapGroupBox);
             this.Controls.Add(this.aboutLbl);
+            this.Controls.Add(this.needed);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -1090,7 +1064,6 @@
             this.Name = "Form1";
             this.Text = "Map Data Generator";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.mapGroupBox.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -1130,7 +1103,6 @@
 
         #endregion
         private LinkLabel aboutLbl;
-        private GroupBox mapGroupBox;
         private TreeView mapTreeView;
         private RadioButton isLvlSelector;
         private RadioButton isLvlStartCP;
@@ -1188,7 +1160,6 @@
         private ContextMenuStrip treeMenuStrip;
         private ToolStripMenuItem deleteBtn;
         private GroupBox lvlGroupBox;
-        private ComboBox lvlColorComboBox;
         private ComboBox lvlIconComboBox;
         private Button addLvlBtn;
         private TextBox lvlNameTxt;
@@ -1200,5 +1171,6 @@
         private TextBox topleftTxt;
         private Button loadKneatBtn;
         private CheckBox coordCbox;
+        private Panel colorSelectPanel;
     }
 }

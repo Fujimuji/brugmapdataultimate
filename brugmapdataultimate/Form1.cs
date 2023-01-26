@@ -23,7 +23,6 @@ public partial class Form1 : Form
         effTypeComboBox.SelectedIndex = 0;
         missTypeComboBox.SelectedIndex = 0;
         lvlIconComboBox.SelectedIndex = 0;
-        lvlColorComboBox.SelectedIndex = 0;
         mapTreeView.SelectedNode = mapTreeView.Nodes[0];
         missSettingsGroupBox.Location = new Point(368, 26);
         effSettingsGroupBox.Location = new Point(368, 26);
@@ -244,6 +243,7 @@ public partial class Form1 : Form
             {
                 wholemapdata = wholemapdata.Replace("rule(\"display\")", "disabled rule(\"display\")");
             }
+
             return wholemapdata;
         }
     }
@@ -396,7 +396,7 @@ public partial class Form1 : Form
 
     public Map map = new Map();
     string pattern = @"(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)";
-    const string version = "v1.0.8";
+    const string version = "v1.0.9";
 
     public int GeneratePrimeForCP()
     {
@@ -496,19 +496,16 @@ public partial class Form1 : Form
                 return;
             }
 
-            else //level selector cp exists and now can add a level
-            {
-                generalGroupBox.Visible = true;
-                cpSettingsGroupBox.Visible = false;
-                HideEffectsMissions();
-                lvlGroupBox.Location = new Point(368, 96);
-                lvlGroupBox.Visible = true;
-                lvlNameTxt.Enabled = true;
-                addLvlBtn.Enabled = true;
-                addLvlBtn.Text = "Add Level";
-                lvlNameTxt.Text = "";
-                return;
-            }
+            generalGroupBox.Visible = true;
+            cpSettingsGroupBox.Visible = false;
+            HideEffectsMissions();
+            lvlGroupBox.Location = new Point(368, 96);
+            lvlGroupBox.Visible = true;
+            lvlNameTxt.Enabled = true;
+            addLvlBtn.Enabled = true;
+            addLvlBtn.Text = "Add Level";
+            lvlNameTxt.Text = "";
+            return;
         }
 
         if (e.Node?.Text == "Checkpoint 0") //level selector cp selected
@@ -548,10 +545,13 @@ public partial class Form1 : Form
             generalGroupBox.Visible = false;
             isLvlSelector.Enabled = false;
             isNormalCP.Checked = true;
+            isEffLocked.Checked = false;
+            isEffLocked.Enabled = false;
             string currentLvlName = mapTreeView.SelectedNode.Tag.ToString();
             var currentlv = map.Levels.First(x => x.Name == currentLvlName);
             lvlIconComboBox.SelectedItem = currentlv.Icon;
-            lvlColorComboBox.SelectedItem = currentlv.Color.Split('(', ')')[1];
+            var rgba = currentlv.Color.Split('(', ')')[1].Split(',');
+            colorSelectPanel.BackColor = Color.FromArgb(int.Parse(rgba[3].Trim()), int.Parse(rgba[0].Trim()), int.Parse(rgba[1].Trim()), int.Parse(rgba[2].Trim()));
             bool doesLvlFirstCpExist = map.Levels.First(x => x.Name == currentLvlName).Checkpoints.Any(x => x.Type == CheckpointType.LevelStart);
             bool doesLvlLastCpExist = map.Levels.First(x => x.Name == currentLvlName).Checkpoints.Any(x => x.Type == CheckpointType.LevelEnd);
             if (doesLvlFirstCpExist)
@@ -586,7 +586,6 @@ public partial class Form1 : Form
                 isLvlEndCP.Enabled = false;
                 isTeleport.Enabled = true;
                 isTeleport.Checked = false;
-                isEffLocked.Checked = false;
                 isNormalCP.Enabled = true;
             }
             lvlGroupBox.Visible = true;
@@ -898,7 +897,8 @@ public partial class Form1 : Form
             Level newLvl = new Level();
             newLvl.Name = lvlNameTxt.Text;
             newLvl.Icon = lvlIconComboBox.Items[lvlIconComboBox.SelectedIndex].ToString();
-            newLvl.Color = $"Color({lvlColorComboBox.Items[lvlColorComboBox.SelectedIndex].ToString()})";
+            var curcolor = colorSelectPanel.BackColor;
+            newLvl.Color = $"Custom Color({curcolor.R}, {curcolor.G}, {curcolor.B}, {curcolor.A})";
             map.Levels.Add(newLvl);
             TreeNode lvlNode = new TreeNode("Level - " + lvlNameTxt.Text);
             lvlNode.Tag = lvlNameTxt.Text;
@@ -919,7 +919,8 @@ public partial class Form1 : Form
             {
                 string oldname = mapTreeView.SelectedNode.Tag.ToString();
                 map.Levels.First(x => x.Name == oldname).Icon = lvlIconComboBox.Items[lvlIconComboBox.SelectedIndex].ToString();
-                map.Levels.First(x => x.Name == oldname).Color = $"Color({lvlColorComboBox.Items[lvlColorComboBox.SelectedIndex].ToString()})";
+                var curcolor = colorSelectPanel.BackColor;
+                map.Levels.First(x => x.Name == oldname).Color = $"Custom Color({curcolor.R}, {curcolor.G}, {curcolor.B}, {curcolor.A})";
                 map.Levels.First(x => x.Name == oldname).Name = lvlNameTxt.Text;
                 mapTreeView.SelectedNode.Tag = lvlNameTxt.Text;
                 mapTreeView.SelectedNode.Text = "Level - " + lvlNameTxt.Text;
@@ -1929,7 +1930,6 @@ public partial class Form1 : Form
                 mapTreeView.SelectedNode = mapTreeView.SelectedNode.Parent;
                 mapTreeView.Enabled = true;
                 effTypeComboBox.Enabled = true;
-                return;
             }
         }
     }
@@ -2522,10 +2522,12 @@ public partial class Form1 : Form
                     mapTreeView.Nodes[0].Nodes.Add(lvlnode);
                     for (int j = 0; j < map.Levels[i].Checkpoints.Count; j++)
                     {
-                        if (!map.Levels[i].Color.Contains('('))
+                        if (!map.Levels[i].Color.Contains("Custom"))
                         {
-                            map.Levels[i].Color = "Color(" + map.Levels[i].Color + ")";
+                            var curcolor = Color.FromName(Regex.Replace(map.Levels[i].Color, @"\s+", string.Empty));
+                            map.Levels[i].Color = $"Custom Color({curcolor.R}, {curcolor.G}, {curcolor.B}, {curcolor.A})";
                         }
+
                         mapTreeView.Nodes[0].Nodes[i + 1].Nodes.Add("Checkpoint " + (j + 1));
                         if (map.Levels[i].Checkpoints[j].Type != CheckpointType.LevelEnd)
                         {
@@ -2840,6 +2842,8 @@ public partial class Form1 : Form
         int cpPositionIndex = kneatdata.IndexOf(cpPosition);
         if (cpPositionIndex >= 0)
         {
+            DialogResult result = MessageBox.Show("Is it an Overwatch 1 map?", "Old Map", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            bool isOldMap = result == DialogResult.Yes;
             int startIndex = cpPositionIndex;
             int endIndex = kneatdata.IndexOf(";", startIndex);
             string cpPositionLine = kneatdata.Substring(startIndex, endIndex - startIndex + 1);
@@ -2855,7 +2859,7 @@ public partial class Form1 : Form
             lvllist.RemoveAt(0);
             for (var index = 0; index < lvllist.Count; index++)
             {
-                newMap.Levels.Add(new Level() { Name = lvllist[index], Icon = GetLevelIcon(index), Color = GetLevelColor(index) });
+                newMap.Levels.Add(new Level { Name = lvllist[index], Icon = GetLevelIcon(index), Color = GetLevelColor(index) });
             }
 
             int lvlindex = -1;
@@ -2866,8 +2870,8 @@ public partial class Form1 : Form
                 if (i == 0)
                 {
                     newMap.levelSelectorCP.Coordinate = checkpoints[i].Groups[1].Value;
-                    newMap.levelSelectorCP.Prime = GetPrime(i);
-                    var primefactors = int.Parse(newMap.levelSelectorCP.Prime).PrimeFactorization();
+                    newMap.levelSelectorCP.Prime = GetPrime(i, isOldMap);
+                    var primefactors = int.Parse(newMap.levelSelectorCP.Prime).PrimeFactorization().Distinct().ToList();
                     newMap.levelSelectorCP.PunchEnabled = !primefactors.Any(x => x == 2);
                     newMap.levelSelectorCP.PowerblockEnabled = !primefactors.Any(x => x == 5);
                     newMap.levelSelectorCP.SlamEnabled = !primefactors.Any(x => x == 3);
@@ -2882,7 +2886,7 @@ public partial class Form1 : Form
                         newMap.levelSelectorCP.PowerblockCount = abilitycount[1];
                         newMap.levelSelectorCP.SlamCount = abilitycount[2];
                     }
-                    var efflist = GetEffects(i);
+                    var efflist = GetEffects(i, isOldMap);
                     if (efflist.Any())
                     {
                         for (int i1 = 0; i1 < efflist.Count; i1++)
@@ -2902,8 +2906,8 @@ public partial class Form1 : Form
 
                 else
                 {
-                    bool islvlEnd = GetPrime(i + 1) == null || int.Parse(GetPrime(i + 1)).PrimeFactorization().Any(x => x == 13);
-                    islevelstart = int.Parse(GetPrime(i)).PrimeFactorization().Any(x => x == 13);
+                    bool islvlEnd = GetPrime(i + 1, isOldMap) == null || int.Parse(GetPrime(i + 1, isOldMap)).PrimeFactorization().Any(x => x == 13);
+                    islevelstart = int.Parse(GetPrime(i, isOldMap)).PrimeFactorization().Any(x => x == 13);
                     if (islevelstart)
                     {
                         lvlindex++;
@@ -2911,12 +2915,12 @@ public partial class Form1 : Form
 
                     if (islvlEnd == false)
                     {
-                        var primefactors = int.Parse(GetPrime(i)).PrimeFactorization();
+                        var primefactors = int.Parse(GetPrime(i, isOldMap)).PrimeFactorization();
 
                         Checkpoint newcp = new Checkpoint()
                         {
                             Coordinate = checkpoints[i].Groups[1].Value,
-                            Prime = GetPrime(i),
+                            Prime = GetPrime(i, isOldMap),
                             Radius = GetRadius(i),
                             TeleportCoordinate = GetTP(i) == "False" ? "" : GetTP(i),
                             TeleportRadius = GetTP(i) == "False" ? "2" : GetTPRadius(i),
@@ -2937,7 +2941,7 @@ public partial class Form1 : Form
                             newcp.SlamCount = abilitycount[2];
                         }
 
-                        var efflist = GetEffects(i);
+                        var efflist = GetEffects(i, isOldMap);
                         if (efflist.Any())
                         {
                             efflist.ForEach(x => newcp.Effects.Add(x));
@@ -2951,7 +2955,7 @@ public partial class Form1 : Form
                         newMap.Levels[lvlindex].Checkpoints.Add(newcp);
                     }
 
-                    if (islvlEnd)
+                    if (islvlEnd && lvlindex <= newMap.Levels.Count - 1)
                     {
                         Checkpoint newcp = new Checkpoint()
                         {
@@ -3037,6 +3041,12 @@ public partial class Form1 : Form
             {
                 return "White";
             }*/
+            if (!matches[index + 1].Value.Contains(','))
+            {
+                var color = Color.FromName(Regex.Replace(matches[index + 1].Groups[1].Value, @"\s+", string.Empty));
+                return $"Custom Color({color.R}, {color.G}, {color.B}, {color.A})";
+            }
+
             return matches[index + 1].Value;
         }
         return null;
@@ -3059,7 +3069,7 @@ public partial class Form1 : Form
         return null;
     }
 
-    public string GetPrime(int index)
+    public string GetPrime(int index, bool isOldMap)
     {
         string fileContent = Clipboard.GetText();
         string target = "Global.Prime =";
@@ -3073,7 +3083,37 @@ public partial class Form1 : Form
                 .Replace(");", string.Empty)
                 .Replace("True", "1");
             targetLine = Regex.Replace(targetLine, @"\s+", string.Empty);
-            return targetLine.Split(',').Length <= index ? null : targetLine.Split(',')[index];
+            if (targetLine.Split(',').Length <= index)
+            {
+                return null;
+            }
+
+            var primeFactors = int.Parse(targetLine.Split(',')[index]).PrimeFactorization().Distinct().ToList();
+            //change prime factors to match new map
+            if (isOldMap)
+            {
+                for (var i = 0; i < primeFactors.Count; i++)
+                {
+                    var factor = primeFactors[i];
+                    if (factor == 3 && !primeFactors.Contains(5))
+                    {
+                        primeFactors.Remove(factor);
+                        primeFactors.Add(5);
+                        break;
+                    }
+
+                    if (factor == 5 && !primeFactors.Contains(3))
+                    {
+                        primeFactors.Remove(factor);
+                        primeFactors.Add(3);
+                        break;
+                    }
+                }
+
+                return primeFactors.Aggregate(1, (current, factor) => current * factor).ToString();
+            }
+
+            return targetLine.Split(',')[index];
         }
         return null;
     }
@@ -3161,7 +3201,7 @@ public partial class Form1 : Form
         return "hmm"; //XD
     }
 
-    public int GetConnection(int index)
+    /*public int GetConnection(int index)
     {
         string fileContent = Clipboard.GetText();
         string target = "Global.Connections =";
@@ -3180,9 +3220,9 @@ public partial class Form1 : Form
             return int.Parse(targetLine.Split(',')[index]);
         }
         return -1;
-    }
+    }*/
 
-    public List<Effect> GetEffects(int index)
+    public List<Effect> GetEffects(int index, bool isOldMap)
     {
         string fileContent = Clipboard.GetText();
         string target = "Global.Effect = Array(";
@@ -3216,47 +3256,69 @@ public partial class Form1 : Form
             if (values[index] == "0") return effects;
 
             MatchCollection mc = Regex.Matches(values[index], @"[Vector[[0-9.,-]+],-?\d+(.\d+)?,\d+,-?\d+]");
-            if (mc.Count > 0)
+            if (mc.Count <= 0) return effects;
+            foreach (Match match in mc)
             {
-                foreach (Match match in mc)
+                string matchString = match.Value;
+                string[] parts = matchString.Split(new char[] { '[', ']', ',' },
+                    StringSplitOptions.RemoveEmptyEntries);
+                if (int.Parse(parts[5]) < 7)
                 {
-                    string matchString = match.Value;
-                    string[] parts = matchString.Split(new char[] { '[', ']', ',' },
-                        StringSplitOptions.RemoveEmptyEntries);
-                    if (int.Parse(parts[5]) < 7)
+                    Effect newEffect = new Effect
                     {
-                        Effect newEffect = new Effect
+                        Coordinate = $"{parts[1]},{parts[2]},{parts[3]}",
+                        Radius = parts[4],
+                        Lightshaft = parts[4].Contains('-'),
+                        Type = (EffectType)int.Parse(parts[5])
+                    };
+                    newEffect.Prime =
+                        newEffect.Type is EffectType.Time or EffectType.Death
+                            ? "1"
+                            : parts[6];
+
+                    var primeFactors = Math.Abs(int.Parse(parts[6])).PrimeFactorization().Distinct().ToList();
+                    if (isOldMap)
+                    {
+                        for (var i = 0; i < primeFactors.Count; i++)
                         {
-                            Coordinate = $"{parts[1]},{parts[2]},{parts[3]}",
-                            Radius = parts[4],
-                            Lightshaft = parts[4].Contains('-'),
-                            Type = (EffectType)int.Parse(parts[5])
-                        };
-                        newEffect.Prime =
-                            (newEffect.Type == EffectType.Time || newEffect.Type == EffectType.Death)
-                                ? "1"
-                                : parts[6];
-                        if (newEffect.Type == EffectType.Time)
-                        {
-                            newEffect.TimeValue = parts[6];
-                            effects.Add(newEffect);
+                            var factor = primeFactors[i];
+                            if (factor == 3 && !primeFactors.Contains(5))
+                            {
+                                primeFactors.Remove(factor);
+                                primeFactors.Add(5);
+                                break;
+                            }
+
+                            if (factor == 5 && !primeFactors.Contains(3))
+                            {
+                                primeFactors.Remove(factor);
+                                primeFactors.Add(3);
+                                break;
+                            }
                         }
 
-                        if (newEffect.Type == EffectType.Death)
-                        {
-                            effects.Add(newEffect);
-                        }
+                        newEffect.Prime = primeFactors.Aggregate(1, (current, factor) => current * factor).ToString();
+                    }
+                    
+                    if (newEffect.Type == EffectType.Time)
+                    {
+                        newEffect.TimeValue = parts[6];
+                        effects.Add(newEffect);
+                    }
 
-                        if (newEffect.Type != EffectType.Time && newEffect.Type != EffectType.Death)
-                        {
-                            var primeFactors = Math.Abs(int.Parse(parts[6])).PrimeFactorization().Distinct();
-                            newEffect.CDReset = parts[6].Contains('-');
-                            newEffect.NoChange = primeFactors.Any(x => x == 11);
-                            newEffect.PunchEnabled = primeFactors.Any(x => x == 2);
-                            newEffect.SlamEnabled = primeFactors.Any(x => x == 3);
-                            newEffect.PowerblockEnabled = primeFactors.Any(x => x == 5);
-                            effects.Add(newEffect);
-                        }
+                    if (newEffect.Type == EffectType.Death)
+                    {
+                        effects.Add(newEffect);
+                    }
+
+                    if (newEffect.Type != EffectType.Time && newEffect.Type != EffectType.Death)
+                    {
+                        newEffect.CDReset = parts[6].Contains('-');
+                        newEffect.NoChange = primeFactors.Any(x => x == 11);
+                        newEffect.PunchEnabled = !primeFactors.Any(x => x == 2);
+                        newEffect.SlamEnabled = !primeFactors.Any(x => x == 3);
+                        newEffect.PowerblockEnabled = !primeFactors.Any(x => x == 5);
+                        effects.Add(newEffect);
                     }
                 }
             }
@@ -3322,7 +3384,7 @@ public partial class Form1 : Form
                     else
                     {
                         newMission.isTimeMission = true;
-                        newMission.TimeValue = missionEffect.ToString();
+                        newMission.TimeValue = missionEffect.ToString(CultureInfo.InvariantCulture);
                         missions.Add(newMission);
                     }
                 }
@@ -3370,6 +3432,17 @@ public partial class Form1 : Form
         }
         map.SelectedMap = mapComboBox.Text;
         map.Type = maplist[mapComboBox.SelectedIndex].Substring(maplist[mapComboBox.SelectedIndex].LastIndexOf(',') + 1);
+    }
+
+    private void colorSelectPanel_Click(object sender, EventArgs e)
+    {
+        ColorDialog colorDialog = new ColorDialog();
+        colorDialog.FullOpen = true;
+        if (colorDialog.ShowDialog() == DialogResult.OK)
+        {
+            colorSelectPanel.BackColor = colorDialog.Color;
+        }
+        colorDialog.Dispose();
     }
 
     #endregion
