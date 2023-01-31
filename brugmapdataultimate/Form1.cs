@@ -1163,9 +1163,9 @@ public partial class Form1 : Form
                 map.levelSelectorCP.SlamEnabled = cpSlamEnabled.Checked;
                 map.levelSelectorCP.PowerblockEnabled = cpPowerBlockEnabled.Checked;
                 map.levelSelectorCP.isAbilCount = IsAbilCount();
-                map.levelSelectorCP.PunchCount = punchUpDown.Value.ToString(CultureInfo.InvariantCulture);
-                map.levelSelectorCP.SlamCount = slamUpDown.Value.ToString(CultureInfo.InvariantCulture);
-                map.levelSelectorCP.PowerblockCount = powerBlockUpDown.Value.ToString(CultureInfo.InvariantCulture);
+                map.levelSelectorCP.PunchCount = IsAbilCount() ? punchUpDown.Value.ToString(CultureInfo.InvariantCulture) : "0";
+                map.levelSelectorCP.SlamCount = IsAbilCount() ? slamUpDown.Value.ToString(CultureInfo.InvariantCulture) : "0";
+                map.levelSelectorCP.PowerblockCount = IsAbilCount() ? powerBlockUpDown.Value.ToString(CultureInfo.InvariantCulture) : "0";
                 map.levelSelectorCP.EffectLock = isEffLocked.Checked;
                 mapTreeView.SelectedNode = mapTreeView.TopNode;
                 return;
@@ -1190,9 +1190,9 @@ public partial class Form1 : Form
                 map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].SlamEnabled = cpSlamEnabled.Checked;
                 map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].PowerblockEnabled = cpPowerBlockEnabled.Checked;
                 map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].isAbilCount = IsAbilCount();
-                map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].PunchCount = punchUpDown.Value.ToString(CultureInfo.InvariantCulture);
-                map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].SlamCount = slamUpDown.Value.ToString(CultureInfo.InvariantCulture);
-                map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].PowerblockCount = powerBlockUpDown.Value.ToString(CultureInfo.InvariantCulture);
+                map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].PunchCount = IsAbilCount() ? punchUpDown.Value.ToString(CultureInfo.InvariantCulture) : "0";
+                map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].SlamCount = IsAbilCount() ? slamUpDown.Value.ToString(CultureInfo.InvariantCulture) : "0";
+                map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].PowerblockCount = IsAbilCount() ? powerBlockUpDown.Value.ToString(CultureInfo.InvariantCulture) : "0";
                 map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].Type = CheckpointType.LevelStart;
                 map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].EffectLock = isEffLocked.Checked;
                 Checkpoint newThis = map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex];
@@ -1294,13 +1294,10 @@ public partial class Form1 : Form
                 map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].PunchEnabled = cpPunchEnabled.Checked;
                 map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].SlamEnabled = cpSlamEnabled.Checked;
                 map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].PowerblockEnabled = cpPowerBlockEnabled.Checked;
-                if (IsAbilCount())
-                {
-                    map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].isAbilCount = true;
-                    map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].PunchCount = punchUpDown.Value.ToString(CultureInfo.InvariantCulture);
-                    map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].SlamCount = slamUpDown.Value.ToString(CultureInfo.InvariantCulture);
-                    map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].PowerblockCount = powerBlockUpDown.Value.ToString(CultureInfo.InvariantCulture);
-                }
+                map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].isAbilCount = IsAbilCount();
+                map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].PunchCount = IsAbilCount() ? punchUpDown.Value.ToString(CultureInfo.InvariantCulture) : "0";
+                map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].SlamCount = IsAbilCount() ? slamUpDown.Value.ToString(CultureInfo.InvariantCulture) : "0";
+                map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].PowerblockCount = IsAbilCount() ? powerBlockUpDown.Value.ToString(CultureInfo.InvariantCulture) : "0";
                 map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].Type = CheckpointType.Normal;
                 map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].EffectLock = isEffLocked.Checked;
                 mapTreeView.SelectedNode = mapTreeView.SelectedNode.Parent;
