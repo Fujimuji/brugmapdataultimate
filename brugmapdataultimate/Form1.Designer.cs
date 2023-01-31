@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Map");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Map");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.aboutLbl = new System.Windows.Forms.LinkLabel();
             this.mapTreeView = new System.Windows.Forms.TreeView();
@@ -101,6 +101,7 @@
             this.topleftTxt = new System.Windows.Forms.TextBox();
             this.loadKneatBtn = new System.Windows.Forms.Button();
             this.coordCbox = new System.Windows.Forms.CheckBox();
+            this.onlyCpDataLinkLbl = new System.Windows.Forms.LinkLabel();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tpRadTxt)).BeginInit();
@@ -129,7 +130,7 @@
             // aboutLbl
             // 
             this.aboutLbl.AutoSize = true;
-            this.aboutLbl.Location = new System.Drawing.Point(12, 674);
+            this.aboutLbl.Location = new System.Drawing.Point(1155, 697);
             this.aboutLbl.Name = "aboutLbl";
             this.aboutLbl.Size = new System.Drawing.Size(40, 15);
             this.aboutLbl.TabIndex = 43;
@@ -142,11 +143,11 @@
             this.mapTreeView.HideSelection = false;
             this.mapTreeView.Location = new System.Drawing.Point(12, 56);
             this.mapTreeView.Name = "mapTreeView";
-            treeNode1.Checked = true;
-            treeNode1.Name = "Node0";
-            treeNode1.Text = "Map";
+            treeNode2.Checked = true;
+            treeNode2.Name = "Node0";
+            treeNode2.Text = "Map";
             this.mapTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1});
+            treeNode2});
             this.mapTreeView.Size = new System.Drawing.Size(350, 612);
             this.mapTreeView.TabIndex = 46;
             this.mapTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.mapTreeView_AfterSelect);
@@ -844,12 +845,12 @@
             // 
             this.clipboardLbl.AutoSize = true;
             this.clipboardLbl.Enabled = false;
-            this.clipboardLbl.Location = new System.Drawing.Point(58, 674);
+            this.clipboardLbl.Location = new System.Drawing.Point(12, 675);
             this.clipboardLbl.Name = "clipboardLbl";
-            this.clipboardLbl.Size = new System.Drawing.Size(158, 15);
+            this.clipboardLbl.Size = new System.Drawing.Size(148, 15);
             this.clipboardLbl.TabIndex = 66;
             this.clipboardLbl.TabStop = true;
-            this.clipboardLbl.Text = "Copy Map Data to Clipboard";
+            this.clipboardLbl.Text = "Copy All Data to Clipboard";
             this.clipboardLbl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.clipboardLbl_LinkClicked);
             // 
             // treeMenuStrip
@@ -1032,18 +1033,31 @@
             this.coordCbox.AutoSize = true;
             this.coordCbox.Checked = true;
             this.coordCbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.coordCbox.Location = new System.Drawing.Point(222, 673);
+            this.coordCbox.Location = new System.Drawing.Point(78, 697);
             this.coordCbox.Name = "coordCbox";
             this.coordCbox.Size = new System.Drawing.Size(203, 19);
             this.coordCbox.TabIndex = 71;
             this.coordCbox.Text = "Enable/Disable Coordinates Panel";
             this.coordCbox.UseVisualStyleBackColor = true;
             // 
+            // onlyCpDataLinkLbl
+            // 
+            this.onlyCpDataLinkLbl.AutoSize = true;
+            this.onlyCpDataLinkLbl.Enabled = false;
+            this.onlyCpDataLinkLbl.Location = new System.Drawing.Point(213, 675);
+            this.onlyCpDataLinkLbl.Name = "onlyCpDataLinkLbl";
+            this.onlyCpDataLinkLbl.Size = new System.Drawing.Size(149, 15);
+            this.onlyCpDataLinkLbl.TabIndex = 72;
+            this.onlyCpDataLinkLbl.TabStop = true;
+            this.onlyCpDataLinkLbl.Text = "Copy CP Data to Clipboard";
+            this.onlyCpDataLinkLbl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.onlyCpDataLinkLbl_LinkClicked);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(1204, 699);
+            this.ClientSize = new System.Drawing.Size(1204, 721);
+            this.Controls.Add(this.onlyCpDataLinkLbl);
             this.Controls.Add(this.mapTreeView);
             this.Controls.Add(this.coordCbox);
             this.Controls.Add(this.loadKneatBtn);
@@ -1172,5 +1186,6 @@
         private Button loadKneatBtn;
         private CheckBox coordCbox;
         private Panel colorSelectPanel;
+        private LinkLabel onlyCpDataLinkLbl;
     }
 }

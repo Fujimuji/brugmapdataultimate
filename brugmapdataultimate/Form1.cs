@@ -1,7 +1,5 @@
-using System.Diagnostics;
 using System.Globalization;
 using System.Text.RegularExpressions;
-using brugmapdataultimate.Properties;
 using Newtonsoft.Json;
 using Octokit;
 using static brugmapdataultimate.Form1;
@@ -75,10 +73,16 @@ public partial class Form1 : Form
         public string SelectedMap { get; set; } = "Eichenwalde";
         public string Type { get; set; } = "Hybrid";
         public string TopLeftInfo { get; set; } = "<CUSTOMIZE IN GLOBAL HUD RULE>";
-        public Checkpoint levelSelectorCP { get; set; }
-        public List<Level> Levels { get; set; }
+        public Checkpoint levelSelectorCP
+        {
+            get; set;
+        }
+        public List<Level> Levels
+        {
+            get; set;
+        }
 
-        public string GenerateMapData(bool isPanelActivated)
+        public string GenerateMapData(bool isPanelActivated, bool isOnlyCpData)
         {
             string genCPposition = "Global.CPposition = Array(";
             string genPrime = "Global.Prime = Array(";
@@ -130,6 +134,13 @@ public partial class Form1 : Form
                     genEffect += ");";
                     genAbilityCount += ");";
                 }
+            }
+
+            if (isOnlyCpData)
+            {
+                return genCPposition + "\n" + genPrime + "\n" + genRadVAGobackCP + "\n" + genConnections + "\n" +
+                       genMission + "\n" + genHiddenCPTpRadTT + "\n" + genTP + "\n" + genEffect + "\n" +
+                       genAbilityCount;
             }
 
             string wholemapdata = Properties.Resources.playtemplate;
@@ -522,10 +533,10 @@ public partial class Form1 : Form
             isLvlEndCP.Enabled = false;
             isNormalCP.Enabled = false;
             cpCoordTxt.Text = map.levelSelectorCP.Coordinate;
-            cpRadTxt.Value = decimal.Parse(map.levelSelectorCP.Radius);
-            punchUpDown.Value = decimal.Parse(map.levelSelectorCP.PunchCount);
-            slamUpDown.Value = decimal.Parse(map.levelSelectorCP.SlamCount);
-            powerBlockUpDown.Value = decimal.Parse(map.levelSelectorCP.PowerblockCount);
+            cpRadTxt.Value = decimal.Parse(map.levelSelectorCP.Radius, CultureInfo.InvariantCulture);
+            punchUpDown.Value = decimal.Parse(map.levelSelectorCP.PunchCount, CultureInfo.InvariantCulture);
+            slamUpDown.Value = decimal.Parse(map.levelSelectorCP.SlamCount, CultureInfo.InvariantCulture);
+            powerBlockUpDown.Value = decimal.Parse(map.levelSelectorCP.PowerblockCount, CultureInfo.InvariantCulture);
             cpPunchEnabled.Checked = map.levelSelectorCP.PunchEnabled;
             cpSlamEnabled.Checked = map.levelSelectorCP.SlamEnabled;
             cpPowerBlockEnabled.Checked = map.levelSelectorCP.PowerblockEnabled;
@@ -642,14 +653,14 @@ public partial class Form1 : Form
             lvlGroupBox.Visible = false;
             addCpBtn.Text = "Edit Checkpoint";
             cpCoordTxt.Text = map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].Coordinate;
-            cpRadTxt.Value = decimal.Parse(map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].Radius);
+            cpRadTxt.Value = decimal.Parse(map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].Radius, CultureInfo.InvariantCulture);
             cpPunchEnabled.Checked = map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].PunchEnabled;
             cpSlamEnabled.Checked = map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].SlamEnabled;
             cpPowerBlockEnabled.Checked = map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].PowerblockEnabled;
             isEffLocked.Checked = map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].EffectLock;
-            punchUpDown.Value = decimal.Parse(map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].PunchCount);
-            slamUpDown.Value = decimal.Parse(map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].SlamCount);
-            powerBlockUpDown.Value = decimal.Parse(map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].PowerblockCount);
+            punchUpDown.Value = decimal.Parse(map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].PunchCount, CultureInfo.InvariantCulture);
+            slamUpDown.Value = decimal.Parse(map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].SlamCount, CultureInfo.InvariantCulture);
+            powerBlockUpDown.Value = decimal.Parse(map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].PowerblockCount, CultureInfo.InvariantCulture);
             isEffLocked.Enabled = map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].Effects.Any(x => x.Type == EffectType.Ability || x.Type == EffectType.Time);
             if (map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].Type == CheckpointType.LevelStart || map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].Type == CheckpointType.LevelEnd)
             {
@@ -658,7 +669,7 @@ public partial class Form1 : Form
             isTeleport.Enabled = true;
             isTeleport.Checked = map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].TeleportCoordinate != "";
             tpCoordTxt.Text = map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].TeleportCoordinate;
-            tpRadTxt.Value = decimal.Parse(map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].TeleportRadius);
+            tpRadTxt.Value = decimal.Parse(map.Levels.First(x => x.Name == currentLvlName).Checkpoints[e.Node.Index].TeleportRadius, CultureInfo.InvariantCulture);
             return;
         }
 
@@ -687,9 +698,9 @@ public partial class Form1 : Form
             {
                 effTypeComboBox.SelectedIndex = 0;
                 effTypeComboBox.Enabled = true;
-                effTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
+                effTimeUpDown.Value = decimal.Parse(currenteff.TimeValue, CultureInfo.InvariantCulture);
                 effCoordTxt.Text = currenteff.Coordinate;
-                effRadTxt.Value = decimal.Parse(currenteff.Radius.Trim('-'));
+                effRadTxt.Value = decimal.Parse(currenteff.Radius.Trim('-'), CultureInfo.InvariantCulture);
                 effTimeUpDown.Enabled = true;
                 iseffLightShaft.Checked = currenteff.Lightshaft;
             }
@@ -699,7 +710,7 @@ public partial class Form1 : Form
                 effTypeComboBox.SelectedIndex = 1;
                 effTypeComboBox.Enabled = true;
                 effCoordTxt.Text = currenteff.Coordinate;
-                effRadTxt.Value = decimal.Parse(currenteff.Radius.Trim('-'));
+                effRadTxt.Value = decimal.Parse(currenteff.Radius.Trim('-'), CultureInfo.InvariantCulture);
                 iseffLightShaft.Checked = currenteff.Lightshaft;
             }
 
@@ -708,7 +719,7 @@ public partial class Form1 : Form
                 effTypeComboBox.SelectedIndex = 2;
                 effTypeComboBox.Enabled = true;
                 effCoordTxt.Text = currenteff.Coordinate;
-                effRadTxt.Value = decimal.Parse(currenteff.Radius.Trim('-'));
+                effRadTxt.Value = decimal.Parse(currenteff.Radius.Trim('-'), CultureInfo.InvariantCulture);
                 iseffLightShaft.Checked = currenteff.Lightshaft;
                 issEffCdReset.Checked = currenteff.CDReset;
                 isNoChange.Checked = currenteff.NoChange;
@@ -722,7 +733,7 @@ public partial class Form1 : Form
                 effTypeComboBox.SelectedIndex = 3;
                 effTypeComboBox.Enabled = true;
                 effCoordTxt.Text = currenteff.Coordinate;
-                effRadTxt.Value = decimal.Parse(currenteff.Radius.Trim('-'));
+                effRadTxt.Value = decimal.Parse(currenteff.Radius.Trim('-'), CultureInfo.InvariantCulture);
                 iseffLightShaft.Checked = currenteff.Lightshaft;
                 issEffCdReset.Checked = currenteff.CDReset;
                 isNoChange.Checked = currenteff.NoChange;
@@ -736,7 +747,7 @@ public partial class Form1 : Form
                 effTypeComboBox.SelectedIndex = 4;
                 effTypeComboBox.Enabled = true;
                 effCoordTxt.Text = currenteff.Coordinate;
-                effRadTxt.Value = decimal.Parse(currenteff.Radius.Trim('-'));
+                effRadTxt.Value = decimal.Parse(currenteff.Radius.Trim('-'), CultureInfo.InvariantCulture);
                 iseffLightShaft.Checked = currenteff.Lightshaft;
                 issEffCdReset.Checked = false;
                 isNoChange.Checked = false;
@@ -750,7 +761,7 @@ public partial class Form1 : Form
                 effTypeComboBox.SelectedIndex = 5;
                 effTypeComboBox.Enabled = false;
                 effCoordTxt.Text = currenteff.Coordinate;
-                effRadTxt.Value = decimal.Parse(currenteff.Radius);
+                effRadTxt.Value = decimal.Parse(currenteff.Radius, CultureInfo.InvariantCulture);
                 iseffLightShaft.Checked = false;
                 issEffCdReset.Checked = currenteff.CDReset;
                 isNoChange.Checked = currenteff.NoChange;
@@ -764,7 +775,7 @@ public partial class Form1 : Form
                 effTypeComboBox.SelectedIndex = 6;
                 effTypeComboBox.Enabled = false;
                 effCoordTxt.Text = currenteff.Coordinate;
-                effRadTxt.Value = decimal.Parse(currenteff.Radius);
+                effRadTxt.Value = decimal.Parse(currenteff.Radius, CultureInfo.InvariantCulture);
                 iseffLightShaft.Checked = false;
                 issEffCdReset.Checked = currenteff.CDReset;
                 isNoChange.Checked = currenteff.NoChange;
@@ -797,67 +808,67 @@ public partial class Form1 : Form
                     missTypeComboBox.SelectedIndex = 0;
                     isMissTime.Checked = currenteff.isTimeMission;
                     isMissLock.Checked = currenteff.isLock;
-                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
+                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue, CultureInfo.InvariantCulture);
                     break;
                 case MissionType.NoSlam:
                     missTypeComboBox.SelectedIndex = 2;
                     isMissTime.Checked = currenteff.isTimeMission;
                     isMissLock.Checked = currenteff.isLock;
-                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
+                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue, CultureInfo.InvariantCulture);
                     break;
                 case MissionType.NoPowerblock:
                     missTypeComboBox.SelectedIndex = 1;
                     isMissTime.Checked = currenteff.isTimeMission;
                     isMissLock.Checked = currenteff.isLock;
-                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
+                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue, CultureInfo.InvariantCulture);
                     break;
                 case MissionType.Stalless:
                     missTypeComboBox.SelectedIndex = 3;
                     isMissTime.Checked = currenteff.isTimeMission;
                     isMissLock.Checked = currenteff.isLock;
-                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
+                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue, CultureInfo.InvariantCulture);
                     break;
                 case MissionType.Spin:
                     missTypeComboBox.SelectedIndex = 4;
                     isMissTime.Checked = currenteff.isTimeMission;
                     isMissLock.Checked = currenteff.isLock;
-                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
+                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue, CultureInfo.InvariantCulture);
                     break;
                 case MissionType.RocketPunchFirst:
                     missTypeComboBox.SelectedIndex = 5;
                     isMissTime.Checked = currenteff.isTimeMission;
                     isMissLock.Checked = currenteff.isLock;
-                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
+                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue, CultureInfo.InvariantCulture);
                     break;
                 case MissionType.PowerblockFirst:
                     missTypeComboBox.SelectedIndex = 6;
                     isMissTime.Checked = currenteff.isTimeMission;
                     isMissLock.Checked = currenteff.isLock;
-                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
+                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue, CultureInfo.InvariantCulture);
                     break;
                 case MissionType.SlamFirst:
                     missTypeComboBox.SelectedIndex = 7;
                     isMissTime.Checked = currenteff.isTimeMission;
                     isMissLock.Checked = currenteff.isLock;
-                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
+                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue, CultureInfo.InvariantCulture);
                     break;
                 case MissionType.UpwardsDiag:
                     missTypeComboBox.SelectedIndex = 8;
                     isMissTime.Checked = currenteff.isTimeMission;
                     isMissLock.Checked = currenteff.isLock;
-                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
+                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue, CultureInfo.InvariantCulture);
                     break;
                 case MissionType.DownwardsDiag:
                     missTypeComboBox.SelectedIndex = 9;
                     isMissTime.Checked = currenteff.isTimeMission;
                     isMissLock.Checked = currenteff.isLock;
-                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
+                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue, CultureInfo.InvariantCulture);
                     break;
                 case MissionType.PunchBounce:
                     missTypeComboBox.SelectedIndex = 10;
                     isMissTime.Checked = currenteff.isTimeMission;
                     isMissLock.Checked = currenteff.isLock;
-                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue);
+                    missTimeUpDown.Value = decimal.Parse(currenteff.TimeValue, CultureInfo.InvariantCulture);
                     break;
             }
 
@@ -984,9 +995,9 @@ public partial class Form1 : Form
                 newCP.SlamEnabled = cpSlamEnabled.Checked;
                 newCP.PowerblockEnabled = cpPowerBlockEnabled.Checked;
                 newCP.isAbilCount = IsAbilCount();
-                newCP.PunchCount = punchUpDown.Value.ToString();
-                newCP.SlamCount = slamUpDown.Value.ToString();
-                newCP.PowerblockCount = powerBlockUpDown.Value.ToString();
+                newCP.PunchCount = punchUpDown.Value.ToString(CultureInfo.InvariantCulture);
+                newCP.SlamCount = slamUpDown.Value.ToString(CultureInfo.InvariantCulture);
+                newCP.PowerblockCount = powerBlockUpDown.Value.ToString(CultureInfo.InvariantCulture);
                 mapTreeView.TopNode.Nodes.Add("Checkpoint 0");
                 mapTreeView.TopNode.Nodes[0].Nodes.Add("Effects");
                 mapTreeView.TopNode.Nodes[0].Nodes.Add("Missions");
@@ -1017,9 +1028,9 @@ public partial class Form1 : Form
                 newCP.SlamEnabled = cpSlamEnabled.Checked;
                 newCP.PowerblockEnabled = cpPowerBlockEnabled.Checked;
                 newCP.isAbilCount = IsAbilCount();
-                newCP.PunchCount = punchUpDown.Value.ToString();
-                newCP.SlamCount = slamUpDown.Value.ToString();
-                newCP.PowerblockCount = powerBlockUpDown.Value.ToString();
+                newCP.PunchCount = punchUpDown.Value.ToString(CultureInfo.InvariantCulture);
+                newCP.SlamCount = slamUpDown.Value.ToString(CultureInfo.InvariantCulture);
+                newCP.PowerblockCount = powerBlockUpDown.Value.ToString(CultureInfo.InvariantCulture);
                 map.Levels.First(x => x.Name == mapTreeView.SelectedNode.Tag.ToString()).Checkpoints.Insert(0, newCP);
                 bool doesLvlFirstCpExist = map.Levels.First(x => x.Name == currentLvlName).Checkpoints.Any(x => x.Type == CheckpointType.LevelStart);
                 TreeNode cpNode = new TreeNode("Checkpoint 1");
@@ -1039,6 +1050,7 @@ public partial class Form1 : Form
                 mapTreeView.SelectedNode = mapTreeView.SelectedNode.Parent;
                 saveBtn.Enabled = true;
                 clipboardLbl.Enabled = true;
+                onlyCpDataLinkLbl.Enabled = true;
                 return;
             }
 
@@ -1063,6 +1075,7 @@ public partial class Form1 : Form
                 mapTreeView.SelectedNode = mapTreeView.TopNode;
                 saveBtn.Enabled = true;
                 clipboardLbl.Enabled = true;
+                onlyCpDataLinkLbl.Enabled = true;
                 return;
             }
 
@@ -1084,9 +1097,9 @@ public partial class Form1 : Form
                 newCP.SlamEnabled = cpSlamEnabled.Checked;
                 newCP.PowerblockEnabled = cpPowerBlockEnabled.Checked;
                 newCP.isAbilCount = IsAbilCount();
-                newCP.PunchCount = punchUpDown.Value.ToString();
-                newCP.SlamCount = slamUpDown.Value.ToString();
-                newCP.PowerblockCount = powerBlockUpDown.Value.ToString();
+                newCP.PunchCount = punchUpDown.Value.ToString(CultureInfo.InvariantCulture);
+                newCP.SlamCount = slamUpDown.Value.ToString(CultureInfo.InvariantCulture);
+                newCP.PowerblockCount = powerBlockUpDown.Value.ToString(CultureInfo.InvariantCulture);
 
                 if (doesLvlLastCpExist)
                 {
@@ -1103,6 +1116,7 @@ public partial class Form1 : Form
                     }
                     saveBtn.Enabled = true;
                     clipboardLbl.Enabled = true;
+                    onlyCpDataLinkLbl.Enabled = true;
                     return;
                 }
                 //if last cp doesn't exist add it to the end
@@ -1115,6 +1129,7 @@ public partial class Form1 : Form
                 mapTreeView.SelectedNode = mapTreeView.SelectedNode.Parent;
                 saveBtn.Enabled = true;
                 clipboardLbl.Enabled = true;
+                onlyCpDataLinkLbl.Enabled = true;
                 return;
             }
         }
@@ -1148,9 +1163,9 @@ public partial class Form1 : Form
                 map.levelSelectorCP.SlamEnabled = cpSlamEnabled.Checked;
                 map.levelSelectorCP.PowerblockEnabled = cpPowerBlockEnabled.Checked;
                 map.levelSelectorCP.isAbilCount = IsAbilCount();
-                map.levelSelectorCP.PunchCount = punchUpDown.Value.ToString();
-                map.levelSelectorCP.SlamCount = slamUpDown.Value.ToString();
-                map.levelSelectorCP.PowerblockCount = powerBlockUpDown.Value.ToString();
+                map.levelSelectorCP.PunchCount = punchUpDown.Value.ToString(CultureInfo.InvariantCulture);
+                map.levelSelectorCP.SlamCount = slamUpDown.Value.ToString(CultureInfo.InvariantCulture);
+                map.levelSelectorCP.PowerblockCount = powerBlockUpDown.Value.ToString(CultureInfo.InvariantCulture);
                 map.levelSelectorCP.EffectLock = isEffLocked.Checked;
                 mapTreeView.SelectedNode = mapTreeView.TopNode;
                 return;
@@ -1175,9 +1190,9 @@ public partial class Form1 : Form
                 map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].SlamEnabled = cpSlamEnabled.Checked;
                 map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].PowerblockEnabled = cpPowerBlockEnabled.Checked;
                 map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].isAbilCount = IsAbilCount();
-                map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].PunchCount = punchUpDown.Value.ToString();
-                map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].SlamCount = slamUpDown.Value.ToString();
-                map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].PowerblockCount = powerBlockUpDown.Value.ToString();
+                map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].PunchCount = punchUpDown.Value.ToString(CultureInfo.InvariantCulture);
+                map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].SlamCount = slamUpDown.Value.ToString(CultureInfo.InvariantCulture);
+                map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].PowerblockCount = powerBlockUpDown.Value.ToString(CultureInfo.InvariantCulture);
                 map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].Type = CheckpointType.LevelStart;
                 map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].EffectLock = isEffLocked.Checked;
                 Checkpoint newThis = map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex];
@@ -1213,6 +1228,7 @@ public partial class Form1 : Form
                 }
                 saveBtn.Enabled = true;
                 clipboardLbl.Enabled = true;
+                onlyCpDataLinkLbl.Enabled = true;
                 return;
             }
 
@@ -1256,6 +1272,7 @@ public partial class Form1 : Form
                 }
                 saveBtn.Enabled = true;
                 clipboardLbl.Enabled = true;
+                onlyCpDataLinkLbl.Enabled = true;
                 return;
             }
 
@@ -1280,9 +1297,9 @@ public partial class Form1 : Form
                 if (IsAbilCount())
                 {
                     map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].isAbilCount = true;
-                    map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].PunchCount = punchUpDown.Value.ToString();
-                    map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].SlamCount = slamUpDown.Value.ToString();
-                    map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].PowerblockCount = powerBlockUpDown.Value.ToString();
+                    map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].PunchCount = punchUpDown.Value.ToString(CultureInfo.InvariantCulture);
+                    map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].SlamCount = slamUpDown.Value.ToString(CultureInfo.InvariantCulture);
+                    map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].PowerblockCount = powerBlockUpDown.Value.ToString(CultureInfo.InvariantCulture);
                 }
                 map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].Type = CheckpointType.Normal;
                 map.Levels.First(x => x.Name == currentLvlName).Checkpoints[cpindex].EffectLock = isEffLocked.Checked;
@@ -1293,6 +1310,7 @@ public partial class Form1 : Form
                 }
                 saveBtn.Enabled = true;
                 clipboardLbl.Enabled = true;
+                onlyCpDataLinkLbl.Enabled = true;
             }
         }
     }
@@ -2554,6 +2572,7 @@ public partial class Form1 : Form
                 }
                 saveBtn.Enabled = true;
                 clipboardLbl.Enabled = true;
+                onlyCpDataLinkLbl.Enabled = true;
             }
 
             MessageBox.Show("Map Data Loaded!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -2622,6 +2641,7 @@ public partial class Form1 : Form
             }
             saveBtn.Enabled = true;
             clipboardLbl.Enabled = true;
+            onlyCpDataLinkLbl.Enabled = true;
         }
 
         MessageBox.Show("Map Data Loaded!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -2629,7 +2649,12 @@ public partial class Form1 : Form
 
     private void clipboardLbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
     {
-        Clipboard.SetText(map.GenerateMapData(coordCbox.Checked));
+        Clipboard.SetText(map.GenerateMapData(coordCbox.Checked, false));
+    }
+
+    private void onlyCpDataLinkLbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+    {
+        Clipboard.SetText(map.GenerateMapData(coordCbox.Checked, true));
     }
 
     private void mapTreeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -3299,7 +3324,7 @@ public partial class Form1 : Form
 
                         newEffect.Prime = primeFactors.Aggregate(1, (current, factor) => current * factor).ToString();
                     }
-                    
+
                     if (newEffect.Type == EffectType.Time)
                     {
                         newEffect.TimeValue = parts[6];
@@ -3374,7 +3399,7 @@ public partial class Form1 : Form
                 {
                     Mission newMission = new Mission();
                     newMission.Type = (MissionType)primeFactor;
-                    double missionEffect = double.Parse(missionValues[i]);
+                    decimal missionEffect = decimal.Parse(missionValues[i]);
                     if (missionEffect >= 9930)
                     {
                         newMission.isLock = true;
@@ -3446,6 +3471,7 @@ public partial class Form1 : Form
     }
 
     #endregion
+
     public async void CheckForUpdates()
     {
         var client = new GitHubClient(new ProductHeaderValue("brugmapdataultimate"));
@@ -3454,24 +3480,20 @@ public partial class Form1 : Form
         {
             var result = MessageBox.Show("There is a new version available. Would you like to download it?",
                 "Update Available", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-            if (result == DialogResult.Yes)
+            if (result != DialogResult.Yes)
             {
-                using (var htclient = new HttpClient())
-                {
-                    using (var s = htclient.GetStreamAsync(releases[0].Assets
-                               .FirstOrDefault(x => x.Name == "brugmapdataultimate.exe").BrowserDownloadUrl))
-                    {
-                        using (var fs = new FileStream($"brugmapdataultimate{releases[0].TagName}.exe",
-                                   FileMode.OpenOrCreate))
-                        {
-                            s.Result.CopyTo(fs);
-                        }
-                    }
-                }
-
-                MessageBox.Show($"Download complete. Please run the new version {releases[0].TagName}", "Success",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
             }
+
+            using (var htclient = new HttpClient())
+            {
+                var s = htclient.GetStreamAsync(releases[0].Assets.FirstOrDefault(x => x.Name == "brugmapdataultimate.exe").BrowserDownloadUrl);
+                await using var fs = new FileStream($"brugmapdataultimate{releases[0].TagName}.exe", FileMode.OpenOrCreate);
+                await s.Result.CopyToAsync(fs);
+            }
+
+            MessageBox.Show($"Download complete. Please run the new version {releases[0].TagName}", "Success",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 
