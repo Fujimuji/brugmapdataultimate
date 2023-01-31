@@ -407,7 +407,7 @@ public partial class Form1 : Form
 
     public Map map = new Map();
     string pattern = @"(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)";
-    const string version = "v1.0.9";
+    const string version = "v2.0.0";
 
     public int GeneratePrimeForCP()
     {
