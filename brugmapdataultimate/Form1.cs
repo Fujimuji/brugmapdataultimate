@@ -2970,7 +2970,7 @@ public partial class Form1 : Form
                         }
 
                         var misslist = GetMissions(i);
-                        if (efflist.Any())
+                        if (misslist.Any())
                         {
                             misslist.ForEach(x => newcp.Missions.Add(x));
                         }
@@ -3063,13 +3063,25 @@ public partial class Form1 : Form
             {
                 return "White";
             }*/
-            if (!matches[index + 1].Value.Contains(','))
+            if (matches[index + 1].Value.Contains(','))
             {
-                var color = Color.FromName(Regex.Replace(matches[index + 1].Groups[1].Value, @"\s+", string.Empty));
-                return $"Custom Color({color.R}, {color.G}, {color.B}, {color.A})";
+                return matches[index + 1].Value;
             }
 
-            return matches[index + 1].Value;
+            switch (matches[index + 1].Groups[1].Value)
+            {
+                case "Rose":
+                    return $"Custom Color({Color.MediumVioletRed.R}, {Color.MediumVioletRed.G}, {Color.MediumVioletRed.B}, {Color.MediumVioletRed.A})";
+                case "Green":
+                    return $"Custom Color({Color.LawnGreen.R}, {Color.LawnGreen.G}, {Color.LawnGreen.B}, {Color.LawnGreen.A})";
+                case "Blue":
+                    return $"Custom Color({Color.DodgerBlue.R}, {Color.DodgerBlue.G}, {Color.DodgerBlue.B}, {Color.DodgerBlue.A})";
+                default:
+                {
+                    var color = Color.FromName(Regex.Replace(matches[index + 1].Groups[1].Value, @"\s+", string.Empty));
+                    return $"Custom Color({color.R}, {color.G}, {color.B}, {color.A})";
+                }
+            }
         }
         return null;
     }
