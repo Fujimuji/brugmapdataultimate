@@ -3631,7 +3631,9 @@ public static class MissionExtensions
             MissionType.RocketPunchFirst => "Mission: Rocket Punch First",
             MissionType.PowerblockFirst => "Mission: Powerblock First",
             MissionType.SlamFirst => "Mission: Seismic Slam First",
-            MissionType.PunchBounce => "Mission: Rocket Punch Bounce"
+            MissionType.PunchBounce => "Mission: Rocket Punch Bounce",
+            MissionType.DownwardsDiag => "Mission: Downwards Diagonal Punch",
+            MissionType.UpwardsDiag => "Mission: Upwards Diagonal Punch"
         };
     }
 }
