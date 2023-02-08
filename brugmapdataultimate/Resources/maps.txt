@@ -4,6 +4,7 @@ Horizon Lunar Colony,Assault
 Paris,Assault
 Temple of Anubis,Assault
 Volskaya Industries,Assault
+Antarctic Peninsula,Control
 Busan,Control
 Ilios,Control
 Lijiang Tower,Control

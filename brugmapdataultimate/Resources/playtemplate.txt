@@ -4369,7 +4369,7 @@ rule("Ms. Destructo | Destroys Breakable Objects On All Maps")
 			Eichenwalde), Map(Hollywood), Map(King's Row), Map(Numbani), Map(Ayutthaya), Map(Black Forest), Map(Castillo), Map(
 			Ecopoint: Antarctica), Map(Château Guillard), Map(Kanezaka), Map(Necropolis), Map(Petra), Map(Volskaya Industries), Map(
 			Practice Range), Map(Ilios), Map(Busan), Map(Lijiang Tower), Map(Nepal), Map(Oasis), Map(Malevento), Map(Circuit royal), Map(
-			Esperança), Map(New Queen Street), Map(Paraíso), Map(Colosseo), Map(Midtown), Map(Shambali Monastery)), Array(Vector(15.759,
+			Esperança), Map(New Queen Street), Map(Paraíso), Map(Colosseo), Map(Midtown), Map(Shambali Monastery), Map(Antarctic Peninsula)), Array(Vector(15.759,
 			30.576, -27.201)), Array(Vector(31.759, 40.003, -59.476)), Array(Vector(-54.508, 40.179, -10.866)), Array(Vector(-26.780,
 			23.366, 40.284)), Array(Vector(69.418, 42.103, -17.712)), Array(Vector(9.382, 38.635, -81.276)), Array(Vector(9.382, 38.635,
 			-81.276)), Array(Vector(9.756, 30.753, -41.395)), Array(Vector(30.313, 28.237, -16.925)), Array(Vector(73.985, 26.198,
@@ -4384,7 +4384,7 @@ rule("Ms. Destructo | Destroys Breakable Objects On All Maps")
 			Vector(-184.659, -38.730, -0.783)), Array(Vector(150.125, 30.619, 251.966), Vector(134.888, 36.760, -240.736), Vector(-195.549,
 			60.350, -0.098)), Array(Vector(17.808, 35.955, 17.505)), Array(Vector(13, 61, -37)), Array(Vector(0, 50, 0)), Array(Vector(0,
 			35, 25), Vector(0, 8, 23.770)), Array(Vector(-29, 40, -36.900)), Array(Vector(0, 40, 0)), Array(Vector(49.300, 45, -2.830)),
-			Array(Vector(-50, 81, 130)));
+			Array(Vector(-50, 81, 130)), Array(Vector(-86, -110, 59), Vector(277, 132, 170), Vector(283, 57, -235)));
 		For Player Variable(Global.MsDestructo, ArrayIterator, 0, Count Of(Global.MsDestructo.MapVectorArray[Index Of Array Value(First Of(
 			Global.MsDestructo.MapVectorArray), Current Map)]), 1);
 			Start Forcing Player Position(Global.MsDestructo, Global.MsDestructo.MapVectorArray[Index Of Array Value(
