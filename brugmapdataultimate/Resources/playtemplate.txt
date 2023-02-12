@@ -272,6 +272,7 @@ variables
 		101: PB_HUD
 		102: Invis
 		110: ArrayIterator
+		111: MapVectorArray
 		112: UpperLock
 		121: LocalC
 		127: ServerPerformance

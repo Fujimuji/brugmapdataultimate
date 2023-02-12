@@ -67,6 +67,7 @@ namespace brugmapdataultimate.Properties {
         ///Paris,Assault
         ///Temple of Anubis,Assault
         ///Volskaya Industries,Assault
+        ///Antarctic Peninsula,Control
         ///Busan,Control
         ///Ilios,Control
         ///Lijiang Tower,Control
@@ -83,8 +84,7 @@ namespace brugmapdataultimate.Properties {
         ///Watchpoint: Gibraltar,Escort
         ///Blizzard World,Hybrid
         ///Blizzard World Winter,Hybrid
-        ///Eichenwalde,Hybrid
-        ///Eichenwalde Hal [rest of string was truncated]&quot;;.
+        ///Eichen [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string maps {
             get {
