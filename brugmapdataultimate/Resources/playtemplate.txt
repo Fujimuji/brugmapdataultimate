@@ -154,6 +154,8 @@ variables
 		40: LBsort
 		41: LBleft
 		42: InfoText
+		43: DestructoIter
+		44: MapVectorArray
 		50: QMission
 		51: QMissionTime
 		52: QMissionD
@@ -270,7 +272,6 @@ variables
 		101: PB_HUD
 		102: Invis
 		110: ArrayIterator
-		111: MapVectorArray
 		112: UpperLock
 		121: LocalC
 		127: ServerPerformance
@@ -4356,54 +4357,63 @@ rule("Ms. Destructo | Destroys Breakable Objects On All Maps")
 
 	actions
 	{
+		"Multiple bots"
+		Global.MsDestructo = Empty Array;
 		Wait Until(Is True For Any(All Players(All Teams), Has Spawned(Current Array Element)), 99999);
-		"Init dummy at arbitrary location\r\n previously -1 slot, now extra dummy enabled to spawn outside of player slot to prevent overwrite of slot"
-		Create Dummy Bot(Hero(D.Va), Team Of(First Of(Filtered Array(All Players(All Teams), Has Spawned(Current Array Element)
-			&& !Is Dummy Bot(Current Array Element)))), 20, Vector(0, 200, 0), Vector(0, 0, 0));
-		Global.MsDestructo = Last Created Entity;
-		"MsDestructo.startForcingName(\"Ms. Destructo\") #disabled because translated this line gives errors"
-		Wait(1, Ignore Condition);
-		"MsDestructo.setInvisibility(Invis.ALL)"
-		Global.MsDestructo.MapVectorArray = Array(Array(0, Map(Hanamura), Map(Horizon Lunar Colony), Map(Paris), Map(Temple of Anubis),
-			Map(Dorado), Map(Havana), Map(Junkertown), Map(Rialto), Map(Route 66), Map(Watchpoint: Gibraltar), Map(Blizzard World), Map(
-			Eichenwalde), Map(Hollywood), Map(King's Row), Map(Numbani), Map(Ayutthaya), Map(Black Forest), Map(Castillo), Map(
-			Ecopoint: Antarctica), Map(Château Guillard), Map(Kanezaka), Map(Necropolis), Map(Petra), Map(Volskaya Industries), Map(
-			Practice Range), Map(Ilios), Map(Busan), Map(Lijiang Tower), Map(Nepal), Map(Oasis), Map(Malevento), Map(Circuit royal), Map(
-			Esperança), Map(New Queen Street), Map(Paraíso), Map(Colosseo), Map(Midtown), Map(Shambali Monastery), Map(Antarctic Peninsula)), Array(Vector(15.759,
-			30.576, -27.201)), Array(Vector(31.759, 40.003, -59.476)), Array(Vector(-54.508, 40.179, -10.866)), Array(Vector(-26.780,
-			23.366, 40.284)), Array(Vector(69.418, 42.103, -17.712)), Array(Vector(9.382, 38.635, -81.276)), Array(Vector(9.382, 38.635,
-			-81.276)), Array(Vector(9.756, 30.753, -41.395)), Array(Vector(30.313, 28.237, -16.925)), Array(Vector(73.985, 26.198,
-			-109.338)), Array(Vector(-21.030, 35.127, 88.381)), Array(Vector(54.798, 40.964, -82.780)), Array(Vector(-0.355, 28.167,
-			-22.396)), Array(Vector(-56.869, 24.061, -32.132)), Array(Vector(105.299, 22.764, 14.890)), Array(Vector(16.965, 26.541,
-			-7.130)), Array(Vector(-9.622, 44.751, 5.635)), Array(Vector(-100.828, 76.566, 60.021)), Array(Vector(-6.186, 35.564, 1.378)),
-			Array(Vector(200.414, 82.412, 78.813)), Array(Vector(-36.319, 32.305, 0.472)), Array(Vector(-1.144, 47.168, -2.946)), Array(
-			Vector(9.678, 28.313, 13.400)), Array(Vector(-49.147, 22.344, 76.844)), Array(Vector(54.948, 50.769, 3.930)), Array(Vector(
-			322.988, 40, -37.732), Vector(27.711, 100, -161.298), Vector(-223.895, 50, 0.890)), Array(Vector(51.885, 37.172, -113.654),
-			Vector(-329.934, 56.136, 149.839), Vector(227.210, 43.353, 252.640)), Array(Vector(-5.808, 324.398, 282.523), Vector(-0.414,
-			156.197, 148.681), Vector(-0.381, 53.736, -33.335)), Array(Vector(83.100, 178.926, 0.593), Vector(-49.803, 63.290, -0.413),
-			Vector(-184.659, -38.730, -0.783)), Array(Vector(150.125, 30.619, 251.966), Vector(134.888, 36.760, -240.736), Vector(-195.549,
-			60.350, -0.098)), Array(Vector(17.808, 35.955, 17.505)), Array(Vector(13, 61, -37)), Array(Vector(0, 50, 0)), Array(Vector(0,
-			35, 25), Vector(0, 8, 23.770)), Array(Vector(-29, 40, -36.900)), Array(Vector(0, 40, 0)), Array(Vector(49.300, 45, -2.830)),
-			Array(Vector(-50, 81, 130)), Array(Vector(-86, -110, 59), Vector(277, 132, 170), Vector(283, 57, -235)));
-		For Player Variable(Global.MsDestructo, ArrayIterator, 0, Count Of(Global.MsDestructo.MapVectorArray[Index Of Array Value(First Of(
-			Global.MsDestructo.MapVectorArray), Current Map)]), 1);
-			Start Forcing Player Position(Global.MsDestructo, Global.MsDestructo.MapVectorArray[Index Of Array Value(
-				Global.MsDestructo.MapVectorArray, Current Map)][Global.MsDestructo.ArrayIterator], True);
-			Start Scaling Player(Global.MsDestructo, 20, True);
-			Disable Movement Collision With Environment(Global.MsDestructo, True);
-			Set Ultimate Ability Enabled(Global.MsDestructo, True);
-			Set Ultimate Charge(Global.MsDestructo, 100);
-			Wait(3, Ignore Condition);
-			Start Holding Button(Global.MsDestructo, Button(Ultimate));
-			Wait(5, Ignore Condition);
-			Respawn(Global.MsDestructo);
-			Wait(3, Ignore Condition);
+		If(True);
+			Skip(Array(14, 0, 2, 4, 6, 8, 10, 12)[1 + Index Of Array Value(Array(Map(Ilios), Map(Busan), Map(Lijiang Tower), Map(Nepal), Map(
+				Oasis), Map(New Queen Street), Map(Antarctic Peninsula)), Current Map)]);
+			Global.MapVectorArray = Array(Vector(322.988, 40, -37.732), Vector(27.711, 100, -161.298), Vector(-223.895, 50, 0.890));
+		Else;
+			Global.MapVectorArray = Array(Vector(51.885, 37.172, -113.654), Vector(-329.934, 56.136, 149.839), Vector(227.210, 43.353,
+				252.640));
+		Else;
+			Global.MapVectorArray = Array(Vector(-5.808, 324.398, 282.523), Vector(-0.414, 156.197, 148.681), Vector(-0.381, 53.736, -33.335));
+		Else;
+			Global.MapVectorArray = Array(Vector(83.100, 178.926, 0.593), Vector(-49.803, 63.290, -0.413), Vector(-184.659, -38.730, -0.783));
+		Else;
+			Global.MapVectorArray = Array(Vector(150.125, 30.619, 251.966), Vector(134.888, 36.760, -240.736), Vector(-195.549, 60.350,
+				-0.098));
+		Else;
+			Global.MapVectorArray = Array(Vector(-13.790, 1.960, 15.920), Vector(0, 35, 25), Vector(0, 8, 23.770), Vector(13.280, 2, 15));
+		Else;
+			Global.MapVectorArray = Array(Vector(-86, -110, 59), Vector(277, 132, 170), Vector(283, 57, -235));
+		Else;
+			"This default covers almost every map"
+			Global.MapVectorArray = Array(Vector(73, 62, -17), Vector(169, 62, 82), Vector(-23, 62, -124), Vector(-23, 62, 100));
 		End;
-		Destroy Dummy Bot(Team Of(Global.MsDestructo), Slot Of(Global.MsDestructo));
+		For Global Variable(DestructoIter, 0, Count Of(Global.MapVectorArray), 1);
+			Create Dummy Bot(Hero(D.Va), Team Of(First Of(Filtered Array(All Players(All Teams), Has Spawned(Current Array Element)
+				&& !Is Dummy Bot(Current Array Element)))), 20 - Evaluate Once(Global.DestructoIter), Evaluate Once(
+				Global.MapVectorArray[Evaluate Once(Global.DestructoIter)]), Vector(0, 0, 0));
+			Global.MsDestructo[Evaluate Once(Global.DestructoIter)] = Last Created Entity;
+			Start Scaling Player(Global.MsDestructo[Evaluate Once(Global.DestructoIter)], 20, True);
+			Wait(0.016, Ignore Condition);
+			Set Gravity(Global.MsDestructo[Evaluate Once(Global.DestructoIter)], 0);
+			Apply Impulse(Global.MsDestructo[Evaluate Once(Global.DestructoIter)], Up, 1, To Player, Cancel Contrary Motion XYZ);
+			Teleport(Global.MsDestructo[Evaluate Once(Global.DestructoIter)], Evaluate Once(Global.MapVectorArray[Evaluate Once(
+				Global.DestructoIter)]));
+			Wait(1, Ignore Condition);
+			Disable Movement Collision With Environment(Global.MsDestructo[Evaluate Once(Global.DestructoIter)], True);
+			Wait(0.016, Ignore Condition);
+			Set Ultimate Ability Enabled(Global.MsDestructo[Evaluate Once(Global.DestructoIter)], True);
+			Wait(0.016, Ignore Condition);
+			Set Ultimate Charge(Global.MsDestructo[Evaluate Once(Global.DestructoIter)], 100);
+			Wait(0.016, Ignore Condition);
+		End;
+		Wait(1, Ignore Condition);
+		For Global Variable(DestructoIter, 0, Count Of(Global.MapVectorArray), 1);
+			Start Holding Button(Global.MsDestructo[Evaluate Once(Global.DestructoIter)], Button(Ultimate));
+		End;
+		Wait(5, Ignore Condition);
+		For Global Variable(DestructoIter, 0, Count Of(Global.MapVectorArray), 1);
+			Destroy Dummy Bot(Team Of(Global.MsDestructo[Evaluate Once(Global.DestructoIter)]), Slot Of(Global.MsDestructo[Evaluate Once(
+				Global.DestructoIter)]));
+		End;
 		"Remove MsDestructo data when done"
-		Global.MsDestructo.MapVectorArray = 0;
-		Global.MsDestructo.ArrayIterator = 0;
-		Global.MsDestructo = 0;
+		Global.MapVectorArray = Null;
+		Global.DestructoIter = Null;
+		Global.MsDestructo = Null;
 	}
 }
 
